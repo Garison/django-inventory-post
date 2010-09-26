@@ -1,0 +1,25 @@
+{% load i18n %}
+<div class="data-entry">
+<form method="get" action="">
+	<table>
+		<thead>
+			<tr>
+				<td colspan=10>
+					{% trans 'Filtrar la lista por:' %}
+				</td>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<td colspan=2>
+					<input type="submit" value="{% trans 'Aceptar' %}" />
+				</td>
+			</tr>
+		</tfoot>
+		<tbody>
+			{{ filter_form }}
+			{{ filter_form.media|safe }}
+		</tbody>
+	</table>
+</form>
+</div>		

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %} :: {% if object %}{% trans 'Editar' %}{% else %}{% trans 'Crear' %}{% endif %} {{ title }} {{ object }}{% endblock %}
+{% block banner %}<div id="banner"><h2>{% if object %}{% trans 'Editar' %}{% else %}{% trans 'Crear' %}{% endif %} {{ title }}</h2></div>{% endblock %}
+{% block content %}
+
+{% if object %}
+<h3><a href="{{ object.get_absolute_url }}">{{ object }}</a></h3>
+{% endif %}
+
+<div class="data-entry">
+<form method="post" action="">
+	<table>
+                <thead>
+                        <tr>
+                                <td colspan=10>
+                                        {% trans 'Entre la información' %}
+                                </td>
+                        </tr>
+                </thead>
+                <tfoot>
+                        <tr>
+                                <td colspan=2>
+                                        <input type="submit" value="{% trans 'Aceptar' %}" />
+                                </td>
+                        </tr>
+                </tfoot>
+                <tbody>
+					{% for field in form %}
+					<tr><th>{{ field.label_tag }}: </th><td>{{ field.errors }}{{ field }}{% if field.field.required %} ({% trans 'obligatorio' %}){% endif %}{% if field.help_text %}<br />{{ field.help_text }}{% endif %}</td></tr>
+					{% endfor %} 
+
+					{{ form.media|safe }}
+                </tbody>
+        </table>
+</form>
+</div>
+
+{% endblock %}

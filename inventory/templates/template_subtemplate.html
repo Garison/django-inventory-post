@@ -1,0 +1,30 @@
+{% load i18n %}
+<center>
+<div class="data-entry" >
+	<table>
+		<thead>
+			<tr>
+				<td colspan='2'>
+					{% trans 'Datos' %}
+				</td>
+			</tr>
+		</thead>	
+		<tbody>
+			<tr>
+				<th>{% trans 'Descripción' %}:</th><td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+			</tr><tr>
+				<th>{% trans 'Marca' %}:</th><td>{{ object.brand }}</td>
+			</tr><tr>
+				<th>{% trans 'Modelo' %}:</th><td>{{ object.model }}</td>
+			</tr><tr>
+				<th>{% trans 'Número de pieza' %}:</th><td>{{ object.part_number }}</td>
+			</tr><tr>
+				<th>{% trans 'Notas/observaciones' %}:</th><td>{{ object.notes }}</td>
+			</tr>
+			<tr>
+				<th>{% trans 'Artículos relacionados' %}:</th><td><ul>{% for i in object.supplies.all %}<li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>{% endfor %}</ul></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</center>

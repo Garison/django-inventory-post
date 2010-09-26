@@ -1,0 +1,237 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	{% comment %}
+		<meta http-equiv="Content-Language" content="es" />
+	{% endcomment %}
+		{% block keywords %}{% endblock %}			
+
+		{% comment %}<link rel="shortcut icon" type="image/png" href="{{ MEDIA_URL }}images/" />{% endcomment %}
+		<link href="{{ MEDIA_URL }}css/base.css" rel="stylesheet" type="text/css" media="screen" />
+		<link href="{{ MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print" />
+		
+		<script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-1.3.1.min.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}packages/pngFix/jquery.pngFix.js"></script>
+
+		<script type="text/javascript">
+		sfHover = function() {
+			var sfEls = document.getElementById("nav").getElementsByTagName("LI");
+			for (var i=0; i<sfEls.length; i++) {
+				sfEls[i].onmouseover=function() {
+					this.className+=" sfhover";
+				}
+				sfEls[i].onmouseout=function() {
+					this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+				}
+			}
+		}
+
+		$(document).ready(function() {
+			$("form").submit(function() {
+				$('input:submit', this).attr("value", "{% trans 'Please wait...' %}");
+				$('input:submit', this).attr("disabled", "disabled");
+				return true;
+			});
+		
+			//suckerfish	
+			if (window.attachEvent) window.attachEvent("onload", sfHover);
+
+			$(document).pngFix();
+			
+			$().ajaxSend(function(r,s){
+				$("#loading").show();
+			});
+
+			$().ajaxStop(function(r,s){
+				$("#loading").fadeOut("fast");
+			});
+		});
+		</script>
+		{% block javascript %}{% endblock %}
+		<title>{% trans 'Control de inventario' %}{% block title %}{% endblock %}</title>
+	</head>
+	<body>
+		<!--[if gte IE 5.5]>
+		<![if lt IE 7]>
+		<style>
+		#loading {
+			/* Netscape 4, IE 4.x-5.0/Win and other lesser browsers will use this */
+		  position: absolute; right: 0px; bottom: 0px;
+		}
+		div#loading {
+		  /* IE5.5+/Win - this is more specific than the IE 5.0 version */
+		  
+		  right: expression( ( ( ignoreMe2 = document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft ) ) + 'px' );
+		  top: expression( ( 10 + ( ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) )  + 'px' );
+		}
+
+		}</style>
+		<![endif]>
+		<![endif]-->
+
+		<div id="loading">
+		{% trans 'Loading' %}...<img src="{{ MEDIA_URL }}images/loading.gif" alt="" />
+		</div>
+		<div id="container">
+			<div id="header" style='float: none;'>
+				<div id='info-box' style='float: right;'>
+					<div id="userbox">
+						<strong>{% trans 'Usuario:' %}</strong>
+						{% if user.is_anonymous %}
+							{% trans 'Visitante' %}
+							<input type="hidden" id="auth_user" value="" />
+							<a href="{% url user_login %}?next={{ request.get_full_path }}">({% trans 'Entrada' %})</a>
+						{% else %}
+							{{ user }}
+							<input type="hidden" id="auth_user" value="{{ user }}" />
+							<a href="{% url user_logout %}">({% trans 'Salir' %})</a>
+							<a href="{% url user_me_password_change %}">({% trans 'Nueva contraseña' %})</a>
+						{% endif %}
+						{% ifequal LANGUAGE_CODE 'es' %}
+							<a href="{% url set_language %}?language=en"><img src='{{ MEDIA_URL }}images/flag-us.png' alt="US-flag" /> {% trans 'Ingles' %}</a>
+						{% else %}
+							<a href="{% url set_language %}?language=es"><img src='{{ MEDIA_URL }}images/flag-pr.png' alt="PR-flag" /> {% trans 'Español' %}</a>
+						{% endifequal %}
+					</div>
+					<div id='searchbox'>
+						<form action='{% url search %}' method='get'>
+							<input id="keyword" type="text" name="keyword" maxlength="64" />
+							<input type="submit" value="{% trans 'Buscar' %}" />
+						</form>
+					</div>
+				</div> <!-- end infobox -->
+
+					<div id="nav-spacer">
+					&nbsp;
+					</div>
+					
+					<div id="nav">			
+						<ul>
+							<li style="width: 6em;"><a href="{% url home %}">{% trans "Inicio" %}<img src="{{ MEDIA_URL }}images/go-home.png" /></a></li>
+							<li style="width: 7em;"><a href="{% url person_list %}">{% trans "Usuarios" %}<img src="{{ MEDIA_URL }}images/system-users.png" /></a>
+								<ul>
+									<li><a href="{% url person_list %}">{% trans "Ver todos" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+									{% if user.is_authenticated %}
+									<li><a href="{% url person_create %}">{% trans "Crear nuevo" %}<img src="{{ MEDIA_URL }}images/contact-new.png" /></a></li>
+									{% endif %}
+								</ul>
+							</li>
+							<li style="width: 7em;"><a href="{% url item_list %}">{% trans "Equipo" %}<img src="{{ MEDIA_URL }}images/computer.png" /></a>
+								<ul>
+									<li><a href="{% url item_list %}">{% trans "Ver todos" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+									{% if user.is_authenticated %}
+									<li><a href="{% url item_create %}">{% trans "Crear nuevo" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+									{% endif %}
+									<li><a href="{% url item_orphans_list %}">{% trans "Sin asignar" %}</a></li>
+									<li><a href="{% url retireditem_list %}">{% trans "Decomisado" %}<img src="{{ MEDIA_URL }}images/user-trash.png" /></a></li>
+									<li><a href="{% url inrepairsitem_list %}">{% trans "En reparación" %}<img src="{{ MEDIA_URL }}images/broken-computer.png" /></a></li>
+
+									<li style="width: 7em;"><a class='parent' href="{% url group_list %}">{% trans "Grupos" %}<img src="{{ MEDIA_URL }}images/network-workgroup.png" /></a>
+										<ul>
+											<li><a href="{% url group_list %}">{% trans "Ver todos" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+											{% if user.is_authenticated %}									
+											<li><a href="{% url group_create %}">{% trans "Crear nuevo" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+											{% endif %}
+										</ul>
+									</li>
+
+									<li style="width: 9em;"><a class='parent' href="{% url template_list %}">{% trans "Plantillas" %}<img src="{{ MEDIA_URL }}images/font-x-generic.png" /></a>
+										<ul>
+											<li><a href="{% url template_list %}">{% trans "Ver todas" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+											{% if user.is_authenticated %}
+											<li><a href="{% url template_create %}">{% trans "Crear nueva" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+											{% endif %}
+											<li><a href="{% url template_orphans_list %}">{% trans "Sin usar" %}</a></li>
+										</ul>
+									</li>
+									
+								</ul>
+							</li>
+							<li><a href="#">{% trans "Inventario" %}<img src="{{ MEDIA_URL }}images/package-x-generic.png" /></a>
+								<ul>
+									<li style="width: 7em;"><a class='parent' href="{% url supply_list %}">{% trans "Artículos" %}<img src="{{ MEDIA_URL }}images/applications-office.png" /></a>
+										<ul>
+											<li><a href="{% url supply_list %}">{% trans "Ver todos" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+											{% if user.is_authenticated %}
+											<li><a href="{% url supply_create %}">{% trans "Crear nuevo" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+											{% endif %}
+											<li><a href="{% url supply_orphans_list %}">{% trans "Sin usar" %}</a></li>
+										</ul>
+									</li>
+
+									<li style="width: 7em;"><a class='parent' href="{% url inventory_transaction_list %}">{% trans "Transacciones" %}</a>
+										<ul>
+											<li><a href="{% url inventory_transaction_list %}">{% trans "Ver todas" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+											{% if user.is_authenticated %}
+											<li><a href="{% url inventory_transaction_create %}">{% trans "Crear nueva" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+											{% endif %}
+										</ul>
+									</li>
+
+								</ul>
+							</li>
+							<li style="width: 10em;"><a href="#">{% trans "Herramientas" %}<img src="{{ MEDIA_URL }}images/preferences-system.png" /></a>
+								<ul>
+									<li><a style="width: 17em;" href="{% url regional_list %}">{% trans "Regionales" %}</a></li>
+									<li><a style="width: 17em;" href="{% url department_list %}">{% trans "Departamentos" %}<img src="{{ MEDIA_URL }}images/view-fullscreen.png" /></a></li>
+									<li><a style="width: 17em;" href="{% url inventory_list %}">{% trans "Inventarios de artículos" %}<img src="{{ MEDIA_URL }}images/package-x-generic.png" /></a></li>
+									{% if user.is_staff %}
+									<li><a style="width: 17em;" href="{% url settings %}">{% trans "Configuración" %}<img src="{{ MEDIA_URL }}images/emblem-system.png" /></a></li>
+									{% endif %}
+								</ul>
+							</li>
+
+{% comment %}				{% if user.is_staff %}
+							<li style="width: 8em;"><a href="/admin">{% trans "Usuarios" %}<img src="{{ MEDIA_URL }}images/preferences-desktop.png" /></a></li>
+							{% endif %}{% endcomment %}
+							<li style="width: 3em;"><a href="{% url about %}">{% trans "Acerca" %}<img src="{{ MEDIA_URL }}images/dialog-information.png" /></a></li>
+						</ul>	
+					</div>	<!-- Nav -->		
+				</div> <!-- left box -->
+			</div> <!-- Header -->
+			<div style='float: right; width: 100%;'>
+			{% block banner %}{% endblock %}		
+			</div>
+		</div>		<!-- container -->
+		<div id="content-container">
+			<div id="content">
+				<script type="text/javascript">
+				</script>
+				<noscript>
+				<div id='js_noscript'>
+					<img src="{{ MEDIA_URL }}images/dialog-warning.png" alt='' />
+					{% trans 'Este programa utiliza una tecnología conocida como JavaScript, asegúrese de que su navegador apoya esta tecnología o que este debidamente activada.' %}
+				</div>
+				</noscript>
+
+				<!--[if lt IE 7]>
+				<center>
+				<div id='js_noscript'>
+				<img src="{{ MEDIA_URL }}images/dialog-warning.png" alt='' />
+					{% trans 'Este programa utiliza una serie de tecnologías como JavaScript, CSS y AJAX que su navegador no apoya correctamente.' %}
+					{% trans 'Utilize una version mas reciente de su navegador o utilize un navegador mas moderno como: <a href="http://www.firefox.com">Firefox</a>, Opera o Safari.' %}
+				</div></center>
+				<![endif]-->
+
+				{% if messages %}
+				<ul id="flashmessages">
+					{% for message in messages %}
+						<li id="flashmessage"><a href="#" onclick="$(this).parent().fadeOut(); return false;">{% trans 'ok' %}</a>
+							<img src='{{ MEDIA_URL }}images/internet-group-chat.png' alt='message'/>&nbsp;&quot;{{ message }}&quot;
+						</li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+				{% block content %}{% endblock %}
+
+			</div>
+			<div id="footer">
+				<hr />
+				{% block footer %}{% endblock %}
+			</div> <!-- END #footer -->
+		</div>	<!-- END #container -->
+	</body>
+</html>

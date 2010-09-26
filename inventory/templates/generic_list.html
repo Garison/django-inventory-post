@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block keywords %}
+{% endblock %}
+{% load generic_views_helpers %}
+{% block title %} :: Lista de {{ title }}{% endblock %}
+{% block banner %}<div id="banner"><h2>{% trans 'Lista de' %} {{ title }}</h2></div>{% endblock %}
+{% block content %}
+<h3>{{ subtitle }}</h3>
+
+{% if filter_form %}
+{% include "filter_form_subtemplate.html" %}	
+{% endif %}
+
+{% if is_paginated %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{{ new_url }}">[{% trans 'Página previa' %}]</a>
+        {% endif %}
+
+        <span class="current">
+            {% trans 'Página' %} {{ page_obj.number }} {% trans 'de' %} {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{{ new_url }}">[{% trans 'Próxima página' %}]</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}	
+<div class='data-entry'>
+	<table>
+		<thead><tr><td colspan='15'>{% trans 'Lista de' %} {{ title }} ({% if is_paginated %}{% blocktrans with range_base|add:1 as from and range_base|add:object_list.count as to %}{{ from }}-{{ to }} de {{ hits }}{% endblocktrans %}{% else %}{{ object_list.count }}{% endif %})</td></tr></thead>
+		{% if not create_view|login_required or user.is_authenticated %}
+		{% if create_view %}
+		<tfoot>
+			<tr>
+				<td colspan='15' style='background: #2020ff;'>
+					<div class='userbar'>
+						<ul>
+							<li><a href="{% url_dynamic create_view %}">{% trans "Crear nuevo" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</tfoot>
+		{% endif %}
+		{% endif %}
+		<tbody>
+			<tr>
+				<th style="text-align:center;"><strong>{% trans 'Identificador' %}</strong></th>
+				{% if record_links %}
+				<th style="text-align:center;"><strong>{% trans 'Acción' %}</strong></th>
+				{% endif %}
+			</tr>
+			{% for object in object_list %}
+				<tr>
+					<th><a href="{{ object.get_absolute_url}}">{{ object }}</a></th>
+						{% if record_links %}
+					<td>
+						<div class='userbar'>
+							<div style='font-size:100%;'>
+								<ul>
+									{% include "generic_navigation.html" %}
+								</ul>
+							</div>
+						</div>	
+					</td>
+				{% endif %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% if is_paginated %}
+<div class="pagination">
+	<span class="step-links">
+		{% if page_obj.has_previous %}
+			<a href="?page={{ page_obj.previous_page_number }}{{ new_url }}">[{% trans 'Página previa' %}]</a>
+		{% endif %}
+
+		<span class="current">
+			{% trans 'Página' %} {{ page_obj.number }} {% trans 'de' %} {{ page_obj.paginator.num_pages }}
+		</span>
+
+		{% if page_obj.has_next %}
+			<a href="?page={{ page_obj.next_page_number }}{{ new_url }}">[{% trans 'Próxima página' %}]</a>
+		{% endif %}
+	</span>
+</div>
+{% endif %}
+
+{% endblock %}

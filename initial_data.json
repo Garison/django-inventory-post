@@ -1,0 +1,3 @@
+[
+{"pk": 1, "model": "inventory.settings", "fields": {"is_anon_restricted": false, "max_template_photos": 5, "max_photo_size": 1000000, "max_item_photos": 5, "max_person_photos": 5}}, {"pk": 1, "model": "inventory.customuser", "fields": {"department": null, "person": null, "user_permissions": [], "regional": null, "groups": []}}]
+

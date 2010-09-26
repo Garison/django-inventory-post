@@ -1,0 +1,48 @@
+{% load i18n %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<link href="/site_media/css/pisa.css" rel="stylesheet" type="text/css" media="screen" />
+		<link href="/site_media/css/pisa.css" rel="stylesheet" type="text/css" media="print" />
+	</head>
+	<body>
+	
+
+<h1>{% trans 'Informe de equipo por usuario' %}</h1>
+{% block content %}
+<br/ >
+<h2>Equipo asignado a: {{ object }}</h2>
+		<table style="border: 1px solid black; vertical-align: center; text-align:center; width:100%;">
+				<thead>
+					<strong><tr>
+						<td>NUM. DE PROPIEDAD</td>
+						<td>DESCRIPCION</td>
+						<td>DIVISION O SECCION</td>
+						<td>ASIGNADO A</td>
+						<td>OBSERVACIONES</td>
+					</tr></strong>
+				</thead>
+				<tbody>
+					{% for item in object.inventory.all %}
+						<tr>
+							<td>{{ item.property_number }}</td>
+							<td>{{ item.item_template.description }}</td>
+							<td>{{ item.department }}</td>
+							<td>{{ object }}</td>
+							<td>&nbsp;{{ item.notes }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+{% endblock %}
+
+<div id="footerblock">
+{%block pager %}
+    <pdf:pagenumber>
+{%endblock%}
+</div>
+</body>
+</html>

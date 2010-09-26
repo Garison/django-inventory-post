@@ -1,0 +1,4 @@
+- python-imaging
+- python-django
+- cherrypy3 (3.1.1)
+	* http://ftp.us.debian.org/debian/pool/main/c/cherrypy3/python-cherrypy3_3.1.1-2_all.deb

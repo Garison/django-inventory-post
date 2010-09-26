@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block keywords %}
+	<meta name="description" content="Django based simple custom inventory control system" />
+	<meta name="keywords" content="django inventory" />
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+});
+</script>
+{% endblock %}
+{% block banner %}<div id="banner"><h2>{% trans 'Inicio' %}</h2></div>{% endblock %}
+{% block content %}
+<h1 style='text-align: center; font-size: 70px; margin-top: 0px; margin-bottom: 0px;'>{% trans "Django Inventory" %}</h1>
+
+{% comment %}<center><img src="{{ MEDIA_URL }}images/logo.png" alt="logo" /></center>{% endcomment %}
+<br /><br />
+<center>
+<strong>{% trans "Estadisticas" %}</strong><br>
+{% trans "Usuarios registrados" %}: {{ person.count }}<br />
+{% trans "Equipos registrados" %}: {{ item.count }}<br />
+{% trans "Equipos decomisados" %}: {{ retired.count }}<br />
+{% trans "Plantillas registradas" %}: {{ template.count }}<br />
+</center>
+
+{% endblock %}

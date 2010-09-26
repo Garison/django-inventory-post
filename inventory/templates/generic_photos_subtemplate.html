@@ -1,0 +1,50 @@
+{% load i18n %}
+{% if photos %}
+<div>
+	<table style='margin: auto;'>
+		<thead>
+			<tr>
+				<td colspan='10' style='font-weight: bold; text-align: center;'>
+					{% if title %}
+						{{ title|capfirst }}
+					{% else %}
+						{% trans 'Fotos' %}
+					{% endif %}
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr style="vertical-align: top;">
+			{% for photo in photos %}
+				<td>
+					<div class="gallery">							
+						<a href="{{ photo.photo.url }}" title="{{ photo.title }}">
+							<img src="{{ photo.thumbnail.url }}" alt='thumbnail' />
+							{% if photo.title %}
+								<div id='caption'>
+								   {{ photo.title }}
+								</div>
+							{% endif %}
+						</a>
+					</div>
+				</td>
+
+				{% if forloop.counter|divisibleby:"4" %}
+				</tr><tr>
+				{% endif %}
+			{% endfor %}				
+			</tr>
+		</tbody>
+	</table>
+</div>	
+{% else %}
+
+<p style='font-weight: bold; text-align:center;'>
+{% if title %}
+	{% blocktrans %}No hay {{ title }} {% endblocktrans %}
+{% else %}
+	{% trans 'No hay fotos' %}
+{% endif %}
+</p>
+
+{% endif %}

@@ -1,0 +1,34 @@
+{% load i18n %}
+<center>
+<div class="data-entry" >
+	<table>
+		<thead>
+			<tr>
+				<td colspan='2'>
+					{% trans 'Datos especificos de este equipo' %}
+				</td>
+			</tr>
+		</thead>	
+		<tbody>
+			<tr>
+				<th>{% trans 'Número de propiedad' %}:</th><td>{{ object.property_number }}</td>
+			</tr>
+			<tr>
+				<th>{% trans 'Notas' %}:</th><td>{{ object.notes }}</td>
+			</tr>
+			<tr>
+				<th>{% trans 'Número de serie' %}:</th><td>{{ object.serial_number }}</td>
+			</tr>
+			<tr>
+				<th>{% trans 'Regional' %}:</th><td>{{ object.regional_office }}</td>
+			</tr>
+			<tr>
+				<th>{% trans 'Departamento/Sección/Area' %}:</th><td>{{ object.department }}</td>
+			</tr>
+			<tr>
+				<th>{% trans 'Asignado a' %}:</th><td><ul>{% for i in object.get_owners %}<li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>{% endfor %}</ul></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</center>

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %} :: {% trans 'Entrada' %}{% endblock %}
+{% block banner %}<div id="banner"><h2>{% trans 'Entrada' %}</h2></div>{% endblock %}
+{% block content %}
+
+  {% if form.errors %}
+    <p class="error-message">{% trans 'La contraseña o el usuario estan incorrectos.' %}</p>
+  {% endif %}
+
+<div class='data-entry'>
+<form action='.' method='post'>
+	<table>
+		<thead><tr><td colspan=2>{% trans 'Información de entrada' %}</td></tr></thead>
+
+		<tr><th>
+			<label for="id_username">{% trans 'Usuario' %}:</label>
+		</th>
+			<td>
+				{{ form.username }}
+			</td>
+		</tr>
+		<tr><th>
+			
+				<label for="id_password">{% trans 'Contraseña' %}:</label>
+			
+			</th>
+			<td>
+				{{ form.password }}
+			</td>
+		</tr>
+
+{% comment %}		<tr><td colspan=2  style="text-align: right;"><a href="/accounts/password/reset/">{% trans 'Olvide mi contraseña' %}</a></td></tr>{% endcomment %}
+		
+		<tfoot>
+		<tr>
+			<td colspan=2>
+				<input type="submit" value="{% trans 'Entrar' %}" />
+				<input type="hidden" name="next" value="{{ next|escape }}" />
+			</td>
+		</tr>
+		</tfoot>
+		
+		
+	</table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block keywords %}
+{% endblock %}
+{% load generic_views_helpers %}
+{% block title %} :: {% trans 'Detalle para' %} {{ title }} {{ object }}{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+$(function() {
+	$("#data :input").each(function() {
+		this.disabled = true;
+	});
+});
+</script>
+
+{% endblock %}
+{% block banner %}<div id="banner"><h2>{% trans 'Detalle para' %} {{ title }}</h2></div>{% endblock %}
+{% block content %}
+
+<h3>{{ object }}</h3>
+
+<style type="text/css">
+	#data textarea:focus, #data input:focus, #data select, #data textarea, #data input { background: none; color: white; border: none; }
+</style>
+<center>
+<form id='data'>
+<div class="data-entry">
+	<table>
+		<thead>
+			<tr>
+				<td colspan='2'>
+					{% trans 'Datos' %}
+				</td>
+			</tr>
+		</thead>	
+		<tbody>
+			{% for field in form %}
+				<tr><th>{{ field.label_tag }}: </th><td>
+				{% if field.field|is_class:"ModelMultipleChoiceField" %}
+				{{ field }}
+{% comment %}
+					<ul>
+					{% for item in field|get_selected_choices:form %}
+						<li><a href="{{ item.get_absolute_url }}">{{ item }}</a></li>
+					{% endfor %}
+					</ul>
+{% endcomment %}					
+				{% else %}
+					{{ field }}
+				{% endif %}
+				</td></tr>
+			{% endfor %} 
+		</tbody>
+	</table>
+</div>
+</form>
+<br />
+</center>
+<div class='userbar'>
+	<div style='font-size:100%;'>
+		<ul>
+			{% if not create_view|login_required or user.is_authenticated %}
+			{% if create_view %}<li><a href="{% url_dynamic create_view %}">{% trans 'Crear' %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>{% endif %}
+			{% endif %}
+			{% include "generic_navigation.html" %}
+		</ul>
+	</div>
+</div>	
+{% endblock %}

@@ -1,0 +1,996 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-04-14 16:33-0400\n"
+"PO-Revision-Date: 2009-04-01 01:01\n"
+"Last-Translator: <admin@admin.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.4.1.svn\n"
+
+#: settings.py:33
+msgid "Spanish"
+msgstr "Spanish"
+
+#: settings.py:34
+msgid "English"
+msgstr "English"
+
+#: inventory/models.py:11
+msgid "Tamaño maximo de las fotos"
+msgstr "Maximum photo size"
+
+#: inventory/models.py:11
+msgid "Limite en kilobytes."
+msgstr "Limit in kilobytes."
+
+#: inventory/models.py:12
+msgid "Máximo de fotos por equipo"
+msgstr "Maximum photos per item"
+
+#: inventory/models.py:13
+msgid "Máximo de fotos por plantilla"
+msgstr "Maximum photos per template"
+
+#: inventory/models.py:14
+msgid "Máximo de fotos por usuario"
+msgstr "Maximum photos per user"
+
+#: inventory/models.py:15
+msgid "¿Entrada requerida para todas las areas?"
+msgstr "Login required for all areas?"
+
+#: inventory/models.py:18
+msgid "configuración"
+msgstr "settings"
+
+#: inventory/models.py:21 templates/base.html:182
+msgid "Configuración"
+msgstr "Settings"
+
+#: inventory/models.py:36
+msgid "Título"
+msgstr "Title"
+
+#: inventory/models.py:37
+msgid "Foto"
+msgstr "Photo"
+
+#: inventory/models.py:40
+msgid "¿Principal?"
+msgstr "Main?"
+
+#: inventory/models.py:91
+msgid "foto"
+msgstr "photo"
+
+#: inventory/models.py:97 inventory/models.py:110 inventory/models.py:196
+#: inventory/models.py:300 inventory/models.py:368
+#: inventory/templates/item_subtemplate.html:23
+#: inventory/templates/inventory/person_detail.html:41
+msgid "Regional"
+msgstr "Regional"
+
+#: inventory/models.py:101 inventory/urls.py:168 inventory/urls.py:169
+#: inventory/urls.py:170
+msgid "regional"
+msgstr "regional"
+
+#: inventory/models.py:111 inventory/models.py:197
+#: inventory/templates/item_subtemplate.html:26
+msgid "Departamento/Sección/Area"
+msgstr "Department/Section/Area"
+
+#: inventory/models.py:115
+msgid "departamento"
+msgstr "department"
+
+#: inventory/models.py:124 inventory/models.py:161
+#: inventory/templates/supply_subtemplate.html:14
+#: inventory/templates/template_subtemplate.html:14
+msgid "Descripción"
+msgstr "Description"
+
+#: inventory/models.py:125 inventory/models.py:162
+#: inventory/templates/supply_subtemplate.html:16
+#: inventory/templates/template_subtemplate.html:16
+msgid "Marca"
+msgstr "Brand"
+
+#: inventory/models.py:126 inventory/models.py:163
+#: inventory/templates/supply_subtemplate.html:18
+#: inventory/templates/template_subtemplate.html:18
+msgid "Modelo"
+msgstr "Model"
+
+#: inventory/models.py:127 inventory/models.py:164
+#: inventory/templates/supply_subtemplate.html:20
+#: inventory/templates/template_subtemplate.html:20
+msgid "Número de pieza"
+msgstr "Part number"
+
+#: inventory/models.py:128 inventory/models.py:165 inventory/models.py:198
+#: inventory/models.py:302 inventory/urls.py:20 inventory/urls.py:28
+#: inventory/urls.py:84 inventory/templates/generic_photos_subtemplate.html:11
+#: inventory/templates/photos.html:33
+msgid "Fotos"
+msgstr "Photos"
+
+#: inventory/models.py:129 inventory/models.py:166 inventory/models.py:194
+msgid "Notas/Observaciones"
+msgstr "Notes/Observations"
+
+#: inventory/models.py:133 inventory/urls.py:113 inventory/urls.py:114
+#: inventory/urls.py:115
+msgid "artículo"
+msgstr "supply"
+
+#: inventory/models.py:167 inventory/urls.py:131 templates/base.html:155
+msgid "Artículos"
+msgstr "Supplies"
+
+#: inventory/models.py:171
+msgid "plantilla"
+msgstr "template"
+
+#: inventory/models.py:192
+msgid "Plantilla de equipo"
+msgstr "Item template"
+
+#: inventory/models.py:193 inventory/templates/item_subtemplate.html:14
+msgid "Número de propiedad"
+msgstr "Asset number"
+
+#: inventory/models.py:195 inventory/templates/item_subtemplate.html:20
+msgid "Número de serie"
+msgstr "Serial number"
+
+#: inventory/models.py:205 inventory/urls.py:133 inventory/urls.py:134
+#: inventory/urls.py:135
+msgid "equipo"
+msgstr "item"
+
+#: inventory/models.py:214
+msgid "(en reparación)"
+msgstr "(in repairs)"
+
+#: inventory/models.py:257 inventory/models.py:298 inventory/models.py:367
+#: inventory/templates/inventory/person_detail.html:37
+msgid "Nombre"
+msgstr "Name"
+
+#: inventory/models.py:258 inventory/models.py:273 inventory/models.py:285
+#: templates/base.html:122
+msgid "Equipo"
+msgstr "Item"
+
+#: inventory/models.py:262 inventory/urls.py:147
+msgid "grupo de equipo"
+msgstr "item group"
+
+#: inventory/models.py:272 inventory/models.py:284 inventory/models.py:382
+msgid "Fecha"
+msgstr "Date"
+
+#: inventory/models.py:296 inventory/templates/inventory/person_detail.html:33
+msgid "Apellido paterno"
+msgstr "Last name"
+
+#: inventory/models.py:297 inventory/templates/inventory/person_detail.html:35
+msgid "Apellido materno"
+msgstr "Second last name"
+
+#: inventory/models.py:299 inventory/templates/inventory/person_detail.html:39
+msgid "Segundo nombre o inicial"
+msgstr "Second name or initial"
+
+#: inventory/models.py:301 templates/base.html:153
+msgid "Inventario"
+msgstr "Inventory"
+
+#: inventory/models.py:306 inventory/urls.py:154 inventory/urls.py:155
+#: inventory/urls.py:156
+msgid "usuario"
+msgstr "user"
+
+#: inventory/models.py:349
+msgid "Fecha y hora"
+msgstr "Time and date"
+
+#: inventory/urls.py:18 inventory/urls.py:26 inventory/urls.py:40
+#: inventory/urls.py:48 inventory/urls.py:53 inventory/urls.py:58
+#: inventory/urls.py:65 inventory/urls.py:71 inventory/urls.py:82
+#: inventory/urls.py:90 inventory/urls.py:95
+#: inventory/templates/generic_form.html:3
+#: inventory/templates/generic_form.html:4
+msgid "Editar"
+msgstr "Edit"
+
+#: inventory/urls.py:19 inventory/urls.py:27 inventory/urls.py:41
+#: inventory/urls.py:49 inventory/urls.py:54 inventory/urls.py:59
+#: inventory/urls.py:66 inventory/urls.py:72 inventory/urls.py:83
+#: inventory/urls.py:91 inventory/urls.py:96
+msgid "Borrar"
+msgstr "Delete"
+
+#: inventory/urls.py:21
+msgid "Equipos que usan esta plantilla"
+msgstr "Items that use this template"
+
+#: inventory/urls.py:22
+msgid "Asignar/Remover artículos"
+msgstr "Assign/Remove supplies"
+
+#: inventory/urls.py:29
+msgid "Asignar/Remover"
+msgstr "Asign/Remove"
+
+#: inventory/urls.py:30
+msgid "Decomisar"
+msgstr "Retire"
+
+#: inventory/urls.py:31
+msgid "Reparar"
+msgstr "To repairs"
+
+#: inventory/urls.py:32
+msgid "Plantilla"
+msgstr "Template"
+
+#: inventory/urls.py:36
+msgid "Reactivar"
+msgstr "Reactivate"
+
+#: inventory/urls.py:42 inventory/templates/photos.html:20
+#: inventory/templates/photos.html.py:21
+msgid "Editar fotos"
+msgstr "Edit photos"
+
+#: inventory/urls.py:43
+msgid "Asignar/Remover equipo"
+msgstr "Assign/Remove item"
+
+#: inventory/urls.py:62
+msgid "Reparado"
+msgstr "Repaired"
+
+#: inventory/urls.py:67
+msgid "Privilegios"
+msgstr "Permissions"
+
+#: inventory/urls.py:85
+msgid "Plantillas que usan este artículo"
+msgstr "Templates that use this supply"
+
+#: inventory/urls.py:86
+msgid "Asignar/Remover plantillas"
+msgstr "Asign/Remove templates"
+
+#: inventory/urls.py:100
+msgid "transacciones"
+msgstr "transactions"
+
+#: inventory/urls.py:101 inventory/urls.py:102 inventory/urls.py:103
+#: inventory/urls.py:104
+msgid "transacción"
+msgstr "transaction"
+
+#: inventory/urls.py:106 inventory/urls.py:107 inventory/urls.py:108
+#: inventory/urls.py:109 inventory/urls.py:110
+msgid "inventario"
+msgstr "inventory"
+
+#: inventory/urls.py:116
+msgid "artículos"
+msgstr "supplies"
+
+#: inventory/urls.py:120
+msgid "artículos sin relacionar"
+msgstr "supplies not related"
+
+#: inventory/urls.py:121
+msgid "a plantillas el artículo"
+msgstr "to templates the supply"
+
+#: inventory/urls.py:121
+msgid "Plantillas que no estan relacionadas el artículo"
+msgstr "Templates that are not related to this supply"
+
+#: inventory/urls.py:121
+msgid "Plantillas relacionadas al artículo"
+msgstr "Templates related to this supply"
+
+#: inventory/urls.py:121
+msgid "plantillas"
+msgstr "templates"
+
+#: inventory/urls.py:123
+msgid "plantillas de equipo"
+msgstr "item templates"
+
+#: inventory/urls.py:124 inventory/urls.py:125 inventory/urls.py:126
+msgid "plantilla de equipo"
+msgstr "item template"
+
+#: inventory/urls.py:126 inventory/urls.py:137
+msgid ""
+"Sera borrado de los usuarios que lo tengan asignado y de cualquier grupo de "
+"equipo al que pertenezca."
+msgstr ""
+"Will be removed from any user that may have it assigned and from any item "
+"group it may belong to."
+
+#: inventory/urls.py:127
+msgid "plantillas sin usar"
+msgstr "unused templates"
+
+#: inventory/urls.py:131
+msgid "artículos a la plantilla"
+msgstr "supplies to the template"
+
+#: inventory/urls.py:131
+msgid "Artículos no relacionados"
+msgstr "Supplies not related"
+
+#: inventory/urls.py:131 inventory/templates/template_subtemplate.html:25
+msgid "Artículos relacionados"
+msgstr "Related supplies"
+
+#: inventory/urls.py:136
+msgid "a usuarios el equipo"
+msgstr "to users the item"
+
+#: inventory/urls.py:136
+msgid "Usuarios que no poseen el equipo"
+msgstr "Users that doesn't own the item"
+
+#: inventory/urls.py:136
+msgid "Usuarios que poseen el equipo"
+msgstr "Users that own the item"
+
+#: inventory/urls.py:136 inventory/urls.py:153
+msgid "usuarios"
+msgstr "users"
+
+#: inventory/urls.py:137
+msgid "decomisar el equipo"
+msgstr "to retire the item"
+
+#: inventory/urls.py:138
+msgid "enviar a reparar el equipo"
+msgstr "send to repairs the item"
+
+#: inventory/urls.py:139
+msgid "equipos sin asignar"
+msgstr "orphan items"
+
+#: inventory/urls.py:140 inventory/urls.py:148 inventory/urls.py:157
+msgid "equipos"
+msgstr "items"
+
+#: inventory/urls.py:145
+msgid "grupos de equipo"
+msgstr "item groups"
+
+#: inventory/urls.py:146 inventory/urls.py:149
+msgid "grupo de equipos"
+msgstr "items group"
+
+#: inventory/urls.py:148
+msgid "equipos a el grupo"
+msgstr "items to the group"
+
+#: inventory/urls.py:148 inventory/urls.py:157
+msgid "Equipos no asignados"
+msgstr "Unassigned items"
+
+#: inventory/urls.py:148 inventory/urls.py:157
+#: inventory/templates/inventory/person_detail.html:43
+msgid "Equipos asignados"
+msgstr "Assigned items"
+
+#: inventory/urls.py:157
+msgid "equipos a el usuario"
+msgstr "items to the user"
+
+#: inventory/urls.py:159
+msgid "equipos decomisados"
+msgstr "retired items"
+
+#: inventory/urls.py:161
+msgid "reactivar el equipo"
+msgstr "reactivate the item"
+
+#: inventory/urls.py:163
+msgid "equipos en reparación"
+msgstr "items in repairs"
+
+#: inventory/urls.py:165
+msgid "marcar como reparado el equipo"
+msgstr "tag as repared"
+
+#: inventory/urls.py:167
+msgid "regionales"
+msgstr "regionals"
+
+#: inventory/urls.py:172 inventory/urls.py:173
+msgid "departamento/sección/area"
+msgstr "department/section/area"
+
+#: inventory/urls.py:174
+msgid "departamentos/Secciones/areas"
+msgstr "Department/Section/Area"
+
+#: inventory/urls.py:175
+msgid "departamentos/secciones/areas"
+msgstr "departments/sections/areas"
+
+#: inventory/urls.py:177 inventory/urls.py:178
+msgid "bitacora"
+msgstr "log"
+
+#: inventory/views.py:80
+msgid "borrar"
+msgstr "delete"
+
+#: inventory/views.py:147
+#, python-format
+msgid "Los %s fueron agregados."
+msgstr "The %s have been added."
+
+#: inventory/views.py:153
+#, python-format
+msgid "Los %s fueron removidos."
+msgstr "The %s were removed."
+
+#: inventory/views.py:185
+msgid "La foto principal ha sido cambiada."
+msgstr "The main photo has been changed."
+
+#: inventory/views.py:194
+msgid ""
+"La foto fue borrada exitosamente.  La foto restante ha sido seleccionada "
+"como la principal."
+msgstr ""
+"The photo was successfully deleted.  The remaining photo has been selected "
+"as the new main photo."
+
+#: inventory/views.py:196
+msgid ""
+"La foto fue borrada exitosamente.  Ha borrado la foto principal, asegurese "
+"de activar otra como la principal."
+msgstr ""
+"The photo was successfully deleted.  You have deleted a main photo, make "
+"sure you select another one as the main photo."
+
+#: inventory/views.py:198
+msgid "La foto fue borrada exitosamente."
+msgstr "The photo was deleted successfully."
+
+#: inventory/views.py:212
+msgid "El tamaño de la foto excede el limite."
+msgstr "The size of the photo exceeds the limit."
+
+#: inventory/views.py:228
+msgid "La foto fue agregada."
+msgstr "The photo has been added."
+
+#: inventory/views.py:267
+#, python-format
+msgid "Bitácora para el equipo: %s"
+msgstr "Log for the item: %s"
+
+#: inventory/views.py:283
+msgid "el equipo"
+msgstr "the item"
+
+#: inventory/views.py:285
+msgid "fotos del equipo"
+msgstr "item photos"
+
+#: inventory/views.py:286
+msgid "fotos de la plantilla"
+msgstr "template photos"
+
+#: inventory/views.py:292 inventory/views.py:497
+msgid "En reparación desde"
+msgstr "In repairs since"
+
+#: inventory/views.py:349
+msgid "equipos que usan la plantilla"
+msgstr "items that use this template"
+
+#: inventory/views.py:372
+msgid "plantillas que usan el artículo"
+msgstr "templates that use the supply"
+
+#: inventory/views.py:447
+msgid "el equipo decomisado"
+msgstr "the item was retired"
+
+#: inventory/views.py:450 templates/base.html:129
+msgid "Decomisado"
+msgstr "Retired"
+
+#: inventory/views.py:475
+msgid "El equipo fue marcado exitosamente como decomisado."
+msgstr "The item has been successfully tagged as retired."
+
+#: inventory/views.py:495
+msgid "el equipo en reparación"
+msgstr "the item in repairs"
+
+#: inventory/views.py:507
+msgid "Este equipo ya esta se encuentra en reparación."
+msgstr "This item is already in repairs."
+
+#: inventory/views.py:515
+msgid "El equipo fue marcado exitosamente como 'en reparación'."
+msgstr "The item was successfully tagged as 'in repairs'."
+
+#: inventory/views.py:525
+msgid "Este equipo no se encuentra en reparación."
+msgstr "This item is not in repairs."
+
+#: inventory/templates/filter_form_subtemplate.html:8
+msgid "Filtrar la lista por:"
+msgstr "Filter the list by:"
+
+#: inventory/templates/filter_form_subtemplate.html:15
+#: inventory/templates/generic_form.html:24
+msgid "Aceptar"
+msgstr "Accept"
+
+#: inventory/templates/generic_assign_remove.html:5
+#: inventory/templates/generic_assign_remove.html:6
+#: inventory/templates/generic_assign_remove.html:12
+msgid "Asignar"
+msgstr "Asign"
+
+#: inventory/templates/generic_assign_remove.html:26
+#: inventory/templates/generic_detail.html:32
+#: inventory/templates/supply_subtemplate.html:8
+#: inventory/templates/template_subtemplate.html:8
+#: inventory/templates/inventory/person_detail.html:27
+msgid "Datos"
+msgstr "Properties"
+
+#: inventory/templates/generic_confirm.html:3
+#: inventory/templates/generic_confirm.html:4
+msgid "Confirmar"
+msgstr "Confirm"
+
+#: inventory/templates/generic_confirm.html:7
+msgid "Esta seguro que desea"
+msgstr "Are you sure you wish"
+
+#: inventory/templates/generic_confirm.html:10
+msgid "Si"
+msgstr "Yes"
+
+#: inventory/templates/generic_detail.html:6
+#: inventory/templates/generic_detail.html:17
+#: inventory/templates/inventory/item_detail.html:5
+#: inventory/templates/inventory/item_detail.html:17
+msgid "Detalle para"
+msgstr "Details for"
+
+#: inventory/templates/generic_detail.html:63
+#: inventory/templates/generic_form.html:3
+#: inventory/templates/generic_form.html:4
+msgid "Crear"
+msgstr "Create"
+
+#: inventory/templates/generic_form.html:17
+msgid "Entre la información"
+msgstr "Enter the information"
+
+#: inventory/templates/generic_form.html:30
+msgid "obligatorio"
+msgstr "required"
+
+#: inventory/templates/generic_list.html:7
+#: inventory/templates/generic_list.html:34
+msgid "Lista de"
+msgstr "List of"
+
+#: inventory/templates/generic_list.html:19
+#: inventory/templates/generic_list.html:80
+msgid "Página previa"
+msgstr "Previous page"
+
+#: inventory/templates/generic_list.html:23
+#: inventory/templates/generic_list.html:84
+msgid "Página"
+msgstr "Page"
+
+#: inventory/templates/generic_list.html:23
+#: inventory/templates/generic_list.html:84
+msgid "de"
+msgstr "of"
+
+#: inventory/templates/generic_list.html:27
+#: inventory/templates/generic_list.html:88
+msgid "Próxima página"
+msgstr "Next page"
+
+#: inventory/templates/generic_list.html:34
+#, python-format
+msgid "%(from)s-%(to)s de %(hits)s"
+msgstr "%(from)s-%(to)s of %(hits)s"
+
+#: inventory/templates/generic_list.html:42
+#: inventory/templates/generic_navigation.html:6
+#: inventory/templates/inventory/item_detail.html:53
+#: inventory/templates/inventory/itemtemplate_detail.html:29
+#: inventory/templates/inventory/supply_detail.html:29 templates/base.html:118
+#: templates/base.html.py:126 templates/base.html:136
+#: templates/base.html.py:159
+msgid "Crear nuevo"
+msgstr "Create new"
+
+#: inventory/templates/generic_list.html:52
+msgid "Identificador"
+msgstr "Identifier"
+
+#: inventory/templates/generic_list.html:54
+msgid "Acción"
+msgstr "Action"
+
+#: inventory/templates/generic_photos_subtemplate.html:44
+#, python-format
+msgid "No hay %(title)s "
+msgstr "There are no %(title)s "
+
+#: inventory/templates/generic_photos_subtemplate.html:46
+msgid "No hay fotos"
+msgstr "There are no photos."
+
+#: inventory/templates/home.html:13 templates/base.html:113
+msgid "Inicio"
+msgstr "Home"
+
+#: inventory/templates/home.html:15
+msgid "Django Inventory"
+msgstr "Django Inventory"
+
+#: inventory/templates/home.html:20
+msgid "Estadisticas"
+msgstr "Statistics"
+
+#: inventory/templates/home.html:21
+msgid "Usuarios registrados"
+msgstr "Registered users"
+
+#: inventory/templates/home.html:22
+msgid "Equipos registrados"
+msgstr "Registered items"
+
+#: inventory/templates/home.html:23
+msgid "Equipos decomisados"
+msgstr "Retired items"
+
+#: inventory/templates/home.html:24
+msgid "Plantillas registradas"
+msgstr "Registered templates"
+
+#: inventory/templates/item_subtemplate.html:8
+msgid "Datos especificos de este equipo"
+msgstr "Item specific properties"
+
+#: inventory/templates/item_subtemplate.html:17
+msgid "Notas"
+msgstr "Notes"
+
+#: inventory/templates/item_subtemplate.html:29
+msgid "Asignado a"
+msgstr "Asigned to"
+
+#: inventory/templates/photos.html:13 templates/base.html:34
+msgid "Please wait..."
+msgstr "Please wait..."
+
+#: inventory/templates/photos.html:25
+msgid "Fotos para"
+msgstr "Photos for"
+
+#: inventory/templates/photos.html:25
+msgid "Máximo de"
+msgstr "Maximum of"
+
+#: inventory/templates/photos.html:52
+msgid "Foto principal"
+msgstr "Main photo"
+
+#: inventory/templates/photos.html:53
+msgid "Borrar foto"
+msgstr "Delete photo"
+
+#: inventory/templates/photos.html:70
+msgid "No hay fotos."
+msgstr "There are no photos."
+
+#: inventory/templates/photos.html:84
+msgid "Subiendo foto..."
+msgstr "Uploading photo..."
+
+#: inventory/templates/photos.html:94
+msgid "Subir fotos"
+msgstr "Upload photos"
+
+#: inventory/templates/photos.html:101
+msgid "Enviar foto"
+msgstr "Send photo"
+
+#: inventory/templates/report-items_per_person.html:14
+msgid "Informe de equipo por usuario"
+msgstr "Items per user report"
+
+#: inventory/templates/search_results.html:9
+msgid "Resultados de la busqueda"
+msgstr "Search results"
+
+#: inventory/templates/search_results.html:12
+msgid "Resultados con"
+msgstr "Results with"
+
+#: inventory/templates/search_results.html:21
+msgid "Resultados en usuarios"
+msgstr "Results in users"
+
+#: inventory/templates/search_results.html:43
+msgid "Resultados en equipos"
+msgstr "Results in items"
+
+#: inventory/templates/search_results.html:65
+msgid "Resultados en plantillas"
+msgstr "Results in templates"
+
+#: inventory/templates/search_results.html:87
+msgid "Resultados en grupos"
+msgstr "Results in groups"
+
+#: inventory/templates/search_results.html:109
+msgid "Resultados en equipos decomisados"
+msgstr "Results in retired items"
+
+#: inventory/templates/search_results.html:131
+msgid "Resultados en artículos"
+msgstr "Results in supplies"
+
+#: inventory/templates/supply_subtemplate.html:22
+#: inventory/templates/template_subtemplate.html:22
+msgid "Notas/observaciones"
+msgstr "Notes/observations"
+
+#: inventory/templates/inventory/itemtemplate_detail.html:5
+#: inventory/templates/inventory/itemtemplate_detail.html:16
+msgid "Detalle de la plantilla"
+msgstr "Template detail"
+
+#: inventory/templates/inventory/person_detail.html:6
+#: inventory/templates/inventory/person_detail.html:17
+msgid "Detalle del usuario"
+msgstr "User detail"
+
+#: inventory/templates/inventory/person_detail.html:60
+msgid "Fotos del usuario"
+msgstr "User photos"
+
+#: inventory/templates/inventory/person_detail.html:90
+msgid "No hay fotos del usuario"
+msgstr "There are no user photos"
+
+#: inventory/templates/inventory/person_detail.html:99
+msgid "Crear otro usuario"
+msgstr "Create another user"
+
+#: inventory/templates/inventory/supply_detail.html:5
+#: inventory/templates/inventory/supply_detail.html:16
+msgid "Detalle del artículo"
+msgstr "Supply detail"
+
+#: templates/about.html:5 templates/about.html.py:6
+msgid "Acerca de este programa"
+msgstr "About this program"
+
+#: templates/about.html:11
+msgid "Un sistema de control de inventario y activos fijos basado en Django"
+msgstr "A Django-bases inventory and fixed asset control system"
+
+#: templates/about.html:13
+msgid "Relizado por: Roberto Rosario González"
+msgstr "Created by: Roberto Rosario"
+
+#: templates/base.html:54
+msgid "Control de inventario"
+msgstr "Inventory control"
+
+#: templates/base.html:76
+msgid "Loading"
+msgstr "Loading"
+
+#: templates/base.html:82
+msgid "Usuario:"
+msgstr "User:"
+
+#: templates/base.html:84
+msgid "Visitante"
+msgstr "Anonymous"
+
+#: templates/base.html:86 templates/registration/login.html:3
+#: templates/registration/login.html:4
+msgid "Entrada"
+msgstr "Login"
+
+#: templates/base.html:90
+msgid "Salir"
+msgstr "Logout"
+
+#: templates/base.html:91 templates/registration/password_change_form.html:28
+msgid "Nueva contraseña"
+msgstr "New password"
+
+#: templates/base.html:94
+msgid "Ingles"
+msgstr "English"
+
+#: templates/base.html:96
+msgid "Español"
+msgstr "Spanish"
+
+#: templates/base.html:102
+msgid "Buscar"
+msgstr "Search"
+
+#: templates/base.html:114 templates/base.html.py:188
+msgid "Usuarios"
+msgstr "Users"
+
+#: templates/base.html:116 templates/base.html.py:124 templates/base.html:134
+#: templates/base.html.py:157
+msgid "Ver todos"
+msgstr "View all"
+
+#: templates/base.html:128
+msgid "Sin asignar"
+msgstr "Orphan"
+
+#: templates/base.html:130
+msgid "En reparación"
+msgstr "In repairs"
+
+#: templates/base.html:132
+msgid "Grupos"
+msgstr "Groups"
+
+#: templates/base.html:141
+msgid "Plantillas"
+msgstr "Templates"
+
+#: templates/base.html:143 templates/base.html.py:167
+msgid "Ver todas"
+msgstr "View all"
+
+#: templates/base.html:145 templates/base.html.py:169
+msgid "Crear nueva"
+msgstr "Create new"
+
+#: templates/base.html:147 templates/base.html.py:161
+msgid "Sin usar"
+msgstr "Unused"
+
+#: templates/base.html:165
+msgid "Transacciones"
+msgstr ""
+
+#: templates/base.html:176
+msgid "Herramientas"
+msgstr "Tools"
+
+#: templates/base.html:178
+msgid "Regionales"
+msgstr "Regionals"
+
+#: templates/base.html:179
+msgid "Departamentos"
+msgstr "Departments"
+
+#: templates/base.html:180
+msgid "Inventarios de artículos"
+msgstr "Supplies inventories"
+
+#: templates/base.html:190
+msgid "Acerca"
+msgstr "About"
+
+#: templates/base.html:206
+msgid ""
+"Este programa utiliza una tecnología conocida como JavaScript, asegúrese de "
+"que su navegador apoya esta tecnología o que este debidamente activada."
+msgstr ""
+"This program uses a technology known as JavaScript, please make sure your "
+"browser support this technology or that it is properly enabled."
+
+#: templates/base.html:214
+msgid ""
+"Este programa utiliza una serie de tecnologías como JavaScript, CSS y AJAX "
+"que su navegador no apoya correctamente."
+msgstr ""
+"This program uses a series of technologies such as JavaScript, CSS and AJAX "
+"that your browser doesn't support correctly."
+
+#: templates/base.html:215
+msgid ""
+"Utilize una version mas reciente de su navegador o utilize un navegador mas "
+"moderno como: <a href=\"http://www.firefox.com\">Firefox</a>, Opera o Safari."
+msgstr ""
+"Use a more recent version of your browser or use a moder browser such as: <a "
+"href=\"http://www.firefox.com\">Firefox</a>, Opera or Safari."
+
+#: templates/base.html:222
+msgid "ok"
+msgstr "ok"
+
+#: templates/registration/login.html:8
+msgid "La contraseña o el usuario estan incorrectos."
+msgstr "The username or password is incorrect."
+
+#: templates/registration/login.html:14
+msgid "Información de entrada"
+msgstr "Data entry"
+
+#: templates/registration/login.html:17
+msgid "Usuario"
+msgstr "User"
+
+#: templates/registration/login.html:25
+msgid "Contraseña"
+msgstr "Password"
+
+#: templates/registration/login.html:33
+msgid "Olvide mi contraseña"
+msgstr "I've forgotten my password"
+
+#: templates/registration/login.html:38
+msgid "Entrar"
+msgstr "Login"
+
+#: templates/registration/password_change_done.html:3
+#: templates/registration/password_change_done.html:4
+#: templates/registration/password_change_form.html:3
+#: templates/registration/password_change_form.html:4
+msgid "Cambio de contraseña"
+msgstr "Change password"
+
+#: templates/registration/password_change_done.html:6
+msgid "Su contraseña fue cambiada exitosamente."
+msgstr "Your password has been changed successfully."
+
+#: templates/registration/password_change_form.html:7
+msgid "Hubo un error, verifique y trate de nuevo."
+msgstr "The was an error, check you input and try again."
+
+#: templates/registration/password_change_form.html:12
+msgid "Entre sus datos de forma correcta."
+msgstr "Enter you information correctly."
+
+#: templates/registration/password_change_form.html:14
+msgid "Cambiar"
+msgstr "Change"
+
+#: templates/registration/password_change_form.html:20
+msgid "Contraseña anterior"
+msgstr "Old password"
+
+#: templates/registration/password_change_form.html:36
+msgid "Confirme la contraseña nueva"
+msgstr "Confirm the new password"

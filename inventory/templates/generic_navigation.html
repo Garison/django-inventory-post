@@ -1,0 +1,28 @@
+{% load generic_views_helpers %}
+{% load i18n %}
+{% comment %}
+		{% if not create_view|login_required or user.is_authenticated %}
+		{% if create_view %}
+		<li><a href="{% url_dynamic create_view %}">{% trans 'Crear nuevo' %}<img src="{{ create_view.icon }}" /></a></li>
+		{% endif %}
+		{% endif %}
+{% endcomment %}
+		{% for link in record_links %}
+			{% if link.view %}
+				{% if not link.view|login_required or user.is_authenticated %}
+					{% if wrapper_object %}
+						<li><a href="{% url_dynamic data.view wrapper_object.id %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+					{% else %}			
+						{% if link.args %}
+							<li><a href="{% url_dynamic_full link.view link.args %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+						{% else %}
+							<li><a href="{% url_dynamic link.view object.id %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+						{% endif %}
+					{% endif %}
+				{% endif %}
+			{% else %} 
+				{% if link.url %}
+				<li><a href="{{ link.url }}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+				{% endif %}
+			{% endif %}
+		{% endfor %}			
