@@ -1,4 +1,3 @@
-#-*- coding: UTF-8 -*-
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -171,13 +170,13 @@ def generic_assign_remove(request, object_id, title, object, left_list_qryset, l
                 for item in form.cleaned_data['left_list']:
                     eval(add_method + "(item)")
                 if request.user.is_authenticated() and form.cleaned_data['left_list']:
-                    request.user.message_set.create(message=_(u"Los %s fueron agregados.") % unicode(item_name))
+                    request.user.message_set.create(message=_(u"The %s were added.") % unicode(item_name))
 
             if action == "remove":
                 for item in form.cleaned_data['right_list']:
                     eval(remove_method + "(item)")
                 if request.user.is_authenticated() and form.cleaned_data['right_list']:
-                    request.user.message_set.create(message=_(u"Los %s fueron removidos.") % unicode(item_name))
+                    request.user.message_set.create(message=_(u"The %s were removed.") % unicode(item_name))
 
     form = GenericAssignRemoveForm(eval(left_list_qryset), eval(right_list_qryset), left_filter)
         
@@ -209,7 +208,7 @@ def generic_photos(request, model, object_id, max_photos = 5):
                 main_photo.main=True
                 main_photo.save()
 
-                _flash_(request, _(u'La foto principal ha sido cambiada.'))
+                _flash_(request, _(u'The main photo has been changed.'))
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
             if action == 'delete':
@@ -218,11 +217,11 @@ def generic_photos(request, model, object_id, max_photos = 5):
                     if photo.main:
                         if photos.count() == 2:
                             photos.update(main=True)
-                            _flash_message(request, _(u'La foto fue borrada exitosamente.  La foto restante ha sido seleccionada como la principal.'))
+                            _flash_message(request, _(u'The photo was deleted successfully.  The remaining photo has been selected as the main photo.'))
                         else:
-                            _flash_message(request, _(u'La foto fue borrada exitosamente.  Ha borrado la foto principal, asegurese de activar otra como la principal.'))
+                            _flash_message(request, _(u'The photo was deleted successfully.  You have deleted the main photo, make sure you mark another one as the main photo.'))
                     else:
-                        _flash_message(request, _(u'La foto fue borrada exitosamente.'))
+                        _flash_message(request, _(u'The photo was deleted successfully.'))
 
                     photo.delete()
                 except:
@@ -236,7 +235,7 @@ def generic_photos(request, model, object_id, max_photos = 5):
             
                 instance = form.save(commit=False)
                 if instance.photo.size > Settings.objects.get(pk=1).max_photo_size:
-                    _flash_message(request, _(u'El tamaño de la foto excede el limite.'), type='error')
+                    _flash_message(request, _(u'The photo is too big.'), type='error')
                     os.unlink(instance.photo.path)
                     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
@@ -252,7 +251,7 @@ def generic_photos(request, model, object_id, max_photos = 5):
                 new_instance = instance.create(instance=instance)
                 model_instance.photos.add(instance)
                 model_instance.save()
-                _flash_message(request, _(u'La foto fue agregada.'))
+                _flash_message(request, _(u'The photo was added.'))
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
         else:
             form = PhotoForm()
@@ -291,7 +290,7 @@ def item_log_list(request, object_id):
         request,
         queryset=log,
         template_name='generic_list.html',
-        extra_context={'title' : _(u"Bitácora para el equipo: %s") % item},
+        extra_context={'title' : _(u"Item log: %s") % item},
         ) 
     
 def item_detail(request, object_id, template_name=None, extra_data=None, passthru=False, show_create_view=True):
@@ -309,14 +308,14 @@ def item_detail(request, object_id, template_name=None, extra_data=None, passthr
         'record_links' : item_record_links,
         'title': _(u'el equipo'),
         'subtitle': item,
-        'item_photos_title': _(u'fotos del equipo'),
-        'template_photos_title': _(u'fotos de la plantilla'),
+        'item_photos_title': _(u'item photos'),
+        'template_photos_title': _(u'template photos'),
         }
 
     in_repairs = item.is_inrepairs()
     if in_repairs:
         extra_context['extra_attribs'] = {
-            _(u'En reparación desde') : in_repairs.date,
+            _(u'In repairs since') : in_repairs.date,
         }
 
     if extra_data:
@@ -373,7 +372,7 @@ def template_items(request, object_id):
         queryset = template.item_set.all(),
         template_name = "generic_list.html", 
         extra_context=dict(
-            title = '%s: %s' % (_(u"equipos que usan la plantilla"), template),
+            title = '%s: %s' % (_(u"item that use the template"), template),
             create_view = 'item_create',
             record_links=item_record_links			
         ),
@@ -396,7 +395,7 @@ def supply_templates(request, object_id):
         queryset = supply.itemtemplate_set.all(),
         template_name = "generic_list.html", 
         extra_context=dict(
-            title = '%s: %s' % (_(u"plantillas que usan el artículo"), supply),
+            title = '%s: %s' % (_(u"templates that use the supply"), supply),
             create_view = 'item_create',
             record_links=template_record_links			
         ),
@@ -471,10 +470,10 @@ def retireditem_detail(request, object_id):
     extra_data={ 
         'wrapper_object' : retired_item,
         'record_links' : retireditem_links,	
-        'title' : _(u"el equipo decomisado"),
+        'title' : _(u"retired item"),
         'subtitle' : retired_item.item,
         'extra_attribs' : {
-                _(u'Decomisado') : retired_item.date
+                _(u'Retired') : retired_item.date
                 }
          }
     
@@ -499,7 +498,7 @@ def item_retire(request, object_id):
     item.save()		
 
     if request.user.is_authenticated():
-        request.user.message_set.create(message=_(u"El equipo fue marcado exitosamente como decomisado."))
+        request.user.message_set.create(message=_(u"The item has been marked as retired."))
 
     return HttpResponseRedirect(reverse('retireditem_list'))
 
@@ -519,9 +518,9 @@ def inrepairsitem_detail(request, object_id):
     extra_data={ 
         'wrapper_object' : inrepairs_item,
         'record_links' : inrepairsitem_links,
-        'title' : _(u"el equipo en reparación"),
+        'title' : _(u"item in repairs"),
         'extra_attribs' : {
-            _(u'En reparación desde') : inrepairs_item.date,
+            _(u'In repairs since') : inrepairs_item.date,
             }
          }
     
@@ -531,7 +530,7 @@ def item_sendtorepairs(request, object_id):
     item = Item.objects.get(pk=object_id)
     if InRepairsItem.objects.filter(item=item):
         if request.user.is_authenticated():
-            request.user.message_set.create(message=_(u"Este equipo ya esta se encuentra en reparación."))
+            request.user.message_set.create(message=_(u"This item is in repairs."))
 
         return HttpResponseRedirect(reverse('inrepairsitem_list'))			
 
@@ -539,7 +538,7 @@ def item_sendtorepairs(request, object_id):
     new.save()
 
     if request.user.is_authenticated():
-        request.user.message_set.create(message=_(u"El equipo fue marcado exitosamente como 'en reparación'."))
+        request.user.message_set.create(message=_(u"The item has been marked as 'in repairs'."))
 
     return HttpResponseRedirect(reverse('inrepairsitem_list'))
     
@@ -549,7 +548,7 @@ def inrepairsitem_unrepair(request, object_id):
         inrepairs.delete()
     except:
         if request.user.is_authenticated():
-            request.user.message_set.create(message=_(u"Este equipo no se encuentra en reparación."))
+            request.user.message_set.create(message=_(u"This item is no in repairs."))
     
     return HttpResponseRedirect(reverse('inrepairsitem_list'))			
 

@@ -1,4 +1,3 @@
-#-*- coding: UTF-8 -*-
 from django.db import models
 from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
@@ -8,17 +7,17 @@ from django.contrib.auth.models import User, UserManager
 from django.core.urlresolvers import reverse
 
 class Settings(models.Model):
-    max_photo_size = models.IntegerField(default=1000000, verbose_name=_(u'Tamaño maximo de las fotos'), help_text=_(u'Limite en kilobytes.'))
+    max_photo_size = models.IntegerField(default=1000000, verbose_name=_(u'Maximum photo size.'), help_text=_(u'Limite en kilobytes.'))
     max_item_photos = models.IntegerField(default=5, verbose_name=_(u'Máximo de fotos por equipo'))
-    max_template_photos = models.IntegerField(default=5, verbose_name=_(u'Máximo de fotos por plantilla'))
-    max_person_photos = models.IntegerField(default=5, verbose_name=_(u'Máximo de fotos por usuario'))
+    max_template_photos = models.IntegerField(default=5, verbose_name=_(u'Maximum photos per item template.'))
+    max_person_photos = models.IntegerField(default=5, verbose_name=_(u'Maximum photos per user.'))
     is_anon_restricted = models.BooleanField(default=True, verbose_name=_(u'¿Entrada requerida para todas las areas?'))
 
     class Meta:
-        verbose_name = _(u"configuración")
+        verbose_name = _(u"settings")
 
     def __unicode__(self):
-        return unicode(_(u"Configuración"))
+        return unicode(_(u"settings"))
 
     def get_absolute_url(self):
         return reverse('settings')
@@ -34,11 +33,11 @@ class Photo(models.Model):
     from http://superjared.com/entry/django-quick-tips-2-image-thumbnails/
     """
     #filename
-    title = models.CharField(max_length=10, null=True, blank=True, verbose_name = _(u"Título"))
-    photo = models.ImageField(upload_to="userfiles/photos/",verbose_name = _(u"Foto"))
+    title = models.CharField(max_length=10, null=True, blank=True, verbose_name = _(u"Title"))
+    photo = models.ImageField(upload_to="userfiles/photos/",verbose_name = _(u"Photo"))
     thumbnail = models.ImageField(upload_to="userfiles/photos/thumbnails/", editable=False)
     preview = models.ImageField(upload_to="userfiles/photos/previews/", editable=False)
-    main = models.BooleanField(default=False, verbose_name = _(u"¿Principal?"))
+    main = models.BooleanField(default=False, verbose_name = _(u"Main photo?"))
 
 #	def _super
 #		self.file_name = str(random.randint(0,99999999))
@@ -89,7 +88,7 @@ class Photo(models.Model):
         super(Photo, self).save()
         
     class Meta:
-        verbose_name = _(u"foto")
+        verbose_name = _(u"photo")
         
     def __unicode__(self):
         return self.title 
@@ -111,11 +110,11 @@ class RegionalOffice(models.Model):
 
 class Department(models.Model):
     regional_office = models.ForeignKey(RegionalOffice, verbose_name=_("Regional"))
-    name = models.CharField(verbose_name=_(u"Departamento/Sección/Area"), max_length=32)
+    name = models.CharField(verbose_name=_(u"Department/Section/Area"), max_length=32)
 
     class Meta:
         ordering = ['name']
-        verbose_name = _(u"departamento")
+        verbose_name = _(u"department")
 
     def __unicode__(self):
         return self.regional_office.name + '/' + self.name
@@ -125,16 +124,16 @@ class Department(models.Model):
 
 
 class Supply(models.Model):
-    description = models.CharField(verbose_name=_(u"Descripción"), max_length=64)
-    brand = models.CharField(verbose_name=_("Marca"), max_length=32, null=True, blank=True)
-    model = models.CharField(verbose_name=_("Modelo"), max_length=32, null=True, blank=True)
-    part_number = models.CharField(verbose_name=_(u"Número de pieza"), max_length=32, null=True, blank=True)
-    photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name = _("Fotos"))
-    notes = models.TextField(_("Notas/Observaciones"), null=True, blank=True)	
+    description = models.CharField(verbose_name=_(u"Description"), max_length=64)
+    brand = models.CharField(verbose_name=_("Brancd"), max_length=32, null=True, blank=True)
+    model = models.CharField(verbose_name=_("Model"), max_length=32, null=True, blank=True)
+    part_number = models.CharField(verbose_name=_(u"Part number"), max_length=32, null=True, blank=True)
+    photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name = _("Photos"))
+    notes = models.TextField(_("Notes/Observations"), null=True, blank=True)	
     
     class Meta:
         ordering = ['description']	
-        verbose_name = _(u"artículo")
+        verbose_name = _(u"article")
     
     def get_absolute_url(self):
         return ('supply_view', [str(self.id)])
@@ -162,17 +161,17 @@ class Supply(models.Model):
 
             
 class ItemTemplate(models.Model):
-    description = models.CharField(verbose_name=_(u"Descripción"), max_length=64)
-    brand = models.CharField(verbose_name=_("Marca"), max_length=32, null=True, blank=True)
-    model = models.CharField(verbose_name=_("Modelo"), max_length=32, null=True, blank=True)
-    part_number = models.CharField(verbose_name=_(u"Número de pieza"), max_length=32, null=True, blank=True)
-    photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name = _("Fotos"))
-    notes = models.TextField(_("Notas/Observaciones"), null=True, blank=True)	
-    supplies = models.ManyToManyField(Supply, null=True, blank=True, verbose_name=_(u"Artículos"))
+    description = models.CharField(verbose_name=_(u"Description"), max_length=64)
+    brand = models.CharField(verbose_name=_("Brand"), max_length=32, null=True, blank=True)
+    model = models.CharField(verbose_name=_("Model"), max_length=32, null=True, blank=True)
+    part_number = models.CharField(verbose_name=_(u"Part number"), max_length=32, null=True, blank=True)
+    photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name = _("Photos"))
+    notes = models.TextField(_("Notes/Observations"), null=True, blank=True)	
+    supplies = models.ManyToManyField(Supply, null=True, blank=True, verbose_name=_(u"Articles"))
     
     class Meta:
         ordering = ['description']	
-        verbose_name = _(u"plantilla")
+        verbose_name = _(u"item template")
     
     def get_absolute_url(self):
         return ('template_view', [str(self.id)])
@@ -196,20 +195,20 @@ class ItemManagerPassthru(models.Manager):
 
 
 class Item(models.Model):
-    item_template = models.ForeignKey(ItemTemplate, verbose_name=_(u"Plantilla de equipo"))
-    property_number = models.CharField(_(u"Número de propiedad"), max_length=10)
-    notes = models.TextField(_(u"Notas/Observaciones"), null=True, blank=True)	
-    serial_number = models.CharField(verbose_name=_(u"Número de serie"), max_length=30, null=True, blank=True)
+    item_template = models.ForeignKey(ItemTemplate, verbose_name=_(u"item template"))
+    property_number = models.CharField(_(u"Asset number"), max_length=10)
+    notes = models.TextField(_(u"Notes/Observations"), null=True, blank=True)	
+    serial_number = models.CharField(verbose_name=_(u"Serial number"), max_length=30, null=True, blank=True)
     regional_office = models.ForeignKey(RegionalOffice, verbose_name=_("Regional"))
-    department = models.ForeignKey(Department, verbose_name=_(u"Departamento/Sección/Area"), null=True, blank=True)
-    photos = models.ManyToManyField(Photo, null=True, blank=True,  verbose_name = _("Fotos"))
+    department = models.ForeignKey(Department, verbose_name=_(u"Department/Section/Area"), null=True, blank=True)
+    photos = models.ManyToManyField(Photo, null=True, blank=True,  verbose_name = _("Photos"))
     active = models.BooleanField(default=True)
     objects = ItemManager()
     objects_passthru = ItemManagerPassthru()
     
     class Meta:
         ordering = ['property_number']
-        verbose_name = _(u"equipo")
+        verbose_name = _(u"item")
 
     def get_absolute_url(self):
         return ('item_view', [str(self.id)])
@@ -218,7 +217,7 @@ class Item(models.Model):
     def __unicode__(self):
         in_repairs = self.is_inrepairs()
         if in_repairs:
-            rep=_(u"(en reparación)")
+            rep=_(u"(in repairs)")
         else:
             rep=''
             
@@ -262,12 +261,12 @@ class Item(models.Model):
 
     
 class ItemGroup(models.Model):
-    name = models.CharField(verbose_name=_("Nombre"), max_length=32)
-    items = models.ManyToManyField(Item, verbose_name=_("Equipo"))
+    name = models.CharField(verbose_name=_("Name"), max_length=32)
+    items = models.ManyToManyField(Item, verbose_name=_("Item"))
     
     class Meta:
         ordering = ['name']
-        verbose_name = _(u"grupo de equipo")
+        verbose_name = _(u"item group")
         
     def __unicode__(self):
         return self.name
@@ -278,8 +277,8 @@ class ItemGroup(models.Model):
 
         
 class RetiredItem(models.Model):
-    date = models.DateField(verbose_name=_("Fecha"), auto_now_add=True)
-    item = models.OneToOneField(Item, verbose_name=_("Equipo"))
+    date = models.DateField(verbose_name=_("date"), auto_now_add=True)
+    item = models.OneToOneField(Item, verbose_name=_("item"))
     #user
     
     def get_absolute_url(self):
@@ -291,8 +290,8 @@ class RetiredItem(models.Model):
 
 
 class InRepairsItem(models.Model):		
-    date = models.DateField(verbose_name=_("Fecha"), auto_now_add=True)
-    item = models.OneToOneField(Item, verbose_name=_("Equipo"))
+    date = models.DateField(verbose_name=_("date"), auto_now_add=True)
+    item = models.OneToOneField(Item, verbose_name=_("item"))
 #	user
 
     def get_absolute_url(self):
@@ -304,17 +303,17 @@ class InRepairsItem(models.Model):
 
 
 class Person(models.Model):
-    last_name = models.CharField(_("Apellido paterno"), max_length=32)
-    second_last_name = models.CharField(_("Apellido materno"), max_length=32, blank=True, null=True)
-    first_name = models.CharField(_("Nombre"), max_length=32)
-    second_name = models.CharField(_("Segundo nombre o inicial"), max_length=32, blank=True, null=True)
-    regional_office = models.ForeignKey(RegionalOffice, verbose_name=_("Regional"))
-    inventory = models.ManyToManyField(Item, blank=True, null=True, verbose_name=_("Inventario"))
-    photos = models.ManyToManyField(Photo, null=True, blank=True,  verbose_name = _("Fotos"))
+    last_name = models.CharField(_("last name"), max_length=32)
+    second_last_name = models.CharField(_("second last name"), max_length=32, blank=True, null=True)
+    first_name = models.CharField(_("first name"), max_length=32)
+    second_name = models.CharField(_("second name or initial"), max_length=32, blank=True, null=True)
+    regional_office = models.ForeignKey(RegionalOffice, verbose_name=_("regional"))
+    inventory = models.ManyToManyField(Item, blank=True, null=True, verbose_name=_("inventory"))
+    photos = models.ManyToManyField(Photo, null=True, blank=True,  verbose_name = _("photos"))
 
     class Meta:
         ordering = ['last_name', 'second_last_name', 'first_name', 'second_name']
-        verbose_name = _(u"usuario")
+        verbose_name = _(u"user")
 
     def get_absolute_url(self):
         return ('person_view', [str(self.id)])
@@ -360,9 +359,9 @@ class Permission(models.Model):
 
     
 class Log(models.Model):
-    timedate = models.DateTimeField(auto_now_add=True, verbose_name=_("Fecha y hora"))
+    timedate = models.DateTimeField(auto_now_add=True, verbose_name=_(u"timedate"))
     action = models.CharField(max_length=32)
-    description = models.TextField("Descripcion", null=True, blank=True)
+    description = models.TextField(verbose_name=_(u"description"), null=True, blank=True)
     #user = models.ForeignKey(User, unique=True)
     
     content_type = models.ForeignKey(ContentType)
@@ -379,8 +378,8 @@ class Log(models.Model):
 
 
 class Inventory(models.Model):
-    name = models.CharField(max_length=32, verbose_name=_(u'Nombre'))
-    regional_office = models.ForeignKey(RegionalOffice, verbose_name=_(u'Regional'))
+    name = models.CharField(max_length=32, verbose_name=_(u'name'))
+    regional_office = models.ForeignKey(RegionalOffice, verbose_name=_(u'regional'))
 
     def get_absolute_url(self):
         return ('inventory_view', [str(self.id)])
@@ -408,12 +407,12 @@ class InventoryTransaction(models.Model):
     inventory = models.ForeignKey(Inventory)
     supply = models.ForeignKey(Supply)
     quantity = models.IntegerField()
-    date = models.DateField(default=datetime.date.today(), verbose_name=_("Fecha"))
+    date = models.DateField(default=datetime.date.today(), verbose_name=_(u"date"))
     notes = models.TextField(null=True, blank=True)
     
     class Meta:
-        verbose_name = _(u'transacción')
-        verbose_name_plural = _(u'transacciones')
+        verbose_name = _(u'transaction')
+        verbose_name_plural = _(u'transactions')
 
     def get_absolute_url(self):
         return ('inventory_transaction_view', [str(self.id)])
