@@ -7,11 +7,11 @@ from django.contrib.auth.models import User, UserManager
 from django.core.urlresolvers import reverse
 
 class Settings(models.Model):
-    max_photo_size = models.IntegerField(default=1000000, verbose_name=_(u'Maximum photo size.'), help_text=_(u'Limite en kilobytes.'))
-    max_item_photos = models.IntegerField(default=5, verbose_name=_(u'Máximo de fotos por equipo'))
+    max_photo_size = models.IntegerField(default=1000000, verbose_name=_(u'Maximum photo size.'), help_text=_(u'Limit in kilobytes.'))
+    max_item_photos = models.IntegerField(default=5, verbose_name=_(u'Maximum photos per item.'))
     max_template_photos = models.IntegerField(default=5, verbose_name=_(u'Maximum photos per item template.'))
     max_person_photos = models.IntegerField(default=5, verbose_name=_(u'Maximum photos per user.'))
-    is_anon_restricted = models.BooleanField(default=True, verbose_name=_(u'¿Entrada requerida para todas las areas?'))
+    is_anon_restricted = models.BooleanField(default=True, verbose_name=_(u'Required login?'))
 
     class Meta:
         verbose_name = _(u"settings")

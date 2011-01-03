@@ -111,8 +111,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-    'django-inventory.inventory',
     'django.contrib.admindocs',
+    'inventory',
     'wsgi',
 ]
 
