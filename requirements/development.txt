@@ -1,0 +1,8 @@
+Django==1.2.4
+PIL==1.1.7
+South==0.7.3
+Werkzeug==0.6.2
+distribute==0.6.10
+django-extensions==0.6
+wsgiref==0.1.2
+yolk==0.4.1
