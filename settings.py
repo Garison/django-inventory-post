@@ -7,7 +7,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-	# ('Your Name', 'your_email@domain.com'),
+    # ('Your Name', 'your_email@domain.com'),
 )
 
 MANAGERS = ADMINS
@@ -33,10 +33,10 @@ LANGUAGE_CODE = 'es'
 ugettext = lambda s: s
 
 LANGUAGES = (
-	('es', ugettext('Spanish')),
-	('en', ugettext('English')),
+    ('es', ugettext('Spanish')),
+    ('en', ugettext('English')),
 )
-	
+    
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -62,44 +62,44 @@ SECRET_KEY = '4#8p2r=zfa=t@3@@v5v*)i=kvnuyxae_yyvqkyv4!opcwad6@+'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-	'django.template.loaders.filesystem.load_template_source',
-	'django.template.loaders.app_directories.load_template_source',
+    'django.template.loaders.filesystem.load_template_source',
+    'django.template.loaders.app_directories.load_template_source',
 #     'django.template.loaders.eggs.load_template_source',
 )
 
 MIDDLEWARE_CLASSES = (
-	'django.middleware.common.CommonMiddleware',
-	'django.contrib.sessions.middleware.SessionMiddleware',
-	'django.middleware.locale.LocaleMiddleware',
-	'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
 ROOT_URLCONF = 'django-inventory.urls'
 
 TEMPLATE_DIRS = (
-	# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-	# Always use forward slashes, even on Windows.
-	# Don't forget to use absolute paths, not relative paths.
-	'./templates',
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    './templates',
 )
 
 INSTALLED_APPS = (
-	'django.contrib.auth',
-	'django.contrib.contenttypes',
-	'django.contrib.sessions',
-	'django.contrib.sites',
-	'django.contrib.admin',
-	'django-inventory.inventory',
-	'django.contrib.admindocs',
-	'wsgi',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'django-inventory.inventory',
+    'django.contrib.admindocs',
+    'wsgi',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-		"django.core.context_processors.auth",
-		"django.core.context_processors.debug",
-		"django.core.context_processors.i18n",
-		"django.core.context_processors.media",
-		'django.core.context_processors.request',
+        "django.core.context_processors.auth",
+        "django.core.context_processors.debug",
+        "django.core.context_processors.i18n",
+        "django.core.context_processors.media",
+        'django.core.context_processors.request',
 )
 
 LOGIN_URL = '/login/'
@@ -113,9 +113,9 @@ CUSTOM_USER_MODEL = 'inventory.CustomUser'
 DEVELOPMENT=True
 
 if DEVELOPMENT:
-	try:
-		from settings_development import *
+    try:
+        from settings_development import *
 #		print u'Starting development version.'
-	except: # ImportError:
-		pass
-	#    print u'File settings_development.py is not found.'
+    except: # ImportError:
+        pass
+    #    print u'File settings_development.py is not found.'
