@@ -8,7 +8,7 @@
 					{% if title %}
 						{{ title|capfirst }}
 					{% else %}
-						{% trans 'Fotos' %}
+						{% trans 'Photos' %}
 					{% endif %}
 				</td>
 			</tr>
@@ -41,9 +41,9 @@
 
 <p style='font-weight: bold; text-align:center;'>
 {% if title %}
-	{% blocktrans %}No hay {{ title }} {% endblocktrans %}
+	{% blocktrans %}There are no {{ title }} {% endblocktrans %}
 {% else %}
-	{% trans 'No hay fotos' %}
+	{% trans 'There are no photos' %}
 {% endif %}
 </p>
 

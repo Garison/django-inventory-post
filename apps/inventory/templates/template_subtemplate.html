@@ -5,24 +5,24 @@
 		<thead>
 			<tr>
 				<td colspan='2'>
-					{% trans 'Datos' %}
+					{% trans 'Data' %}
 				</td>
 			</tr>
 		</thead>	
 		<tbody>
 			<tr>
-				<th>{% trans 'Descripción' %}:</th><td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+				<th>{% trans 'Description' %}:</th><td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
 			</tr><tr>
-				<th>{% trans 'Marca' %}:</th><td>{{ object.brand }}</td>
+				<th>{% trans 'Brand' %}:</th><td>{{ object.brand }}</td>
 			</tr><tr>
-				<th>{% trans 'Modelo' %}:</th><td>{{ object.model }}</td>
+				<th>{% trans 'Model' %}:</th><td>{{ object.model }}</td>
 			</tr><tr>
-				<th>{% trans 'Número de pieza' %}:</th><td>{{ object.part_number }}</td>
+				<th>{% trans 'Part number' %}:</th><td>{{ object.part_number }}</td>
 			</tr><tr>
-				<th>{% trans 'Notas/observaciones' %}:</th><td>{{ object.notes }}</td>
+				<th>{% trans 'Notes/observations' %}:</th><td>{{ object.notes }}</td>
 			</tr>
 			<tr>
-				<th>{% trans 'Artículos relacionados' %}:</th><td><ul>{% for i in object.supplies.all %}<li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>{% endfor %}</ul></td>
+				<th>{% trans 'Related supplies' %}:</th><td><ul>{% for i in object.supplies.all %}<li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>{% endfor %}</ul></td>
 			</tr>
 		</tbody>
 	</table>
