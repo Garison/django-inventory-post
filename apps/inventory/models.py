@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
@@ -15,7 +17,8 @@ class Settings(models.Model):
 
     class Meta:
         verbose_name = _(u"settings")
-
+        verbose_name_plural = _(u"settings")
+        
     def __unicode__(self):
         return unicode(_(u"settings"))
 
@@ -99,8 +102,9 @@ class RegionalOffice(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = _(u"regional")
-    
+        verbose_name = _(u"regional office")
+        verbose_name_plural = _(u'regional offices')
+            
     def __unicode__(self):
         return self.name
 
@@ -115,6 +119,7 @@ class Department(models.Model):
     class Meta:
         ordering = ['name']
         verbose_name = _(u"department")
+        verbose_name_plural = _(u"departments")
 
     def __unicode__(self):
         return self.regional_office.name + '/' + self.name
@@ -125,7 +130,7 @@ class Department(models.Model):
 
 class Supply(models.Model):
     description = models.CharField(verbose_name=_(u"Description"), max_length=64)
-    brand = models.CharField(verbose_name=_("Brancd"), max_length=32, null=True, blank=True)
+    brand = models.CharField(verbose_name=_("Brand"), max_length=32, null=True, blank=True)
     model = models.CharField(verbose_name=_("Model"), max_length=32, null=True, blank=True)
     part_number = models.CharField(verbose_name=_(u"Part number"), max_length=32, null=True, blank=True)
     photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name = _("Photos"))
@@ -133,7 +138,8 @@ class Supply(models.Model):
     
     class Meta:
         ordering = ['description']	
-        verbose_name = _(u"article")
+        verbose_name = _(u"supply")
+        verbose_name_plural = _(u"supplies")        
     
     def get_absolute_url(self):
         return ('supply_view', [str(self.id)])
@@ -172,6 +178,7 @@ class ItemTemplate(models.Model):
     class Meta:
         ordering = ['description']	
         verbose_name = _(u"item template")
+        verbose_name_plural = _(u"item templates")        
     
     def get_absolute_url(self):
         return ('template_view', [str(self.id)])
@@ -209,6 +216,7 @@ class Item(models.Model):
     class Meta:
         ordering = ['property_number']
         verbose_name = _(u"item")
+        verbose_name_plural = _(u"items")        
 
     def get_absolute_url(self):
         return ('item_view', [str(self.id)])
@@ -267,6 +275,7 @@ class ItemGroup(models.Model):
     class Meta:
         ordering = ['name']
         verbose_name = _(u"item group")
+        verbose_name_plural = _(u"item groups")        
         
     def __unicode__(self):
         return self.name
@@ -280,6 +289,10 @@ class RetiredItem(models.Model):
     date = models.DateField(verbose_name=_("date"), auto_now_add=True)
     item = models.OneToOneField(Item, verbose_name=_("item"))
     #user
+
+    class Meta:
+        verbose_name = _(u"retired item")
+        verbose_name_plural = _(u"retired items")
     
     def get_absolute_url(self):
         return ('retireditem_view', [str(self.id)])
@@ -293,6 +306,9 @@ class InRepairsItem(models.Model):
     date = models.DateField(verbose_name=_("date"), auto_now_add=True)
     item = models.OneToOneField(Item, verbose_name=_("item"))
 #	user
+    class Meta:
+        verbose_name = _(u"item in repairs")
+        verbose_name_plural = _(u"items in repairs")
 
     def get_absolute_url(self):
         return ('inrepairsitem_view', [str(self.id)])
@@ -313,7 +329,8 @@ class Person(models.Model):
 
     class Meta:
         ordering = ['last_name', 'second_last_name', 'first_name', 'second_name']
-        verbose_name = _(u"user")
+        verbose_name = _(u"person")
+        verbose_name_plural = _(u"people")
 
     def get_absolute_url(self):
         return ('person_view', [str(self.id)])
@@ -381,6 +398,10 @@ class Inventory(models.Model):
     name = models.CharField(max_length=32, verbose_name=_(u'name'))
     regional_office = models.ForeignKey(RegionalOffice, verbose_name=_(u'regional'))
 
+    class Meta:
+        verbose_name = _(u'inventory')
+        verbose_name_plural = _(u'inventories')
+
     def get_absolute_url(self):
         return ('inventory_view', [str(self.id)])
     get_absolute_url = models.permalink(get_absolute_url)		
@@ -390,7 +411,6 @@ class Inventory(models.Model):
 
 
 class InventoryCheckPoint(models.Model):
-    import datetime
     inventory = models.ForeignKey(Inventory)
     datetime = models.DateTimeField(default=datetime.datetime.now())	
     supplies = models.ManyToManyField(Supply, null=True, blank=True, through='InventoryCPQty')
@@ -403,7 +423,6 @@ class InventoryCPQty(models.Model):
 
     
 class InventoryTransaction(models.Model):
-    import datetime
     inventory = models.ForeignKey(Inventory)
     supply = models.ForeignKey(Supply)
     quantity = models.IntegerField()
@@ -411,8 +430,8 @@ class InventoryTransaction(models.Model):
     notes = models.TextField(null=True, blank=True)
     
     class Meta:
-        verbose_name = _(u'transaction')
-        verbose_name_plural = _(u'transactions')
+        verbose_name = _(u'inventory transaction')
+        verbose_name_plural = _(u'inventory transactions')
 
     def get_absolute_url(self):
         return ('inventory_transaction_view', [str(self.id)])
