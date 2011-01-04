@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block keywords %}
 {% endblock %}
-{% block title %} :: {% trans 'Detalle del artículo' %} {{ object }}{% endblock %}
+{% block title %} :: {% trans 'Supply details' %} {{ object }}{% endblock %}
 {% load generic_views_helpers %}
 {% block javascript %}
 <script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-lightbox-0.5/js/jquery.lightbox-0.5.js"></script>
@@ -13,7 +13,7 @@ $(function() {
     });
 </script>
 {% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Detalle del artículo' %}</h2></div>{% endblock %}
+{% block banner %}<div id="banner"><h2>{% trans 'Supply details' %}</h2></div>{% endblock %}
 {% block content %}
 
 <h3>{{ object }}</h3>
@@ -25,9 +25,9 @@ $(function() {
 <div class='userbar'>
 	<div style='font-size:100%;'>
 		<ul>
-			{% if not "template_create"|login_required or user.is_authenticated %}
+			{#{% if not "template_create"|login_required or user.is_authenticated %}#}
 			<li><a href="{% url template_create %}">{% trans 'Crear nuevo' %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
-			{% endif %}
+			{#{% endif %}#}
 			{% include "generic_navigation.html" %}
 		</ul>
 	</div>

@@ -15,7 +15,7 @@
 {% include "filter_form_subtemplate.html" %}	
 {% endif %}
 
-<form method='POST' action='' id='assign_remove'>
+<form method='POST' action='' id='assign_remove'>{% csrf_token %}
 <input name='action' value='' type='hidden' />
 <center>
 <div class="data-entry" >
