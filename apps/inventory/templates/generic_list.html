@@ -2,9 +2,9 @@
 {% load i18n %}
 {% block keywords %}
 {% endblock %}
-{#{% load generic_views_helpers %}#}
-{% block title %} :: Lista de {{ title }}{% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Lista de' %} {{ title }}</h2></div>{% endblock %}
+{% load generic_views_helpers %}
+{% block title %} :: {% blocktrans %}List of {{ title }}{% endblocktrans %}{% endblock %}
+{% block banner %}<div id="banner"><h2>{% blocktrans %}List of {{ title }}{% endblocktrans %}</h2></div>{% endblock %}
 {% block content %}
 <h3>{{ subtitle }}</h3>
 
@@ -16,22 +16,22 @@
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}{{ new_url }}">[{% trans 'Página previa' %}]</a>
+            <a href="?page={{ page_obj.previous_page_number }}{{ new_url }}">[{% trans 'Previous page' %}]</a>
         {% endif %}
 
         <span class="current">
-            {% trans 'Página' %} {{ page_obj.number }} {% trans 'de' %} {{ page_obj.paginator.num_pages }}
+            {% trans 'Page' %} {{ page_obj.number }} {% trans 'of' %} {{ page_obj.paginator.num_pages }}
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}{{ new_url }}">[{% trans 'Próxima página' %}]</a>
+            <a href="?page={{ page_obj.next_page_number }}{{ new_url }}">[{% trans 'Next page' %}]</a>
         {% endif %}
     </span>
 </div>
 {% endif %}	
 <div class='data-entry'>
 	<table>
-		<thead><tr><td colspan='15'>{% trans 'Lista de' %} {{ title }} ({% if is_paginated %}{% blocktrans with range_base|add:1 as from and range_base|add:object_list.count as to %}{{ from }}-{{ to }} de {{ hits }}{% endblocktrans %}{% else %}{{ object_list.count }}{% endif %})</td></tr></thead>
+		<thead><tr><td colspan='15'>{% trans 'List of' %} {{ title }} ({% if is_paginated %}{% blocktrans with range_base|add:1 as from and range_base|add:object_list.count as to %}{{ from }}-{{ to }} of {{ hits }}{% endblocktrans %}{% else %}{{ object_list.count }}{% endif %})</td></tr></thead>
 		{#{% if not create_view|login_required or user.is_authenticated %}#}
 		{% if create_view %}
 		<tfoot>
@@ -39,7 +39,7 @@
 				<td colspan='15' style='background: #2020ff;'>
 					<div class='userbar'>
 						<ul>
-							<li><a href="{% url create_view %}">{% trans "Crear nuevo" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+							<li><a href="{% dynurl create_view %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
 						</ul>
 					</div>
 				</td>
@@ -49,9 +49,9 @@
 		{#{% endif %}#}
 		<tbody>
 			<tr>
-				<th style="text-align:center;"><strong>{% trans 'Identificador' %}</strong></th>
+				<th style="text-align:center;"><strong>{% trans 'Identifier' %}</strong></th>
 				{% if record_links %}
-				<th style="text-align:center;"><strong>{% trans 'Acción' %}</strong></th>
+				<th style="text-align:center;"><strong>{% trans 'Action' %}</strong></th>
 				{% endif %}
 			</tr>
 			{% for object in object_list %}
@@ -77,15 +77,15 @@
 <div class="pagination">
 	<span class="step-links">
 		{% if page_obj.has_previous %}
-			<a href="?page={{ page_obj.previous_page_number }}{{ new_url }}">[{% trans 'Página previa' %}]</a>
+			<a href="?page={{ page_obj.previous_page_number }}{{ new_url }}">[{% trans 'Previous page' %}]</a>
 		{% endif %}
 
 		<span class="current">
-			{% trans 'Página' %} {{ page_obj.number }} {% trans 'de' %} {{ page_obj.paginator.num_pages }}
+			{% trans 'Page' %} {{ page_obj.number }} {% trans 'of' %} {{ page_obj.paginator.num_pages }}
 		</span>
 
 		{% if page_obj.has_next %}
-			<a href="?page={{ page_obj.next_page_number }}{{ new_url }}">[{% trans 'Próxima página' %}]</a>
+			<a href="?page={{ page_obj.next_page_number }}{{ new_url }}">[{% trans 'Next page' %}]</a>
 		{% endif %}
 	</span>
 </div>

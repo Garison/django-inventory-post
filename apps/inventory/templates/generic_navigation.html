@@ -1,4 +1,4 @@
-{#{% load generic_views_helpers %}#}
+{% load generic_views_helpers %}
 {% load i18n %}
 {% comment %}
 		{% if not create_view|login_required or user.is_authenticated %}
@@ -11,12 +11,12 @@
 			{% if link.view %}
 				{#{% if not link.view|login_required or user.is_authenticated %}#}
 					{% if wrapper_object %}
-						<li><a href="{% url data.view wrapper_object.id %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+						<li><a href="{% dynurl data.view wrapper_object.id %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
 					{% else %}			
 						{% if link.args %}
-							<li><a href="{% url link.view link.args %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+							<li><a href="{% dynurl link.view link.args %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
 						{% else %}
-							<li><a href="{% url link.view object.id %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+							<li><a href="{% dynurl link.view object.id %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
 						{% endif %}
 					{% endif %}
 				{#{% endif %}#}

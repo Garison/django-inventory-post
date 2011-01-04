@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %} :: {% trans 'Confirmar' %} {{ title }} {{ object }}{% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Confirmar' %}</h2></div>{% endblock %}
+{% block title %} :: {% trans 'Confirm' %} {{ title }} {{ object }}{% endblock %}
+{% block banner %}<div id="banner"><h2>{% trans 'Confirm' %}</h2></div>{% endblock %}
 {% block content %}
 
-<h3>{% trans 'Esta seguro que desea' %} {{ title }} {% if object %}<a href="{{ object.get_absolute_url }}">{{ object }}</a>{% endif %}?</h3>
+<h3>{% trans 'Are you sure you with to' %} {{ title }} {% if object %}<a href="{{ object.get_absolute_url }}">{{ object }}</a>{% endif %}?</h3>
 <center><h4>{{ message }}</h4></center>
-<form method="post" action=".">
-<div style="text-align: center;"><input type="submit" value="{% trans 'Si' %}" /></div>
+<form method="post" action=".">{% csrf_token %}
+<div style="text-align: center;"><input type="submit" value="{% trans 'Yes' %}" /></div>
 </form>
 {% endblock %}

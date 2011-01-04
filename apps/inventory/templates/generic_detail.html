@@ -3,7 +3,7 @@
 {% block keywords %}
 {% endblock %}
 {#{% load generic_views_helpers %}#}
-{% block title %} :: {% trans 'Detalle para' %} {{ title }} {{ object }}{% endblock %}
+{% block title %} :: {% blocktrans %}Details for {{ title }} {{ object }}{% endblocktrans %}{% endblock %}
 {% block javascript %}
 <script type="text/javascript">
 $(function() {
@@ -14,7 +14,7 @@ $(function() {
 </script>
 
 {% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Detalle para' %} {{ title }}</h2></div>{% endblock %}
+{% block banner %}<div id="banner"><h2>{% trans 'Details for' %} {{ title }}</h2></div>{% endblock %}
 {% block content %}
 
 <h3>{{ object }}</h3>
@@ -29,7 +29,7 @@ $(function() {
 		<thead>
 			<tr>
 				<td colspan='2'>
-					{% trans 'Datos' %}
+					{% trans 'Data' %}
 				</td>
 			</tr>
 		</thead>	
@@ -60,7 +60,7 @@ $(function() {
 	<div style='font-size:100%;'>
 		<ul>
 			{#{% if not create_view|login_required or user.is_authenticated %}#}
-			{% if create_view %}<li><a href="{% url_dynamic create_view %}">{% trans 'Crear' %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>{% endif %}
+			{% if create_view %}<li><a href="{% dynurl create_view %}">{% trans 'Create' %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>{% endif %}
 			{#{% endif %}#}
 			{% include "generic_navigation.html" %}
 		</ul>
