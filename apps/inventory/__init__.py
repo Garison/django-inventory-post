@@ -67,20 +67,20 @@ retireditem_filter = {
     'regional':{'queryset':RegionalOffice.objects.all(), 'destination':'item__regional_office'},
 }
 
-#supply_record_links=[
-#        { 'text' : _(u'Edit'), 'view' : 'supply_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png' },
-#        { 'text' : _(u'Delete'), 'view' : 'supply_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png' },
-#        { 'text' : _(u'Photos'), 'view' : 'supply_photos', 'icon': MEDIA_URL + 'images/camera-photo.png' },
-#        { 'text' : _(u'Item templates that use this supply item'), 'view' : 'supply_templates_list', 'icon': MEDIA_URL + 'images/folder-saved-search.png' },
-#        { 'text' : _(u'Assign/Remove templates'), 'view' : 'supply_assign_template', 'icon': MEDIA_URL + 'images/edit-redo.png' },
-#    ]
+supply_record_links=[
+    {'text':_(u'Edit'), 'view':'supply_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
+    {'text':_(u'Delete'), 'view':'supply_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
+    {'text':_(u'Photos'), 'view':'supply_photos', 'icon':settings.MEDIA_URL + 'images/camera-photo.png'},
+    {'text':_(u'Item templates that use this supply item'), 'view':'supply_templates_list', 'icon':settings.MEDIA_URL + 'images/folder-saved-search.png'},
+    {'text':_(u'Assign/Remove templates'), 'view':'supply_assign_template', 'icon':settings.MEDIA_URL + 'images/edit-find.png'},
+]
 
 inventory_links = [
     {'text':_(u'Edit'), 'view':'inventory_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
     {'text':_(u'Delete'), 'view':'inventory_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
 ]
 
-#inventory_transaction_links = [
-#        { 'text' : 	_(u'Edit'), 'view': 'inventory_transaction_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png' },
-#        { 'text' : 	_(u'Delete'), 'view' : 'inventory_transaction_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
-#    ]
+inventory_transaction_links = [
+    {'text':_(u'Edit'), 'view':'inventory_transaction_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
+    {'text':_(u'Delete'), 'view':'inventory_transaction_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
+]

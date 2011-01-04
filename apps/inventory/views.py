@@ -9,7 +9,7 @@ from django.views.generic.create_update import create_object, update_object, del
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-from models import Settings, Person, Item, ItemTemplate
+from models import Settings, Person, Item, ItemTemplate, Supply
 
 from forms import FilterForm, PhotoForm
 #    kwargs['queryset'] = kwargs['queryset'].filter(user=request.user)
@@ -389,8 +389,9 @@ def supply_detail(request, object_id):
     from urls import supply_record_links
     return object_detail(
         request,
-        queryset = Supply.objects.all(),
-        object_id = object_id,
+        queryset=Supply.objects.all(),
+        object_id=object_id,
+        template_name='supply_detail.html',
         extra_context={'photos':get_object_or_404(Supply, pk=object_id).photos.all(), 'record_links':supply_record_links},
     )
 
@@ -605,6 +606,7 @@ def fetch_resources(uri, rel):
     """
     path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
     return path
+'''
 
 def inventory_current(request, object_id):
     inventory = get_object_or_404(Inventory, pk=object_id)
@@ -621,6 +623,7 @@ def inventory_current(request, object_id):
         'supply_qty': supply_qty,
     },
     context_instance=RequestContext(request))
+'''
         
 restricted_views = ['generic_photos', 'generic_update', 'generic_create', 'generic_delete', 'generic_confirm']
 if Settings.objects.get(pk=1).is_anon_restricted:

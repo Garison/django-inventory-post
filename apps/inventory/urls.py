@@ -5,7 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 from inventory import person_links, regional_links, department_links, \
                       template_record_links, inventory_links, \
                       item_record_links, retireditem_filter, \
-                      retireditem_links, inrepairsitem_links
+                      retireditem_links, inrepairsitem_links, \
+                      supply_record_links, inventory_transaction_links
 
 from views import generic_photos
 
@@ -26,28 +27,28 @@ regional_filter = {
 
 
 urlpatterns = patterns('inventory.views',
-#    url(r'^transaction/list/$', 'generic_list', dict({ 'queryset' : InventoryTransaction.objects.all() }, extra_context = dict( title = _(u'transactions'), create_view = 'inventory_transaction_create', record_links=inventory_transaction_links) ), 'inventory_transaction_list'),
-#    url(r'^transaction/create/$', 'generic_create', dict({ 'model' : InventoryTransaction }), 'inventory_transaction_create'),
-#    url(r'^transaction/(?P<object_id>\d+)/$', 'generic_detail', dict(form_class = InventoryTransactionForm, model=InventoryTransaction, title=_(u'transaction'), create_view = 'inventory_transaction_create', record_links=inventory_transaction_links), 'inventory_transaction_view'),
-#    url(r'^transaction/(?P<object_id>\d+)/update/$', 'generic_update', dict({ 'model' : InventoryTransaction }), 'inventory_transaction_update' ),
-#    url(r'^transaction/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({ 'model' : InventoryTransaction }, post_delete_redirect = "inventory_transaction_list"), 'inventory_transaction_delete'),
+    url(r'^transaction/list/$', 'generic_list', dict({'queryset':InventoryTransaction.objects.all()}, extra_context=dict(title=_(u'transactions'), create_view='inventory_transaction_create', record_links=inventory_transaction_links)), 'inventory_transaction_list'),
+    url(r'^transaction/create/$', 'generic_create', dict({'model':InventoryTransaction}), 'inventory_transaction_create'),
+    url(r'^transaction/(?P<object_id>\d+)/$', 'generic_detail', dict(form_class=InventoryTransactionForm, model=InventoryTransaction, title=_(u'transaction'), create_view='inventory_transaction_create', record_links=inventory_transaction_links), 'inventory_transaction_view'),
+    url(r'^transaction/(?P<object_id>\d+)/update/$', 'generic_update', dict({'model':InventoryTransaction}), 'inventory_transaction_update'),
+    url(r'^transaction/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({'model':InventoryTransaction}, post_delete_redirect="inventory_transaction_list"), 'inventory_transaction_delete'),
 
     url(r'^inventory/list/$', 'generic_list', dict({'queryset':Inventory.objects.all()}, extra_context=dict(title=_(u'inventory'), create_view='inventory_create', record_links=inventory_links)), 'inventory_list'),
-#    url(r'^inventory/create/$', 'generic_create', dict({ 'model' : Inventory }, extra_context={ 'title': _('inventory') }), 'inventory_create'),
-#    url(r'^inventory/(?P<object_id>\d+)/$', 'generic_detail', dict(form_class = InventoryForm, model=Inventory, title=_('inventory'), create_view = 'inventory_create', record_links=inventory_links), 'inventory_view'),
-#    url(r'^inventory/(?P<object_id>\d+)/update/$', 'generic_update', dict({ 'form_class' : InventoryForm }, extra_context={ 'title': _(u'inventory') }), 'inventory_update' ),
-#    url(r'^inventory/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({ 'model' : Inventory }, post_delete_redirect = "inventory_list", extra_context = dict ( title = _(u'inventory'))), 'inventory_delete'),
-#    url(r'^inventory/(?P<object_id>\d+)/current/$', 'inventory_current', (), 'inventory_current'),
+    url(r'^inventory/create/$', 'generic_create', dict({'model':Inventory}, extra_context={'title':_(u'inventory')}), 'inventory_create'),
+    url(r'^inventory/(?P<object_id>\d+)/$', 'generic_detail', dict(form_class=InventoryForm, model=Inventory, title=_(u'inventory'), create_view='inventory_create', record_links=inventory_links), 'inventory_view'),
+    url(r'^inventory/(?P<object_id>\d+)/update/$', 'generic_update', dict({'form_class':InventoryForm}, extra_context={'title':_(u'inventory')}), 'inventory_update'),
+    url(r'^inventory/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({'model':Inventory}, post_delete_redirect="inventory_list", extra_context=dict(title=_(u'inventory'))), 'inventory_delete'),
+    url(r'^inventory/(?P<object_id>\d+)/current/$', 'inventory_current', (), 'inventory_current'),
 
-#    url(r'^supply/create/$', 'generic_create', dict({ 'form_class' : SupplyForm }, extra_context={ 'title': _(u'supply') }), 'supply_create' ),
-#    url(r'^supply/(?P<object_id>\d+)/update/$', 'generic_update', dict({ 'form_class' : SupplyForm }, extra_context={ 'title': _(u'supply') }), 'supply_update' ),
-#    url(r'^supply/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({ 'model' : Supply }, post_delete_redirect = "supply_list", extra_context=dict(title = _(u'supply'))), 'supply_delete' ),
-#    url(r'^supply/list/$', 'generic_list', dict({ 'queryset' : Supply.objects.all() }, extra_context = dict(title = _(u'supply'), create_view = 'supply_create', record_links=supply_record_links) ), 'supply_list'),
-#    url(r'^supply/(?P<object_id>\d+)/$', 'supply_detail', (), 'supply_view'),
-#    url(r'^supply/(?P<object_id>\d+)/photos/$', generic_photos, dict(model = Supply, max_photos = 5), 'supply_photos'), 
-#    url(r'^supply/(?P<object_id>\d+)/templates/$', 'supply_templates', (), 'supply_templates_list'),
-#    url(r'^supply/orphans/$', 'generic_list', dict({ 'queryset' : Supply.objects.filter(itemtemplate=None)}, extra_context = dict(title = _(u'orphan supplies'), create_view = 'supply_create', record_links=supply_record_links)), 'supply_orphans_list'),
-#    url(r'^supply/(?P<object_id>\d+)/assign/$', 'generic_assign_remove', dict(title = _(u"supplies to template"), object = Supply.objects.all(), left_list_qryset='object.get_nonowners()',right_list_qryset='object.get_owners()',add_method='object.add_owner',remove_method='object.remove_owner',left_list_title = _(u'Unassigned templates'),right_list_title = _(u'Assigned templates'), item_name=_("templates")), name='supply_assign_template'),
+    url(r'^supply/create/$', 'generic_create', dict({'form_class':SupplyForm}, extra_context={'title':_(u'supply')}), 'supply_create'),
+    url(r'^supply/(?P<object_id>\d+)/update/$', 'generic_update', dict({'form_class':SupplyForm }, extra_context={'title':_(u'supply')}), 'supply_update' ),
+    url(r'^supply/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({'model':Supply}, post_delete_redirect="supply_list", extra_context=dict(title=_(u'supply'))), 'supply_delete'),
+    url(r'^supply/list/$', 'generic_list', dict({'queryset':Supply.objects.all()}, extra_context=dict(title=_(u'supply'), create_view='supply_create', record_links=supply_record_links)), 'supply_list'),
+    url(r'^supply/(?P<object_id>\d+)/$', 'supply_detail', (), 'supply_view'),
+    url(r'^supply/(?P<object_id>\d+)/photos/$', generic_photos, dict(model=Supply, max_photos=5), 'supply_photos'), 
+    url(r'^supply/(?P<object_id>\d+)/templates/$', 'supply_templates', (), 'supply_templates_list'),
+    url(r'^supply/orphans/$', 'generic_list', dict({'queryset':Supply.objects.filter(itemtemplate=None)}, extra_context=dict(title=_(u'orphan supplies'), create_view='supply_create', record_links=supply_record_links)), 'supply_orphans_list'),
+    url(r'^supply/(?P<object_id>\d+)/assign/$', 'generic_assign_remove', dict(title=_(u"supplies to template"), object=Supply.objects.all(), left_list_qryset='object.get_nonowners()', right_list_qryset='object.get_owners()', add_method='object.add_owner', remove_method='object.remove_owner', left_list_title=_(u'Unassigned templates'), right_list_title=_(u'Assigned templates'), item_name=_(u"templates")), name='supply_assign_template'),
 
     url(r'^template/list/$', 'generic_list', dict({'queryset':ItemTemplate.objects.all()}, extra_context=dict(title=_(u'item template'), create_view="template_create", record_links=template_record_links)), 'template_list'),
     url(r'^template/create/$', 'generic_create', dict({'form_class':ItemTemplateForm}, extra_context=dict(title=_(u'item template'))), 'template_create'),
