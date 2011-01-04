@@ -1,5 +1,6 @@
-from django.forms import ModelForm
 from django import forms 
+
+#TODO: fix global import
 from models import *
 
 #TODO: maybe dynamic generation from view is better?
@@ -21,41 +22,35 @@ class GenericAssignRemoveForm(forms.Form):
         self.fields['right_list'].queryset = right_list_qryset
 
 
-class ItemForm(ModelForm):
+class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         exclude = ('photos','active')
 
 
-class PersonForm(ModelForm):
+class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
         exclude = ('photos', 'inventory')
 
         
-class PhotoForm(ModelForm):
-    class Meta:
-        model = Photo
-        exclude = ('main')
-
-        
-class RegionalOfficeForm(ModelForm):
+class RegionalOfficeForm(forms.ModelForm):
     class Meta:
         model = RegionalOffice
 
 
-class ItemTemplateForm(ModelForm):
+class ItemTemplateForm(forms.ModelForm):
     class Meta:
         model = ItemTemplate
         exclude = ('photos', 'supplies')
 
 
-class ItemGroupForm(ModelForm):
+class ItemGroupForm(forms.ModelForm):
     class Meta:
         model = ItemGroup
 
     
-class LogForm(ModelForm):
+class LogForm(forms.ModelForm):
     class Meta:
         model = Log
 
@@ -67,28 +62,28 @@ class FilterForm(forms.Form):
             self.fields[key] = forms.ModelChoiceField(queryset=field_dict[key]['queryset'], required=False)
 
 
-class PermissionForm(ModelForm):
+class PermissionForm(forms.ModelForm):
     class Meta:
         model = Permission
 
 
-class CustomUserForm(ModelForm):
+class CustomUserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
 
 
-class SupplyForm(ModelForm):
+class SupplyForm(forms.ModelForm):
     class Meta:
         model = Supply
         exclude = ('photos')
 
 
-class InventoryForm(ModelForm):
+class InventoryForm(forms.ModelForm):
     class Meta:
         model = Inventory
 
 
-class InventoryTransactionForm(ModelForm):
+class InventoryTransactionForm(forms.ModelForm):
     class Meta:
         model = InventoryTransaction
         
