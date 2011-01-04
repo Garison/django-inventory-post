@@ -1,4 +1,4 @@
-from django.template import Node, Variable
+'''from django.template import Node, Variable
 from django.template import TemplateSyntaxError, Library, VariableDoesNotExist
 from django.conf import settings
 
@@ -149,12 +149,37 @@ def url_dynamic_full(parser, token):
                         args.append(parser.compile_filter(arg))
     return URLNode_dynarg(viewname, args, kwargs, asvar)
 url_dynamic_full = register.tag(url_dynamic_full)
+'''
 
+from django.template import Library, Node, Variable
+from django.core.urlresolvers import reverse
+#from django.contrib.auth.decorators import _CheckLogin
 
-from inventory.views import *
-from inventory.urls import urlpatterns
-from django.contrib.auth.decorators import _CheckLogin
+#from inventory.views import *
+#from inventory.urls import urlpatterns
 
+register = Library()
+
+class DynUrlNode(Node):
+    def __init__(self, *args):
+        self.name_var = Variable(args[0])
+        if len(args)>1:
+            #Process view arguments
+            self.args = [Variable(a) for a in args[1].split(',')]
+        else:
+            self.args = []
+
+    def render(self, context):
+        name = self.name_var.resolve(context)
+        args = [a.resolve(context) for a in self.args]
+        return reverse(name, args = args)
+
+@register.tag
+def dynurl(parser, token):
+    args = token.split_contents()
+    return DynUrlNode(*args[1:])
+
+'''
 @register.filter
 def login_required(value):
     for url in urlpatterns:
@@ -168,7 +193,7 @@ def login_required(value):
                 #unable to compare - missing import?
 #				print "FALSE"
                 return None
-        
+'''        
         
 #	raise TemplateSyntaxError("%s" % item_detail.__class__)
         
