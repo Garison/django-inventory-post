@@ -9,10 +9,9 @@ from django.views.generic.create_update import create_object, update_object, del
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-from models import Settings
+from models import Settings, Person, Item
 
 from forms import FilterForm
-
 #    kwargs['queryset'] = kwargs['queryset'].filter(user=request.user)
     
 #def render_response(req, *args, **kwargs):
@@ -69,7 +68,7 @@ def generic_list(request, list_filter=None, queryset_filter=None, *args, **kwarg
     results_per_page = 20
     kwargs['extra_context']['range_base'] = (int(request.GET.get('page', 1))-1) * results_per_page
     return object_list(request, paginate_by=results_per_page, template_name = 'generic_list.html', *args, **kwargs)
-'''
+
 def generic_create(*args, **kwargs):
     if 'model' in kwargs:
         try:
@@ -142,12 +141,12 @@ def generic_confirm(request, _view, _title=None, _model=None, _object_id=None, _
     return render_to_response('generic_confirm.html',
         data,
         context_instance=RequestContext(request))	
-
+'''
 def _flash_message(request, msg, type='success'):
     pass
 #		request.session['flash_msg'] = msg
 #		request.session['flash_params'] = {'type': type}
-
+'''
 def generic_assign_remove(request, object_id, title, object, left_list_qryset, left_list_title, right_list_qryset, right_list_title, add_method, remove_method, item_name, list_filter=None):
     from forms import GenericAssignRemoveForm
     left_filter = None
@@ -283,7 +282,7 @@ def generic_detail(request, object_id, form_class, model, title=None, create_vie
         'record_links' : record_links,
     },
     context_instance=RequestContext(request))
-
+'''
 def item_log_list(request, object_id):
     from django.contrib.contenttypes.models import ContentType
     item = Item.objects_passthru.get(pk=object_id)
@@ -348,7 +347,7 @@ def item_detail(request, object_id, template_name=None, extra_data=None, passthr
             object_id = object_id,
             extra_context=extra_context,
         )
-
+'''
 def person_detail(request, object_id):
     from urls import person_links
     return object_detail(
@@ -357,7 +356,7 @@ def person_detail(request, object_id):
         object_id = object_id,
         extra_context={'photos': get_object_or_404(Person, pk=object_id).photos.all(), 'record_links' : person_links },
     )
-
+'''
 def template_detail(request, object_id):
     from urls import template_record_links
     return object_detail(
