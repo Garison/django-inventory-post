@@ -33,10 +33,10 @@ person_links = [
 ]
 
 #TODO: autodetect update or delete
-#group_links = [
-#        { 'text' : _(u'Edit'), 'view' : 'group_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png'},
-#        { 'text' : _(u'Delete'), 'view' : 'group_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
-#    ]
+group_links = [
+    {'text':_(u'Edit'), 'view':'group_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
+    {'text' : _(u'Delete'), 'view':'group_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
+]
 
 regional_links = [
     {'text':_(u'Edit'), 'view':'regional_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
