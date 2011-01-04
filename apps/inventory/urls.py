@@ -2,6 +2,8 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
+from photos.views import generic_photos
+
 from inventory import person_links, regional_links, department_links, \
                       template_record_links, inventory_links, \
                       item_record_links, retireditem_filter, \
@@ -9,7 +11,6 @@ from inventory import person_links, regional_links, department_links, \
                       supply_record_links, inventory_transaction_links, \
                       group_links
 
-from views import generic_photos
 
 from models import ItemTemplate, RegionalOffice, InventoryTransaction, \
                    Inventory, Supply, Settings, Item, ItemGroup, Person, \
