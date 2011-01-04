@@ -2,17 +2,16 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from models import Person, RegionalOffice
-
+from inventory import person_links, regional_links, department_links
 #from views import item_retire, retireditem_unretire, item_sendtorepairs#, inrepairsitem_unrepair
-#from views import generic_photos
+from views import generic_photos
 
-#from models import ItemTemplate, RegionalOffice, InventoryTransaction, \
-#                   Inventory, Supply, Settings, Item, ItemGroup, Person, \
-#                   RetiredItem, InRepairsItem, Department, Log
-#from forms import InventoryTransactionForm, InventoryForm, SupplyForm, \
-#                  ItemTemplateForm, ItemForm, ItemGroupForm, PersonForm, \
-#                  LogForm
+from models import ItemTemplate, RegionalOffice, InventoryTransaction, \
+                   Inventory, Supply, Settings, Item, ItemGroup, Person, \
+                   RetiredItem, InRepairsItem, Department, Log
+from forms import InventoryTransactionForm, InventoryForm, SupplyForm, \
+                  ItemTemplateForm, ItemForm, ItemGroupForm, PersonForm, \
+                  LogForm
 
 #template_orphan_dict = dict(
 #    queryset = ItemTemplate.objects.filter(item=None)
@@ -22,85 +21,6 @@ regional_filter = {
     'regional' : { 'queryset': RegionalOffice.objects.all(), 'destination': 'regional_office'},
 }
 
-template_record_links = [
-    { 'text' : _(u'Edit'), 'view' : 'template_update', 'icon' : settings.MEDIA_URL+'images/accessories-text-editor.png' },
-    { 'text' : _(u'Delete'), 'view' : 'template_delete', 'icon' : settings.MEDIA_URL+'images/emblem-unreadable.png' },
-    { 'text' : _(u'Photos'), 'view' : 'template_photos', 'icon': settings.MEDIA_URL + 'images/camera-photo.png' },
-    { 'text' : _(u'Items that use this template'), 'view' : 'template_items_list', 'icon': settings.MEDIA_URL + 'images/folder-saved-search.png' },
-    { 'text' : _(u'Assign/Remove items'), 'view' : 'template_assign_supply', 'icon': settings.MEDIA_URL + 'images/edit-redo.png'},
-]
-    
-item_record_links = [
-    { 'text' : _(u'Edit'), 'view' : 'item_update', 'icon' : settings.MEDIA_URL+'images/accessories-text-editor.png'},
-    { 'text' : _(u'Delete'), 'view' : 'item_delete', 'icon' : settings.MEDIA_URL+'images/emblem-unreadable.png'},
-    { 'text' : _(u'Photos'), 'view' : 'item_photos', 'icon': settings.MEDIA_URL + 'images/camera-photo.png' },
-    { 'text' : _(u'Assign/Remove'), 'view' : 'item_assign_person', 'icon': settings.MEDIA_URL + 'images/item-plus-user.png' },
-    { 'text' : _(u'Decomisar'), 'view' : 'item_retire', 'icon': settings.MEDIA_URL + 'images/user-trash.png' },
-    { 'text' : _(u'Repair'), 'view' : 'item_sendtorepairs', 'icon': settings.MEDIA_URL + 'images/broken-computer.png' },
-    { 'text' : _(u'Template'), 'view' : 'template_view', 'icon' : settings.MEDIA_URL+'images/font-x-generic.png', 'args': 'object.item_template.id'},
-]
-    
-#retireditem_links = [
-#        { 'text' : _(u'Reactivate'), 'view' : 'retireditem_unretire' }
-#    ]
-
-person_links = [
-    {'text':_(u'Edit'), 'view':'person_update', 'icon':settings.MEDIA_URL+'images/accessories-text-editor.png'},
-    {'text':_(u'Delete'), 'view':'person_delete', 'icon':settings.MEDIA_URL+'images/emblem-unreadable.png'},
-    {'text':_(u'Edit photos'), 'view':'person_photos', 'icon':settings.MEDIA_URL + 'images/camera-photo.png' },
-    {'text':_(u'Assign/Remove item'), 'view':'person_assign_item', 'icon':settings.MEDIA_URL + 'images/item-plus-user.png'},
-]
-
-#TODO: autodetect update or delete
-#group_links = [
-#        { 'text' : _(u'Edit'), 'view' : 'group_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png'},
-#        { 'text' : _(u'Delete'), 'view' : 'group_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
-#    ]
-
-#regional_links = [
-#        { 'text' : _(u'Edit'), 'view' : 'regional_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png'},
-#        { 'text' : _(u'Delete'), 'view' : 'regional_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
-#    ]
-
-#department_links = [
-#        { 'text' : _(u'Editar'), 'view' : 'department_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png'},
-#        { 'text' : _(u'Borrar'), 'view' : 'department_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
-#    ]
-
-#inrepairsitem_links = [ { 'text' :  _(u'Repaired'), 'view' : 'inrepairsitem_unrepair' }]
-
-user_links = [
-    {'text':_(u'Edit'), 'view':'user_update', 'icon':settings.MEDIA_URL+'images/accessories-text-editor.png'},
-    {'text':_(u'Delete'), 'view':'user_delete', 'icon':settings.MEDIA_URL+'images/emblem-unreadable.png'},
-    {'text':_(u'Privileges'), 'view':'permission_list', 'icon':'#'}
-]
-
-#permission_links = [
-#        { 'text' : 	_(u'Edit'), 'view': 'permission_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png' },
-#        { 'text' : 	_(u'Delete'), 'view' : 'permission_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
-#    ]
-
-#retireditem_filter = {
-#    'regional' : { 'queryset': RegionalOffice.objects.all(), 'destination': 'item__regional_office'},
-#}
-
-#supply_record_links=[
-#        { 'text' : _(u'Edit'), 'view' : 'supply_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png' },
-#        { 'text' : _(u'Delete'), 'view' : 'supply_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png' },
-#        { 'text' : _(u'Photos'), 'view' : 'supply_photos', 'icon': MEDIA_URL + 'images/camera-photo.png' },
-#        { 'text' : _(u'Item templates that use this supply item'), 'view' : 'supply_templates_list', 'icon': MEDIA_URL + 'images/folder-saved-search.png' },
-#        { 'text' : _(u'Assign/Remove templates'), 'view' : 'supply_assign_template', 'icon': MEDIA_URL + 'images/edit-redo.png' },
-#    ]
-
-#inventory_links = [
-#        { 'text' : 	_(u'Edit'), 'view': 'inventory_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png' },
-#        { 'text' : 	_(u'Delete'), 'view' : 'inventory_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
-#    ]
-
-#inventory_transaction_links = [
-#        { 'text' : 	_(u'Edit'), 'view': 'inventory_transaction_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png' },
-#        { 'text' : 	_(u'Delete'), 'view' : 'inventory_transaction_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
-#    ]
 
 urlpatterns = patterns('inventory.views',
 #    url(r'^transaction/list/$', 'generic_list', dict({ 'queryset' : InventoryTransaction.objects.all() }, extra_context = dict( title = _(u'transactions'), create_view = 'inventory_transaction_create', record_links=inventory_transaction_links) ), 'inventory_transaction_list'),
@@ -154,13 +74,13 @@ urlpatterns = patterns('inventory.views',
 #    url(r'^group/(?P<object_id>\d+)/update/$', 'generic_assign_remove', dict(title = _(u"item group"), object = ItemGroup.objects.all(), left_list_qryset='Item.objects.exclude(itemgroup=object)',right_list_qryset='object.items.all()',add_method='object.items.add',remove_method="object.items.remove",left_list_title = _('Equipos no asignados'),right_list_title = _('Equipos asignados'), item_name=_("equipos")  ), name='group_update'),
 #    url(r'^group/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({ 'model' : ItemGroup }, post_delete_redirect = "group_list", extra_context = dict ( title = _(u'item group'))), 'group_delete'),
 
-#    url(r'^person/(?P<object_id>\d+)/photos/$', generic_photos, { 'model' : Person, 'max_photos' : Settings.objects.get(pk=1).max_person_photos }, 'person_photos'), 
-#    url(r'^person/(?P<object_id>\d+)/$', 'person_detail', (), 'person_view'),
+    url(r'^person/(?P<object_id>\d+)/photos/$', generic_photos, {'model':Person, 'max_photos':Settings.objects.get(pk=1).max_person_photos}, 'person_photos'), 
+    url(r'^person/(?P<object_id>\d+)/$', 'person_detail', (), 'person_view'),
     url(r'^person/list/$', 'generic_list', dict({'queryset':Person.objects.all()}, list_filter=regional_filter, extra_context=dict(title=_(u'users'), create_view="person_create", record_links=person_links)), 'person_list'),
-#    url(r'^person/create/$', 'generic_create', dict({ 'form_class' : PersonForm }, extra_context={ 'title': _(u'user') }), 'person_create' ),
-#    url(r'^person/(?P<object_id>\d+)/update/$', 'generic_update', dict({ 'form_class' : PersonForm }, extra_context={  'title' : _(u'user') }), 'person_update' ),
-#    url(r'^person/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({ 'model' : Person }, post_delete_redirect = "person_list", extra_context=dict(title = _(u'user'))), 'person_delete' ),
-#    url(r'^person/(?P<object_id>\d+)/assign/$', 'generic_assign_remove', dict(title = _(u"item to user"), object = Person.objects.all(), left_list_qryset='Item.objects.exclude(person=object)',right_list_qryset='object.inventory.all()',add_method='object.inventory.add',remove_method="object.inventory.remove",left_list_title = _('Equipos no asignados'),right_list_title = _('Equipos asignados'), item_name=_("equipos"), list_filter=regional_filter), name='person_assign_item'),
+    url(r'^person/create/$', 'generic_create', dict({'form_class':PersonForm}, extra_context={'title':_(u'user')}), 'person_create'),
+    url(r'^person/(?P<object_id>\d+)/update/$', 'generic_update', dict({'form_class':PersonForm}, extra_context={'title':_(u'user')}), 'person_update'),
+    url(r'^person/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({'model':Person}, post_delete_redirect="person_list", extra_context=dict(title=_(u'user'))), 'person_delete'),
+    url(r'^person/(?P<object_id>\d+)/assign/$', 'generic_assign_remove', dict(title=_(u"item to user"), object=Person.objects.all(), left_list_qryset='Item.objects.exclude(person=object)', right_list_qryset='object.inventory.all()', add_method='object.inventory.add', remove_method="object.inventory.remove", left_list_title=_(u'Unassigned items'), right_list_title=_(u'Assigned items'), item_name=_(u"items"), list_filter=regional_filter), name='person_assign_item'),
 
 #    url(r'^retireditem/list/$', 'generic_list', dict({ 'queryset' : RetiredItem.objects.all() }, list_filter=retireditem_filter, extra_context = dict(title = _('retired items'),  record_links=retireditem_links)), 'retireditem_list'),
 #    url(r'^retireditem/(?P<object_id>\d+)/$', 'retireditem_detail', (), 'retireditem_view'),
@@ -170,15 +90,15 @@ urlpatterns = patterns('inventory.views',
 #    url(r'^inrepairsitem/(?P<object_id>\d+)/$', 'inrepairsitem_detail', (), 'inrepairsitem_view'),
 #    url(r'^inrepairsitem/(?P<object_id>\d+)/unrepair/$', 'generic_confirm', dict(_view=inrepairsitem_unrepair, _title=_(u"mark item as repaired"), _model=InRepairsItem, _object_id="object_id"), 'inrepairsitem_unrepair'),
     
-#    url(r'^regional/list/$', 'generic_list', dict({ 'queryset' : RegionalOffice.objects.all() }, extra_context = dict( title = _(u'regionals'), create_view = 'regional_create', record_links=regional_links)), 'regional_list'),
-#    url(r'^regional/create/$', 'generic_create', dict({ 'model' : RegionalOffice }, extra_context={ 'title': _(u'regionals') }), 'regional_create'),
-#    url(r'^regional/(?P<object_id>\d+)/update/$', 'generic_update', dict({ 'model' : RegionalOffice }, extra_context={ 'title': _(u'regionals') }) , 'regional_update'),
-#    url(r'^regional/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({ 'model' : RegionalOffice }, post_delete_redirect = "regional_list", extra_context = dict ( title = _(u'regional'))), 'regional_delete'),
+    url(r'^regional/list/$', 'generic_list', dict({'queryset':RegionalOffice.objects.all()}, extra_context=dict(title =_(u'regionals'), create_view='regional_create', record_links=regional_links)), 'regional_list'),
+    url(r'^regional/create/$', 'generic_create', dict({'model':RegionalOffice}, extra_context={'title':_(u'regionals')}), 'regional_create'),
+    url(r'^regional/(?P<object_id>\d+)/update/$', 'generic_update', dict({'model':RegionalOffice}, extra_context={'title':_(u'regionals')}), 'regional_update'),
+    url(r'^regional/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({'model':RegionalOffice}, post_delete_redirect="regional_list", extra_context=dict (title=_(u'regional'))), 'regional_delete'),
 
-#    url(r'^department/create/$', 'generic_create', dict({ 'model' : Department }, extra_context={ 'title': _(u'department/section/area') }), 'department_create'),
-#    url(r'^department/(?P<object_id>\d+)/update/$', 'generic_update', dict({ 'model' : Department }, extra_context={ 'title': _(u'department/section/area') }) , 'department_update'),
-#    url(r'^department/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({ 'model' : Department }, post_delete_redirect = "department_list", extra_context = dict ( title = _(u'departments/sections/areas'))), 'department_delete'),
-#    url(r'^department/list/$', 'generic_list', dict({ 'queryset' : Department.objects.all() }, list_filter=regional_filter, extra_context = dict( title = _(u'departments/sections/areas'), create_view='department_create', record_links=department_links) ), 'department_list'),
+    url(r'^department/create/$', 'generic_create', dict({'model':Department }, extra_context={'title':_(u'department/section/area')}), 'department_create'),
+    url(r'^department/(?P<object_id>\d+)/update/$', 'generic_update', dict({'model':Department}, extra_context={'title':_(u'department/section/area')}) , 'department_update'),
+    url(r'^department/(?P<object_id>\d+)/delete/$', 'generic_delete', dict({'model':Department}, post_delete_redirect="department_list", extra_context=dict(title=_(u'departments/sections/areas'))), 'department_delete'),
+    url(r'^department/list/$', 'generic_list', dict({'queryset':Department.objects.all()}, list_filter=regional_filter, extra_context=dict(title=_(u'departments/sections/areas'), create_view='department_create', record_links=department_links)), 'department_list'),
 
 #    url(r'^log/list/$', 'generic_list', dict(queryset=Log.objects.all(), extra_context={'title' : _(u'log')}), 'log_list'),
 #    url(r'^log/(?P<object_id>\d+)/$', 'generic_detail', dict(form_class=LogForm, model=Log, title=_(u'log')), 'log_view'),
