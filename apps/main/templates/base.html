@@ -103,15 +103,15 @@
 									{% endif %}
 								</ul>
 							</li>
-							<li style="width: 7em;"><a href="{#{% url item_list %}#}">{% trans "Items" %}<img src="{{ MEDIA_URL }}images/computer.png" /></a>
+							<li style="width: 7em;"><a href="{% url item_list %}">{% trans "Items" %}<img src="{{ MEDIA_URL }}images/computer.png" /></a>
 								<ul>
-									<li><a href="{#{% url item_list %}#}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+									<li><a href="{% url item_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
 									{% if user.is_authenticated %}
-									<li><a href="{#{% url item_create %}#}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+									<li><a href="{% url item_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
 									{% endif %}
-									<li><a href="{#{% url item_orphans_list %}#}">{% trans "Orphan" %}</a></li>
-									<li><a href="{#{% url retireditem_list %}#}">{% trans "Retired" %}<img src="{{ MEDIA_URL }}images/user-trash.png" /></a></li>
-									<li><a href="{#{% url inrepairsitem_list %}#}">{% trans "In repairs" %}<img src="{{ MEDIA_URL }}images/broken-computer.png" /></a></li>
+									<li><a href="{% url item_orphans_list %}">{% trans "Orphan" %}</a></li>
+									<li><a href="{% url retireditem_list %}">{% trans "Retired" %}<img src="{{ MEDIA_URL }}images/user-trash.png" /></a></li>
+									<li><a href="{% url inrepairsitem_list %}">{% trans "In repairs" %}<img src="{{ MEDIA_URL }}images/broken-computer.png" /></a></li>
 
 									<li style="width: 7em;"><a class='parent' href="{#{% url group_list %}#}">{% trans "Grupos" %}<img src="{{ MEDIA_URL }}images/network-workgroup.png" /></a>
 										<ul>
@@ -122,13 +122,13 @@
 										</ul>
 									</li>
 
-									<li style="width: 9em;"><a class='parent' href="{#{% url template_list %}#}">{% trans "Templates" %}<img src="{{ MEDIA_URL }}images/font-x-generic.png" /></a>
+									<li style="width: 9em;"><a class='parent' href="{% url template_list %}">{% trans "Templates" %}<img src="{{ MEDIA_URL }}images/font-x-generic.png" /></a>
 										<ul>
-											<li><a href="{#{% url template_list %}#}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+											<li><a href="{% url template_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
 											{% if user.is_authenticated %}
-											<li><a href="{#{% url template_create %}#}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+											<li><a href="{% url template_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
 											{% endif %}
-											<li><a href="{#{% url template_orphans_list %}#}">{% trans "Orphan" %}</a></li>
+											<li><a href="{% url template_orphans_list %}">{% trans "Orphan" %}</a></li>
 										</ul>
 									</li>
 									
@@ -161,9 +161,9 @@
 								<ul>
 									<li><a style="width: 17em;" href="{% url regional_list %}">{% trans "Regionals" %}</a></li>
 									<li><a style="width: 17em;" href="{% url department_list %}">{% trans "Departments" %}<img src="{{ MEDIA_URL }}images/view-fullscreen.png" /></a></li>
-									<li><a style="width: 17em;" href="{#{% url inventory_list %}#}">{% trans "Supplies inventory" %}<img src="{{ MEDIA_URL }}images/package-x-generic.png" /></a></li>
+									<li><a style="width: 17em;" href="{% url inventory_list %}">{% trans "Supplies inventory" %}<img src="{{ MEDIA_URL }}images/package-x-generic.png" /></a></li>
 									{% if user.is_staff %}
-									<li><a style="width: 17em;" href="{#{% url settings %}#}">{% trans "Settings" %}<img src="{{ MEDIA_URL }}images/emblem-system.png" /></a></li>
+									<li><a style="width: 17em;" href="{% url settings %}">{% trans "Settings" %}<img src="{{ MEDIA_URL }}images/emblem-system.png" /></a></li>
 									{% endif %}
 								</ul>
 							</li>

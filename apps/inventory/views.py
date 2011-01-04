@@ -9,14 +9,15 @@ from django.views.generic.create_update import create_object, update_object, del
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-from models import Settings, Person, Item
+from models import Settings, Person, Item, ItemTemplate
 
-from forms import FilterForm
+from forms import FilterForm, PhotoForm
 #    kwargs['queryset'] = kwargs['queryset'].filter(user=request.user)
     
 #def render_response(req, *args, **kwargs):
 #	kwargs['context_instance'] = RequestContext(req)
 #	return render_to_response(*args, **kwargs)
+from inventory import person_links, item_record_links
 
 
 def add_filter(request, list_filter):
@@ -275,14 +276,15 @@ def generic_detail(request, object_id, form_class, model, title=None, create_vie
     form = form_class(instance = instance)
     
     return render_to_response('generic_detail.html', {
-        'title': title,
-        'form' : form,
-        'object': instance,
-        'create_view' : create_view,
-        'record_links' : record_links,
+        'title':title,
+        'form':form,
+        'object':instance,
+        'create_view':create_view,
+        'record_links':record_links,
     },
     context_instance=RequestContext(request))
-'''
+
+
 def item_log_list(request, object_id):
     from django.contrib.contenttypes.models import ContentType
     item = Item.objects_passthru.get(pk=object_id)
@@ -292,32 +294,31 @@ def item_log_list(request, object_id):
         request,
         queryset=log,
         template_name='generic_list.html',
-        extra_context={'title' : _(u"Item log: %s") % item},
+        extra_context={'title':_(u"Item log: %s") % item},
         ) 
+
     
 def item_detail(request, object_id, template_name=None, extra_data=None, passthru=False, show_create_view=True):
-    from urls import item_record_links
-
     if passthru:
         item = Item.objects_passthru.get(pk=object_id)
     else:
         item = get_object_or_404(Item, pk=object_id)
 
     extra_context={ 
-        'photos': item.photos.all(),
-        'template_photos' : item.item_template.photos.all(),
-        'template' : item.item_template,
-        'record_links' : item_record_links,
-        'title': _(u'el equipo'),
-        'subtitle': item,
-        'item_photos_title': _(u'item photos'),
-        'template_photos_title': _(u'template photos'),
+        'photos':item.photos.all(),
+        'template_photos':item.item_template.photos.all(),
+        'template':item.item_template,
+        'record_links':item_record_links,
+        'title':_(u'the item'),
+        'subtitle':item,
+        'item_photos_title':_(u'item photos'),
+        'template_photos_title':_(u'template photos'),
         }
 
     in_repairs = item.is_inrepairs()
     if in_repairs:
         extra_context['extra_attribs'] = {
-            _(u'In repairs since') : in_repairs.date,
+            _(u'In repairs since'):in_repairs.date,
         }
 
     if extra_data:
@@ -346,24 +347,27 @@ def item_detail(request, object_id, template_name=None, extra_data=None, passthr
             queryset = queryset,
             object_id = object_id,
             extra_context=extra_context,
+            template_name = 'item_detail.html'
         )
-'''
+
+
 def person_detail(request, object_id):
-    from urls import person_links
     return object_detail(
         request,
         queryset = Person.objects.all(),
         object_id = object_id,
-        extra_context={'photos': get_object_or_404(Person, pk=object_id).photos.all(), 'record_links' : person_links },
+        template_name = 'person_detail.html',
+        extra_context={'photos':get_object_or_404(Person, pk=object_id).photos.all(), 'record_links':person_links},
     )
-'''
+
 def template_detail(request, object_id):
     from urls import template_record_links
     return object_detail(
         request,
         queryset = ItemTemplate.objects.all(),
         object_id = object_id,
-        extra_context={'photos': get_object_or_404(ItemTemplate, pk=object_id).photos.all(), 'record_links' : template_record_links},
+        template_name = 'itemtemplate_detail.html',
+        extra_context={'photos':get_object_or_404(ItemTemplate, pk=object_id).photos.all(), 'record_links':template_record_links},
     )
 
 def template_items(request, object_id):
@@ -380,14 +384,16 @@ def template_items(request, object_id):
         ),
     )
 
+
 def supply_detail(request, object_id):
     from urls import supply_record_links
     return object_detail(
         request,
         queryset = Supply.objects.all(),
         object_id = object_id,
-        extra_context={'photos': get_object_or_404(Supply, pk=object_id).photos.all(), 'record_links' : supply_record_links},
+        extra_context={'photos':get_object_or_404(Supply, pk=object_id).photos.all(), 'record_links':supply_record_links},
     )
+
 
 def supply_templates(request, object_id):
     from urls import template_record_links
@@ -404,7 +410,7 @@ def supply_templates(request, object_id):
     )
 
 
-'''
+
 def search(request):
     keyword=''
     people=None
@@ -455,33 +461,33 @@ def search(request):
 #				results.append(i)
 
     return render_to_response('search_results.html', {
-        'people': people,
-        'items': items,
-        'templates': templates,
-        'groups': groups,
-        'retired_items': retired_items,
-        'keyword': keyword,
-        'supplies': supplies,
+        'people':people,
+        'items':items,
+        'templates':templates,
+        'groups':groups,
+        'retired_items':retired_items,
+        'keyword':keyword,
+        'supplies':supplies,
 #		'results': results,
         },
     context_instance=RequestContext(request))
 
-'''
+
 def retireditem_detail(request, object_id):
     from urls import retireditem_links
     retired_item = get_object_or_404(RetiredItem, pk=object_id)
     extra_data={ 
-        'wrapper_object' : retired_item,
-        'record_links' : retireditem_links,	
-        'title' : _(u"retired item"),
-        'subtitle' : retired_item.item,
-        'extra_attribs' : {
-                _(u'Retired') : retired_item.date
+        'wrapper_object':retired_item,
+        'record_links':retireditem_links,	
+        'title':_(u"retired item"),
+        'subtitle':retired_item.item,
+        'extra_attribs':{
+                _(u'Retired'):retired_item.date
                 }
          }
     
-    return item_detail(request, retired_item.item_id, template_name='inventory/item_detail.html', extra_data=extra_data, passthru=True)
-'''
+    return item_detail(request, retired_item.item_id, template_name='item_detail.html', extra_data=extra_data, passthru=True)
+
 
 def item_retire(request, object_id):
     item = Item.objects.get(pk=object_id)
@@ -516,7 +522,7 @@ def retireditem_unretire(request, object_id):
 
     retired_item.delete()
     return HttpResponseRedirect(reverse('retireditem_list'))
-'''
+
 def inrepairsitem_detail(request, object_id):
     from urls import inrepairsitem_links
     inrepairs_item = get_object_or_404(InRepairsItem, pk=object_id)
@@ -530,7 +536,8 @@ def inrepairsitem_detail(request, object_id):
          }
     
     return item_detail(request, inrepairs_item.item_id, template_name='inventory/item_detail.html', extra_data=extra_data, show_create_view=False)
-'''
+
+
 def item_sendtorepairs(request, object_id):
     item = Item.objects.get(pk=object_id)
     if InRepairsItem.objects.filter(item=item):
@@ -547,7 +554,7 @@ def item_sendtorepairs(request, object_id):
 
     return HttpResponseRedirect(reverse('inrepairsitem_list'))
 
-'''
+
 def inrepairsitem_unrepair(request, object_id):
     try:
         inrepairs = InRepairsItem.objects.get(pk=object_id)
@@ -557,8 +564,6 @@ def inrepairsitem_unrepair(request, object_id):
             request.user.message_set.create(message=_(u"This item is no in repairs."))
     
     return HttpResponseRedirect(reverse('inrepairsitem_list'))			
-'''
-
 
 '''
 def render_to_pdf(template_src, context_dict):
