@@ -1,3 +1,64 @@
+from django.template.defaultfilters import stringfilter
+from django.template import Library, Node, Variable
+from django.core.urlresolvers import reverse
+
+register = Library()
+
+class DynUrlNode(Node):
+    def __init__(self, *args):
+        self.name_var = Variable(args[0])
+        if len(args)>1:
+            #Process view arguments
+            self.args = [Variable(a) for a in args[1].split(',')]
+        else:
+            self.args = []
+
+    def render(self, context):
+        name = self.name_var.resolve(context)
+        args = [a.resolve(context) for a in self.args]
+        try:
+            return reverse(name, args = args)
+        except:
+            #Argument might be pointing to a context variable
+            args = [Variable(a).resolve(context) for a in args]
+            return reverse(name, args = args)
+
+
+@register.tag
+def dynurl(parser, token):
+    args = token.split_contents()
+    return DynUrlNode(*args[1:])
+
+
+@register.filter
+@stringfilter
+def is_class(value, arg):
+    return value[21:(value[21:].find(' ')+21)] == arg
+
+
+'''
+from django.contrib.auth.decorators import _CheckLogin
+
+from inventory.views import *
+from inventory.urls import urlpatterns
+
+@register.filter
+def login_required(value):
+    for url in urlpatterns:
+#		print "%s - %s - %s" % (value, url.name, url._get_callback())
+        view_name = url._get_callback().__name__
+        if value == url.name:
+            try:
+#				print eval(url._get_callback().__name__ +'.__class__')
+                return eval(view_name +'.__class__') == _CheckLogin
+            except:
+                #unable to compare - missing import?
+#				print "FALSE"
+                return None
+'''        
+        
+#	raise TemplateSyntaxError("%s" % item_detail.__class__)
+        
 '''from django.template import Node, Variable
 from django.template import TemplateSyntaxError, Library, VariableDoesNotExist
 from django.conf import settings
@@ -150,62 +211,3 @@ def url_dynamic_full(parser, token):
     return URLNode_dynarg(viewname, args, kwargs, asvar)
 url_dynamic_full = register.tag(url_dynamic_full)
 '''
-
-from django.template import Library, Node, Variable
-from django.core.urlresolvers import reverse
-#from django.contrib.auth.decorators import _CheckLogin
-
-#from inventory.views import *
-#from inventory.urls import urlpatterns
-
-register = Library()
-
-class DynUrlNode(Node):
-    def __init__(self, *args):
-        self.name_var = Variable(args[0])
-        if len(args)>1:
-            #Process view arguments
-            self.args = [Variable(a) for a in args[1].split(',')]
-        else:
-            self.args = []
-
-    def render(self, context):
-        name = self.name_var.resolve(context)
-        args = [a.resolve(context) for a in self.args]
-        try:
-            return reverse(name, args = args)
-        except:
-            #Argument might be pointing to a context variable
-            args = [Variable(a).resolve(context) for a in args]
-            return reverse(name, args = args)
-
-@register.tag
-def dynurl(parser, token):
-    args = token.split_contents()
-    return DynUrlNode(*args[1:])
-
-'''
-@register.filter
-def login_required(value):
-    for url in urlpatterns:
-#		print "%s - %s - %s" % (value, url.name, url._get_callback())
-        view_name = url._get_callback().__name__
-        if value == url.name:
-            try:
-#				print eval(url._get_callback().__name__ +'.__class__')
-                return eval(view_name +'.__class__') == _CheckLogin
-            except:
-                #unable to compare - missing import?
-#				print "FALSE"
-                return None
-'''        
-        
-#	raise TemplateSyntaxError("%s" % item_detail.__class__)
-        
-from django.template.defaultfilters import stringfilter
-
-@register.filter
-@stringfilter
-def is_class(value, arg):
-    return value[21:(value[21:].find(' ')+21)] == arg
-
