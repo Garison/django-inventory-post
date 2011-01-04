@@ -2,14 +2,16 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
+from django.db.models import Q
 
 from django.views.generic.list_detail import object_detail, object_list
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-from models import *
-from forms import *
+from models import Settings
+
+from forms import FilterForm
 
 #    kwargs['queryset'] = kwargs['queryset'].filter(user=request.user)
     
@@ -67,7 +69,7 @@ def generic_list(request, list_filter=None, queryset_filter=None, *args, **kwarg
     results_per_page = 20
     kwargs['extra_context']['range_base'] = (int(request.GET.get('page', 1))-1) * results_per_page
     return object_list(request, paginate_by=results_per_page, template_name = 'generic_list.html', *args, **kwargs)
-
+'''
 def generic_create(*args, **kwargs):
     if 'model' in kwargs:
         try:
@@ -266,6 +268,7 @@ def generic_photos(request, model, object_id, max_photos = 5):
         'max_photos': max_photos,
         },
     context_instance=RequestContext(request))
+    
 
 #TODO: Fix arguments into a dict just like the generic views
 def generic_detail(request, object_id, form_class, model, title=None, create_view=None, record_links=None, extra_context=None):
@@ -402,7 +405,7 @@ def supply_templates(request, object_id):
     )
 
 
-from django.db.models import Q
+'''
 def search(request):
     keyword=''
     people=None
@@ -464,6 +467,7 @@ def search(request):
         },
     context_instance=RequestContext(request))
 
+'''
 def retireditem_detail(request, object_id):
     from urls import retireditem_links
     retired_item = get_object_or_404(RetiredItem, pk=object_id)
@@ -478,6 +482,7 @@ def retireditem_detail(request, object_id):
          }
     
     return item_detail(request, retired_item.item_id, template_name='inventory/item_detail.html', extra_data=extra_data, passthru=True)
+'''
 
 def item_retire(request, object_id):
     item = Item.objects.get(pk=object_id)
@@ -501,6 +506,7 @@ def item_retire(request, object_id):
         request.user.message_set.create(message=_(u"The item has been marked as retired."))
 
     return HttpResponseRedirect(reverse('retireditem_list'))
+    
 
 def retireditem_unretire(request, object_id):
     retired_item = RetiredItem.objects.get(pk=object_id)
@@ -511,7 +517,7 @@ def retireditem_unretire(request, object_id):
 
     retired_item.delete()
     return HttpResponseRedirect(reverse('retireditem_list'))
-
+'''
 def inrepairsitem_detail(request, object_id):
     from urls import inrepairsitem_links
     inrepairs_item = get_object_or_404(InRepairsItem, pk=object_id)
@@ -525,7 +531,7 @@ def inrepairsitem_detail(request, object_id):
          }
     
     return item_detail(request, inrepairs_item.item_id, template_name='inventory/item_detail.html', extra_data=extra_data, show_create_view=False)
-
+'''
 def item_sendtorepairs(request, object_id):
     item = Item.objects.get(pk=object_id)
     if InRepairsItem.objects.filter(item=item):
@@ -541,7 +547,8 @@ def item_sendtorepairs(request, object_id):
         request.user.message_set.create(message=_(u"The item has been marked as 'in repairs'."))
 
     return HttpResponseRedirect(reverse('inrepairsitem_list'))
-    
+
+'''
 def inrepairsitem_unrepair(request, object_id):
     try:
         inrepairs = InRepairsItem.objects.get(pk=object_id)
@@ -551,13 +558,10 @@ def inrepairsitem_unrepair(request, object_id):
             request.user.message_set.create(message=_(u"This item is no in repairs."))
     
     return HttpResponseRedirect(reverse('inrepairsitem_list'))			
+'''
 
-def set_language(request):
-    if request.method == "GET":
-        request.session['django_language'] = request.GET.get('language', 'es')
-            
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
+'''
 def render_to_pdf(template_src, context_dict):
     from django import http
     from django.shortcuts import render_to_response
@@ -620,4 +624,4 @@ if Settings.objects.get(pk=1).is_anon_restricted:
 
 for view in restricted_views:
     exec ("%s=login_required(%s)" % (view, view))
-
+'''

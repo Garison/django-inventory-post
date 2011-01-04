@@ -10,8 +10,8 @@ sys.path.append(os.path.join(PROJECT_ROOT, 'apps'))
 sys.path.append(os.path.join(PROJECT_ROOT, 'shared_apps'))
 sys.path.append(os.path.join(PROJECT_ROOT, '3rd_party_apps'))
 
-PROJECT_TITLE = 'Django Replication'
-PROJECT_NAME = 'django_replication'
+PROJECT_TITLE = 'Django Inventory'
+PROJECT_NAME = 'django_inventory'
 
 DEBUG = False
 DEVELOPMENT = False
@@ -42,7 +42,7 @@ TIME_ZONE = 'America/Puerto_Rico'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 ugettext = lambda s: s
 
@@ -78,7 +78,7 @@ SECRET_KEY = '4#8p2r=zfa=t@3@@v5v*)i=kvnuyxae_yyvqkyv4!opcwad6@+'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
+#   'django.template.loaders.eggs.load_template_source',
 )
 
 #MIDDLEWARE_CLASSES = (
@@ -113,7 +113,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.admindocs',
     'inventory',
-    'wsgi',
+    'main',
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = [

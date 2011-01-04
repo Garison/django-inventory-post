@@ -1,5 +1,5 @@
 from django.db.models.signals import post_save, pre_save
-from models import *
+#from models import *
 from django.contrib.auth.models import Message
 
 def __get_changelog(sender, instance, old_record=True):

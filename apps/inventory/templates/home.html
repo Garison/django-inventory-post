@@ -10,18 +10,18 @@ $(document).ready(function() {
 });
 </script>
 {% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Inicio' %}</h2></div>{% endblock %}
+{% block banner %}<div id="banner"><h2>{% trans 'Home' %}</h2></div>{% endblock %}
 {% block content %}
 <h1 style='text-align: center; font-size: 70px; margin-top: 0px; margin-bottom: 0px;'>{% trans "Django Inventory" %}</h1>
 
 {% comment %}<center><img src="{{ MEDIA_URL }}images/logo.png" alt="logo" /></center>{% endcomment %}
 <br /><br />
 <center>
-<strong>{% trans "Estadisticas" %}</strong><br>
-{% trans "Usuarios registrados" %}: {{ person.count }}<br />
-{% trans "Equipos registrados" %}: {{ item.count }}<br />
-{% trans "Equipos decomisados" %}: {{ retired.count }}<br />
-{% trans "Plantillas registradas" %}: {{ template.count }}<br />
+<strong>{% trans "Statistics" %}</strong><br>
+{% trans "Users" %}: {{ person.count }}<br />
+{% trans "Items" %}: {{ item.count }}<br />
+{% trans "Retired items" %}: {{ retired.count }}<br />
+{% trans "Templates" %}: {{ template.count }}<br />
 </center>
 
 {% endblock %}
