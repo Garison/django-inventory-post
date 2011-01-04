@@ -113,11 +113,11 @@
 									<li><a href="{% url retireditem_list %}">{% trans "Retired" %}<img src="{{ MEDIA_URL }}images/user-trash.png" /></a></li>
 									<li><a href="{% url inrepairsitem_list %}">{% trans "In repairs" %}<img src="{{ MEDIA_URL }}images/broken-computer.png" /></a></li>
 
-									<li style="width: 7em;"><a class='parent' href="{#{% url group_list %}#}">{% trans "Grupos" %}<img src="{{ MEDIA_URL }}images/network-workgroup.png" /></a>
+									<li style="width: 7em;"><a class='parent' href="{% url group_list %}">{% trans "Grupos" %}<img src="{{ MEDIA_URL }}images/network-workgroup.png" /></a>
 										<ul>
-											<li><a href="{#{% url group_list %}#}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+											<li><a href="{% url group_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
 											{% if user.is_authenticated %}									
-											<li><a href="{#{% url group_create %}#}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+											<li><a href="{% url group_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
 											{% endif %}
 										</ul>
 									</li>
@@ -136,21 +136,21 @@
 							</li>
 							<li><a href="#">{% trans "Inventory" %}<img src="{{ MEDIA_URL }}images/package-x-generic.png" /></a>
 								<ul>
-									<li style="width: 7em;"><a class='parent' href="{#{% url supply_list %}#}">{% trans "Supplies" %}<img src="{{ MEDIA_URL }}images/applications-office.png" /></a>
+									<li style="width: 7em;"><a class='parent' href="{% url supply_list %}">{% trans "Supplies" %}<img src="{{ MEDIA_URL }}images/applications-office.png" /></a>
 										<ul>
-											<li><a href="{#{% url supply_list %}#}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+											<li><a href="{% url supply_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
 											{% if user.is_authenticated %}
-											<li><a href="{#{% url supply_create %}#}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+											<li><a href="{% url supply_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
 											{% endif %}
-											<li><a href="{#{% url supply_orphans_list %}#}">{% trans "Orphan" %}</a></li>
+											<li><a href="{% url supply_orphans_list %}">{% trans "Orphan" %}</a></li>
 										</ul>
 									</li>
 
-									<li style="width: 7em;"><a class='parent' href="{#{% url inventory_transaction_list %}#}">{% trans "Transactions" %}</a>
+									<li style="width: 7em;"><a class='parent' href="{% url inventory_transaction_list %}">{% trans "Transactions" %}</a>
 										<ul>
-											<li><a href="{#{% url inventory_transaction_list %}#}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+											<li><a href="{% url inventory_transaction_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
 											{% if user.is_authenticated %}
-											<li><a href="{#{% url inventory_transaction_create %}#}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+											<li><a href="{% url inventory_transaction_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
 											{% endif %}
 										</ul>
 									</li>
