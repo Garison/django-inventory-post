@@ -1,0 +1,567 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-04 09:09-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: models.py:10
+msgid "Maximum photo size."
+msgstr ""
+
+#: models.py:10
+msgid "Limit in kilobytes."
+msgstr ""
+
+#: models.py:11
+msgid "Maximum photos per item."
+msgstr ""
+
+#: models.py:12
+msgid "Maximum photos per item template."
+msgstr ""
+
+#: models.py:13
+msgid "Maximum photos per user."
+msgstr ""
+
+#: models.py:14
+msgid "Required login?"
+msgstr ""
+
+#: models.py:17 models.py:20
+msgid "settings"
+msgstr ""
+
+#: models.py:36
+msgid "Title"
+msgstr ""
+
+#: models.py:37
+msgid "Photo"
+msgstr ""
+
+#: models.py:40
+msgid "Main photo?"
+msgstr ""
+
+#: models.py:91
+msgid "photo"
+msgstr ""
+
+#: models.py:98 models.py:112 models.py:202 templates/item_subtemplate.html:23
+#: templates/inventory/person_detail.html:41
+msgid "Regional"
+msgstr ""
+
+#: models.py:102 models.py:310 models.py:382
+msgid "regional"
+msgstr ""
+
+#: models.py:113 models.py:203
+msgid "Department/Section/Area"
+msgstr ""
+
+#: models.py:117
+msgid "department"
+msgstr ""
+
+#: models.py:127 models.py:164
+msgid "Description"
+msgstr ""
+
+#: models.py:128
+msgid "Brancd"
+msgstr ""
+
+#: models.py:129 models.py:166
+msgid "Model"
+msgstr ""
+
+#: models.py:130 models.py:167
+msgid "Part number"
+msgstr ""
+
+#: models.py:131 models.py:168 models.py:204 urls.py:28 urls.py:36
+msgid "Photos"
+msgstr ""
+
+#: models.py:132 models.py:169 models.py:200
+msgid "Notes/Observations"
+msgstr ""
+
+#: models.py:136
+msgid "article"
+msgstr ""
+
+#: models.py:165
+msgid "Brand"
+msgstr ""
+
+#: models.py:170
+msgid "Articles"
+msgstr ""
+
+#: models.py:174 models.py:198
+msgid "item template"
+msgstr ""
+
+#: models.py:199
+msgid "Asset number"
+msgstr ""
+
+#: models.py:201
+msgid "Serial number"
+msgstr ""
+
+#: models.py:211 models.py:281 models.py:294
+msgid "item"
+msgstr ""
+
+#: models.py:220
+msgid "(in repairs)"
+msgstr ""
+
+#: models.py:264
+msgid "Name"
+msgstr ""
+
+#: models.py:265
+msgid "Item"
+msgstr ""
+
+#: models.py:269
+msgid "item group"
+msgstr ""
+
+#: models.py:280 models.py:293 models.py:410
+msgid "date"
+msgstr ""
+
+#: models.py:306
+msgid "last name"
+msgstr ""
+
+#: models.py:307
+msgid "second last name"
+msgstr ""
+
+#: models.py:308
+msgid "first name"
+msgstr ""
+
+#: models.py:309
+msgid "second name or initial"
+msgstr ""
+
+#: models.py:311
+msgid "inventory"
+msgstr ""
+
+#: models.py:312
+msgid "photos"
+msgstr ""
+
+#: models.py:316
+msgid "user"
+msgstr ""
+
+#: models.py:362
+msgid "timedate"
+msgstr ""
+
+#: models.py:364
+msgid "description"
+msgstr ""
+
+#: models.py:381
+msgid "name"
+msgstr ""
+
+#: models.py:414
+msgid "transaction"
+msgstr ""
+
+#: models.py:415
+msgid "transactions"
+msgstr ""
+
+#: urls.py:26 urls.py:34 urls.py:48 urls.py:73
+msgid "Edit"
+msgstr ""
+
+#: urls.py:27 urls.py:35 urls.py:49 urls.py:74
+msgid "Delete"
+msgstr ""
+
+#: urls.py:29
+msgid "Items that use this template"
+msgstr ""
+
+#: urls.py:30
+msgid "Assign/Remove items"
+msgstr ""
+
+#: urls.py:37
+msgid "Assign/Remove"
+msgstr ""
+
+#: urls.py:38
+msgid "Decomisar"
+msgstr ""
+
+#: urls.py:39
+msgid "Repair"
+msgstr ""
+
+#: urls.py:40
+msgid "Template"
+msgstr ""
+
+#: urls.py:50
+msgid "Edit photos"
+msgstr ""
+
+#: urls.py:51
+msgid "Assign/Remove item"
+msgstr ""
+
+#: urls.py:75
+msgid "Privileges"
+msgstr ""
+
+#: urls.py:159
+msgid "users"
+msgstr ""
+
+#: views.py:506
+msgid "The item has been marked as retired."
+msgstr ""
+
+#: views.py:539
+msgid "This item is in repairs."
+msgstr ""
+
+#: views.py:547
+msgid "The item has been marked as 'in repairs'."
+msgstr ""
+
+#: templates/filter_form_subtemplate.html:8
+msgid "Filtrar la lista por:"
+msgstr ""
+
+#: templates/filter_form_subtemplate.html:15 templates/generic_form.html:24
+msgid "Aceptar"
+msgstr ""
+
+#: templates/generic_assign_remove.html:5
+#: templates/generic_assign_remove.html:6
+#: templates/generic_assign_remove.html:12
+msgid "Asignar"
+msgstr ""
+
+#: templates/generic_assign_remove.html:26 templates/generic_detail.html:32
+#: templates/supply_subtemplate.html:8 templates/template_subtemplate.html:8
+#: templates/inventory/person_detail.html:27
+msgid "Datos"
+msgstr ""
+
+#: templates/generic_confirm.html:3 templates/generic_confirm.html.py:4
+msgid "Confirmar"
+msgstr ""
+
+#: templates/generic_confirm.html:7
+msgid "Esta seguro que desea"
+msgstr ""
+
+#: templates/generic_confirm.html:10
+msgid "Si"
+msgstr ""
+
+#: templates/generic_detail.html:6 templates/generic_detail.html.py:17
+#: templates/inventory/item_detail.html:5
+#: templates/inventory/item_detail.html:17
+msgid "Detalle para"
+msgstr ""
+
+#: templates/generic_detail.html:63 templates/generic_form.html:3
+#: templates/generic_form.html.py:4
+msgid "Crear"
+msgstr ""
+
+#: templates/generic_form.html:3 templates/generic_form.html.py:4
+msgid "Editar"
+msgstr ""
+
+#: templates/generic_form.html:17 templates/inventory_current.html:13
+msgid "Entre la información"
+msgstr ""
+
+#: templates/generic_form.html:30
+msgid "obligatorio"
+msgstr ""
+
+#: templates/generic_list.html:7 templates/generic_list.html.py:34
+msgid "Lista de"
+msgstr ""
+
+#: templates/generic_list.html:19 templates/generic_list.html.py:80
+msgid "Página previa"
+msgstr ""
+
+#: templates/generic_list.html:23 templates/generic_list.html.py:84
+msgid "Página"
+msgstr ""
+
+#: templates/generic_list.html:23 templates/generic_list.html.py:84
+msgid "de"
+msgstr ""
+
+#: templates/generic_list.html:27 templates/generic_list.html.py:88
+msgid "Próxima página"
+msgstr ""
+
+#: templates/generic_list.html:34
+#, python-format
+msgid "%(from)s-%(to)s de %(hits)s"
+msgstr ""
+
+#: templates/generic_list.html:42 templates/generic_navigation.html:6
+#: templates/inventory/item_detail.html:53
+#: templates/inventory/itemtemplate_detail.html:29
+#: templates/inventory/supply_detail.html:29
+msgid "Crear nuevo"
+msgstr ""
+
+#: templates/generic_list.html:52
+msgid "Identificador"
+msgstr ""
+
+#: templates/generic_list.html:54
+msgid "Acción"
+msgstr ""
+
+#: templates/generic_photos_subtemplate.html:11 templates/photos.html:33
+msgid "Fotos"
+msgstr ""
+
+#: templates/generic_photos_subtemplate.html:44
+#, python-format
+msgid "No hay %(title)s "
+msgstr ""
+
+#: templates/generic_photos_subtemplate.html:46
+msgid "No hay fotos"
+msgstr ""
+
+#: templates/home.html:13
+msgid "Home"
+msgstr ""
+
+#: templates/home.html:15
+msgid "Django Inventory"
+msgstr ""
+
+#: templates/home.html:20
+msgid "Statistics"
+msgstr ""
+
+#: templates/home.html:21
+msgid "Users"
+msgstr ""
+
+#: templates/home.html:22
+msgid "Items"
+msgstr ""
+
+#: templates/home.html:23
+msgid "Retired items"
+msgstr ""
+
+#: templates/home.html:24
+msgid "Templates"
+msgstr ""
+
+#: templates/item_subtemplate.html:8
+msgid "Datos especificos de este equipo"
+msgstr ""
+
+#: templates/item_subtemplate.html:14
+msgid "Número de propiedad"
+msgstr ""
+
+#: templates/item_subtemplate.html:17
+msgid "Notas"
+msgstr ""
+
+#: templates/item_subtemplate.html:20
+msgid "Número de serie"
+msgstr ""
+
+#: templates/item_subtemplate.html:26
+msgid "Departamento/Sección/Area"
+msgstr ""
+
+#: templates/item_subtemplate.html:29
+msgid "Asignado a"
+msgstr ""
+
+#: templates/photos.html:13
+msgid "Please wait..."
+msgstr ""
+
+#: templates/photos.html:20 templates/photos.html.py:21
+msgid "Editar fotos"
+msgstr ""
+
+#: templates/photos.html:25
+msgid "Fotos para"
+msgstr ""
+
+#: templates/photos.html:25
+msgid "Máximo de"
+msgstr ""
+
+#: templates/photos.html:52
+msgid "Foto principal"
+msgstr ""
+
+#: templates/photos.html:53
+msgid "Borrar foto"
+msgstr ""
+
+#: templates/photos.html:70
+msgid "No hay fotos."
+msgstr ""
+
+#: templates/photos.html:84
+msgid "Subiendo foto..."
+msgstr ""
+
+#: templates/photos.html:94
+msgid "Subir fotos"
+msgstr ""
+
+#: templates/photos.html:101
+msgid "Enviar foto"
+msgstr ""
+
+#: templates/report-items_per_person.html:14
+msgid "Informe de equipo por usuario"
+msgstr ""
+
+#: templates/search_results.html:9
+msgid "Resultados de la busqueda"
+msgstr ""
+
+#: templates/search_results.html:12
+msgid "Resultados con"
+msgstr ""
+
+#: templates/search_results.html:21
+msgid "Resultados en usuarios"
+msgstr ""
+
+#: templates/search_results.html:43
+msgid "Resultados en equipos"
+msgstr ""
+
+#: templates/search_results.html:65
+msgid "Resultados en plantillas"
+msgstr ""
+
+#: templates/search_results.html:87
+msgid "Resultados en grupos"
+msgstr ""
+
+#: templates/search_results.html:109
+msgid "Resultados en equipos decomisados"
+msgstr ""
+
+#: templates/search_results.html:131
+msgid "Resultados en artículos"
+msgstr ""
+
+#: templates/supply_subtemplate.html:14 templates/template_subtemplate.html:14
+msgid "Descripción"
+msgstr ""
+
+#: templates/supply_subtemplate.html:16 templates/template_subtemplate.html:16
+msgid "Marca"
+msgstr ""
+
+#: templates/supply_subtemplate.html:18 templates/template_subtemplate.html:18
+msgid "Modelo"
+msgstr ""
+
+#: templates/supply_subtemplate.html:20 templates/template_subtemplate.html:20
+msgid "Número de pieza"
+msgstr ""
+
+#: templates/supply_subtemplate.html:22 templates/template_subtemplate.html:22
+msgid "Notas/observaciones"
+msgstr ""
+
+#: templates/template_subtemplate.html:25
+msgid "Artículos relacionados"
+msgstr ""
+
+#: templates/inventory/itemtemplate_detail.html:5
+#: templates/inventory/itemtemplate_detail.html:16
+msgid "Detalle de la plantilla"
+msgstr ""
+
+#: templates/inventory/person_detail.html:6
+#: templates/inventory/person_detail.html:17
+msgid "Detalle del usuario"
+msgstr ""
+
+#: templates/inventory/person_detail.html:33
+msgid "Apellido paterno"
+msgstr ""
+
+#: templates/inventory/person_detail.html:35
+msgid "Apellido materno"
+msgstr ""
+
+#: templates/inventory/person_detail.html:37
+msgid "Nombre"
+msgstr ""
+
+#: templates/inventory/person_detail.html:39
+msgid "Segundo nombre o inicial"
+msgstr ""
+
+#: templates/inventory/person_detail.html:43
+msgid "Equipos asignados"
+msgstr ""
+
+#: templates/inventory/person_detail.html:60
+msgid "Fotos del usuario"
+msgstr ""
+
+#: templates/inventory/person_detail.html:90
+msgid "No hay fotos del usuario"
+msgstr ""
+
+#: templates/inventory/person_detail.html:99
+msgid "Crear otro usuario"
+msgstr ""
+
+#: templates/inventory/supply_detail.html:5
+#: templates/inventory/supply_detail.html:16
+msgid "Detalle del artículo"
+msgstr ""

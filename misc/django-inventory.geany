@@ -1,0 +1,18 @@
+
+[indentation]
+indent_width=4
+indent_type=0
+indent_hard_tab_width=8
+detect_indent=false
+indent_mode=2
+
+[project]
+name=django-inventory
+base_path=/home/rosarior/development/git/django-inventory/django-inventory
+
+[long line marker]
+long_line_behaviour=1
+long_line_column=72
+
+[files]
+current_page=0
