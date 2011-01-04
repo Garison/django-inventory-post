@@ -172,7 +172,12 @@ class DynUrlNode(Node):
     def render(self, context):
         name = self.name_var.resolve(context)
         args = [a.resolve(context) for a in self.args]
-        return reverse(name, args = args)
+        try:
+            return reverse(name, args = args)
+        except:
+            #Argument might be pointing to a context variable
+            args = [Variable(a).resolve(context) for a in args]
+            return reverse(name, args = args)
 
 @register.tag
 def dynurl(parser, token):
