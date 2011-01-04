@@ -4,13 +4,15 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-from inventory.admin import mysite
+#from inventory.admin import mysite
 
 urlpatterns = patterns('',
     #----Django
-    (r'^orig_admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^orig_admin/(.*)', admin.site.root),
-    (r'^admin/(.*)', mysite.root),
+    #(r'^orig_admin/doc/', include('django.contrib.admindocs.urls')),
+    #(r'^orig_admin/(.*)', admin.site.root),
+    #(r'^admin/(.*)', mysite.root),
+    (r'^admin/', include(admin.site.urls)),
+
     (r'^i18n/', include('django.conf.urls.i18n')),
     
     #----Project
@@ -28,3 +30,7 @@ if settings.DEVELOPMENT:
         (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'site_media', 'show_indexes': True}),
     )
 
+    if 'rosetta' in settings.INSTALLED_APPS:
+        urlpatterns += patterns('',
+            url(r'^rosetta/', include('rosetta.urls'), name = "rosetta"),
+        )
