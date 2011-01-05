@@ -3,6 +3,15 @@ from django.utils.translation import ugettext_lazy as _
 
 from models import RegionalOffice 
 
+
+regional_filter = {
+    'regional':{'queryset':RegionalOffice.objects.all(), 'destination':'regional_office'},
+}
+
+retireditem_filter = {
+    'regional':{'queryset':RegionalOffice.objects.all(), 'destination':'item__regional_office'},
+}
+
 template_record_links = [
     {'text':_(u'Edit'), 'view':'template_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
     {'text':_(u'Delete'), 'view':'template_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
@@ -62,10 +71,6 @@ user_links = [
 #        { 'text' : 	_(u'Edit'), 'view': 'permission_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png' },
 #        { 'text' : 	_(u'Delete'), 'view' : 'permission_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
 #    ]
-
-retireditem_filter = {
-    'regional':{'queryset':RegionalOffice.objects.all(), 'destination':'item__regional_office'},
-}
 
 supply_record_links=[
     {'text':_(u'Edit'), 'view':'supply_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},

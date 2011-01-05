@@ -11,11 +11,14 @@ from django.contrib.auth.decorators import login_required
 
 from photos.views import generic_photos
 
+from generic_views.views import generic_assign_remove
+
 from models import Settings, Person, Item, ItemTemplate, Supply
 
 from inventory import person_links, item_record_links, \
                       template_record_links, retireditem_links, \
-                      supply_record_links, inrepairsitem_links
+                      supply_record_links, inrepairsitem_links, \
+                      regional_filter
 
 
 def item_log_list(request, object_id):
@@ -91,6 +94,74 @@ def person_detail(request, object_id):
         template_name = 'person_detail.html',
         extra_context={'photos':get_object_or_404(Person, pk=object_id).photos.all(), 'record_links':person_links},
     )
+
+def person_assign_remove_item(request, object_id):
+    person = get_object_or_404(Person, pk=object_id)
+
+    return generic_assign_remove(
+        request,
+        object_id=object_id,
+        title=_(u"item to user"), 
+        object_class=Person,
+        left_list_qryset=Item.objects.exclude(person=object_id), 
+        right_list_qryset=person.inventory.all(), 
+        add_method=person.inventory.add, 
+        remove_method=person.inventory.remove, 
+        left_list_title=_(u'Unassigned items'), 
+        right_list_title=_(u'Assigned items'), 
+        item_name=_(u"items"), 
+        list_filter=regional_filter
+    )
+
+def supply_assign_remove_template(request, object_id):
+    supply = get_object_or_404(Supply, pk=object_id)
+
+    return generic_assign_remove(
+        request,
+        object_id=object_id,
+        title=_(u"supplies to template"),
+        object_class=Supply,
+        left_list_qryset=supply.get_nonowners(),
+        right_list_qryset=supply.get_owners(),
+        add_method=supply.add_owner,
+        remove_method=supply.remove_owner,
+        left_list_title=_(u'Unassigned templates'),
+        right_list_title=_(u'Assigned templates'),
+        item_name=_(u"templates"))     
+
+def template_assign_remove_supply(request, object_id):
+    obj = get_object_or_404(ItemTemplate, pk=object_id)
+
+    return generic_assign_remove(
+        request,
+        object_id=object_id,
+        title=_(u"template supplies"),
+        object_class=ItemTemplate,
+        left_list_qryset=Supply.objects.exclude(itemtemplate=obj),
+        right_list_qryset=obj.supplies.all(),
+        add_method=obj.supplies.add,
+        remove_method=obj.supplies.remove,
+        left_list_title=_(u'Unassigned supplies'),
+        right_list_title=_(u'Assigned supplies'),
+        item_name=_(u"Supplies"))
+        
+        
+def item_assign_remove_person(request, object_id):
+    obj = get_object_or_404(Item, pk=object_id)
+
+    return generic_assign_remove(
+        request,
+        object_id=object_id,
+        title=_(u"to users of the item"),
+        object_class=Item,
+        left_list_qryset=obj.get_nonowners(),
+        right_list_qryset=obj.get_owners(),
+        add_method=obj.add_owner,
+        remove_method=obj.remove_owner,
+        left_list_title=_(u"User that don't have this item"),
+        right_list_title=_(u"User that have this item"),
+        item_name=_(u"users"),
+        list_filter=regional_filter)
 
 def template_detail(request, object_id):
     return object_detail(

@@ -7,7 +7,7 @@ class GenericConfirmForm(forms.Form):
 class GenericAssignRemoveForm(forms.Form):
     left_list = forms.ModelMultipleChoiceField(required=False, queryset=None)
     right_list = forms.ModelMultipleChoiceField(required=False, queryset=None)
-    def __init__(self, left_list_qryset, right_list_qryset, left_filter=None, *args, **kwargs):
+    def __init__(self, left_list_qryset=None, right_list_qryset=None, left_filter=None, *args, **kwargs):
         super(GenericAssignRemoveForm, self).__init__(*args, **kwargs)
         if left_filter:
             self.fields['left_list'].queryset = left_list_qryset.filter(*left_filter)

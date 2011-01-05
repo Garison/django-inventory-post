@@ -131,7 +131,7 @@ def generic_confirm(request, _view, _title=None, _model=None, _object_id=None, _
         data,
         context_instance=RequestContext(request))	
 
-def generic_assign_remove(request, object_id, title, object, left_list_qryset, left_list_title, right_list_qryset, right_list_title, add_method, remove_method, item_name, list_filter=None):
+def generic_assign_remove(request, object_id, title, object_class, left_list_qryset, left_list_title, right_list_qryset, right_list_title, add_method, remove_method, item_name, list_filter=None):
     left_filter = None
     filter_form = None
     if list_filter:
@@ -143,34 +143,36 @@ def generic_assign_remove(request, object_id, title, object, left_list_qryset, l
 #	if list_filter:
         filter_form = result['filter_form']
         
-    object=object.get(pk=object_id) 
-
+    #object=object.get(pk=object_id) 
+    obj = get_object_or_404(object_class, pk=object_id)
+    
     if request.method == 'POST':
         post_data = request.POST
-        form = GenericAssignRemoveForm(eval(left_list_qryset), eval(right_list_qryset), left_filter, request.POST)
+        #form = GenericAssignRemoveForm(eval(left_list_qryset), eval(right_list_qryset), left_filter, request.POST)
+        form = GenericAssignRemoveForm(left_list_qryset, right_list_qryset, left_filter, request.POST)
         if form.is_valid():
             action = post_data.get('action','')
             if action == "assign":
                 for item in form.cleaned_data['left_list']:
-                    eval(add_method + "(item)")
+                    add_method(item)
                 if request.user.is_authenticated() and form.cleaned_data['left_list']:
                     request.user.message_set.create(message=_(u"The %s were added.") % unicode(item_name))
 
             if action == "remove":
                 for item in form.cleaned_data['right_list']:
-                    eval(remove_method + "(item)")
+                    remove_method(item)
                 if request.user.is_authenticated() and form.cleaned_data['right_list']:
                     request.user.message_set.create(message=_(u"The %s were removed.") % unicode(item_name))
 
-    form = GenericAssignRemoveForm(eval(left_list_qryset), eval(right_list_qryset), left_filter)
+    form = GenericAssignRemoveForm(left_list_qryset=left_list_qryset, right_list_qryset=right_list_qryset, left_filter=left_filter)
         
     return render_to_response('generic_assign_remove.html', {
-    'form': form,
-    'object': object,
-    'title': title,
-    'left_list_title': left_list_title,
-    'right_list_title': right_list_title,
-    'filter_form': filter_form,
+    'form':form,
+    'object':obj,
+    'title':title,
+    'left_list_title':left_list_title,
+    'right_list_title':right_list_title,
+    'filter_form':filter_form,
     },
     context_instance=RequestContext(request))
 
