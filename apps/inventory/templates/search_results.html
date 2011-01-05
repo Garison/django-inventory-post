@@ -2,23 +2,21 @@
 {% load i18n %}
 {% block keywords %}
 {% endblock %}
-{% block title %} :: Resultados de la busqueda{% endblock %}
+{% block title %} :: Search results{% endblock %}
 {% block javascript %}
 </script>
 {% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Resultados de la busqueda' %}</h2></div>{% endblock %}
+{% block banner %}<div id="banner"><h2>{% trans 'Search results' %}</h2></div>{% endblock %}
 {% block content %}
 
-<h3>{% trans 'Resultados con' %}: {{ keyword }}</h3>
+<h3>{% blocktrans %}Results with: {{ keyword }}{% endblocktrans %}</h3>
 
 {% if not people and not items and not templates and not groups and not retired_items and not supplies %}
-<h3>No hay resultados encontrados</h3>
-{% comment %}{% else %}
-<h3>Resultados encontrados</h3>{% endcomment %}
+<h3>{% trans 'No results found' %}</h3>
 {% endif %}
 
 {% if people %}
-<h3>{% trans 'Resultados en usuarios' %}: {{ people.count }}</h3>
+<h3>{% trans 'Results in users' %}: {{ people.count }}</h3>
 <div class='results'>
 	<table>
 		<tbody>
@@ -40,7 +38,7 @@
 {% endif %}
 
 {% if items %}
-<h3>{% trans 'Resultados en equipos' %}: {{ items.count }}</h3>
+<h3>{% trans 'Results in assets' %}: {{ items.count }}</h3>
 <div class='results'>
 	<table>
 		<tbody>
@@ -62,7 +60,7 @@
 {% endif %}
 
 {% if templates %}
-<h3>{% trans 'Resultados en plantillas' %}: {{ templates.count }}</h3>
+<h3>{% trans 'Results in templates' %}: {{ templates.count }}</h3>
 <div class='results'>
 	<table>
 		<tbody>
@@ -84,7 +82,7 @@
 {% endif %}
 
 {% if groups %}
-<h3>{% trans 'Resultados en grupos' %}: {{ groups.count }}</h3>
+<h3>{% trans 'Results in groups' %}: {{ groups.count }}</h3>
 <div class='results'>
 	<table>
 		<tbody>
@@ -106,7 +104,7 @@
 {% endif %}
 
 {% if retired_items %}
-<h3>{% trans 'Resultados en equipos decomisados' %}: {{ retired_items.count }}</h3>
+<h3>{% trans 'Results in retired items' %}: {{ retired_items.count }}</h3>
 <div class='results'>
 	<table>
 		<tbody>
@@ -128,7 +126,7 @@
 {% endif %}
 
 {% if supplies %}
-<h3>{% trans 'Resultados en artículos' %}: {{ supplies.count }}</h3>
+<h3>{% trans 'Results in supplies' %}: {{ supplies.count }}</h3>
 <div class='results'>
 	<table>
 		<tbody>
@@ -148,22 +146,6 @@
 </div>
 <br />
 {% endif %}
-
-
-{% comment %}
-<div class='results'>
-	<table>
-		<tbody>
-			{% for i in results %}
-				<tr class="{% cycle 'results-odd' 'results-even' %}">
-					<td><a href="{{ i.get_absolute_url }}">{{ i }}</a></td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-</div>
-<br />
-{% endcomment %}
 
 {% endblock %}
 

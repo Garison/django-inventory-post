@@ -11,18 +11,18 @@
 	<body>
 	
 
-<h1>{% trans 'Informe de equipo por usuario' %}</h1>
+<h1>{% trans 'User assets report' %}</h1>
 {% block content %}
 <br/ >
 <h2>Equipo asignado a: {{ object }}</h2>
 		<table style="border: 1px solid black; vertical-align: center; text-align:center; width:100%;">
 				<thead>
 					<strong><tr>
-						<td>NUM. DE PROPIEDAD</td>
-						<td>DESCRIPCION</td>
-						<td>DIVISION O SECCION</td>
-						<td>ASIGNADO A</td>
-						<td>OBSERVACIONES</td>
+						<td>{% trans 'ASSET NUMBER' %}</td>
+						<td>{% trans 'DESCRIPTION' %}</td>
+						<td>{% trans 'LOCATION' %}</td>
+						<td>{% trans 'ASSIGNED TO' %}</td>
+						<td>{% trans 'NOTES' %}</td>
 					</tr></strong>
 				</thead>
 				<tbody>
@@ -30,7 +30,7 @@
 						<tr>
 							<td>{{ item.property_number }}</td>
 							<td>{{ item.item_template.description }}</td>
-							<td>{{ item.department }}</td>
+							<td>{{ item.location }}</td>
 							<td>{{ object }}</td>
 							<td>&nbsp;{{ item.notes }}</td>
 						</tr>
