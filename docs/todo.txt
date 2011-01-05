@@ -1,6 +1,6 @@
 # 2011 Refactor list
 ========================
-# New location based object (absorbs regional, section, dept, ect) - Started
+# New location based object (absorbs regional, section, dept, ect) - DONE
 # Eliminate inrepair and retired and implement user defined 'item states'
 # Merge supplies with itemtemplate and allow for circular dependencies
 # Transfer items from one inventory to another
@@ -15,9 +15,11 @@
 # Add reporting/hard copies
 # Connect w/ descartes for BI charts
 # Implement django-permissions
-# Supply reorder threshold
+# Supply reorder thresholds
 # Change to famfamfam icons
-
+# Implement South for database migration
+# Add google maps api to locations model
+# Eliminate CustomUser model
 
 # Deferred, deprecated
 ==========================
