@@ -48,53 +48,15 @@ class Location(models.Model):
     def get_absolute_url(self):
         return reverse('location_list')
    
-
-class Supply(models.Model):
-    description = models.CharField(verbose_name=_(u"Description"), max_length=64)
-    brand = models.CharField(verbose_name=_("Brand"), max_length=32, null=True, blank=True)
-    model = models.CharField(verbose_name=_("Model"), max_length=32, null=True, blank=True)
-    part_number = models.CharField(verbose_name=_(u"Part number"), max_length=32, null=True, blank=True)
-    photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name = _("Photos"))
-    notes = models.TextField(_("Notes/Observations"), null=True, blank=True)	
-    
-    class Meta:
-        ordering = ['description']	
-        verbose_name = _(u"supply")
-        verbose_name_plural = _(u"supplies")        
-    
-    def get_absolute_url(self):
-        return ('supply_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)
-    
-    def __unicode__(self):
-        return self.description
-
-    def get_owners(self):
-        try:
-            return self.itemtemplate_set.all()
-        except:
-            return None
-
-    def get_nonowners(self):
-        return ItemTemplate.objects.all().exclude(id__in=self.itemtemplate_set.values_list("id",  flat=True))	
-    
-    def add_owner(self, template):
-        if self not in template.supplies.all():
-            template.supplies.add(self)		
-
-    def remove_owner(self, template):
-        if self in template.supplies.all():
-            template.supplies.remove(self)		
-
             
 class ItemTemplate(models.Model):
     description = models.CharField(verbose_name=_(u"Description"), max_length=64)
-    brand = models.CharField(verbose_name=_("Brand"), max_length=32, null=True, blank=True)
-    model = models.CharField(verbose_name=_("Model"), max_length=32, null=True, blank=True)
+    brand = models.CharField(verbose_name=_(u"Brand"), max_length=32, null=True, blank=True)
+    model = models.CharField(verbose_name=_(u"Model"), max_length=32, null=True, blank=True)
     part_number = models.CharField(verbose_name=_(u"Part number"), max_length=32, null=True, blank=True)
-    photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name = _("Photos"))
-    notes = models.TextField(_("Notes/Observations"), null=True, blank=True)	
-    supplies = models.ManyToManyField(Supply, null=True, blank=True, verbose_name=_(u"Articles"))
+    photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name=_(u"Photos"))
+    notes = models.TextField(verbose_name=_(u"Notes/Observations"), null=True, blank=True)	
+    supplies = models.ManyToManyField("self", null=True, blank=True, verbose_name=_(u"supplies"))
     
     class Meta:
         ordering = ['description']	
@@ -316,18 +278,18 @@ class Inventory(models.Model):
 class InventoryCheckPoint(models.Model):
     inventory = models.ForeignKey(Inventory)
     datetime = models.DateTimeField(default=datetime.datetime.now())	
-    supplies = models.ManyToManyField(Supply, null=True, blank=True, through='InventoryCPQty')
+    supplies = models.ManyToManyField(ItemTemplate, null=True, blank=True, through='InventoryCPQty')
 
 
 class InventoryCPQty(models.Model):
-    supply = models.ForeignKey(Supply)
+    supply = models.ForeignKey(ItemTemplate)
     check_point = models.ForeignKey(InventoryCheckPoint)
     quantity = models.IntegerField()
 
     
 class InventoryTransaction(models.Model):
     inventory = models.ForeignKey(Inventory)
-    supply = models.ForeignKey(Supply)
+    supply = models.ForeignKey(ItemTemplate)
     quantity = models.IntegerField()
     date = models.DateField(default=datetime.date.today(), verbose_name=_(u"date"))
     notes = models.TextField(null=True, blank=True)

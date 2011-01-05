@@ -36,12 +36,6 @@ class PermissionForm(forms.ModelForm):
         model = Permission
 
 
-class SupplyForm(forms.ModelForm):
-    class Meta:
-        model = Supply
-        exclude = ('photos')
-
-
 class InventoryForm(forms.ModelForm):
     class Meta:
         model = Inventory

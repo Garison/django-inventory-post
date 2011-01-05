@@ -8,15 +8,15 @@ from inventory import person_links, \
                       template_record_links, inventory_links, \
                       item_record_links, retireditem_filter, \
                       retireditem_links, inrepairsitem_links, \
-                      supply_record_links, inventory_transaction_links, \
+                      inventory_transaction_links, \
                       group_links, location_filter, location_links
 
 
 from models import ItemTemplate, InventoryTransaction, \
-                   Inventory, Supply, Settings, Item, ItemGroup, Person, \
+                   Inventory, Settings, Item, ItemGroup, Person, \
                    RetiredItem, InRepairsItem, Log, Location
                    
-from forms import InventoryTransactionForm, InventoryForm, SupplyForm, \
+from forms import InventoryTransactionForm, InventoryForm, \
                   ItemTemplateForm, ItemForm, ItemGroupForm, PersonForm, \
                   LogForm
 
@@ -42,16 +42,6 @@ urlpatterns = patterns('inventory.views',
     url(r'^inventory/(?P<object_id>\d+)/update/$', generic_update, dict({'form_class':InventoryForm}, extra_context={'title':_(u'inventory')}), 'inventory_update'),
     url(r'^inventory/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Inventory}, post_delete_redirect="inventory_list", extra_context=dict(title=_(u'inventory'))), 'inventory_delete'),
     url(r'^inventory/(?P<object_id>\d+)/current/$', 'inventory_current', (), 'inventory_current'),
-
-    url(r'^supply/create/$', generic_create, dict({'form_class':SupplyForm}, extra_context={'title':_(u'supply')}), 'supply_create'),
-    url(r'^supply/(?P<object_id>\d+)/update/$', generic_update, dict({'form_class':SupplyForm }, extra_context={'title':_(u'supply')}), 'supply_update' ),
-    url(r'^supply/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Supply}, post_delete_redirect="supply_list", extra_context=dict(title=_(u'supply'))), 'supply_delete'),
-    url(r'^supply/list/$', generic_list, dict({'queryset':Supply.objects.all()}, extra_context=dict(title=_(u'supply'), create_view='supply_create', record_links=supply_record_links)), 'supply_list'),
-    url(r'^supply/(?P<object_id>\d+)/$', 'supply_detail', (), 'supply_view'),
-    url(r'^supply/(?P<object_id>\d+)/photos/$', generic_photos, dict(model=Supply, max_photos=5), 'supply_photos'), 
-    url(r'^supply/(?P<object_id>\d+)/templates/$', 'supply_templates', (), 'supply_templates_list'),
-    url(r'^supply/orphans/$', generic_list, dict({'queryset':Supply.objects.filter(itemtemplate=None)}, extra_context=dict(title=_(u'orphan supplies'), create_view='supply_create', record_links=supply_record_links)), 'supply_orphans_list'),
-    url(r'^supply/(?P<object_id>\d+)/assign/$', 'supply_assign_remove_template', (), name='supply_assign_template'),
 
     url(r'^template/list/$', generic_list, dict({'queryset':ItemTemplate.objects.all()}, extra_context=dict(title=_(u'item template'), create_view="template_create", record_links=template_record_links)), 'template_list'),
     url(r'^template/create/$', generic_create, dict({'form_class':ItemTemplateForm}, extra_context=dict(title=_(u'item template'))), 'template_create'),

@@ -1,14 +1,13 @@
 from django.contrib import admin
 
 from inventory.models import Permission, \
-                             Supply, ItemTemplate, Item, \
+                             ItemTemplate, Item, \
                              ItemGroup, RetiredItem, InRepairsItem, \
                              Person, Inventory, Location
 
 
 admin.site.register(Permission)
 admin.site.register(Location)
-admin.site.register(Supply)
 admin.site.register(ItemTemplate)
 admin.site.register(Item)
 admin.site.register(ItemGroup)

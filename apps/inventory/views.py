@@ -14,12 +14,12 @@ from photos.views import generic_photos
 
 from generic_views.views import generic_assign_remove
 
-from models import Settings, Person, Item, ItemTemplate, Supply, \
+from models import Settings, Person, Item, ItemTemplate, \
                    InRepairsItem, RetiredItem
 
 from inventory import person_links, item_record_links, \
                       template_record_links, retireditem_links, \
-                      supply_record_links, inrepairsitem_links, \
+                      inrepairsitem_links, \
                       location_filter
 
 
@@ -114,20 +114,6 @@ def person_assign_remove_item(request, object_id):
         list_filter=location_filter
     )
 
-def supply_assign_remove_template(request, object_id):
-    supply = get_object_or_404(Supply, pk=object_id)
-
-    return generic_assign_remove(
-        request,
-        title=_(u"supplies to template"),
-        obj=supply,
-        left_list_qryset=supply.get_nonowners(),
-        right_list_qryset=supply.get_owners(),
-        add_method=supply.add_owner,
-        remove_method=supply.remove_owner,
-        left_list_title=_(u'Unassigned templates'),
-        right_list_title=_(u'Assigned templates'),
-        item_name=_(u"templates"))     
 
 def template_assign_remove_supply(request, object_id):
     obj = get_object_or_404(ItemTemplate, pk=object_id)
@@ -136,14 +122,14 @@ def template_assign_remove_supply(request, object_id):
         request,
         title=_(u"template supplies"),
         obj=obj,
-        left_list_qryset=Supply.objects.exclude(itemtemplate=obj),
+        left_list_qryset=ItemTemplate.objects.exclude(supplies=obj).exclude(pk=obj.pk),
         right_list_qryset=obj.supplies.all(),
         add_method=obj.supplies.add,
         remove_method=obj.supplies.remove,
         left_list_title=_(u'Unassigned supplies'),
         right_list_title=_(u'Assigned supplies'),
         item_name=_(u"Supplies"))
-        
+    
         
 def item_assign_remove_person(request, object_id):
     obj = get_object_or_404(Item, pk=object_id)
@@ -184,38 +170,12 @@ def template_items(request, object_id):
     )
 
 
-def supply_detail(request, object_id):
-    return object_detail(
-        request,
-        queryset=Supply.objects.all(),
-        object_id=object_id,
-        template_name='supply_detail.html',
-        extra_context={'photos':get_object_or_404(Supply, pk=object_id).photos.all(), 'record_links':supply_record_links},
-    )
-
-
-def supply_templates(request, object_id):
-    supply = get_object_or_404(Supply, pk=object_id)
-    return object_list(
-        request,
-        queryset = supply.itemtemplate_set.all(),
-        template_name = "generic_list.html", 
-        extra_context=dict(
-            title = '%s: %s' % (_(u"templates that use the supply"), supply),
-            create_view = 'item_create',
-            record_links=template_record_links			
-        ),
-    )
-
-
-
 def search(request):
     keyword=''
     people=None
     items=None
     templates=None
     groups=None
-    supplies=None
     
     if request.method == 'GET':
         keyword=request.GET.get('keyword','')
@@ -231,10 +191,6 @@ def search(request):
 
             templates = ItemTemplate.objects.filter(
                 Q(description__icontains=keyword) | Q(brand__icontains=keyword) | Q(model__icontains=keyword) | Q(photos__title__icontains=keyword ) | Q(part_number__icontains=keyword) | Q(notes__icontains=keyword)
-                )		
-
-            supplies = Supply.objects.filter(
-                Q(description__icontains=keyword) | Q(brand__icontains=keyword) | Q(model__icontains=keyword) | Q(photos__title__icontains=keyword ) | Q(part_number__icontains=keyword) | Q(notes__icontains=keyword) | Q(itemtemplate__description__icontains=keyword) | Q(itemtemplate__brand__icontains=keyword) | Q(itemtemplate__model__icontains=keyword) | Q(itemtemplate__photos__title__icontains=keyword ) | Q(itemtemplate__part_number__icontains=keyword) | Q(itemtemplate__notes__icontains=keyword)
                 )		
 
             groups = ItemGroup.objects.filter(
@@ -265,7 +221,6 @@ def search(request):
         'groups':groups,
         'retired_items':retired_items,
         'keyword':keyword,
-        'supplies':supplies,
 #		'results': results,
         },
     context_instance=RequestContext(request))

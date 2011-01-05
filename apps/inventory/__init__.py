@@ -67,14 +67,6 @@ user_links = [
 #        { 'text' : 	_(u'Delete'), 'view' : 'permission_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
 #    ]
 
-supply_record_links=[
-    {'text':_(u'Edit'), 'view':'supply_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
-    {'text':_(u'Delete'), 'view':'supply_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
-    {'text':_(u'Photos'), 'view':'supply_photos', 'icon':settings.MEDIA_URL + 'images/camera-photo.png'},
-    {'text':_(u'Item templates that use this supply item'), 'view':'supply_templates_list', 'icon':settings.MEDIA_URL + 'images/folder-saved-search.png'},
-    {'text':_(u'Assign/Remove templates'), 'view':'supply_assign_template', 'icon':settings.MEDIA_URL + 'images/edit-find.png'},
-]
-
 inventory_links = [
     {'text':_(u'Edit'), 'view':'inventory_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
     {'text':_(u'Delete'), 'view':'inventory_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},

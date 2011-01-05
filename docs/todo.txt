@@ -2,7 +2,7 @@
 ========================
 # New location based object (absorbs regional, section, dept, ect)      - DONE
 # Eliminate inrepair and retired and implement user defined 'item states'
-# Merge supplies with itemtemplate and allow for circular dependencies
+# Merge supplies with itemtemplate and allow for circular dependencies  - DONE
 # Transfer items from one inventory to another
 # Transfer asset from/to users
 # Use django reversion for changelogs

@@ -125,28 +125,6 @@
 <br />
 {% endif %}
 
-{% if supplies %}
-<h3>{% trans 'Results in supplies' %}: {{ supplies.count }}</h3>
-<div class='results'>
-	<table>
-		<tbody>
-			<tr>
-			{% for i in supplies %}
-				<td class="{% cycle 'results-odd' 'results-even' %}">
-					<a href="{{ i.get_absolute_url}}">{{ i }}</a></td>
-				</td>
-					{% if forloop.counter|divisibleby:"5" %}
-						</tr>
-						<tr>
-					{% endif %}
-			{% endfor %}
-			</tr>
-		</tbody>
-	</table>
-</div>
-<br />
-{% endif %}
-
 {% endblock %}
 
 
