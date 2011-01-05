@@ -335,7 +335,7 @@ def inrepairsitem_detail(request, object_id):
 def item_sendtorepairs(request, object_id):
     item = Item.objects.get(pk=object_id)
     if InRepairsItem.objects.filter(item=item):
-        messages.warning(request, _(u"This asset is in repairs."))
+        messages.warning(request, _(u"This asset is already in repairs."))
 
         return HttpResponseRedirect(reverse('inrepairsitem_list'))			
 
