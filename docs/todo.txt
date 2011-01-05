@@ -21,6 +21,7 @@
 # Add google maps api to locations model
 # Eliminate CustomUser model                                            - DONE
 # Fix html and make it compliant (Remove <CENTER>, etc)
+# Add inventory transactions from RMAs & customer invoices
 
 # Deferred, deprecated
 ==========================
