@@ -15,7 +15,7 @@ from photos.views import generic_photos
 from generic_views.views import generic_assign_remove
 
 from models import Settings, Person, Item, ItemTemplate, \
-                   InRepairsItem, RetiredItem
+                   InRepairsItem, RetiredItem, ItemGroup
 
 from inventory import person_links, item_record_links, \
                       template_record_links, retireditem_links, \
@@ -182,11 +182,11 @@ def search(request):
         
         if keyword:
             people = Person.objects.filter(
-                Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword) | Q(second_name__icontains=keyword) | Q(second_last_name__icontains=keyword ) | Q(regional_office__name__icontains=keyword) | Q(photos__title__icontains=keyword )
+                Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword) | Q(second_name__icontains=keyword) | Q(second_last_name__icontains=keyword ) | Q(location__name__icontains=keyword) | Q(photos__title__icontains=keyword )
                 )		
 
             items = Item.objects.filter(
-                Q(property_number__icontains=keyword) | Q(notes__icontains=keyword) | Q(serial_number__icontains=keyword) | Q(photos__title__icontains=keyword ) | Q(regional_office__name__icontains=keyword) | Q(department__name__icontains=keyword) | Q(item_template__description__icontains=keyword)
+                Q(property_number__icontains=keyword) | Q(notes__icontains=keyword) | Q(serial_number__icontains=keyword) | Q(photos__title__icontains=keyword ) | Q(location__name__icontains=keyword) | Q(item_template__description__icontains=keyword)
                 )		
 
             templates = ItemTemplate.objects.filter(
@@ -198,7 +198,7 @@ def search(request):
                 )	
 
             retired_items = RetiredItem.objects.filter(
-                Q(item__property_number__icontains=keyword) | Q(item__notes__icontains=keyword) | Q(item__serial_number__icontains=keyword) | Q(item__photos__title__icontains=keyword ) | Q(item__regional_office__name__icontains=keyword) | Q(item__department__name__icontains=keyword) | Q(item__item_template__description__icontains=keyword) | Q(item__item_template__brand__icontains=keyword) | Q(item__item_template__model__icontains=keyword) | Q(item__item_template__photos__title__icontains=keyword ) | Q(item__item_template__part_number__icontains=keyword) | Q(item__item_template__notes__icontains=keyword)
+                Q(item__property_number__icontains=keyword) | Q(item__notes__icontains=keyword) | Q(item__serial_number__icontains=keyword) | Q(item__photos__title__icontains=keyword ) | Q(item__location__name__icontains=keyword) | Q(item__item_template__description__icontains=keyword) | Q(item__item_template__brand__icontains=keyword) | Q(item__item_template__model__icontains=keyword) | Q(item__item_template__photos__title__icontains=keyword ) | Q(item__item_template__part_number__icontains=keyword) | Q(item__item_template__notes__icontains=keyword)
                 )		
                 
 #			results = []
