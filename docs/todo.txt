@@ -20,6 +20,7 @@
 # Implement South for database migration
 # Add google maps api to locations model
 # Eliminate CustomUser model                                            - DONE
+# Fix html and make it compliant (Remove <CENTER>, etc)
 
 # Deferred, deprecated
 ==========================
