@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-05 14:09-0400\n"
+"PO-Revision-Date: 2011-01-05 14:20\n"
+"Last-Translator: <admin@admin.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Translated-Using: django-rosetta 0.5.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/about.html:5 templates/about.html.py:6
+msgid "About this program"
+msgstr "Acerca de este programa"
+
+#: templates/about.html:11
+msgid "A Django based inventory and asset management system"
+msgstr "Un sistema de manejo de inventario y activos basado en Django"
+
+#: templates/about.html:13
+msgid "Copyright 2007 Roberto Rosario"
+msgstr "Copyright 2007 Roberto Rosario"
+
+#: templates/base.html:31
+msgid "Please wait..."
+msgstr "Por favor espere..."
+
+#: templates/base.html:49
+msgid "Inventory Control"
+msgstr ""
+
+#: templates/base.html:53
+msgid "Loading"
+msgstr "Cargando"
+
+#: templates/base.html:59
+msgid "User:"
+msgstr "Usuario"
+
+#: templates/base.html:61
+msgid "Anonymous"
+msgstr "Anónimo"
+
+#: templates/base.html:63
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: templates/base.html:67
+msgid "Logout"
+msgstr "Desconectarse"
+
+#: templates/base.html:68
+msgid "New password"
+msgstr "Nueva contraseña"
+
+#: templates/base.html:71
+msgid "English"
+msgstr "Inglés"
+
+#: templates/base.html:73
+msgid "Spanish"
+msgstr "Español"
+
+#: templates/base.html:80
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/base.html:91
+msgid "Home"
+msgstr "Inicio"
+
+#: templates/base.html:92 templates/base.html.py:161
+msgid "Users"
+msgstr "Usuarios"
+
+#: templates/base.html:94 templates/base.html.py:103 templates/base.html:113
+#: templates/base.html.py:123 templates/base.html:138
+#: templates/base.html.py:142
+msgid "View all"
+msgstr "Ver todos"
+
+#: templates/base.html:96 templates/base.html.py:105 templates/base.html:115
+#: templates/base.html.py:125 templates/base.html:144
+msgid "Create new"
+msgstr "Crear nuevo"
+
+#: templates/base.html:101
+msgid "Templates"
+msgstr "Plantillas"
+
+#: templates/base.html:107 templates/base.html.py:117
+msgid "Orphan"
+msgstr "Huérfanos"
+
+#: templates/base.html:111
+msgid "Assets"
+msgstr "Activos"
+
+#: templates/base.html:118
+msgid "Retired"
+msgstr "Decomisados"
+
+#: templates/base.html:119
+msgid "In repairs"
+msgstr "En reparación"
+
+#: templates/base.html:121
+msgid "Groups"
+msgstr "Grupos"
+
+#: templates/base.html:136
+msgid "Inventory"
+msgstr "Inventario"
+
+#: templates/base.html:140
+msgid "Transactions"
+msgstr "Transacciones"
+
+#: templates/base.html:151
+msgid "Tools"
+msgstr "Herramientas"
+
+#: templates/base.html:153
+msgid "Locations"
+msgstr "Localizaciones"
+
+#: templates/base.html:155
+msgid "Settings"
+msgstr "Configuración"
+
+#: templates/base.html:164
+msgid "About"
+msgstr "Acerca"
+
+#: templates/base.html:178
+msgid "ok"
+msgstr "ok"
