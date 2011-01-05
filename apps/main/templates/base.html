@@ -162,8 +162,7 @@
 							</li>
 							<li style="width: 10em;"><a href="#">{% trans "Tools" %}<img src="{{ MEDIA_URL }}images/preferences-system.png" /></a>
 								<ul>
-									<li><a style="width: 17em;" href="{% url regional_list %}">{% trans "Regionals" %}</a></li>
-									<li><a style="width: 17em;" href="{% url department_list %}">{% trans "Departments" %}<img src="{{ MEDIA_URL }}images/view-fullscreen.png" /></a></li>
+									<li><a style="width: 17em;" href="{% url location_list %}">{% trans "Locations" %}<img src="{{ MEDIA_URL }}images/view-fullscreen.png" /></a></li>
 									<li><a style="width: 17em;" href="{% url inventory_list %}">{% trans "Supplies inventory" %}<img src="{{ MEDIA_URL }}images/package-x-generic.png" /></a></li>
 									{% if user.is_staff %}
 									<li><a style="width: 17em;" href="{% url settings %}">{% trans "Settings" %}<img src="{{ MEDIA_URL }}images/emblem-system.png" /></a></li>

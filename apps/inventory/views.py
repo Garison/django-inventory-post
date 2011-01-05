@@ -18,7 +18,7 @@ from models import Settings, Person, Item, ItemTemplate, Supply
 from inventory import person_links, item_record_links, \
                       template_record_links, retireditem_links, \
                       supply_record_links, inrepairsitem_links, \
-                      regional_filter
+                      location_filter
 
 
 def item_log_list(request, object_id):
@@ -110,7 +110,7 @@ def person_assign_remove_item(request, object_id):
         left_list_title=_(u'Unassigned assets'), 
         right_list_title=_(u'Assigned assets'), 
         item_name=_(u"assets"), 
-        list_filter=regional_filter
+        list_filter=location_filter
     )
 
 def supply_assign_remove_template(request, object_id):
@@ -161,7 +161,7 @@ def item_assign_remove_person(request, object_id):
         left_list_title=_(u"Users that don't have this asset"),
         right_list_title=_(u"Users that have this asset"),
         item_name=_(u"users"),
-        list_filter=regional_filter)
+        list_filter=location_filter)
 
 def template_detail(request, object_id):
     return object_detail(

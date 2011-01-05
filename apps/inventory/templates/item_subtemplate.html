@@ -20,10 +20,7 @@
 				<th>{% trans 'Serial number' %}:</th><td>{{ object.serial_number }}</td>
 			</tr>
 			<tr>
-				<th>{% trans 'Regional' %}:</th><td>{{ object.regional_office }}</td>
-			</tr>
-			<tr>
-				<th>{% trans 'Department/section/area' %}:</th><td>{{ object.department }}</td>
+				<th>{% trans 'Location' %}:</th><td>{{ object.location }}</td>
 			</tr>
 			<tr>
 				<th>{% trans 'Assigned to' %}:</th><td><ul>{% for i in object.get_owners %}<li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>{% endfor %}</ul></td>

@@ -1,15 +1,15 @@
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from models import RegionalOffice 
+from models import Location
 
 
-regional_filter = {
-    'regional':{'queryset':RegionalOffice.objects.all(), 'destination':'regional_office'},
+location_filter = {
+    'location':{'queryset':Location.objects.all(), 'destination':'location'},
 }
 
 retireditem_filter = {
-    'regional':{'queryset':RegionalOffice.objects.all(), 'destination':'item__regional_office'},
+    'location':{'queryset':Location.objects.all(), 'destination':'item__location'},
 }
 
 template_record_links = [
@@ -47,14 +47,9 @@ group_links = [
     {'text' : _(u'Delete'), 'view':'group_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
 ]
 
-regional_links = [
-    {'text':_(u'Edit'), 'view':'regional_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
-    {'text':_(u'Delete'), 'view':'regional_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
-]
-
-department_links = [
-    {'text':_(u'Edit'), 'view':'department_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
-    {'text':_(u'Delete'), 'view':'department_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
+location_links = [
+    {'text':_(u'Edit'), 'view':'location_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
+    {'text':_(u'Delete'), 'view':'location_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
 ]
 
 inrepairsitem_links = [

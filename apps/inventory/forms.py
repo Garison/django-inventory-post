@@ -6,7 +6,7 @@ from models import *
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        exclude = ('photos','active')
+        exclude = ('photos', 'active')
 
 
 class PersonForm(forms.ModelForm):
@@ -15,11 +15,6 @@ class PersonForm(forms.ModelForm):
         exclude = ('photos', 'inventory')
 
         
-class RegionalOfficeForm(forms.ModelForm):
-    class Meta:
-        model = RegionalOffice
-
-
 class ItemTemplateForm(forms.ModelForm):
     class Meta:
         model = ItemTemplate

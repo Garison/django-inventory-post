@@ -27,37 +27,27 @@ class Settings(models.Model):
     def get_absolute_url(self):
         return reverse('settings')
  
- 
-class RegionalOffice(models.Model):
-    name = models.CharField(verbose_name=_(u"Regional"), max_length=32)
+
+class Location(models.Model):
+    name = models.CharField(max_length=32, verbose_name=_("name"))
+    address_line1 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
+    address_line2 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
+    address_line3 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
+    address_line4 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
+    phone_number1 = models.CharField(max_length=32, null=True, blank=True, verbose_name=_(u'phone number'))
+    phone_number2 = models.CharField(max_length=32, null=True, blank=True, verbose_name=_(u'phone number'))
 
     class Meta:
         ordering = ['name']
-        verbose_name = _(u"regional office")
-        verbose_name_plural = _(u'regional offices')
-            
+        verbose_name = _(u"location")
+        verbose_name_plural = _(u"locations")
+        
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('regional_list')
-
-
-class Department(models.Model):
-    regional_office = models.ForeignKey(RegionalOffice, verbose_name=_("Regional"))
-    name = models.CharField(verbose_name=_(u"Department/Section/Area"), max_length=32)
-
-    class Meta:
-        ordering = ['name']
-        verbose_name = _(u"department")
-        verbose_name_plural = _(u"departments")
-
-    def __unicode__(self):
-        return self.regional_office.name + '/' + self.name
-
-    def get_absolute_url(self):
-        return reverse('department_list')
-
+        return reverse('location_list')
+   
 
 class Supply(models.Model):
     description = models.CharField(verbose_name=_(u"Description"), max_length=64)
@@ -137,8 +127,7 @@ class Item(models.Model):
     property_number = models.CharField(_(u"Asset number"), max_length=10)
     notes = models.TextField(_(u"Notes/Observations"), null=True, blank=True)	
     serial_number = models.CharField(verbose_name=_(u"Serial number"), max_length=30, null=True, blank=True)
-    regional_office = models.ForeignKey(RegionalOffice, verbose_name=_("Regional"))
-    department = models.ForeignKey(Department, verbose_name=_(u"Department/Section/Area"), null=True, blank=True)
+    location = models.ForeignKey(Location, verbose_name=_(u"Location"), null=True, blank=True)
     photos = models.ManyToManyField(Photo, null=True, blank=True,  verbose_name = _("Photos"))
     active = models.BooleanField(default=True)
     objects = ItemManager()
@@ -254,7 +243,7 @@ class Person(models.Model):
     second_last_name = models.CharField(_("second last name"), max_length=32, blank=True, null=True)
     first_name = models.CharField(_("first name"), max_length=32)
     second_name = models.CharField(_("second name or initial"), max_length=32, blank=True, null=True)
-    regional_office = models.ForeignKey(RegionalOffice, verbose_name=_("regional"))
+    location = models.ForeignKey(Location, verbose_name=_("location"))
     inventory = models.ManyToManyField(Item, blank=True, null=True, verbose_name=_("inventory"))
     photos = models.ManyToManyField(Photo, null=True, blank=True,  verbose_name = _("photos"))
 
@@ -273,8 +262,6 @@ class Person(models.Model):
 
 class CustomUser(User):
     person = models.ForeignKey(Person, blank=True, null=True)
-    regional = models.ForeignKey(RegionalOffice, blank=True, null=True)
-    department = models.ForeignKey(Department, blank=True, null=True)
 
     # Use UserManager to get the create_user method, etc.
     objects = UserManager()
@@ -289,7 +276,6 @@ class CustomUser(User):
         
 class Permission(models.Model):
     user = models.ForeignKey(CustomUser)
-    regional_office = models.ForeignKey(RegionalOffice, unique=True)
 
     PERMISSION_CHOICES = (
         ('ro', 'Read-only'),
@@ -303,7 +289,7 @@ class Permission(models.Model):
     get_absolute_url = models.permalink(get_absolute_url)	
 
     def __unicode__(self):
-        return "%s - %s - %s" % (self.user.username, self.regional_office, self.get_permission_display())
+        return "%s - %s" % (self.user.username, self.get_permission_display())
 
     
 class Log(models.Model):
@@ -327,7 +313,7 @@ class Log(models.Model):
 
 class Inventory(models.Model):
     name = models.CharField(max_length=32, verbose_name=_(u'name'))
-    regional_office = models.ForeignKey(RegionalOffice, verbose_name=_(u'regional'))
+    location = models.ForeignKey(Location, verbose_name=_(u'location'))
 
     class Meta:
         verbose_name = _(u'inventory')
@@ -338,7 +324,7 @@ class Inventory(models.Model):
     get_absolute_url = models.permalink(get_absolute_url)		
 
     def __unicode__(self):
-        return "%s, %s" % (self.regional_office, self.name)
+        return "%s @ %s" % (self.name, self.location)
 
 
 class InventoryCheckPoint(models.Model):
