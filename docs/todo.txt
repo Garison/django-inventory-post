@@ -1,6 +1,7 @@
 # 2011 Refactor list
 ========================
-# New location based object (absorbs regional, section, dept, ect)
+# New location based object (absorbs regional, section, dept, ect) - Started
+# Eliminate inrepair and retired and implement user defined 'item states'
 # Merge supplies with itemtemplate and allow for circular dependencies
 # Transfer items from one inventory to another
 # Transfer asset from/to users
@@ -15,6 +16,7 @@
 # Connect w/ descartes for BI charts
 # Implement django-permissions
 # Supply reorder threshold
+# Change to famfamfam icons
 
 
 # Deferred, deprecated
