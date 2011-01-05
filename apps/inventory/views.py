@@ -100,9 +100,8 @@ def person_assign_remove_item(request, object_id):
 
     return generic_assign_remove(
         request,
-        object_id=object_id,
         title=_(u"asset to user"), 
-        object_class=Person,
+        obj=person,
         left_list_qryset=Item.objects.exclude(person=object_id), 
         right_list_qryset=person.inventory.all(), 
         add_method=person.inventory.add, 
@@ -118,9 +117,8 @@ def supply_assign_remove_template(request, object_id):
 
     return generic_assign_remove(
         request,
-        object_id=object_id,
         title=_(u"supplies to template"),
-        object_class=Supply,
+        obj=supply,
         left_list_qryset=supply.get_nonowners(),
         right_list_qryset=supply.get_owners(),
         add_method=supply.add_owner,
@@ -134,9 +132,8 @@ def template_assign_remove_supply(request, object_id):
 
     return generic_assign_remove(
         request,
-        object_id=object_id,
         title=_(u"template supplies"),
-        object_class=ItemTemplate,
+        obj=obj,
         left_list_qryset=Supply.objects.exclude(itemtemplate=obj),
         right_list_qryset=obj.supplies.all(),
         add_method=obj.supplies.add,
@@ -151,9 +148,8 @@ def item_assign_remove_person(request, object_id):
 
     return generic_assign_remove(
         request,
-        object_id=object_id,
         title=_(u"to users of the asset"),
-        object_class=Item,
+        obj=obj,
         left_list_qryset=obj.get_nonowners(),
         right_list_qryset=obj.get_owners(),
         add_method=obj.add_owner,

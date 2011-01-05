@@ -131,7 +131,7 @@ def generic_confirm(request, _view, _title=None, _model=None, _object_id=None, _
         data,
         context_instance=RequestContext(request))	
 
-def generic_assign_remove(request, object_id, title, object_class, left_list_qryset, left_list_title, right_list_qryset, right_list_title, add_method, remove_method, item_name, list_filter=None):
+def generic_assign_remove(request, title, obj, left_list_qryset, left_list_title, right_list_qryset, right_list_title, add_method, remove_method, item_name, list_filter=None):
     left_filter = None
     filter_form = None
     if list_filter:
@@ -142,13 +142,9 @@ def generic_assign_remove(request, object_id, title, object_class, left_list_qry
 #	filter_form = None
 #	if list_filter:
         filter_form = result['filter_form']
-        
-    #object=object.get(pk=object_id) 
-    obj = get_object_or_404(object_class, pk=object_id)
-    
+  
     if request.method == 'POST':
         post_data = request.POST
-        #form = GenericAssignRemoveForm(eval(left_list_qryset), eval(right_list_qryset), left_filter, request.POST)
         form = GenericAssignRemoveForm(left_list_qryset, right_list_qryset, left_filter, request.POST)
         if form.is_valid():
             action = post_data.get('action','')
