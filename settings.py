@@ -81,12 +81,6 @@ TEMPLATE_LOADERS = (
 #   'django.template.loaders.eggs.load_template_source',
 )
 
-#MIDDLEWARE_CLASSES = (
-#    'django.middleware.common.CommonMiddleware',
-#    'django.contrib.sessions.middleware.SessionMiddleware',
-#    'django.middleware.locale.LocaleMiddleware',
-#    'django.contrib.auth.middleware.AuthenticationMiddleware',
-#)
 MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -113,6 +107,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.admindocs',
     'photos',
+    'generic_views',
     'inventory',
     'main',
 ]
