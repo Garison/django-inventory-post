@@ -3,9 +3,9 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.db.models import Q
-
+from django.contrib.contenttypes.models import ContentType
 from django.views.generic.list_detail import object_detail, object_list
-from django.views.generic.create_update import create_object, update_object, delete_object
+
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -13,205 +13,12 @@ from photos.views import generic_photos
 
 from models import Settings, Person, Item, ItemTemplate, Supply
 
-from forms import FilterForm
-#    kwargs['queryset'] = kwargs['queryset'].filter(user=request.user)
-    
-#def render_response(req, *args, **kwargs):
-#	kwargs['context_instance'] = RequestContext(req)
-#	return render_to_response(*args, **kwargs)
-from inventory import person_links, item_record_links
-
-
-def add_filter(request, list_filter):
-    result={}
-    if(len(request.GET)>0):
-        filter_form=FilterForm(list_filter, request.GET)
-        if filter_form.is_valid():
-            filterdict = filter_form.cleaned_data
-            q_objs = [Q(**{list_filter[k]['destination']: filterdict[k]}) for k in list_filter.keys() if filterdict.get(k, None)]
-            result['filter']=q_objs
-            result['filterdict'] = filterdict
-            
-            id_dict={}
-            for key in filterdict.keys():
-                if hasattr(filterdict[key], 'id'):
-                    id_dict[key] = filterdict[key].id
-    else:			
-        filter_form = FilterForm(list_filter)
-            
-    result['filter_form'] = filter_form
-    return result
-
-def generic_list(request, list_filter=None, queryset_filter=None, *args, **kwargs):
-    import urllib
-
-    if list_filter:
-        result = add_filter(request, list_filter)
-        if 'filter' in result:
-            kwargs['queryset'] = kwargs['queryset'].filter(*result['filter'])
-
-            id_dict={}
-            for key in result['filterdict'].keys():
-                if hasattr(result['filterdict'][key], 'id'):
-                    id_dict[key] = result['filterdict'][key].id
-
-            raw_url = urllib.urlencode(id_dict)
-            
-            if len(raw_url):
-                kwargs['extra_context']['new_url'] = '&' + raw_url
-
-        kwargs['extra_context']['filter_form'] = result['filter_form']
-
-    if queryset_filter:
-#		locals()[val+'_str']= x
-        exec("kwargs['queryset'] = kwargs['queryset'].filter(" + queryset_filter['field'] + "=kwargs['" +queryset_filter['source'] +"'])")
-        if queryset_filter['source'] in kwargs:
-            kwargs.pop(queryset_filter['source'])
-        
-    results_per_page = 20
-    kwargs['extra_context']['range_base'] = (int(request.GET.get('page', 1))-1) * results_per_page
-    return object_list(request, paginate_by=results_per_page, template_name = 'generic_list.html', *args, **kwargs)
-
-def generic_create(*args, **kwargs):
-    if 'model' in kwargs:
-        try:
-            if 'extra_context' in kwargs:
-                kwargs['extra_context']['title'] = kwargs['model']._meta.verbose_name
-            else:
-                kwargs['extra_context']= { 'title': kwargs['model']._meta.verbose_name }
-        except:
-            pass
-    
-    return create_object(template_name='generic_form.html', *args, **kwargs)
-
-def generic_update(*args, **kwargs):
-    if 'model' in kwargs:
-        try:
-            if 'extra_context' in kwargs:
-                kwargs['extra_context']['title'] = kwargs['model']._meta.verbose_name
-            else:
-                kwargs['extra_context']= { 'title': kwargs['model']._meta.verbose_name }
-        except:
-            pass
-                
-    return update_object(template_name='generic_form.html', *args, **kwargs)
-
-def generic_delete(*args, **kwargs):
-    if 'model' in kwargs:
-        try:
-            if 'extra_context' in kwargs:
-                kwargs['extra_context']['title'] = kwargs['model']._meta.verbose_name
-            else:
-                kwargs['extra_context']= { 'title': kwargs['model']._meta.verbose_name }
-        except:
-            pass
-
-#	if 'extra_context' in kwargs:
-    kwargs['extra_context']['title'] = "%s %s:" % (_("borrar"), kwargs['extra_context']['title'])
-    try:
-        kwargs['post_delete_redirect'] = reverse(kwargs['post_delete_redirect'])
-    except:
-        pass
-        
-    return delete_object(template_name = 'generic_confirm.html', *args, **kwargs)
-
-def generic_confirm(request, _view, _title=None, _model=None, _object_id=None, _message='', *args, **kwargs):
-    if request.method == 'POST':
-        form = GenericConfirmForm(request.POST)
-        if form.is_valid():
-            return _view(request, *args, **kwargs);
-
-    data = {}
-    
-    try:
-        object = _model.objects.get(pk=kwargs[_object_id])
-        data['object'] = object
-    except:
-        pass
-    
-    try:
-        data['title'] = _title
-    except:
-        pass
-
-    try:
-        data['message'] = _message
-    except:
-        pass
-
-    form=GenericConfirmForm()
-        
-    return render_to_response('generic_confirm.html',
-        data,
-        context_instance=RequestContext(request))	
-'''
-def _flash_message(request, msg, type='success'):
-    pass
-#		request.session['flash_msg'] = msg
-#		request.session['flash_params'] = {'type': type}
-'''
-def generic_assign_remove(request, object_id, title, object, left_list_qryset, left_list_title, right_list_qryset, right_list_title, add_method, remove_method, item_name, list_filter=None):
-    from forms import GenericAssignRemoveForm
-    left_filter = None
-    filter_form = None
-    if list_filter:
-        result = add_filter(request, list_filter)
-        if 'filter' in result:
-            left_filter = result['filter']
-
-#	filter_form = None
-#	if list_filter:
-        filter_form = result['filter_form']
-        
-    object=object.get(pk=object_id) 
-
-    if request.method == 'POST':
-        post_data = request.POST
-        form = GenericAssignRemoveForm(eval(left_list_qryset), eval(right_list_qryset), left_filter, request.POST)
-        if form.is_valid():
-            action = post_data.get('action','')
-            if action == "assign":
-                for item in form.cleaned_data['left_list']:
-                    eval(add_method + "(item)")
-                if request.user.is_authenticated() and form.cleaned_data['left_list']:
-                    request.user.message_set.create(message=_(u"The %s were added.") % unicode(item_name))
-
-            if action == "remove":
-                for item in form.cleaned_data['right_list']:
-                    eval(remove_method + "(item)")
-                if request.user.is_authenticated() and form.cleaned_data['right_list']:
-                    request.user.message_set.create(message=_(u"The %s were removed.") % unicode(item_name))
-
-    form = GenericAssignRemoveForm(eval(left_list_qryset), eval(right_list_qryset), left_filter)
-        
-    return render_to_response('generic_assign_remove.html', {
-    'form': form,
-    'object': object,
-    'title': title,
-    'left_list_title': left_list_title,
-    'right_list_title': right_list_title,
-    'filter_form': filter_form,
-    },
-    context_instance=RequestContext(request))
-
-
-#TODO: Fix arguments into a dict just like the generic views
-def generic_detail(request, object_id, form_class, model, title=None, create_view=None, record_links=None, extra_context=None):
-    instance = get_object_or_404(model, pk=object_id)
-    form = form_class(instance = instance)
-    
-    return render_to_response('generic_detail.html', {
-        'title':title,
-        'form':form,
-        'object':instance,
-        'create_view':create_view,
-        'record_links':record_links,
-    },
-    context_instance=RequestContext(request))
+from inventory import person_links, item_record_links, \
+                      template_record_links, retireditem_links, \
+                      supply_record_links, inrepairsitem_links
 
 
 def item_log_list(request, object_id):
-    from django.contrib.contenttypes.models import ContentType
     item = Item.objects_passthru.get(pk=object_id)
     ctype = ContentType.objects.get_for_model(item)
     log=Log.objects.filter(content_type__pk=ctype.id, object_id=item.id)
@@ -286,7 +93,6 @@ def person_detail(request, object_id):
     )
 
 def template_detail(request, object_id):
-    from urls import template_record_links
     return object_detail(
         request,
         queryset = ItemTemplate.objects.all(),
@@ -296,7 +102,6 @@ def template_detail(request, object_id):
     )
 
 def template_items(request, object_id):
-    from urls import item_record_links
     template = get_object_or_404(ItemTemplate, pk=object_id)
     return object_list(
         request,
@@ -311,7 +116,6 @@ def template_items(request, object_id):
 
 
 def supply_detail(request, object_id):
-    from urls import supply_record_links
     return object_detail(
         request,
         queryset=Supply.objects.all(),
@@ -322,7 +126,6 @@ def supply_detail(request, object_id):
 
 
 def supply_templates(request, object_id):
-    from urls import template_record_links
     supply = get_object_or_404(Supply, pk=object_id)
     return object_list(
         request,
@@ -400,7 +203,6 @@ def search(request):
 
 
 def retireditem_detail(request, object_id):
-    from urls import retireditem_links
     retired_item = get_object_or_404(RetiredItem, pk=object_id)
     extra_data={ 
         'wrapper_object':retired_item,
@@ -450,7 +252,6 @@ def retireditem_unretire(request, object_id):
     return HttpResponseRedirect(reverse('retireditem_list'))
 
 def inrepairsitem_detail(request, object_id):
-    from urls import inrepairsitem_links
     inrepairs_item = get_object_or_404(InRepairsItem, pk=object_id)
     extra_data={ 
         'wrapper_object' : inrepairs_item,
