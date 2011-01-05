@@ -67,9 +67,6 @@ class ItemTemplate(models.Model):
         return ('template_view', [str(self.id)])
     get_absolute_url = models.permalink(get_absolute_url)
     
-#	def get_photos(self):
-#		return ItemPhoto.objects.filter(item=self)
-
     def __unicode__(self):
         return self.description
 
@@ -86,11 +83,11 @@ class ItemManagerPassthru(models.Manager):
 
 class Item(models.Model):
     item_template = models.ForeignKey(ItemTemplate, verbose_name=_(u"item template"))
-    property_number = models.CharField(_(u"Asset number"), max_length=10)
-    notes = models.TextField(_(u"Notes/Observations"), null=True, blank=True)	
+    property_number = models.CharField(verbose_name=_(u"Asset number"), max_length=10)
+    notes = models.TextField(verbose_name=_(u"Notes/Observations"), null=True, blank=True)	
     serial_number = models.CharField(verbose_name=_(u"Serial number"), max_length=30, null=True, blank=True)
     location = models.ForeignKey(Location, verbose_name=_(u"Location"), null=True, blank=True)
-    photos = models.ManyToManyField(Photo, null=True, blank=True,  verbose_name = _("Photos"))
+    photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name=_(u"Photos"))
     active = models.BooleanField(default=True)
     objects = ItemManager()
     objects_passthru = ItemManagerPassthru()
@@ -151,8 +148,8 @@ class Item(models.Model):
 
     
 class ItemGroup(models.Model):
-    name = models.CharField(verbose_name=_("Name"), max_length=32)
-    items = models.ManyToManyField(Item, verbose_name=_("Item"))
+    name = models.CharField(verbose_name=_(u"Name"), max_length=32)
+    items = models.ManyToManyField(Item, verbose_name=_(u"Item"))
     
     class Meta:
         ordering = ['name']
@@ -168,8 +165,8 @@ class ItemGroup(models.Model):
 
         
 class RetiredItem(models.Model):
-    date = models.DateField(verbose_name=_("date"), auto_now_add=True)
-    item = models.OneToOneField(Item, verbose_name=_("item"))
+    date = models.DateField(verbose_name=_(u"date"), auto_now_add=True)
+    item = models.OneToOneField(Item, verbose_name=_(u"item"))
     #user
 
     class Meta:
@@ -185,8 +182,8 @@ class RetiredItem(models.Model):
 
 
 class InRepairsItem(models.Model):		
-    date = models.DateField(verbose_name=_("date"), auto_now_add=True)
-    item = models.OneToOneField(Item, verbose_name=_("item"))
+    date = models.DateField(verbose_name=_(u"date"), auto_now_add=True)
+    item = models.OneToOneField(Item, verbose_name=_(u"item"))
 #	user
     class Meta:
         verbose_name = _(u"item in repairs")
@@ -201,13 +198,13 @@ class InRepairsItem(models.Model):
 
 
 class Person(models.Model):
-    last_name = models.CharField(_("last name"), max_length=32)
-    second_last_name = models.CharField(_("second last name"), max_length=32, blank=True, null=True)
-    first_name = models.CharField(_("first name"), max_length=32)
-    second_name = models.CharField(_("second name or initial"), max_length=32, blank=True, null=True)
-    location = models.ForeignKey(Location, verbose_name=_("location"))
-    inventory = models.ManyToManyField(Item, blank=True, null=True, verbose_name=_("inventory"))
-    photos = models.ManyToManyField(Photo, null=True, blank=True,  verbose_name = _("photos"))
+    last_name = models.CharField(verbose_name=_(u"last name"), max_length=32)
+    second_last_name = models.CharField(verbose_name=_(u"second last name"), max_length=32, blank=True, null=True)
+    first_name = models.CharField(verbose_name=_(u"first name"), max_length=32)
+    second_name = models.CharField(verbose_name=_(u"second name or initial"), max_length=32, blank=True, null=True)
+    location = models.ForeignKey(Location, verbose_name=_(u"location"))
+    inventory = models.ManyToManyField(Item, blank=True, null=True, verbose_name=_(u"assets"))
+    photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name=_(u"photos"))
 
     class Meta:
         ordering = ['last_name', 'second_last_name', 'first_name', 'second_name']

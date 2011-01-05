@@ -1,7 +1,7 @@
 from django import forms 
 
-#TODO: fix global import
-from models import *
+from models import Item, Person, ItemTemplate, ItemGroup, Log, Permission, \
+                   InventoryTransaction, Inventory
 
 class ItemForm(forms.ModelForm):
     class Meta:

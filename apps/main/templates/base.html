@@ -36,8 +36,6 @@
 			//suckerfish	
 			if (window.attachEvent) window.attachEvent("onload", sfHover);
 
-			$(document).pngFix();
-			
 			$().ajaxSend(function(r,s){
 				$("#loading").show();
 			});
@@ -76,12 +74,11 @@
 						{% endifequal %}
 					</div>
 					<div id='searchbox'>
-                    {% comment %}
-						<form action='{% url search %}' method='get'>
-							<input id="keyword" type="text" name="keyword" maxlength="64" />
-							<input type="submit" value="{% trans 'Buscar' %}" />
-						</form>
-                    {% endcomment %}
+
+                    <form action='{% url search %}' method='get'>
+                        <input id="keyword" type="text" name="keyword" maxlength="64" />
+                        <input type="submit" value="{% trans 'Buscar' %}" />
+                    </form>
 					</div>
 				</div> <!-- end infobox -->
 
@@ -140,19 +137,6 @@
                                 <ul>
 									<li><a style="width: 10em;" href="{% url inventory_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/package-x-generic.png" /></a></li>
 
-{% comment %}
-
-								<ul>
-									<li style="width: 7em;"><a class='parent' href="{% url supply_list %}">{% trans "Supplies" %}<img src="{{ MEDIA_URL }}images/applications-office.png" /></a>
-										<ul>
-											<li><a href="{% url supply_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
-											{% if user.is_authenticated %}
-											<li><a href="{% url supply_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
-											{% endif %}
-											<li><a href="{% url supply_orphans_list %}">{% trans "Orphan" %}</a></li>
-										</ul>
-									</li>
-{% endcomment %}
 									<li style="width: 7em;"><a class='parent' href="{% url inventory_transaction_list %}">{% trans "Transactions" %}</a>
 										<ul>
 											<li><a href="{% url inventory_transaction_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
@@ -166,9 +150,9 @@
 							</li>
 							<li style="width: 10em;"><a href="#">{% trans "Tools" %}<img src="{{ MEDIA_URL }}images/preferences-system.png" /></a>
 								<ul>
-									<li><a style="width: 17em;" href="{% url location_list %}">{% trans "Locations" %}<img src="{{ MEDIA_URL }}images/view-fullscreen.png" /></a></li>
+									<li><a style="width: 10em;" href="{% url location_list %}">{% trans "Locations" %}<img src="{{ MEDIA_URL }}images/view-fullscreen.png" /></a></li>
 									{% if user.is_staff %}
-									<li><a style="width: 17em;" href="{% url settings %}">{% trans "Settings" %}<img src="{{ MEDIA_URL }}images/emblem-system.png" /></a></li>
+									<li><a style="width: 10em;" href="{% url settings %}">{% trans "Settings" %}<img src="{{ MEDIA_URL }}images/emblem-system.png" /></a></li>
 									{% endif %}
 								</ul>
 							</li>
