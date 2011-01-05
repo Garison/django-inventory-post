@@ -65,7 +65,7 @@ urlpatterns = patterns('inventory.views',
 
     url(r'^asset/create/$', generic_create, dict({'form_class':ItemForm}, extra_context={'title':_(u'asset')}), 'item_create'),
     url(r'^asset/(?P<object_id>\d+)/update/$', generic_update, dict({'form_class':ItemForm}, extra_context={'title':_(u'asset')}), 'item_update'),
-    url(r'^asset/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Item}, post_delete_redirect="item_list", extra_context=dict(title=_(u'item'))), 'item_delete'),
+    url(r'^asset/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Item}, post_delete_redirect="item_list", extra_context=dict(title=_(u'asset'))), 'item_delete'),
     url(r'^asset/(?P<object_id>\d+)/assign/$', 'item_assign_remove_person', (), name='item_assign_person'),
     url(r'^asset/(?P<object_id>\d+)/retire/$', 'item_retire', (), 'item_retire'),
     url(r'^asset/(?P<object_id>\d+)/sendtorepairs/$', 'item_sendtorepairs', (), 'item_sendtorepairs'),

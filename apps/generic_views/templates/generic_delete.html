@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} :: {% trans 'Confirm delete' %}{% endblock %}
+{% block banner %}<div id="banner"><h2>{% trans 'Confirm delete' %}</h2></div>{% endblock %}
+{% block content %}
+    <form action="" method="post" class="uniForm">{% csrf_token %}
+        {% if next %}
+            <input name='next' type='hidden' value='{{ next }}' />
+        {% endif %}
+
+        <h3>{% blocktrans %}Are you sure you wish to delete: {{ object }}?{% endblocktrans %}</h3>
+        <center><h4>{{ message }}</h4>
+        <br />
+        <input type="button" value="{% trans 'No' %}" class="btn" ONCLICK='{% if previous %}window.location.replace("{{ previous }}");{% else %}history.go(-1){% endif %}' />
+        <input type="submit" value="{% trans 'Yes' %}" class="" />
+        </center>
+   </form>
+{% endblock %}

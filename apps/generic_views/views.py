@@ -85,22 +85,12 @@ def generic_update(*args, **kwargs):
     return update_object(template_name='generic_form.html', *args, **kwargs)
 
 def generic_delete(*args, **kwargs):
-    if 'model' in kwargs:
-        try:
-            if 'extra_context' in kwargs:
-                kwargs['extra_context']['title'] = kwargs['model']._meta.verbose_name
-            else:
-                kwargs['extra_context'] = {'title':kwargs['model']._meta.verbose_name}
-        except:
-            pass
-            
-    kwargs['extra_context']['title'] = "%s %s:" % (_(u"delete"), kwargs['extra_context']['title'])
     try:
         kwargs['post_delete_redirect'] = reverse(kwargs['post_delete_redirect'])
     except NoReverseMatch:
         pass
   
-    return delete_object(template_name='generic_confirm.html', *args, **kwargs)
+    return delete_object(template_name='generic_delete.html', *args, **kwargs)
 
 def generic_confirm(request, _view, _title=None, _model=None, _object_id=None, _message='', *args, **kwargs):
     if request.method == 'POST':
