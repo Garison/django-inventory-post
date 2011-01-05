@@ -1,6 +1,6 @@
 # 2011 Refactor list
 ========================
-# New location based object (absorbs regional, section, dept, ect) - DONE
+# New location based object (absorbs regional, section, dept, ect)      - DONE
 # Eliminate inrepair and retired and implement user defined 'item states'
 # Merge supplies with itemtemplate and allow for circular dependencies
 # Transfer items from one inventory to another
@@ -19,7 +19,7 @@
 # Change to famfamfam icons
 # Implement South for database migration
 # Add google maps api to locations model
-# Eliminate CustomUser model
+# Eliminate CustomUser model                                            - DONE
 
 # Deferred, deprecated
 ==========================

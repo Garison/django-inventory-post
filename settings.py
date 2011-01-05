@@ -125,12 +125,6 @@ GRAPPELLI_ADMIN_TITLE = PROJECT_TITLE
 
 LOGIN_URL = '/login/'
 
-AUTHENTICATION_BACKENDS = (
-    'django-inventory.auth_backends.CustomUserModelBackend',
-)
-
-CUSTOM_USER_MODEL = 'inventory.CustomUser'
-
 try:
     from settings_local import *
 except ImportError:

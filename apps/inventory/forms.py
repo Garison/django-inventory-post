@@ -36,11 +36,6 @@ class PermissionForm(forms.ModelForm):
         model = Permission
 
 
-class CustomUserForm(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-
-
 class SupplyForm(forms.ModelForm):
     class Meta:
         model = Supply

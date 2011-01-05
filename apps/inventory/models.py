@@ -259,23 +259,9 @@ class Person(models.Model):
     def __unicode__(self):
         return "%s %s, %s %s" % (self.last_name, self.second_last_name, self.first_name, self.second_name)
 
-
-class CustomUser(User):
-    person = models.ForeignKey(Person, blank=True, null=True)
-
-    # Use UserManager to get the create_user method, etc.
-    objects = UserManager()
-    
-    def __unicode__(self):
-        return "%s - %s" % (self.username, self.person)
-        
-    def get_absolute_url(self):
-        return ('user_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)		
-
         
 class Permission(models.Model):
-    user = models.ForeignKey(CustomUser)
+    user = models.ForeignKey(User)
 
     PERMISSION_CHOICES = (
         ('ro', 'Read-only'),
