@@ -20,7 +20,7 @@ from forms import InventoryTransactionForm, InventoryForm, SupplyForm, \
                   ItemTemplateForm, ItemForm, ItemGroupForm, PersonForm, \
                   LogForm
 
-from generic_views.views import generic_assign_remove, generic_confirm, \
+from generic_views.views import generic_assign_remove, \
                                 generic_create, generic_delete, \
                                 generic_detail, generic_list, \
                                 generic_update
@@ -28,7 +28,6 @@ from generic_views.views import generic_assign_remove, generic_confirm, \
 #template_orphan_dict = dict(
 #    queryset = ItemTemplate.objects.filter(item=None)
 #)
-
 
 urlpatterns = patterns('inventory.views',
     url(r'^transaction/list/$', generic_list, dict({'queryset':InventoryTransaction.objects.all()}, extra_context=dict(title=_(u'transactions'), create_view='inventory_transaction_create', record_links=inventory_transaction_links)), 'inventory_transaction_list'),
@@ -68,8 +67,8 @@ urlpatterns = patterns('inventory.views',
     url(r'^asset/(?P<object_id>\d+)/update/$', generic_update, dict({'form_class':ItemForm}, extra_context={'title':_(u'asset')}), 'item_update'),
     url(r'^asset/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Item}, post_delete_redirect="item_list", extra_context=dict(title=_(u'item'))), 'item_delete'),
     url(r'^asset/(?P<object_id>\d+)/assign/$', 'item_assign_remove_person', (), name='item_assign_person'),
-    url(r'^asset/(?P<object_id>\d+)/retire/$', generic_confirm, dict(_view='item_retire', _title=_(u"retire asset"), _model=Item, _object_id="object_id", _message=_(u"Will be removed from any user that may have it assigned and from any item group it may belong.")), 'item_retire'),
-    url(r'^asset/(?P<object_id>\d+)/sendtorepairs/$', generic_confirm, dict(_view='item_sendtorepairs', _title=_(u"send asset to repairs"), _model=Item, _object_id="object_id"), 'item_sendtorepairs'),
+    url(r'^asset/(?P<object_id>\d+)/retire/$', 'item_retire', (), 'item_retire'),
+    url(r'^asset/(?P<object_id>\d+)/sendtorepairs/$', 'item_sendtorepairs', (), 'item_sendtorepairs'),
     url(r'^asset/orphans/$', generic_list, dict({'queryset':Item.objects.filter(person=None)}, extra_context=dict(title=_(u'orphan assets'), create_view='item_create', record_links=item_record_links)), 'item_orphans_list'),
     url(r'^asset/list/$', generic_list, dict({'queryset':Item.objects.all()}, list_filter=location_filter, extra_context=dict(title=_(u'assets'), create_view='item_create', record_links=item_record_links)), 'item_list'),
     url(r'^asset/(?P<object_id>\d+)/$', 'item_detail', (), 'item_view'),
@@ -93,11 +92,11 @@ urlpatterns = patterns('inventory.views',
     
     url(r'^retireditem/list/$', generic_list, dict({'queryset':RetiredItem.objects.all()}, list_filter=retireditem_filter, extra_context=dict(title=_(u'retired assets'), record_links=retireditem_links)), 'retireditem_list'),
     url(r'^retireditem/(?P<object_id>\d+)/$', 'retireditem_detail', (), 'retireditem_view'),
-    url(r'^retireditem/(?P<object_id>\d+)/unretire/$', generic_confirm, dict(_view='retireditem_unretire', _title=_(u"reactivate asset"), _model=RetiredItem, _object_id="object_id"), 'retireditem_unretire'),
+    url(r'^retireditem/(?P<object_id>\d+)/unretire/$', 'retireditem_unretire', (), 'retireditem_unretire'),
 
     url(r'^inrepairsitem/list/$', generic_list, dict({'queryset':InRepairsItem.objects.all()}, list_filter=retireditem_filter, extra_context=dict(title=_(u"assets in repairs"), record_links=inrepairsitem_links)), 'inrepairsitem_list'),
     url(r'^inrepairsitem/(?P<object_id>\d+)/$', 'inrepairsitem_detail', (), 'inrepairsitem_view'),
-    url(r'^inrepairsitem/(?P<object_id>\d+)/unrepair/$', generic_confirm, dict(_view='inrepairsitem_unrepair', _title=_(u"mark asset as repaired"), _model=InRepairsItem, _object_id="object_id"), 'inrepairsitem_unrepair'),
+    url(r'^inrepairsitem/(?P<object_id>\d+)/unrepair/$', 'inrepairsitem_unrepair', (), 'inrepairsitem_unrepair'),
     
     url(r'^location/list/$', generic_list, dict({'queryset':Location.objects.all()}, extra_context=dict(title =_(u'locations'), create_view='location_create', record_links=location_links)), 'location_list'),
     url(r'^location/create/$', generic_create, dict({'model':Location}, extra_context={'title':_(u'locations')}), 'location_create'),

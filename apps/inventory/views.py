@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.db.models import Q
@@ -14,7 +14,8 @@ from photos.views import generic_photos
 
 from generic_views.views import generic_assign_remove
 
-from models import Settings, Person, Item, ItemTemplate, Supply
+from models import Settings, Person, Item, ItemTemplate, Supply, \
+                   InRepairsItem, RetiredItem
 
 from inventory import person_links, item_record_links, \
                       template_record_links, retireditem_links, \
@@ -282,79 +283,127 @@ def retireditem_detail(request, object_id):
                 }
          }
     
-    return item_detail(request, retired_item.item_id, template_name='item_detail.html', extra_data=extra_data, passthru=True)
+    return item_detail(request, retired_item.item_id)#, template_name='item_detail.html', extra_data=extra_data, passthru=True)
 
 
 def item_retire(request, object_id):
-    item = Item.objects.get(pk=object_id)
-
-    new = RetiredItem(item=item)
-    new.save()
-
-    for owner in item.get_owners():
-        owner.inventory.remove(item)
-
-    try: 
-        inrepairs = InRepairsItem.objects.get(item=item)
-        inrepairs.delete()
-    except:
-        pass
-
-    item.active=False
-    item.save()		
-
-    messages.success(request, _(u"The asset has been marked as retired."))
-
-    return HttpResponseRedirect(reverse('retireditem_list'))
+    item = get_object_or_404(Item, pk=object_id)
+    next = reverse("retireditem_list")
+    data = {
+        'next':next,
+        'object':item,
+        'title':_(u'Are you sure you wish to retire the asset: %s?') % item,
+        'message':_(u"Will be removed from any user that may have it assigned and from any item group it may belong.")
+    }    
     
+    if request.method == 'POST':
+        new = RetiredItem(item=item)
+        new.save()
+            
+        for owner in item.get_owners():
+            owner.inventory.remove(item)
+
+        try: 
+            inrepairs = InRepairsItem.objects.get(item=item)
+            inrepairs.delete()
+        except:
+            pass
+
+        item.active=False
+        item.save()		
+
+        messages.success(request, _(u"The asset has been marked as retired."))
+
+        return HttpResponseRedirect(next)
+
+    return render_to_response('generic_confirm.html', data,
+    context_instance=RequestContext(request))       
+
+
 
 def retireditem_unretire(request, object_id):
-    retired_item = RetiredItem.objects.get(pk=object_id)
+    retired_item = get_object_or_404(RetiredItem, pk=object_id)
+    next = reverse("retireditem_list")
+    data = {
+        'next':next,
+        'object':retired_item,
+        'title':_(u'Are you sure you wish to reactivate the asset: %s?') % retired_item,
+    }       
+    if request.method == 'POST':
+        retired_item = RetiredItem.objects.get(pk=object_id)
 
-    item = Item.objects_passthru.filter(pk=retired_item.item.id)
-    item.update(active=True)
-#HACK: because of custom manager .save() doesn;t see the item and tries to create new record
+        item = Item.objects_passthru.filter(pk=retired_item.item.id)
+        item.update(active=True)
+    #HACK: because of custom manager .save() doesn;t see the item and tries to create new record
 
-    retired_item.delete()
-    return HttpResponseRedirect(reverse('retireditem_list'))
+        retired_item.delete()
+        return HttpResponseRedirect(next)
+
+    return render_to_response('generic_confirm.html', data,
+    context_instance=RequestContext(request))       
+
 
 def inrepairsitem_detail(request, object_id):
     inrepairs_item = get_object_or_404(InRepairsItem, pk=object_id)
     extra_data={ 
-        'wrapper_object' : inrepairs_item,
-        'record_links' : inrepairsitem_links,
+#        'wrapper_object' : inrepairs_item,
+        'record_links':inrepairsitem_links,
         'title' : _(u"asset in repairs"),
         'extra_attribs' : {
             _(u'In repairs since') : inrepairs_item.date,
             }
          }
     
-    return item_detail(request, inrepairs_item.item_id, template_name='item_detail.html', extra_data=extra_data, show_create_view=False)
+    return item_detail(request, inrepairs_item.item.pk, extra_data=extra_data, show_create_view=False)
 
 
 def item_sendtorepairs(request, object_id):
     item = Item.objects.get(pk=object_id)
-    if InRepairsItem.objects.filter(item=item):
-        messages.warning(request, _(u"This asset is already in repairs."))
 
-        return HttpResponseRedirect(reverse('inrepairsitem_list'))			
+    next = reverse("inrepairsitem_list")
+    data = {
+        'next':next,
+        'object':item,
+        'title':_(u'Are you sure you wish to send the asset: %s, to repairs?') % item,
+    }
 
-    new = InRepairsItem(item=item)
-    new.save()
+    if request.method == 'POST':
+        if InRepairsItem.objects.filter(item=item):
+            messages.warning(request, _(u"This asset is already in repairs."))
 
-    messages.success(request, _(u"The asset has been marked as 'in repairs'."))
+            return HttpResponseRedirect(next)			
 
-    return HttpResponseRedirect(reverse('inrepairsitem_list'))
+        new = InRepairsItem(item=item)
+        new.save()
+
+        messages.success(request, _(u"The asset has been marked as 'in repairs'."))
+
+        return HttpResponseRedirect(next)
+    return render_to_response('generic_confirm.html', data,
+    context_instance=RequestContext(request))
 
 
 def inrepairsitem_unrepair(request, object_id):
-    try:
-        inrepairs = InRepairsItem.objects.get(pk=object_id)
-        inrepairs.delete()
-    except:
-        messages.warning(request, _(u"This asset is not in repairs."))
-    
-    return HttpResponseRedirect(reverse('inrepairsitem_list'))			
+    item = get_object_or_404(InRepairsItem, pk=object_id)
+    next = reverse("inrepairsitem_list")
+    data = {
+        'next':next,
+        'object':item,
+        'title':_(u'Are you sure you wish to mark the asset: %s, as repaired?') % item,
+    }    
+    if request.method == 'POST':
+        try:
+            inrepairs = InRepairsItem.objects.get(pk=object_id)
+            inrepairs.delete()
+            messages.success(request, _(u"The asset has been marked as repaired."))            
+        except:
+            messages.warning(request, _(u"This asset is not in repairs."))
+        
+        
+        return HttpResponseRedirect(next)
+        
+    return render_to_response('generic_confirm.html', data,
+    context_instance=RequestContext(request))       			
 
 '''
 def render_to_pdf(template_src, context_dict):

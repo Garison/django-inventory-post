@@ -106,7 +106,10 @@ def generic_confirm(request, _view, _title=None, _model=None, _object_id=None, _
     if request.method == 'POST':
         form = GenericConfirmForm(request.POST)
         if form.is_valid():
-            return _view(request, *args, **kwargs);
+            if hasattr(_view, '__call__'):
+                return _view(request, *args, **kwargs)
+            else:
+                return HttpResponseRedirect(reverse(_view, args=args, kwargs=kwargs))
 
     data = {}
     
