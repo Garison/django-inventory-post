@@ -16,8 +16,8 @@ template_record_links = [
     {'text':_(u'Edit'), 'view':'template_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
     {'text':_(u'Delete'), 'view':'template_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
     {'text':_(u'Photos'), 'view':'template_photos', 'icon':settings.MEDIA_URL + 'images/camera-photo.png'},
-    {'text':_(u'Items that use this template'), 'view':'template_items_list', 'icon':settings.MEDIA_URL + 'images/folder-saved-search.png'},
-    {'text':_(u'Assign/Remove items'), 'view':'template_assign_supply', 'icon':settings.MEDIA_URL + 'images/edit-redo.png'},
+    {'text':_(u'Assets that use this template'), 'view':'template_items_list', 'icon':settings.MEDIA_URL + 'images/folder-saved-search.png'},
+    {'text':_(u'Assign/Remove supplies'), 'view':'template_assign_supply', 'icon':settings.MEDIA_URL + 'images/edit-redo.png'},
 ]
     
 item_record_links = [
@@ -38,7 +38,7 @@ person_links = [
     {'text':_(u'Edit'), 'view':'person_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
     {'text':_(u'Delete'), 'view':'person_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
     {'text':_(u'Edit photos'), 'view':'person_photos', 'icon':settings.MEDIA_URL + 'images/camera-photo.png' },
-    {'text':_(u'Assign/Remove item'), 'view':'person_assign_item', 'icon':settings.MEDIA_URL + 'images/item-plus-user.png'},
+    {'text':_(u'Assign/Remove asset'), 'view':'person_assign_item', 'icon':settings.MEDIA_URL + 'images/item-plus-user.png'},
 ]
 
 #TODO: autodetect update or delete

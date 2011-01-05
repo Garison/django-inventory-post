@@ -29,7 +29,7 @@ def item_log_list(request, object_id):
         request,
         queryset=log,
         template_name='generic_list.html',
-        extra_context={'title':_(u"Item log: %s") % item},
+        extra_context={'title':_(u"Asset log: %s") % item},
         ) 
 
     
@@ -44,7 +44,7 @@ def item_detail(request, object_id, template_name=None, extra_data=None, passthr
         'template_photos':item.item_template.photos.all(),
         'template':item.item_template,
         'record_links':item_record_links,
-        'title':_(u'the item'),
+        'title':_(u'the asset'),
         'subtitle':item,
         'item_photos_title':_(u'item photos'),
         'template_photos_title':_(u'template photos'),
@@ -101,15 +101,15 @@ def person_assign_remove_item(request, object_id):
     return generic_assign_remove(
         request,
         object_id=object_id,
-        title=_(u"item to user"), 
+        title=_(u"asset to user"), 
         object_class=Person,
         left_list_qryset=Item.objects.exclude(person=object_id), 
         right_list_qryset=person.inventory.all(), 
         add_method=person.inventory.add, 
         remove_method=person.inventory.remove, 
-        left_list_title=_(u'Unassigned items'), 
-        right_list_title=_(u'Assigned items'), 
-        item_name=_(u"items"), 
+        left_list_title=_(u'Unassigned assets'), 
+        right_list_title=_(u'Assigned assets'), 
+        item_name=_(u"assets"), 
         list_filter=regional_filter
     )
 
@@ -152,14 +152,14 @@ def item_assign_remove_person(request, object_id):
     return generic_assign_remove(
         request,
         object_id=object_id,
-        title=_(u"to users of the item"),
+        title=_(u"to users of the asset"),
         object_class=Item,
         left_list_qryset=obj.get_nonowners(),
         right_list_qryset=obj.get_owners(),
         add_method=obj.add_owner,
         remove_method=obj.remove_owner,
-        left_list_title=_(u"User that don't have this item"),
-        right_list_title=_(u"User that have this item"),
+        left_list_title=_(u"Users that don't have this asset"),
+        right_list_title=_(u"Users that have this asset"),
         item_name=_(u"users"),
         list_filter=regional_filter)
 
@@ -179,7 +179,7 @@ def template_items(request, object_id):
         queryset = template.item_set.all(),
         template_name = "generic_list.html", 
         extra_context=dict(
-            title = '%s: %s' % (_(u"item that use the template"), template),
+            title = '%s: %s' % (_(u"assets that use the template"), template),
             create_view = 'item_create',
             record_links=item_record_links			
         ),
@@ -278,7 +278,7 @@ def retireditem_detail(request, object_id):
     extra_data={ 
         'wrapper_object':retired_item,
         'record_links':retireditem_links,	
-        'title':_(u"retired item"),
+        'title':_(u"retired asset"),
         'subtitle':retired_item.item,
         'extra_attribs':{
                 _(u'Retired'):retired_item.date
@@ -307,7 +307,7 @@ def item_retire(request, object_id):
     item.save()		
 
     if request.user.is_authenticated():
-        request.user.message_set.create(message=_(u"The item has been marked as retired."))
+        request.user.message_set.create(message=_(u"The asset has been marked as retired."))
 
     return HttpResponseRedirect(reverse('retireditem_list'))
     
@@ -327,20 +327,20 @@ def inrepairsitem_detail(request, object_id):
     extra_data={ 
         'wrapper_object' : inrepairs_item,
         'record_links' : inrepairsitem_links,
-        'title' : _(u"item in repairs"),
+        'title' : _(u"asset in repairs"),
         'extra_attribs' : {
             _(u'In repairs since') : inrepairs_item.date,
             }
          }
     
-    return item_detail(request, inrepairs_item.item_id, template_name='inventory/item_detail.html', extra_data=extra_data, show_create_view=False)
+    return item_detail(request, inrepairs_item.item_id, template_name='item_detail.html', extra_data=extra_data, show_create_view=False)
 
 
 def item_sendtorepairs(request, object_id):
     item = Item.objects.get(pk=object_id)
     if InRepairsItem.objects.filter(item=item):
         if request.user.is_authenticated():
-            request.user.message_set.create(message=_(u"This item is in repairs."))
+            request.user.message_set.create(message=_(u"This asset is in repairs."))
 
         return HttpResponseRedirect(reverse('inrepairsitem_list'))			
 
@@ -348,7 +348,7 @@ def item_sendtorepairs(request, object_id):
     new.save()
 
     if request.user.is_authenticated():
-        request.user.message_set.create(message=_(u"The item has been marked as 'in repairs'."))
+        request.user.message_set.create(message=_(u"The asset has been marked as 'in repairs'."))
 
     return HttpResponseRedirect(reverse('inrepairsitem_list'))
 
@@ -359,7 +359,7 @@ def inrepairsitem_unrepair(request, object_id):
         inrepairs.delete()
     except:
         if request.user.is_authenticated():
-            request.user.message_set.create(message=_(u"This item is no in repairs."))
+            request.user.message_set.create(message=_(u"This asset is not in repairs."))
     
     return HttpResponseRedirect(reverse('inrepairsitem_list'))			
 

@@ -146,8 +146,8 @@ class Item(models.Model):
     
     class Meta:
         ordering = ['property_number']
-        verbose_name = _(u"item")
-        verbose_name_plural = _(u"items")        
+        verbose_name = _(u"asset")
+        verbose_name_plural = _(u"assets")        
 
     def get_absolute_url(self):
         return ('item_view', [str(self.id)])

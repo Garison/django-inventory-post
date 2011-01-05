@@ -100,7 +100,18 @@
 									{% endif %}
 								</ul>
 							</li>
-							<li style="width: 7em;"><a href="{% url item_list %}">{% trans "Items" %}<img src="{{ MEDIA_URL }}images/computer.png" /></a>
+
+                            <li style="width: 9em;"><a class='parent' href="{% url template_list %}">{% trans "Templates" %}<img src="{{ MEDIA_URL }}images/font-x-generic.png" /></a>
+                                <ul>
+                                    <li><a href="{% url template_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url template_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
+                                    {% endif %}
+                                    <li><a href="{% url template_orphans_list %}">{% trans "Orphan" %}</a></li>
+                                </ul>
+                            </li>
+
+							<li style="width: 7em;"><a href="{% url item_list %}">{% trans "Assets" %}<img src="{{ MEDIA_URL }}images/computer.png" /></a>
 								<ul>
 									<li><a href="{% url item_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
 									{% if user.is_authenticated %}
@@ -119,18 +130,12 @@
 										</ul>
 									</li>
 
-									<li style="width: 9em;"><a class='parent' href="{% url template_list %}">{% trans "Templates" %}<img src="{{ MEDIA_URL }}images/font-x-generic.png" /></a>
-										<ul>
-											<li><a href="{% url template_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
-											{% if user.is_authenticated %}
-											<li><a href="{% url template_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
-											{% endif %}
-											<li><a href="{% url template_orphans_list %}">{% trans "Orphan" %}</a></li>
-										</ul>
-									</li>
+
 									
 								</ul>
 							</li>
+
+
                            
 							<li><a href="#">{% trans "Inventory" %}<img src="{{ MEDIA_URL }}images/package-x-generic.png" /></a>
 								<ul>
