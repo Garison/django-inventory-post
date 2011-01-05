@@ -1,6 +1,7 @@
 import urllib
 
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -151,14 +152,14 @@ def generic_assign_remove(request, title, obj, left_list_qryset, left_list_title
             if action == "assign":
                 for item in form.cleaned_data['left_list']:
                     add_method(item)
-                if request.user.is_authenticated() and form.cleaned_data['left_list']:
-                    request.user.message_set.create(message=_(u"The %s were added.") % unicode(item_name))
+                if form.cleaned_data['left_list']:
+                    messages.success(request, _(u"The %s were added.") % unicode(item_name))
 
             if action == "remove":
                 for item in form.cleaned_data['right_list']:
                     remove_method(item)
-                if request.user.is_authenticated() and form.cleaned_data['right_list']:
-                    request.user.message_set.create(message=_(u"The %s were removed.") % unicode(item_name))
+                if form.cleaned_data['right_list']:
+                    messages.success(request, _(u"The %s were removed.") % unicode(item_name))
 
     form = GenericAssignRemoveForm(left_list_qryset=left_list_qryset, right_list_qryset=right_list_qryset, left_filter=left_filter)
         

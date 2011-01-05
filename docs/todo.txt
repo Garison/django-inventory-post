@@ -8,7 +8,7 @@
 # Use django reversion for changelogs
 # Implement django photologue and get rid of custom photo app
 # Skinable interface
-# Use new django messages system
+# Use new django messages system                                        - DONE
 # Add clear button to filter by form in generic_list or substitue
     '----' to 'Any' in filter drop down
 # Suppliers object

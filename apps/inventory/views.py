@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.db.models import Q
+from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic.list_detail import object_detail, object_list
 
@@ -302,8 +303,7 @@ def item_retire(request, object_id):
     item.active=False
     item.save()		
 
-    if request.user.is_authenticated():
-        request.user.message_set.create(message=_(u"The asset has been marked as retired."))
+    messages.success(request, _(u"The asset has been marked as retired."))
 
     return HttpResponseRedirect(reverse('retireditem_list'))
     
@@ -335,16 +335,14 @@ def inrepairsitem_detail(request, object_id):
 def item_sendtorepairs(request, object_id):
     item = Item.objects.get(pk=object_id)
     if InRepairsItem.objects.filter(item=item):
-        if request.user.is_authenticated():
-            request.user.message_set.create(message=_(u"This asset is in repairs."))
+        messages.warning(request, _(u"This asset is in repairs."))
 
         return HttpResponseRedirect(reverse('inrepairsitem_list'))			
 
     new = InRepairsItem(item=item)
     new.save()
 
-    if request.user.is_authenticated():
-        request.user.message_set.create(message=_(u"The asset has been marked as 'in repairs'."))
+    messages.success(request, _(u"The asset has been marked as 'in repairs'."))
 
     return HttpResponseRedirect(reverse('inrepairsitem_list'))
 
@@ -354,8 +352,7 @@ def inrepairsitem_unrepair(request, object_id):
         inrepairs = InRepairsItem.objects.get(pk=object_id)
         inrepairs.delete()
     except:
-        if request.user.is_authenticated():
-            request.user.message_set.create(message=_(u"This asset is not in repairs."))
+        messages.warning(request, _(u"This asset is not in repairs."))
     
     return HttpResponseRedirect(reverse('inrepairsitem_list'))			
 
