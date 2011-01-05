@@ -1,36 +1,41 @@
+# 2011 Refactor list
+========================
+# New location based object (absorbs regional, section, dept, ect)
+# Merge supplies with itemtemplate and allow for circular dependencies
+# Transfer items from one inventory to another
+# Transfer asset from/to users
+# Use django reversion for changelogs
+# Implement django photologue and get rid of custom photo app
+# Skinable interface
+# Use new django messages system
+# Add clear button to filter by form in generic_list or substitue
+    '----' to 'Any' in filter drop down
+# Suppliers object
+# Add reporting/hard copies
+# Connect w/ descartes for BI charts
+# Implement django-permissions
+# Supply reorder threshold
+
+
+# Deferred, deprecated
+==========================
 # WISH LIST
-# - - SVN checkout django row-level-premission branch
-# - transferir de un usuario a otro, item tranfer dialog  
-# - log file; global & per item																		- STARTED user from context missing
 # - view main photo in list 
 # - 1 new template to multiple users at a time
 # - 1 group to multiple users at a time
 # - remind user to print forms when retiring items
-# - fix photo model & implementation, maybe move to django-utils-thumbnails
 # - session length, very much or browser session
 # - improve the create_view issue
-# - move generic_photos to its own app
-# - move generic_view to its own app
 # - create item from template and assign to user in one action
 # - if item is in repairs another regional may 'see' the item
 	usefull if the repair dept is in another regional office
 # - icon identifiers, "template_icon" instead of {{ MEDIA_URL }}+'images/foo.png'
-# - Improve internal message system
 # - prettyfy messages (http://traviscline.com/blog/2008/08/23/django-middleware-session-backed-messaging/)
-# - Add clear button to filter by form in generic_list
-# - Suppliers list matched by supply
 # - Inventory transactions in bulk (inventory transaction events)
 
 # TODO list
-# - reports w/ regional, person or item filter														- STARTED (barely)
-# - advanced permisions system (R,W,All per regional office per module (personal, items, templates, inventory))
-# - create user view, maybe use admin
-# - user list view, maybe use admin
 # - template groups
-# - remind user to restart application after changing a setting - > User alerts
 # - make results_per_page a user adjustable setting
-# - Transfer item from one inventory to another
-# - Supply reorder threshold
 # - Make new form widget for m2m fields
 # - Grab model name & plural in generic list, create, update & delete views
 # - User alert blinking icon, jquery
@@ -38,34 +43,3 @@
 # CLEANUP - REFACTOR
 # - update generic_assign_remove to use model.verbose_name_plural, fallback to model.name (to eliminate arg item_name)
 # - Hide items from item_group create view, or maybe make a custom item group detail view
-
-# DONE 
-# - item; Assign to user																			- DONE
-# - garfield or another art in about.html															- DONE
-# - item ammount per user in user list [ + '(' + str(self.inventory.count()) +')' ] 				- WONT DO - Doesn't look good
-# - assign to button in item_view & item_detail														- DONE
-# - jquery menu																						- DONE
-# - smarter custom {% url %} tag  {% url 'named_url' %} {% url named_url_variable %}				- DONE
-# - implement search, ie. robert, "results in users: 1, results in items: 0, results in templates"	- DONE
-# - fix buttons CSS  (make a new class)																- DONE, cleaned up 
-# - request.full_path used for login is not working													- FIXED with context middleware
-# - retired & in repair check if unique is needed													- DONE changed to onetoonefield
-# - add 'active' field to items & custom manager													- DONE
-# - password change view																			- DONE
-# - messages for generic_confirm																	- DONE
-# - decomisar equipo																				- DONE
-# - send to repair																					- DONE
-# - merge generic_confirm_delete & generic_confirm													- DONE
-# - move template_name from url's update & delete to views.py										- DONE
-# - filtrar por regional (or generic_filter_by) en las listas										- DONE
-# - Move code to svn																				- DONE
-# - dynamic login_required decorator in views														- DONE
-# - identify (maybe with a *) required field in forms												- DONE
-# - pagination in lists																				- DONE, styling remains
-# - Merge item_detail template_detail & retired_item_detail templates								- DONE
-# - Merge item-assign-person w/ item-remove-person													- DONE
-# - Merger person-assign-item w/ person-remove-item													- DONE
-# - Merge all 4 of the above, posible?																- DONE
-# - filter in item_assign_person view or filter regional automatically from item					- DONE
-# - record_links ordering system (tab order?)														- DONE
-# - move item group menu item to a sub menu of items 
