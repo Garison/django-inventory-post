@@ -1,3 +1,5 @@
+import os
+
 from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -47,8 +49,6 @@ def generic_photos(request, model, object_id, max_photos = 5):
 
             form = PhotoForm(post_data, request.FILES)
             if form.is_valid():
-                #import os
-            
                 instance = form.save(commit=False)
                 if instance.photo.size > Settings.objects.get(pk=1).max_photo_size:
                     _flash_message(request, _(u'The photo is too big.'), type='error')
