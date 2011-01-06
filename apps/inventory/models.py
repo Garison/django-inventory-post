@@ -28,6 +28,17 @@ class Settings(models.Model):
         return reverse('settings')
  
 
+class ItemState(models.Model):
+    name = models.CharField(max_length=32, verbose_name=_(u'name'))
+     
+    class Meta:
+        verbose_name = _(u"item state")
+        verbose_name_plural = _(u"item states")
+        
+    def __unicode__(self):
+        return self.name
+ 
+
 class Location(models.Model):
     name = models.CharField(max_length=32, verbose_name=_("name"))
     address_line1 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
