@@ -10,7 +10,7 @@ from inventory.models import Settings
 from forms import PhotoForm
 
 
-def generic_photos(request, model, object_id, max_photos = 5):
+def generic_photos(request, model, object_id, max_photos=5):
     model_instance = model.objects.get(pk=object_id)
     photos = model_instance.photos.all()
 
@@ -76,11 +76,11 @@ def generic_photos(request, model, object_id, max_photos = 5):
         form = ''
 
     return render_to_response('photos.html', {
-        'object_id': object_id,
-        'model_instance': model_instance,
-        'photos': photos,
-        'form': form,
-        'max_photos': max_photos,
-        },
+        'object_id':object_id,
+        'model_instance':model_instance,
+        'photos':photos,
+        'form':form,
+        'max_photos':max_photos,
+    },
     context_instance=RequestContext(request))
     
