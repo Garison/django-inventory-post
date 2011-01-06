@@ -1,27 +1,27 @@
 # 2011 Refactor list
 ========================
+# Eliminate CustomUser model                                            - DONE
 # New location based object (absorbs regional, section, dept, ect)      - DONE
-# Eliminate inrepair and retired and implement user defined 'item states'
 # Merge supplies with itemtemplate and allow for circular dependencies  - DONE
+# Implement django photologue and improve custom photo app              - DONE
+# Use new django messages system                                        - DONE
+# Eliminate inrepair and retired and implement user defined 'item states'
+# Fix html and make it compliant (Remove <CENTER>, etc)
 # Transfer items from one inventory to another
 # Transfer asset from/to users
-# Use django reversion for changelogs
-# Implement django photologue and improve custom photo app              - DONE
-# Skinable interface
-# Use new django messages system                                        - DONE
 # Add clear button to filter by form in generic_list or substitue
     '----' to 'Any' in filter drop down
+# Use django reversion for changelogs
+# Skinable interface
 # Suppliers object
 # Add reporting/hard copies
-# Connect w/ descartes for BI charts
-# Implement django-permissions
 # Supply reorder thresholds
 # Change to famfamfam icons
 # Implement South for database migration
 # Add google maps api to locations model
-# Eliminate CustomUser model                                            - DONE
-# Fix html and make it compliant (Remove <CENTER>, etc)
 # Add inventory transactions from RMAs & customer invoices
+# Implement django-permissions
+# Connect w/ descartes for BI charts
 
 # Deferred, deprecated
 ==========================
