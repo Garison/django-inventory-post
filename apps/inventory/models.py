@@ -8,7 +8,7 @@ from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User, UserManager
 from django.core.urlresolvers import reverse
 
-from photos.models import Photo
+from photos.models import GenericPhoto
 
 class Settings(models.Model):
     max_photo_size = models.IntegerField(default=1000000, verbose_name=_(u'Maximum photo size'), help_text=_(u'Limit in kilobytes.'))
@@ -54,7 +54,7 @@ class ItemTemplate(models.Model):
     brand = models.CharField(verbose_name=_(u"Brand"), max_length=32, null=True, blank=True)
     model = models.CharField(verbose_name=_(u"Model"), max_length=32, null=True, blank=True)
     part_number = models.CharField(verbose_name=_(u"Part number"), max_length=32, null=True, blank=True)
-    #photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name=_(u"Photos"))
+    #photos = models.ManyToManyField(GenericPhoto, null=True, blank=True, verbose_name=_(u"Photos"))
     notes = models.TextField(verbose_name=_(u"Notes/Observations"), null=True, blank=True)	
     supplies = models.ManyToManyField("self", null=True, blank=True, verbose_name=_(u"supplies"))
     
@@ -87,7 +87,7 @@ class Item(models.Model):
     notes = models.TextField(verbose_name=_(u"Notes/Observations"), null=True, blank=True)	
     serial_number = models.CharField(verbose_name=_(u"Serial number"), max_length=30, null=True, blank=True)
     location = models.ForeignKey(Location, verbose_name=_(u"Location"), null=True, blank=True)
-    #photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name=_(u"Photos"))
+    #photos = models.ManyToManyField(GenericPhoto, null=True, blank=True, verbose_name=_(u"Photos"))
     active = models.BooleanField(default=True)
     objects = ItemManager()
     objects_passthru = ItemManagerPassthru()
@@ -204,7 +204,7 @@ class Person(models.Model):
     second_name = models.CharField(verbose_name=_(u"second name or initial"), max_length=32, blank=True, null=True)
     location = models.ForeignKey(Location, verbose_name=_(u"location"))
     inventory = models.ManyToManyField(Item, blank=True, null=True, verbose_name=_(u"assets"))
-    #photos = models.ManyToManyField(Photo, null=True, blank=True, verbose_name=_(u"photos"))
+    #photos = models.ManyToManyField(GenericPhoto, null=True, blank=True, verbose_name=_(u"photos"))
 
     class Meta:
         ordering = ['last_name', 'second_last_name', 'first_name', 'second_name']

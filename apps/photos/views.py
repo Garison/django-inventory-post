@@ -1,18 +1,21 @@
 import os
 
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 
 from inventory.models import Settings
 
 from forms import PhotoForm
 
+from models import GenericPhoto
 
 def generic_photos(request, model, object_id, max_photos=5):
-    model_instance = model.objects.get(pk=object_id)
-    photos = model_instance.photos.all()
+    model_instance = get_object_or_404(model, pk=object_id)
+    photos = GenericPhoto.objects.photos_for_object(model_instance)
 
     if (photos.count() < max_photos):
         if request.method == 'POST':
@@ -23,7 +26,7 @@ def generic_photos(request, model, object_id, max_photos=5):
             
             if action == 'make_main':
                 photos.update(main=False)
-                main_photo=Photo.objects.get(pk=photo_num)
+                main_photo=GenericPhoto.objects.get(pk=photo_num)
                 main_photo.main=True
                 main_photo.save()
 
@@ -32,7 +35,7 @@ def generic_photos(request, model, object_id, max_photos=5):
 
             if action == 'delete':
                 try:
-                    photo = Photo.objects.get(pk=photo_num)
+                    photo = GenericPhoto.objects.get(pk=photo_num)
                     if photo.main:
                         if photos.count() == 2:
                             photos.update(main=True)
@@ -51,7 +54,7 @@ def generic_photos(request, model, object_id, max_photos=5):
             form = PhotoForm(post_data, request.FILES)
             if form.is_valid():
                 instance = form.save(commit=False)
-                if instance.photo.size > Settings.objects.get(pk=1).max_photo_size:
+                if instance.image.size > Settings.objects.get(pk=1).max_photo_size:
                     messages.error(request, _(u'The photo is too big.'))
                     os.unlink(instance.photo.path)
                     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
@@ -65,9 +68,10 @@ def generic_photos(request, model, object_id, max_photos=5):
                 if photos.count() == 0:
                     instance.main = True
                 
-                new_instance = instance.create(instance=instance)
-                model_instance.photos.add(instance)
-                model_instance.save()
+                instance.object_id = object_id
+                instance.content_type = ContentType.objects.get_for_model(model)                
+                instance.save()
+                
                 messages.success(request, _(u'The photo was added.'))
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
         else:

@@ -6,7 +6,7 @@
 # Transfer items from one inventory to another
 # Transfer asset from/to users
 # Use django reversion for changelogs
-# Implement django photologue and get rid of custom photo app
+# Implement django photologue and improve custom photo app              - DONE
 # Skinable interface
 # Use new django messages system                                        - DONE
 # Add clear button to filter by form in generic_list or substitue

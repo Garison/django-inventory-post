@@ -36,8 +36,8 @@ $(function() {
 				{% for photo in photos %}
 					<td>
 						<div class="gallery">							
-							<a href="{{ photo.photo.url }}" title="{{ photo.title }}">
-							<img src="{{ photo.thumbnail.url }}" alt='photo' />
+							<a href="{{ photo.get_display_url }}" title="{{ photo.title }}">
+							<img src="{{ photo.get_thumbnail_url }}" alt='photo' />
 							{% if photo.title %}
 								<div id='caption'>
 								   {{ photo.title }}

@@ -2,5 +2,6 @@ Django==1.2.4
 PIL==1.1.7
 South==0.7.3
 distribute==0.6.10
+django-photologue==2.3
 wsgiref==0.1.2
 yolk==0.4.1

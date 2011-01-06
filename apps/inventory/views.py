@@ -42,8 +42,6 @@ def item_detail(request, object_id, template_name=None, extra_data=None, passthr
         item = get_object_or_404(Item, pk=object_id)
 
     extra_context={ 
-        'photos':item.photos.all(),
-        'template_photos':item.item_template.photos.all(),
         'template':item.item_template,
         'record_links':item_record_links,
         'title':_(u'the asset'),
@@ -94,7 +92,9 @@ def person_detail(request, object_id):
         queryset = Person.objects.all(),
         object_id = object_id,
         template_name = 'person_detail.html',
-        extra_context={'photos':get_object_or_404(Person, pk=object_id).photos.all(), 'record_links':person_links},
+        extra_context={
+            'record_links':person_links,
+        },
     )
 
 def person_assign_remove_item(request, object_id):
@@ -153,7 +153,7 @@ def template_detail(request, object_id):
         queryset = ItemTemplate.objects.all(),
         object_id = object_id,
         template_name = 'itemtemplate_detail.html',
-        extra_context={'photos':get_object_or_404(ItemTemplate, pk=object_id).photos.all(), 'record_links':template_record_links},
+        extra_context={'record_links':template_record_links},
     )
 
 def template_items(request, object_id):
@@ -182,15 +182,15 @@ def search(request):
         
         if keyword:
             people = Person.objects.filter(
-                Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword) | Q(second_name__icontains=keyword) | Q(second_last_name__icontains=keyword ) | Q(location__name__icontains=keyword) | Q(photos__title__icontains=keyword )
+                Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword) | Q(second_name__icontains=keyword) | Q(second_last_name__icontains=keyword ) | Q(location__name__icontains=keyword)
                 )		
 
             items = Item.objects.filter(
-                Q(property_number__icontains=keyword) | Q(notes__icontains=keyword) | Q(serial_number__icontains=keyword) | Q(photos__title__icontains=keyword ) | Q(location__name__icontains=keyword) | Q(item_template__description__icontains=keyword)
+                Q(property_number__icontains=keyword) | Q(notes__icontains=keyword) | Q(serial_number__icontains=keyword) | Q(location__name__icontains=keyword) | Q(item_template__description__icontains=keyword)
                 )		
 
             templates = ItemTemplate.objects.filter(
-                Q(description__icontains=keyword) | Q(brand__icontains=keyword) | Q(model__icontains=keyword) | Q(photos__title__icontains=keyword ) | Q(part_number__icontains=keyword) | Q(notes__icontains=keyword)
+                Q(description__icontains=keyword) | Q(brand__icontains=keyword) | Q(model__icontains=keyword) | Q(part_number__icontains=keyword) | Q(notes__icontains=keyword)
                 )		
 
             groups = ItemGroup.objects.filter(
@@ -198,7 +198,7 @@ def search(request):
                 )	
 
             retired_items = RetiredItem.objects.filter(
-                Q(item__property_number__icontains=keyword) | Q(item__notes__icontains=keyword) | Q(item__serial_number__icontains=keyword) | Q(item__photos__title__icontains=keyword ) | Q(item__location__name__icontains=keyword) | Q(item__item_template__description__icontains=keyword) | Q(item__item_template__brand__icontains=keyword) | Q(item__item_template__model__icontains=keyword) | Q(item__item_template__photos__title__icontains=keyword ) | Q(item__item_template__part_number__icontains=keyword) | Q(item__item_template__notes__icontains=keyword)
+                Q(item__property_number__icontains=keyword) | Q(item__notes__icontains=keyword) | Q(item__serial_number__icontains=keyword) | Q(item__location__name__icontains=keyword) | Q(item__item_template__description__icontains=keyword) | Q(item__item_template__brand__icontains=keyword) | Q(item__item_template__model__icontains=keyword) | Q(item__item_template__part_number__icontains=keyword) | Q(item__item_template__notes__icontains=keyword)
                 )		
                 
 #			results = []

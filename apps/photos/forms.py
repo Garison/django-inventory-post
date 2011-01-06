@@ -1,12 +1,12 @@
 from django import forms 
 
 
-from models import Photo
+from models import GenericPhoto
 
        
 class PhotoForm(forms.ModelForm):
     class Meta:
-        model = Photo
-        exclude = ('main')
+        model = GenericPhoto
+        exclude = ('main', 'content_type', 'object_id', 'crop_from', 'effect')
 
   

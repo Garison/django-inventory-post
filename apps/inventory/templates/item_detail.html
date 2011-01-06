@@ -4,15 +4,7 @@
 {% endblock %}
 {% block title %} :: {% trans 'Details for' %} {{ title }} {{ object }}{% endblock %}
 {% load generic_views_helpers %}
-{% block javascript %}
-<script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-lightbox-0.5/js/jquery.lightbox-0.5.js"></script>
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}packages/jquery-lightbox-0.5/css/jquery.lightbox-0.5.css" media="screen" />
-<script type="text/javascript">
-$(function() {
-        $('.gallery a').lightBox();
-    });
-</script>
-{% endblock %}
+
 
 {% block banner %}<div id="banner"><h2>{% trans 'Details for' %} {{ title }}</h2></div>{% endblock %}
 {% block content %}
@@ -27,12 +19,12 @@ $(function() {
 </h3>
 
 {% with template as object %}
-{% include "template_subtemplate.html" %}
+    {% include "template_subtemplate.html" %}
 {% endwith %}
 
 {% with template_photos_title as title %}
-{% with template_photos as photos %}
-{% include 'generic_photos_subtemplate.html' %}
+{% with template as object %}
+    {% include 'generic_photos_subtemplate.html' %}
 {% endwith %}
 {% endwith %}
 
@@ -41,7 +33,7 @@ $(function() {
 {% include 'item_subtemplate.html' %}
 
 {% with item_photos_title as title %}
-{% include 'generic_photos_subtemplate.html' %}
+    {% include 'generic_photos_subtemplate.html' %}
 {% endwith %}
 
 <br />

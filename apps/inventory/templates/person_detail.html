@@ -5,15 +5,7 @@
 {% load generic_views_helpers %}
 {% block title %} :: {% trans 'User details' %} {{ object }}{% endblock %}
 {% load generic_views_helpers %}
-{% block javascript %}
-<script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-lightbox-0.5/js/jquery.lightbox-0.5.js"></script>
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}packages/jquery-lightbox-0.5/css/jquery.lightbox-0.5.css" media="screen" />
-<script type="text/javascript">
-$(function() {
-        $('.gallery a').lightBox();
-    });
-</script>
-{% endblock %}
+
 {% block banner %}<div id="banner"><h2>{% trans 'User details' %}</h2></div>{% endblock %}
 {% block content %}
 
@@ -53,42 +45,9 @@ $(function() {
 </div>
 </center>
 
-{% if photos %}
-<div>
-		<table style='margin: auto;'>
-			<thead><tr><td colspan='10' style='font-weight: bold; text-align: center;'>
-				{% trans 'User photos' %}
-			</td></tr></thead>
-			<tr style="vertical-align: top;">
-
-						{% for photo in photos %}
-							<td>
-								<div class="gallery">							
-								<a href="{{ photo.photo.url }}" title="{{ photo.title }}">
-									<img src="{{ photo.thumbnail.url }}" alt='thumbnail' />
-
-									{% if photo.title %}
-										<div id='caption'>
-									    	   {{ photo.title }}
-										</div>
-									{% endif %}
-								</a>
-							</div>
-
-							</td>
-
-							{% if forloop.counter|divisibleby:"4" %}
-							</tr><tr>
-							{% endif %}
-
-						{% endfor %}				
-			</tr>
-		</table>
-</div>	
-{% else %}
-
-<p style='font-weight: bold; text-align:center;'>{% trans 'There are no photos for this user' %}</p>
-{% endif %}
+{% with photos_title as title %}
+    {% include 'generic_photos_subtemplate.html' %}
+{% endwith %}
 
 <br />
 
