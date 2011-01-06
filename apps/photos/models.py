@@ -18,9 +18,9 @@ class Photo(models.Model):
     """
     #filename
     title = models.CharField(max_length=10, null=True, blank=True, verbose_name=_(u"Title"))
-    photo = models.ImageField(upload_to="userfiles/photos/",verbose_name=_(u"Photo"))
-    thumbnail = models.ImageField(upload_to="userfiles/photos/thumbnails/", editable=False)
-    preview = models.ImageField(upload_to="userfiles/photos/previews/", editable=False)
+    photo = models.ImageField(upload_to="photos/",verbose_name=_(u"Photo"))
+    thumbnail = models.ImageField(upload_to="photos/thumbnails/", editable=False)
+    preview = models.ImageField(upload_to="photos/previews/", editable=False)
     main = models.BooleanField(default=False, verbose_name=_(u"Main photo?"))
 
     def resize(self, source, destination, size):

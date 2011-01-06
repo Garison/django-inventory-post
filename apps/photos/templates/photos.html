@@ -25,7 +25,7 @@ $(function() {
 <h3>{% trans 'Photos for' %}: <a href="{{ model_instance.get_absolute_url }}">{{ model_instance }}</a> ({% trans 'Maximum of' %} {{ max_photos }}):</h3>
 
 {% if photos %}
-<form method='POST' action='.' id='photo_selector'> 
+<form method='POST' action='.' id='photo_selector'>{% csrf_token %}
 <input name='action' value='default' type='hidden' />
 <input name='photo_num' value='' type='hidden' />
 <div class='data-entry'>
