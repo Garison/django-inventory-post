@@ -246,8 +246,9 @@ def item_setstate(request, object_id, state_id):
             for item_state in ItemState.objects.states_for_item(item):
                 item_state.delete()
         else:
-            if len(ItemState.objects.states_for_item(item).filter(state__exclusive=True)):
-                messages.error(request, _(u"This asset has already been exclusively marked as '%s'.  Clear this state first.") % state.name)
+            exclusive_state = ItemState.objects.states_for_item(item).filter(state__exclusive=True)
+            if exclusive_state:
+                messages.error(request, _(u"This asset has already been exclusively marked as '%s'.  Clear this state first.") % exclusive_state[0].state.name)
                 return HttpResponseRedirect(reverse("item_view", args=[item.id]))                
             
                             
