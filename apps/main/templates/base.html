@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load inventory_tags %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
@@ -85,7 +86,6 @@
 					<div id="nav-spacer">
 					&nbsp;
 					</div>
-					
 					<div id="nav">			
 						<ul>
 							<li style="width: 6em;"><a href="{% url home %}">{% trans "Home" %}<img src="{{ MEDIA_URL }}images/go-home.png" /></a></li>
@@ -115,6 +115,17 @@
 									<li><a href="{% url item_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
 									{% endif %}
 									<li><a href="{% url item_orphans_list %}">{% trans "Orphan" %}</a></li>
+									<li style="width: 7em;"><a class='parent' href="{% url group_list %}">{% trans "States" %}</a>
+										<ul>
+                                            {% get_all_states as states %}
+                                            {% for state in states %}
+                                                <li style=""><a href="{% url item_state_list state.id %}">{% blocktrans with state.name as state %}View all '{{ state }}'{% endblocktrans %}</a></li>
+                                            {% endfor %}
+                                        
+                                        </ul>
+                                    </li>
+
+
 									{#<li><a href="{% url retireditem_list %}">{% trans "Retired" %}<img src="{{ MEDIA_URL }}images/user-trash.png" /></a></li>#}
 									{#<li><a href="{% url inrepairsitem_list %}">{% trans "In repairs" %}<img src="{{ MEDIA_URL }}images/broken-computer.png" /></a></li>#}
 
