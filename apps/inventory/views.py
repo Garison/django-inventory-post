@@ -12,10 +12,10 @@ from django.contrib.auth.decorators import login_required
 
 from photos.views import generic_photos
 
-from generic_views.views import generic_assign_remove
+from generic_views.views import generic_assign_remove, generic_list
 
 from models import Settings, Person, Item, ItemTemplate, \
-                   ItemGroup
+                   ItemGroup, State, ItemState
 
 from inventory import person_links, item_record_links, \
                       template_record_links, \
@@ -239,40 +239,65 @@ def retireditem_detail(request, object_id):
     
     return item_detail(request, retired_item.item_id)#, template_name='item_detail.html', extra_data=extra_data, passthru=True)
 
-
-def item_retire(request, object_id):
+'''
+def item_setstate(request, object_id, state_id):
     item = get_object_or_404(Item, pk=object_id)
-    next = reverse("retireditem_list")
+    state = get_object_or_404(State, pk=state_id)
+
+    if state.id in ItemState.objects.states_for_item(item).values_list('state', flat=True):
+        messages.error(request, _(u"This asset has already been marked as '%s'.") % state.name)
+        return HttpResponseRedirect(reverse("item_view", args=[item.id]))    
+
+    #next = reverse("itemstate_list", args=[state_id])
+    next = reverse("item_list")
     data = {
-        'next':next,
+        #'next':next,
         'object':item,
-        'title':_(u'Are you sure you wish to retire the asset: %s?') % item,
-        'message':_(u"Will be removed from any user that may have it assigned and from any item group it may belong.")
+        'title':_(u"Are you sure you wish to mark this asset as '%s'?") % state.name,
     }    
     
+    if state.exclusive:
+        data['message'] = _(u"Any other states this asset may be marked as, will be cleared.")
+   
+    
     if request.method == 'POST':
-        new = RetiredItem(item=item)
+        if state.exclusive:
+            for item_state in ItemState.objects.states_for_item(item):
+                item_state.delete()
+        else:
+            if len(ItemState.objects.states_for_item(item).filter(state__exclusive=True)):
+                messages.error(request, _(u"This asset has already been exclusively marked as '%s'.  Clear this state first.") % state.name)
+                return HttpResponseRedirect(reverse("item_view", args=[item.id]))                
+            
+                            
+        new = ItemState(item=item, state=state)
         new.save()
             
-        for owner in item.get_owners():
-            owner.inventory.remove(item)
+        #item.active=False
+        #item.save()		
 
-        try: 
-            inrepairs = InRepairsItem.objects.get(item=item)
-            inrepairs.delete()
-        except:
-            pass
-
-        item.active=False
-        item.save()		
-
-        messages.success(request, _(u"The asset has been marked as retired."))
+        messages.success(request, _(u"The asset has been marked as '%s'.") % state.name)
 
         return HttpResponseRedirect(next)
 
     return render_to_response('generic_confirm.html', data,
     context_instance=RequestContext(request))       
-
+    
+    
+def item_state_list(request, state_id):
+    state = get_object_or_404(State, pk=state_id)
+    return generic_list(
+        request,
+        list_filter=location_filter, 
+        queryset=Item.objects.filter(itemstate__state=state),
+        extra_context={
+            'title':_(u"Assets marked as '%s'") % state.name,
+            'create_view':'item_create',
+            'record_links':item_record_links      
+        }
+    )
+    
+'''
 
 def retireditem_unretire(request, object_id):
     retired_item = get_object_or_404(RetiredItem, pk=object_id)

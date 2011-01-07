@@ -63,6 +63,9 @@ urlpatterns = patterns('inventory.views',
     url(r'^asset/(?P<object_id>\d+)/$', 'item_detail', (), 'item_view'),
     url(r'^asset/(?P<object_id>\d+)/photos/$', generic_photos, dict(model=Item, max_photos=Settings.objects.get(pk=1).max_item_photos), 'item_photos'), 
     url(r'^asset/(?P<object_id>\d+)/log/$', 'item_log_list',() , 'item_log_list'),
+    url(r'^asset/(?P<object_id>\d+)/setstate/(?P<state_id>\d+)/$', 'item_setstate', (), 'item_setstate'),
+    url(r'^asset/state/(?P<state_id>\d+)/list/$', 'item_state_list', (), 'item_state_list'),
+
 
     url(r'^group/list/$', generic_list, dict({'queryset':ItemGroup.objects.all()}, extra_context=dict(title=_(u'item group'), create_view='group_create', record_links=group_links)), 'group_list'),
     url(r'^group/create/$', generic_create, dict({'form_class':ItemGroupForm}, extra_context={'title':_(u'item group')}), 'group_create'),

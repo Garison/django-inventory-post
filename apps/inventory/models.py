@@ -40,18 +40,25 @@ class State(models.Model):
         return "%s, %s" % (self.name, self.exclusive and _(u'exclusive') or _(u'inclusive'))
 
 
+class ItemStateManager(models.Manager):
+    def states_for_item(self, item):
+        return self.filter(item=item)
+        
+
 class ItemState(models.Model):
     item = models.ForeignKey('Item', verbose_name=_(u"item"))
     state = models.ForeignKey(State, verbose_name=_(u"state"))
     date = models.DateField(verbose_name=_(u"date"), auto_now_add=True)
+    
+    objects = ItemStateManager()
      
     class Meta:
         verbose_name = _(u"item state")
         verbose_name_plural = _(u"item states")
         
     def __unicode__(self):
-        return "%s, %s @ %s" % (self.name, self.state, self.date)
-        
+        return _(u"%s, %s since %s") % (self.item, self.state.name, self.date)
+
  
 class Location(models.Model):
     name = models.CharField(max_length=32, verbose_name=_("name"))

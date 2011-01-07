@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from inventory.models import Permission, State, ItemState, \
+from inventory.models import Permission, \
+                             State, ItemState, \
                              ItemTemplate, Item, \
                              ItemGroup, \
                              Person, Inventory, Location
