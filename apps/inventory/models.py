@@ -28,17 +28,31 @@ class Settings(models.Model):
         return reverse('settings')
  
 
-class ItemState(models.Model):
+class State(models.Model):
     name = models.CharField(max_length=32, verbose_name=_(u'name'))
+    exclusive = models.BooleanField(default=False, verbose_name=_(u'exclusive'))
+     
+    class Meta:
+        verbose_name = _(u"state")
+        verbose_name_plural = _(u"states")
+        
+    def __unicode__(self):
+        return "%s, %s" % (self.name, self.exclusive and _(u'exclusive') or _(u'inclusive'))
+
+
+class ItemState(models.Model):
+    item = models.ForeignKey('Item', verbose_name=_(u"item"))
+    state = models.ForeignKey(State, verbose_name=_(u"state"))
+    date = models.DateField(verbose_name=_(u"date"), auto_now_add=True)
      
     class Meta:
         verbose_name = _(u"item state")
         verbose_name_plural = _(u"item states")
         
     def __unicode__(self):
-        return self.name
+        return "%s, %s @ %s" % (self.name, self.state, self.date)
+        
  
-
 class Location(models.Model):
     name = models.CharField(max_length=32, verbose_name=_("name"))
     address_line1 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
@@ -111,11 +125,11 @@ class Item(models.Model):
     get_absolute_url = models.permalink(get_absolute_url)
 
     def __unicode__(self):
-        in_repairs = self.is_inrepairs()
-        if in_repairs:
-            rep=_(u"(in repairs)")
-        else:
-            rep=''
+        #in_repairs = self.is_inrepairs()
+        #if in_repairs:
+        #    rep=_(u"(in repairs)")
+        #else:
+        rep=''
             
         return "#%s, '%s' %s" % (self.property_number, self.item_template.description, rep)
 
@@ -149,11 +163,11 @@ class Item(models.Model):
     def get_photos(self):
         return ItemPhoto.objects.filter(item=self)
         
-    def is_inrepairs(self):
-        try:
-            return InRepairsItem.objects.get(item=self)
-        except:
-            return False
+    #def is_inrepairs(self):
+    #    try:
+    #        return InRepairsItem.objects.get(item=self)
+    #    except:
+    #        return False
 
     
 class ItemGroup(models.Model):
@@ -173,37 +187,37 @@ class ItemGroup(models.Model):
     get_absolute_url = models.permalink(get_absolute_url)		
 
         
-class RetiredItem(models.Model):
-    date = models.DateField(verbose_name=_(u"date"), auto_now_add=True)
-    item = models.OneToOneField(Item, verbose_name=_(u"item"))
-    #user
+#class RetiredItem(models.Model):
+#    date = models.DateField(verbose_name=_(u"date"), auto_now_add=True)
+#    item = models.OneToOneField(Item, verbose_name=_(u"item"))
+#    #user
 
-    class Meta:
-        verbose_name = _(u"retired item")
-        verbose_name_plural = _(u"retired items")
+#    class Meta:
+#        verbose_name = _(u"retired item")
+#        verbose_name_plural = _(u"retired items")
     
-    def get_absolute_url(self):
-        return ('retireditem_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)
+#    def get_absolute_url(self):
+#       return ('retireditem_view', [str(self.id)])
+#    get_absolute_url = models.permalink(get_absolute_url)
 
-    def __unicode__(self):
-        return unicode(self.item)
+#    def __unicode__(self):
+#        return unicode(self.item)
 
 
-class InRepairsItem(models.Model):		
-    date = models.DateField(verbose_name=_(u"date"), auto_now_add=True)
-    item = models.OneToOneField(Item, verbose_name=_(u"item"))
+#class InRepairsItem(models.Model):		
+#    date = models.DateField(verbose_name=_(u"date"), auto_now_add=True)
+#    item = models.OneToOneField(Item, verbose_name=_(u"item"))
 #	user
-    class Meta:
-        verbose_name = _(u"item in repairs")
-        verbose_name_plural = _(u"items in repairs")
+#    class Meta:
+#        verbose_name = _(u"item in repairs")
+#        verbose_name_plural = _(u"items in repairs")
 
-    def get_absolute_url(self):
-        return ('inrepairsitem_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)
+#    def get_absolute_url(self):
+#        return ('inrepairsitem_view', [str(self.id)])
+#    get_absolute_url = models.permalink(get_absolute_url)
 
-    def __unicode__(self):
-        return unicode(self.item)
+#    def __unicode__(self):
+#        return unicode(self.item)
 
 
 class Person(models.Model):

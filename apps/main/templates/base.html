@@ -115,8 +115,8 @@
 									<li><a href="{% url item_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
 									{% endif %}
 									<li><a href="{% url item_orphans_list %}">{% trans "Orphan" %}</a></li>
-									<li><a href="{% url retireditem_list %}">{% trans "Retired" %}<img src="{{ MEDIA_URL }}images/user-trash.png" /></a></li>
-									<li><a href="{% url inrepairsitem_list %}">{% trans "In repairs" %}<img src="{{ MEDIA_URL }}images/broken-computer.png" /></a></li>
+									{#<li><a href="{% url retireditem_list %}">{% trans "Retired" %}<img src="{{ MEDIA_URL }}images/user-trash.png" /></a></li>#}
+									{#<li><a href="{% url inrepairsitem_list %}">{% trans "In repairs" %}<img src="{{ MEDIA_URL }}images/broken-computer.png" /></a></li>#}
 
 									<li style="width: 7em;"><a class='parent' href="{% url group_list %}">{% trans "Groups" %}<img src="{{ MEDIA_URL }}images/network-workgroup.png" /></a>
 										<ul>

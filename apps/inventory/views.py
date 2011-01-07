@@ -15,11 +15,10 @@ from photos.views import generic_photos
 from generic_views.views import generic_assign_remove
 
 from models import Settings, Person, Item, ItemTemplate, \
-                   InRepairsItem, RetiredItem, ItemGroup
+                   ItemGroup
 
 from inventory import person_links, item_record_links, \
-                      template_record_links, retireditem_links, \
-                      inrepairsitem_links, \
+                      template_record_links, \
                       location_filter
 
 
@@ -50,11 +49,11 @@ def item_detail(request, object_id, template_name=None, extra_data=None, passthr
         'template_photos_title':_(u'template photos'),
         }
 
-    in_repairs = item.is_inrepairs()
-    if in_repairs:
-        extra_context['extra_attribs'] = {
-            _(u'In repairs since'):in_repairs.date,
-        }
+    #in_repairs = item.is_inrepairs()
+    #if in_repairs:
+    #    extra_context['extra_attribs'] = {
+    #        _(u'In repairs since'):in_repairs.date,
+    #    }
 
     if extra_data:
         for k, v in extra_data.iteritems():
@@ -225,7 +224,7 @@ def search(request):
         },
     context_instance=RequestContext(request))
 
-
+'''
 def retireditem_detail(request, object_id):
     retired_item = get_object_or_404(RetiredItem, pk=object_id)
     extra_data={ 
@@ -275,7 +274,6 @@ def item_retire(request, object_id):
     context_instance=RequestContext(request))       
 
 
-
 def retireditem_unretire(request, object_id):
     retired_item = get_object_or_404(RetiredItem, pk=object_id)
     next = reverse("retireditem_list")
@@ -296,8 +294,9 @@ def retireditem_unretire(request, object_id):
 
     return render_to_response('generic_confirm.html', data,
     context_instance=RequestContext(request))       
+'''
 
-
+'''
 def inrepairsitem_detail(request, object_id):
     inrepairs_item = get_object_or_404(InRepairsItem, pk=object_id)
     extra_data={ 
@@ -359,7 +358,7 @@ def inrepairsitem_unrepair(request, object_id):
         
     return render_to_response('generic_confirm.html', data,
     context_instance=RequestContext(request))       			
-
+'''
 '''
 def render_to_pdf(template_src, context_dict):
     from django import http
