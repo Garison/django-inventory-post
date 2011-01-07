@@ -49,11 +49,6 @@ def item_detail(request, object_id, template_name=None, extra_data=None, passthr
         'template_photos_title':_(u'template photos'),
         }
 
-    #in_repairs = item.is_inrepairs()
-    #if in_repairs:
-    #    extra_context['extra_attribs'] = {
-    #        _(u'In repairs since'):in_repairs.date,
-    #    }
 
     if extra_data:
         for k, v in extra_data.iteritems():
@@ -366,12 +361,3 @@ def inventory_current(request, object_id):
         'supply_qty': supply_qty,
     },
     context_instance=RequestContext(request))
-'''
-        
-restricted_views = ['generic_photos', 'generic_update', 'generic_create', 'generic_delete', 'generic_confirm']
-if Settings.objects.get(pk=1).is_anon_restricted:
-    restricted_views += ['generic_list', 'generic_detail', 'item_detail', 'person_detail', 'template_detail']
-
-for view in restricted_views:
-    exec ("%s=login_required(%s)" % (view, view))
-'''
