@@ -308,52 +308,7 @@ def item_state_list(request, state_id):
         }
     )
     
-'''
 
-def retireditem_unretire(request, object_id):
-    retired_item = get_object_or_404(RetiredItem, pk=object_id)
-    next = reverse("retireditem_list")
-    data = {
-        'next':next,
-        'object':retired_item,
-        'title':_(u'Are you sure you wish to reactivate the asset: %s?') % retired_item,
-    }       
-    if request.method == 'POST':
-        retired_item = RetiredItem.objects.get(pk=object_id)
-
-        item = Item.objects_passthru.filter(pk=retired_item.item.id)
-        item.update(active=True)
-    #HACK: because of custom manager .save() doesn;t see the item and tries to create new record
-
-        retired_item.delete()
-        return HttpResponseRedirect(next)
-
-    return render_to_response('generic_confirm.html', data,
-    context_instance=RequestContext(request))       
-
-
-def inrepairsitem_unrepair(request, object_id):
-    item = get_object_or_404(InRepairsItem, pk=object_id)
-    next = reverse("inrepairsitem_list")
-    data = {
-        'next':next,
-        'object':item,
-        'title':_(u'Are you sure you wish to mark the asset: %s, as repaired?') % item,
-    }    
-    if request.method == 'POST':
-        try:
-            inrepairs = InRepairsItem.objects.get(pk=object_id)
-            inrepairs.delete()
-            messages.success(request, _(u"The asset has been marked as repaired."))            
-        except:
-            messages.warning(request, _(u"This asset is not in repairs."))
-        
-        
-        return HttpResponseRedirect(next)
-        
-    return render_to_response('generic_confirm.html', data,
-    context_instance=RequestContext(request))       			
-'''
 '''
 def render_to_pdf(template_src, context_dict):
     from django import http
