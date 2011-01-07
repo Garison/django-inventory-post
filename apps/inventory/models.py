@@ -167,9 +167,8 @@ class Item(models.Model):
         return ('item_view', [str(self.id)])
     get_absolute_url = models.permalink(get_absolute_url)
     
-    def get_photos(self):
-        return ItemPhoto.objects.filter(item=self)
-        
+    def states(self):
+        return [State.objects.get(pk=id) for id in self.itemstate_set.all().values_list('state', flat=True)]
     
 class ItemGroup(models.Model):
     name = models.CharField(verbose_name=_(u"Name"), max_length=32)

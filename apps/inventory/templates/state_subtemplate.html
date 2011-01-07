@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load inventory_tags %}
+<center>
+<div class="data-entry" >
+	<table>
+		<thead>
+			<tr>
+				<td colspan='2'>
+					{% trans 'Item states' %}
+				</td>
+			</tr>
+		</thead>	
+		<tbody>
+            {% get_all_states as states %}
+            {% for state in states %}
+                <tr>
+                    <th>{{ state.name }}:</th>
+                    <td>
+                        {% if state in object.states %}
+                            <a href="{% url item_remove_state object.id state.id %}">{% trans 'Unmark' %}</a>
+                        {% else %}
+                            <a href="{% url item_setstate object.id state.id %}">{% trans 'Mark' %}</a>
+                        {% endif %}
+                    
+                    </td>
+                </tr>
+            {% endfor %}             
+		</tbody>
+	</table>
+</div>
+</center>

@@ -229,8 +229,7 @@ def item_setstate(request, object_id, state_id):
         messages.error(request, _(u"This asset has already been marked as '%s'.") % state.name)
         return HttpResponseRedirect(reverse("item_view", args=[item.id]))    
 
-    #next = reverse("itemstate_list", args=[state_id])
-    next = reverse("item_list")
+    next = reverse("item_view", args=[item.id])
     data = {
         #'next':next,
         'object':item,
@@ -264,7 +263,37 @@ def item_setstate(request, object_id, state_id):
 
     return render_to_response('generic_confirm.html', data,
     context_instance=RequestContext(request))       
+
+
+def item_remove_state(request, object_id, state_id):
+    item = get_object_or_404(Item, pk=object_id)
+    state = get_object_or_404(State, pk=state_id)    
+
+    next = reverse("item_view", args=[item.id])
+
+    item_state = ItemState.objects.filter(item=item, state=state)
+    if not item_state:
+        messages.error(request, _(u"This asset is not marked as '%s'") % state.name)
+        return HttpResponseRedirect(next)
+        
+    data = {
+        #'next':next,
+        'object':item,
+        'title':_(u"Are you sure you wish to unmark this asset as '%s'?") % state.name,
+    }       
+    if request.method == 'POST':
+        if item_state:
+            try:
+                item_state.delete()
+                messages.success(request, _(u"The asset has been unmarked as '%s'.") % state.name)
+            except:
+                messages.error(request, _(u"Unable to unmark this asset as '%s'") % state.name)        
+        
+        return HttpResponseRedirect(next)
     
+    return render_to_response('generic_confirm.html', data,
+    context_instance=RequestContext(request))      
+       
     
 def item_state_list(request, state_id):
     state = get_object_or_404(State, pk=state_id)
@@ -273,7 +302,7 @@ def item_state_list(request, state_id):
         list_filter=location_filter, 
         queryset=Item.objects.filter(itemstate__state=state),
         extra_context={
-            'title':_(u"Assets marked as '%s'") % state.name,
+            'title':_(u"assets marked as '%s'") % state.name,
             'create_view':'item_create',
             'record_links':item_record_links      
         }

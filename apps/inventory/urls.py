@@ -61,7 +61,8 @@ urlpatterns = patterns('inventory.views',
     url(r'^asset/(?P<object_id>\d+)/$', 'item_detail', (), 'item_view'),
     url(r'^asset/(?P<object_id>\d+)/photos/$', generic_photos, dict(model=Item, max_photos=Settings.objects.get(pk=1).max_item_photos), 'item_photos'), 
     url(r'^asset/(?P<object_id>\d+)/log/$', 'item_log_list',() , 'item_log_list'),
-    url(r'^asset/(?P<object_id>\d+)/setstate/(?P<state_id>\d+)/$', 'item_setstate', (), 'item_setstate'),
+    url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/set/$', 'item_setstate', (), 'item_setstate'),
+    url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/unset$', 'item_remove_state', (), 'item_remove_state'),
     url(r'^asset/state/(?P<state_id>\d+)/list/$', 'item_state_list', (), 'item_state_list'),
 
 
