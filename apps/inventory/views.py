@@ -196,9 +196,6 @@ def search(request):
                 Q(name__icontains=keyword)
                 )	
 
-            retired_items = RetiredItem.objects.filter(
-                Q(item__property_number__icontains=keyword) | Q(item__notes__icontains=keyword) | Q(item__serial_number__icontains=keyword) | Q(item__location__name__icontains=keyword) | Q(item__item_template__description__icontains=keyword) | Q(item__item_template__brand__icontains=keyword) | Q(item__item_template__model__icontains=keyword) | Q(item__item_template__part_number__icontains=keyword) | Q(item__item_template__notes__icontains=keyword)
-                )		
                 
 #			results = []
 #			for i in people:
@@ -218,28 +215,12 @@ def search(request):
         'items':items,
         'templates':templates,
         'groups':groups,
-        'retired_items':retired_items,
         'keyword':keyword,
 #		'results': results,
         },
     context_instance=RequestContext(request))
 
-'''
-def retireditem_detail(request, object_id):
-    retired_item = get_object_or_404(RetiredItem, pk=object_id)
-    extra_data={ 
-        'wrapper_object':retired_item,
-        'record_links':retireditem_links,	
-        'title':_(u"retired asset"),
-        'subtitle':retired_item.item,
-        'extra_attribs':{
-                _(u'Retired'):retired_item.date
-                }
-         }
-    
-    return item_detail(request, retired_item.item_id)#, template_name='item_detail.html', extra_data=extra_data, passthru=True)
 
-'''
 def item_setstate(request, object_id, state_id):
     item = get_object_or_404(Item, pk=object_id)
     state = get_object_or_404(State, pk=state_id)
@@ -319,47 +300,6 @@ def retireditem_unretire(request, object_id):
 
     return render_to_response('generic_confirm.html', data,
     context_instance=RequestContext(request))       
-'''
-
-'''
-def inrepairsitem_detail(request, object_id):
-    inrepairs_item = get_object_or_404(InRepairsItem, pk=object_id)
-    extra_data={ 
-#        'wrapper_object' : inrepairs_item,
-        'record_links':inrepairsitem_links,
-        'title' : _(u"asset in repairs"),
-        'extra_attribs' : {
-            _(u'In repairs since') : inrepairs_item.date,
-            }
-         }
-    
-    return item_detail(request, inrepairs_item.item.pk, extra_data=extra_data, show_create_view=False)
-
-
-def item_sendtorepairs(request, object_id):
-    item = Item.objects.get(pk=object_id)
-
-    next = reverse("inrepairsitem_list")
-    data = {
-        'next':next,
-        'object':item,
-        'title':_(u'Are you sure you wish to send the asset: %s, to repairs?') % item,
-    }
-
-    if request.method == 'POST':
-        if InRepairsItem.objects.filter(item=item):
-            messages.warning(request, _(u"This asset is already in repairs."))
-
-            return HttpResponseRedirect(next)			
-
-        new = InRepairsItem(item=item)
-        new.save()
-
-        messages.success(request, _(u"The asset has been marked as 'in repairs'."))
-
-        return HttpResponseRedirect(next)
-    return render_to_response('generic_confirm.html', data,
-    context_instance=RequestContext(request))
 
 
 def inrepairsitem_unrepair(request, object_id):

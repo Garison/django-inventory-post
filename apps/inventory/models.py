@@ -170,12 +170,6 @@ class Item(models.Model):
     def get_photos(self):
         return ItemPhoto.objects.filter(item=self)
         
-    #def is_inrepairs(self):
-    #    try:
-    #        return InRepairsItem.objects.get(item=self)
-    #    except:
-    #        return False
-
     
 class ItemGroup(models.Model):
     name = models.CharField(verbose_name=_(u"Name"), max_length=32)
@@ -194,39 +188,6 @@ class ItemGroup(models.Model):
     get_absolute_url = models.permalink(get_absolute_url)		
 
         
-#class RetiredItem(models.Model):
-#    date = models.DateField(verbose_name=_(u"date"), auto_now_add=True)
-#    item = models.OneToOneField(Item, verbose_name=_(u"item"))
-#    #user
-
-#    class Meta:
-#        verbose_name = _(u"retired item")
-#        verbose_name_plural = _(u"retired items")
-    
-#    def get_absolute_url(self):
-#       return ('retireditem_view', [str(self.id)])
-#    get_absolute_url = models.permalink(get_absolute_url)
-
-#    def __unicode__(self):
-#        return unicode(self.item)
-
-
-#class InRepairsItem(models.Model):		
-#    date = models.DateField(verbose_name=_(u"date"), auto_now_add=True)
-#    item = models.OneToOneField(Item, verbose_name=_(u"item"))
-#	user
-#    class Meta:
-#        verbose_name = _(u"item in repairs")
-#        verbose_name_plural = _(u"items in repairs")
-
-#    def get_absolute_url(self):
-#        return ('inrepairsitem_view', [str(self.id)])
-#    get_absolute_url = models.permalink(get_absolute_url)
-
-#    def __unicode__(self):
-#        return unicode(self.item)
-
-
 class Person(models.Model):
     last_name = models.CharField(verbose_name=_(u"last name"), max_length=32)
     second_last_name = models.CharField(verbose_name=_(u"second last name"), max_length=32, blank=True, null=True)

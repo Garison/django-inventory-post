@@ -30,10 +30,6 @@ item_record_links = [
     {'text':_(u'Template'), 'view':'template_view', 'icon':settings.MEDIA_URL + 'images/font-x-generic.png', 'args':'object.item_template.id'},
 ]
     
-#retireditem_links = [
-#    {'text':_(u'Reactivate'), 'view':'retireditem_unretire' }
-#]
-
 person_links = [
     {'text':_(u'Edit'), 'view':'person_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
     {'text':_(u'Delete'), 'view':'person_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},

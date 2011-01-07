@@ -7,7 +7,6 @@ from inventory.models import State
 register = Library()
 
 
-
 class GetAllStatesNode(Node):
     def __init__(self, variable):
         self.variable = variable
@@ -15,6 +14,7 @@ class GetAllStatesNode(Node):
     def render(self, context):
         context[self.variable] = State.objects.all()
         return ''
+
 
 @register.tag
 def get_all_states(parser, token):

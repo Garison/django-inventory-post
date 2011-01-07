@@ -103,27 +103,7 @@
 <br />
 {% endif %}
 
-{% if retired_items %}
-<h3>{% trans 'Results in retired items' %}: {{ retired_items.count }}</h3>
-<div class='results'>
-	<table>
-		<tbody>
-			<tr>
-			{% for i in retired_items %}
-				<td class="{% cycle 'results-odd' 'results-even' %}">
-					<a href="{{ i.get_absolute_url}}">{{ i }}</a></td>
-				</td>
-					{% if forloop.counter|divisibleby:"5" %}
-						</tr>
-						<tr>
-					{% endif %}
-			{% endfor %}
-			</tr>
-		</tbody>
-	</table>
-</div>
-<br />
-{% endif %}
+
 
 {% endblock %}
 
