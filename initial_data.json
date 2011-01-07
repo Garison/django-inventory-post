@@ -1,4 +1,5 @@
 [
-    {"pk": 1, "model": "inventory.settings", "fields": {"is_anon_restricted": false, "max_template_photos": 5, "max_photo_size": 1000000, "max_item_photos": 5, "max_person_photos": 5}}
+    {"pk": 1, "model": "inventory.settings", "fields": {"is_anon_restricted": false, "max_template_photos": 5, "max_photo_size": 1000000, "max_item_photos": 5, "max_person_photos": 5}},
+    {"pk": 1, "model": "photologue.photosize", "fields": {"name": "admin_thumbnail", "watermark": null, "increment_count": false, "effect": null, "crop": false, "height": 50, "width": 50, "upscale": false, "pre_cache": false, "quality": 70}}, {"pk": 2, "model": "photologue.photosize", "fields": {"name": "thumbnail", "watermark": null, "increment_count": false, "effect": null, "crop": false, "height": 100, "width": 100, "upscale": false, "pre_cache": false, "quality": 70}}, {"pk": 3, "model": "photologue.photosize", "fields": {"name": "display", "watermark": null, "increment_count": false, "effect": null, "crop": false, "height": 250, "width": 250, "upscale": false, "pre_cache": false, "quality": 70}}
 ]
 
