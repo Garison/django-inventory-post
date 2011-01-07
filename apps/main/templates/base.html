@@ -162,6 +162,7 @@
 							<li style="width: 10em;"><a href="#">{% trans "Tools" %}<img src="{{ MEDIA_URL }}images/preferences-system.png" /></a>
 								<ul>
 									<li><a style="width: 10em;" href="{% url location_list %}">{% trans "Locations" %}<img src="{{ MEDIA_URL }}images/view-fullscreen.png" /></a></li>
+									<li><a style="width: 10em;" href="{% url state_list %}">{% trans "States" %}</a></li>
 									{% if user.is_staff %}
 									<li><a style="width: 10em;" href="{% url settings %}">{% trans "Settings" %}<img src="{{ MEDIA_URL }}images/emblem-system.png" /></a></li>
 									{% endif %}

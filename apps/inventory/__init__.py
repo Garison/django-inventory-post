@@ -48,6 +48,11 @@ location_links = [
     {'text':_(u'Delete'), 'view':'location_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
 ]
 
+state_links = [
+    {'text':_(u'Edit'), 'view':'state_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
+    {'text':_(u'Delete'), 'view':'state_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
+]
+
 #inrepairsitem_links = [
 #    {'text': _(u'Repaired'), 'view':'inrepairsitem_unrepair'}
 #]

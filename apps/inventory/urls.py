@@ -6,14 +6,14 @@ from photos.views import generic_photos
 
 from inventory import person_links, \
                       template_record_links, inventory_links, \
-                      item_record_links, \
+                      item_record_links, state_links, \
                       inventory_transaction_links, \
                       group_links, location_filter, location_links
 
 
 from models import ItemTemplate, InventoryTransaction, \
                    Inventory, Settings, Item, ItemGroup, Person, \
-                   Log, Location
+                   Log, Location, State
                    
 from forms import InventoryTransactionForm, InventoryForm, \
                   ItemTemplateForm, ItemForm, ItemGroupForm, PersonForm, \
@@ -65,7 +65,6 @@ urlpatterns = patterns('inventory.views',
     url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/unset$', 'item_remove_state', (), 'item_remove_state'),
     url(r'^asset/state/(?P<state_id>\d+)/list/$', 'item_state_list', (), 'item_state_list'),
 
-
     url(r'^group/list/$', generic_list, dict({'queryset':ItemGroup.objects.all()}, extra_context=dict(title=_(u'item group'), create_view='group_create', record_links=group_links)), 'group_list'),
     url(r'^group/create/$', generic_create, dict({'form_class':ItemGroupForm}, extra_context={'title':_(u'item group')}), 'group_create'),
     url(r'^group/(?P<object_id>\d+)/$', generic_detail, dict(form_class=ItemGroupForm, model=ItemGroup, title=_(u'item group'), create_view='group_create', record_links=group_links), 'group_view'),
@@ -85,6 +84,12 @@ urlpatterns = patterns('inventory.views',
     url(r'^location/create/$', generic_create, dict({'model':Location}, extra_context={'title':_(u'locations')}), 'location_create'),
     url(r'^location/(?P<object_id>\d+)/update/$', generic_update, dict({'model':Location}, extra_context={'title':_(u'locations')}), 'location_update'),
     url(r'^location/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Location}, post_delete_redirect="location_list", extra_context=dict(title=_(u'locations'))), 'location_delete'),
+
+    url(r'^state/list/$', generic_list, dict({'queryset':State.objects.all()}, extra_context=dict(title =_(u'states'), create_view='state_create', record_links=state_links)), 'state_list'),
+    url(r'^state/create/$', generic_create, dict({'model':State}, extra_context={'title':_(u'states')}), 'state_create'),
+    url(r'^state/(?P<object_id>\d+)/update/$', generic_update, dict({'model':State}, extra_context={'title':_(u'states')}), 'state_update'),
+    url(r'^state/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':State}, post_delete_redirect="state_list", extra_context=dict(title=_(u'states'))), 'state_delete'),
+
 
 #    url(r'^log/list/$', generic_list, dict(queryset=Log.objects.all(), extra_context={'title' : _(u'log')}), 'log_list'),
 #    url(r'^log/(?P<object_id>\d+)/$', generic_detail, dict(form_class=LogForm, model=Log, title=_(u'log')), 'log_view'),

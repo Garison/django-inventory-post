@@ -37,8 +37,11 @@ class State(models.Model):
         verbose_name_plural = _(u"states")
         
     def __unicode__(self):
-        return "%s, %s" % (self.name, self.exclusive and _(u'exclusive') or _(u'inclusive'))
+        return "%s (%s)" % (self.name, self.exclusive and _(u'exclusive') or _(u'inclusive'))
 
+    def get_absolute_url(self):
+        return reverse('state_list')
+        
 
 class ItemStateManager(models.Manager):
     def states_for_item(self, item):
@@ -169,6 +172,7 @@ class Item(models.Model):
     
     def states(self):
         return [State.objects.get(pk=id) for id in self.itemstate_set.all().values_list('state', flat=True)]
+    
     
 class ItemGroup(models.Model):
     name = models.CharField(verbose_name=_(u"Name"), max_length=32)

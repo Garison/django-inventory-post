@@ -5,7 +5,7 @@
 # Merge supplies with itemtemplate and allow for circular dependencies  - DONE
 # Implement django photologue and improve custom photo app              - DONE
 # Use new django messages system                                        - DONE
-# Eliminate inrepair and retired and implement user defined 'item states'
+# Eliminate inrepair/retired and implement user defined 'item states'   - DONE
 # Fix html and make it compliant (Remove <CENTER>, etc)
 # Transfer items from one inventory to another
 # Transfer asset from/to users
