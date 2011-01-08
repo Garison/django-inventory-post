@@ -1,24 +1,33 @@
 {% load i18n %}
 {% load project_tags %}
 {% load inventory_tags %}
+{% load navigation %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta http-equiv="Content-Language" content="{{ LANGUAGE_CODE }}" />
-		{% block keywords %}{% endblock %}		
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="{{ LANGUAGE_CODE }}" />
+
+        <title>{% project_name %}{% block title %}{% endblock %}</title>
+
+        {% block keywords %}{% endblock %}		
+
+        <link rel="stylesheet" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/base.css" type="text/css" media="screen" />
+        <link rel="stylesheet" id="current-theme" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/themes/default/style.css" type="text/css" media="screen" />
+        <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}skins/pilu-web-app/javascripts/jquery-1.3.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}skins/pilu-web-app/javascripts/jquery.scrollTo.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}skins/pilu-web-app/javascripts/jquery.localscroll.js"></script>
         
-        <link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/base.css" />
-        <link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/override.css" />
-        <link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/themes/default/style.css" />
-        
+        {#<link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/base.css" />#}
+        {#<link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/override.css" />#}
+        {#<link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/themes/default/style.css" />#}
         
 		{% comment %}<link rel="shortcut icon" type="image/png" href="{{ MEDIA_URL }}images/" />{% endcomment %}
 		<link href="{{ MEDIA_URL }}css/base.css" rel="stylesheet" type="text/css" media="screen" />
-		<link href="{{ MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print" />
+		{#<link href="{{ MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print" />#}
 
-		<script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-1.3.1.min.js"></script>
+		{#<script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-1.3.1.min.js"></script>#}
 
 		<script type="text/javascript">
 		sfHover = function() {
@@ -53,9 +62,65 @@
 		});
 		</script>
 		{% block javascript %}{% endblock %}
-		<title>{% project_name %}{% block title %}{% endblock %}</title>
 	</head>
 	<body>
+    
+        <div id="container">
+            <div id="header">
+                <h1><a href="index.html">{% project_name %}</a></h1>
+                    <div id="user-navigation">
+                        <ul class="wat-cf">
+                            <li><strong>{% trans 'User' %}:</strong>
+                                {% if user.is_anonymous %}
+                                    {% trans 'Anonymous' %}
+                                    <input type="hidden" id="auth_user" value="" />
+                                    <a href="{% url user_login %}?next={{ request.get_full_path }}">({% trans 'Login' %})</a>
+                                {% else %}
+                                    {{ user }}
+                                    <input type="hidden" id="auth_user" value="{{ user }}" />
+                                    <a href="{% url user_logout %}">({% trans 'Logout' %})</a>
+                                    <a href="{% url user_me_password_change %}">({% trans 'New password' %})</a>
+                                {% endif %}
+                            </li>
+                            <li>
+                                {% ifequal LANGUAGE_CODE 'es' %}
+                                    <a href="{% url set_language %}?language=en"><img src='{{ MEDIA_URL }}images/flag-us.png' alt="US-flag" /> {% trans 'English' %}</a>
+                                {% else %}
+                                    <a href="{% url set_language %}?language=es"><img src='{{ MEDIA_URL }}images/flag-pr.png' alt="PR-flag" /> {% trans 'Spanish' %}</a>
+                                {% endifequal %}                        
+                            </li>
+                            <li><a class="logout" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+
+                    {% main_navigation %}                    
+                    <div id="main-navigation">
+                        <ul class="wat-cf">
+                            {% for link in navigation_main_links %}
+                                <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+            </div>
+
+            <div id="wrapper" class="wat-cf">
+                <div id="main">
+                    <div class="block" id="block-text">                    
+                        <div class="secondary-navigation">
+                            <ul class="wat-cf">
+                                {% for link in navigation_secondary_links %}
+                                    <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}</a></li>
+                                {% endfor %}                            
+                            </ul>
+                        </div>                    
+                    </div>                    
+                </div>                    
+            </div>                    
+
+        </div>
+
+    
+        
         <div id="loading">
 		{% trans 'Loading' %}...<img src="{{ MEDIA_URL }}images/loading.gif" alt="" />
 		</div>
