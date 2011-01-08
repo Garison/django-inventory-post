@@ -70,13 +70,13 @@ tools_menu_links = [
     {'text':_('Settings'), 'view':'settings'},
 ]
 
-#TODO: Item groups, item states
+#TODO: Item groups, item states, search
 navigation = [
     {'text':_('Home'), 'view':'home'},
     {'text':_('Users'), 'view':'person_list', 'links':user_menu_links},
     {'text':_('Templates'), 'view':'template_list', 'links':template_menu_links},
     {'text':_('Assets'), 'view':'item_list', 'links':item_menu_links},
-    {'text':_('Assets states'), 'view':''},#, 'links':item_states_menu_links},
+    {'text':_('Assets states'), 'view':'item_state_list_init'},
     {'text':_('Inventories'), 'view':'inventory_list', 'links':inventory_menu_links},
     {'text':_('Inventory transactions'), 'view':'inventory_transaction_list', 'links':inventory_transactions_menu_links},
     {'text':_('Tools'), 'view':'location_list', 'links':tools_menu_links},

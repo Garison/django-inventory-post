@@ -3,6 +3,8 @@
 {% load generic_views_helpers %}
 {% block title %} :: {% blocktrans %}List of {{ title }}{% endblocktrans %}{% endblock %}
 {% block banner %}<div id="banner"><h2>{% blocktrans %}List of {{ title }}{% endblocktrans %}</h2></div>{% endblock %}
+{% block secondary_links %}{{ secondary_links|safe }}{% endblock %}
+
 {% block content %}
 
 {% if filter_form %}
