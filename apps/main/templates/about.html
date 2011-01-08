@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block keywords %}
-{% endblock %}
+{% load project_tags %}
 {% block title %} :: {% trans 'About this program' %}{% endblock %}
 {% block banner %}<div id="banner"><h2>{% trans 'About this program' %}</h2></div>{% endblock %}
 {% block content %}
 <h3>
 <center>
-Django Inventory<br /><br />
+{% project_name %}<br /><br />
 {% trans 'A Django based inventory and asset management system' %}<br /><br />
 <a href="http://code.google.com/p/django-inventory/">http://code.google.com/p/django-inventory/</a><br /><br />
 {% trans 'Copyright 2007 Roberto Rosario' %}<br /><br />

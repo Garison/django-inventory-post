@@ -109,6 +109,7 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'photologue',
     'photos',
+    'common',
     'generic_views',
     'inventory',
     'main',
