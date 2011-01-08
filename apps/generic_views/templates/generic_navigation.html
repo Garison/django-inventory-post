@@ -7,22 +7,46 @@
 		{% endif %}
 		{% endif %}
 {% endcomment %}
+
 		{% for link in record_links %}
 			{% if link.view %}
 				{#{% if not link.view|login_required or user.is_authenticated %}#}
 					{% if wrapper_object %}
-						<li><a href="{% dynurl data.view wrapper_object.id %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+						<a href="{% dynurl data.view wrapper_object.id %}">{{ link.text }}</a>{% if not forloop.last %} | {% endif %}
 					{% else %}			
 						{% if link.args %}
-							<li><a href="{% dynurl link.view link.args %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+							<a href="{% dynurl link.view link.args %}">{{ link.text }}</a>{% if not forloop.last %} | {% endif %}
 						{% else %}
-							<li><a href="{% dynurl link.view object.id %}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+							<a href="{% dynurl link.view object.id %}">{{ link.text }}</a>{% if not forloop.last %} | {% endif %}
 						{% endif %}
 					{% endif %}
 				{#{% endif %}#}
 			{% else %} 
 				{% if link.url %}
-				<li><a href="{{ link.url }}">{{ link.text }}<img src="{{ link.icon }}" /></a></li>
+				<a href="{{ link.url }}">{{ link.text }}</a>{% if not forloop.last %} | {% endif %}
 				{% endif %}
 			{% endif %}
 		{% endfor %}			
+
+
+{% comment %}
+		{% for link in record_links %}
+			{% if link.view %}
+				{#{% if not link.view|login_required or user.is_authenticated %}#}
+					{% if wrapper_object %}
+						<a href="{% dynurl data.view wrapper_object.id %}">{{ link.text }}<img src="{{ link.icon }}" /></a>{% if not forloop.last %} | {% endif %}
+					{% else %}			
+						{% if link.args %}
+							<a href="{% dynurl link.view link.args %}">{{ link.text }}<img src="{{ link.icon }}" /></a>{% if not forloop.last %} | {% endif %}
+						{% else %}
+							<a href="{% dynurl link.view object.id %}">{{ link.text }}<img src="{{ link.icon }}" /></a>{% if not forloop.last %} | {% endif %}
+						{% endif %}
+					{% endif %}
+				{#{% endif %}#}
+			{% else %} 
+				{% if link.url %}
+				<a href="{{ link.url }}">{{ link.text }}<img src="{{ link.icon }}" /></a>{% if not forloop.last %} | {% endif %}
+				{% endif %}
+			{% endif %}
+		{% endfor %}			
+{% endcomment %}

@@ -3,37 +3,37 @@
 {% block title %} :: {% if object %}{% trans 'Edit' %}{% else %}{% trans 'Create' %}{% endif %} {{ title }} {{ object }}{% endblock %}
 {% block banner %}<div id="banner"><h2>{% if object %}{% trans 'Edit' %}{% else %}{% trans 'Create' %}{% endif %} {{ title }}</h2></div>{% endblock %}
 {% block content %}
+		{{ form.media|safe }}              
 
-{% if object %}
-<h3><a href="{{ object.get_absolute_url }}">{{ object }}</a></h3>
-{% endif %}
-
-<div class="data-entry">
-<form method="post" action="">{% csrf_token %}
-	<table>
-                <thead>
-                        <tr>
-                                <td colspan=10>
-                                        {% trans 'Data entry' %}
-                                </td>
-                        </tr>
-                </thead>
-                <tfoot>
-                        <tr>
-                                <td colspan=2>
-                                        <input type="submit" value="{% trans 'Submit' %}" />
-                                </td>
-                        </tr>
-                </tfoot>
-                <tbody>
+            <h2 class="title">
+                {% if object %}
+                    <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+                {% else %}
+                    {% trans 'Create' %}
+                {% endif %}                
+            
+            </h2>
+            <div class="inner">
+              <form action="" method="post" class="form">{% csrf_token %}
 					{% for field in form %}
-					<tr><th>{{ field.label_tag }}: </th><td>{{ field.errors }}{{ field }}{% if field.field.required %} ({% trans 'required' %}){% endif %}{% if field.help_text %}<br />{{ field.help_text }}{% endif %}</td></tr>
+                        <div class="group">
+                        {% if field.errors %}<div class="fieldWithErrors">{% endif %}
+                          <label class="label">{{ field.label_tag }}</label>{% if field.field.required %} ({% trans 'required' %}){% endif %}
+                          <span class="error">{{ field.errors }}</span>
+                        {% if field.errors %}</div>{% endif %} 
+                            <div class='text_field'>{{ field }}</div>
+                          {#<input type="text" class="text_field" />#}
+                          {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
+                        </div>
 					{% endfor %} 
-
-					{{ form.media|safe }}
-                </tbody>
-        </table>
-</form>
-</div>
-
+                <div class="group navform wat-cf">
+                  <button class="button" type="submit">
+                    <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% trans 'Save' %}" /> {% trans 'Save' %}
+                  </button>
+                  <a href="#header" class="button">
+                    <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/cross.png" alt="{% trans 'Cancel' %}"/> {% trans 'Cancel' %}
+                  </a>
+                </div>
+              </form>
+            </div>
 {% endblock %}

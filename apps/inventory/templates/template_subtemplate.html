@@ -1,30 +1,41 @@
 {% load i18n %}
-<center>
-<div class="data-entry" >
-	<table>
-		<thead>
-			<tr>
-				<td colspan='2'>
-					{% trans 'Item template data' %}
-				</td>
-			</tr>
-		</thead>	
-		<tbody>
-			<tr>
-				<th>{% trans 'Description' %}:</th><td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
-			</tr><tr>
-				<th>{% trans 'Brand' %}:</th><td>{{ object.brand }}</td>
-			</tr><tr>
-				<th>{% trans 'Model' %}:</th><td>{{ object.model }}</td>
-			</tr><tr>
-				<th>{% trans 'Part number' %}:</th><td>{{ object.part_number }}</td>
-			</tr><tr>
-				<th>{% trans 'Notes/observations' %}:</th><td>{{ object.notes }}</td>
-			</tr>
-			<tr>
-				<th>{% trans 'Related supplies' %}:</th><td><ul>{% for i in object.supplies.all %}<li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>{% endfor %}</ul></td>
-			</tr>
-		</tbody>
-	</table>
+<h3>{% trans 'Item template data' %}</h3>
+
+<div class="inner">
+  <form action="" method="post" class="form">{% csrf_token %}
+
+            <div class="group">
+              <label class="label">{% trans 'Description' %}</label>
+                <input type="text" value="{{ object.description }}" class="text_field" />
+            </div>
+
+            <div class="group">
+              <label class="label">{% trans 'Brand' %}</label>
+                <input type="text" value="{{ object.brand }}" class="text_field" />
+            </div>
+
+            <div class="group">
+              <label class="label">{% trans 'Model' %}</label>
+                <input type="text" value="{{ object.model }}" class="text_field" />
+            </div>
+
+            <div class="group">
+              <label class="label">{% trans 'Part number' %}</label>
+                <input type="text" value="{{ object.part_number }}" class="text_field" />
+            </div>
+            
+            <div class="group">
+              <label class="label">{% trans 'Notes' %}</label>
+              <textarea class="text_area" rows="10" cols="80">{{ object.notes }}</textarea>
+            </div>
+            
+            <div class="group">
+              <label class="label">{% trans 'Related supplies' %}</label>
+                <ul>{% for i in object.supplies.all %}<li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>{% endfor %}</ul>
+            </div>
+
+
+    <div class="group navform wat-cf">
+    </div>
+  </form>
 </div>
-</center>

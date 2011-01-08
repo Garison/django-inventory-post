@@ -1,31 +1,36 @@
 {% load i18n %}
-<center>
-<div class="data-entry" >
-	<table>
-		<thead>
-			<tr>
-				<td colspan='2'>
-					{% trans 'Item specific data' %}
-				</td>
-			</tr>
-		</thead>	
-		<tbody>
-			<tr>
-				<th>{% trans 'Asset number' %}:</th><td>{{ object.property_number }}</td>
-			</tr>
-			<tr>
-				<th>{% trans 'Notes' %}:</th><td>{{ object.notes }}</td>
-			</tr>
-			<tr>
-				<th>{% trans 'Serial number' %}:</th><td>{{ object.serial_number }}</td>
-			</tr>
-			<tr>
-				<th>{% trans 'Location' %}:</th><td>{{ object.location }}</td>
-			</tr>
-			<tr>
-				<th>{% trans 'Assigned to' %}:</th><td><ul>{% for i in object.get_owners %}<li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>{% endfor %}</ul></td>
-			</tr>
-		</tbody>
-	</table>
+
+<h3>{% trans 'Asset details' %}</h3>
+<div class="inner">
+  <form action="" method="post" class="form">{% csrf_token %}
+
+            <div class="group">
+              <label class="label">{% trans 'Asset number' %}</label>
+                <input type="text" value="{{ object.property_number }}" class="text_field" />
+            </div>
+
+            <div class="group">
+              <label class="label">{% trans 'Serial number' %}</label>
+                <input type="text" value="{{ object.serial_number }}" class="text_field" />
+            </div>
+
+            <div class="group">
+              <label class="label">{% trans 'Location' %}</label>
+                <input type="text" value="{{ object.location }}" class="text_field" />
+            </div>
+
+            <div class="group">
+              <label class="label">{% trans 'Notes' %}</label>
+              <textarea class="text_area" rows="10" cols="80">{{ object.notes }}</textarea>
+            </div>
+
+            <div class="group">
+              <label class="label">{% trans 'Assigned to' %}</label>
+                <ul>{% for i in object.get_owners %}<li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>{% endfor %}</ul>
+            </div>
+
+
+    <div class="group navform wat-cf">
+    </div>
+  </form>
 </div>
-</center>

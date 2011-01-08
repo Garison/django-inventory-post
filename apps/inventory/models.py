@@ -118,7 +118,7 @@ class ItemManagerPassthru(models.Manager):
 class Item(models.Model):
     item_template = models.ForeignKey(ItemTemplate, verbose_name=_(u"item template"))
     property_number = models.CharField(verbose_name=_(u"Asset number"), max_length=10)
-    notes = models.TextField(verbose_name=_(u"Notes/Observations"), null=True, blank=True)	
+    notes = models.TextField(verbose_name=_(u"Notes"), null=True, blank=True)	
     serial_number = models.CharField(verbose_name=_(u"Serial number"), max_length=30, null=True, blank=True)
     location = models.ForeignKey(Location, verbose_name=_(u"Location"), null=True, blank=True)
     active = models.BooleanField(default=True)

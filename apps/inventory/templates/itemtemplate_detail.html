@@ -1,27 +1,17 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block keywords %}
-{% endblock %}
 {% block title %} :: {% trans 'Template details' %} {{ object }}{% endblock %}
 {% load generic_views_helpers %}
-
-{% block banner %}<div id="banner"><h2>{% trans 'Template details' %}</h2></div>{% endblock %}
 {% block content %}
 
-<h3>{{ object }}</h3>
+<h2>{{ object }}</h2>
 
 {% include "template_subtemplate.html" %}
 
 {% include "generic_photos_subtemplate.html" %}
 
-<div class='userbar'>
-	<div style='font-size:100%;'>
-		<ul>
-			{#{% if not "template_create"|login_required or user.is_authenticated %}#}
-			<li><a href="{% url template_create %}">{% trans 'Create new' %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
-			{#{% endif %}#}
-			{% include "generic_navigation.html" %}
-		</ul>
-	</div>
-</div>	
+{#{% if template_create %}#}
+    <a href="{% url template_create %}">{% trans 'Create new' %}</a> | 
+{#{% endif %}#}
+{% include "generic_navigation.html" %}
 {% endblock %}

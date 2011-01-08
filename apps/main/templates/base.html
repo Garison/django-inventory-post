@@ -24,42 +24,26 @@
         {#<link type="text/css" rel="stylesheet" media="all" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/themes/default/style.css" />#}
         
 		{% comment %}<link rel="shortcut icon" type="image/png" href="{{ MEDIA_URL }}images/" />{% endcomment %}
-		<link href="{{ MEDIA_URL }}css/base.css" rel="stylesheet" type="text/css" media="screen" />
-		{#<link href="{{ MEDIA_URL }}css/print.css" rel="stylesheet" type="text/css" media="print" />#}
+		{#<link href="{{ MEDIA_URL }}css/base.css" rel="stylesheet" type="text/css" media="screen" />#}
 
 		{#<script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-1.3.1.min.js"></script>#}
 
 		<script type="text/javascript">
-		sfHover = function() {
-			var sfEls = document.getElementById("nav").getElementsByTagName("LI");
-			for (var i=0; i<sfEls.length; i++) {
-				sfEls[i].onmouseover=function() {
-					this.className+=" sfhover";
-				}
-				sfEls[i].onmouseout=function() {
-					this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
-				}
-			}
-		}
+            $(document).ready(function() {
+                $("form").submit(function() {
+                    $('input:submit', this).attr("value", "{% trans 'Please wait...' %}");
+                    $('input:submit', this).attr("disabled", "disabled");
+                    return true;
+                });
+            
+                $().ajaxSend(function(r,s){
+                    $("#loading").show();
+                });
 
-		$(document).ready(function() {
-			$("form").submit(function() {
-				$('input:submit', this).attr("value", "{% trans 'Please wait...' %}");
-				$('input:submit', this).attr("disabled", "disabled");
-				return true;
-			});
-		
-			//suckerfish	
-			if (window.attachEvent) window.attachEvent("onload", sfHover);
-
-			$().ajaxSend(function(r,s){
-				$("#loading").show();
-			});
-
-			$().ajaxStop(function(r,s){
-				$("#loading").fadeOut("fast");
-			});
-		});
+                $().ajaxStop(function(r,s){
+                    $("#loading").fadeOut("fast");
+                });
+            });
 		</script>
 		{% block javascript %}{% endblock %}
 	</head>
@@ -67,18 +51,14 @@
     
         <div id="container">
             <div id="header">
-                <h1><a href="index.html">{% project_name %}</a></h1>
+                <h1><a href="{% url home %}">{% project_name %}</a></h1>
                     <div id="user-navigation">
                         <ul class="wat-cf">
                             <li><strong>{% trans 'User' %}:</strong>
                                 {% if user.is_anonymous %}
                                     {% trans 'Anonymous' %}
-                                    <input type="hidden" id="auth_user" value="" />
-                                    <a href="{% url user_login %}?next={{ request.get_full_path }}">({% trans 'Login' %})</a>
                                 {% else %}
                                     {{ user }}
-                                    <input type="hidden" id="auth_user" value="{{ user }}" />
-                                    <a href="{% url user_logout %}">({% trans 'Logout' %})</a>
                                     <a href="{% url user_me_password_change %}">({% trans 'New password' %})</a>
                                 {% endif %}
                             </li>
@@ -89,7 +69,7 @@
                                     <a href="{% url set_language %}?language=es"><img src='{{ MEDIA_URL }}images/flag-pr.png' alt="PR-flag" /> {% trans 'Spanish' %}</a>
                                 {% endifequal %}                        
                             </li>
-                            <li><a class="logout" href="#">Logout</a></li>
+                            <li><a class="logout" href="{% if user.is_anonymous %}{% url user_login %}?next=/{% else %}{% url user_logout %}{% endif %}">{% if user.is_anonymous %}{% trans 'Login' %}{% else %}{% trans 'Logout' %}{% endif %}</a></li>
                         </ul>
                     </div>
 
@@ -102,175 +82,54 @@
                         </ul>
                     </div>
             </div>
+            <div class="block" id="block-text">
+                <div id="wrapper" class="wat-cf">
+                    <div id="main">
+                        <div class="block" id="block-text">                    
+                            <div class="secondary-navigation">
+                                <ul class="wat-cf">
+                                    {% for link in navigation_secondary_links %}
+                                        <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}</a></li>
+                                    {% endfor %}                            
+                                </ul>
+                            </div>                    
+                            <div class="content">
+                                {% if messages %}
 
-            <div id="wrapper" class="wat-cf">
-                <div id="main">
-                    <div class="block" id="block-text">                    
-                        <div class="secondary-navigation">
-                            <ul class="wat-cf">
-                                {% for link in navigation_secondary_links %}
-                                    <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}</a></li>
-                                {% endfor %}                            
-                            </ul>
-                        </div>                    
+                                     <div class="inner">
+
+                                      <div class="flash">
+                                    {% for message in messages %}
+
+                                        <div class="message {% if message.tags %}{{ message.tags }}{% else %}notice{% endif %}">
+                                          <p>{{ message }}<a href="#" onclick="$(this).parent().parent().fadeOut(); return false;">{% trans 'ok' %}</a></p>
+                                          
+                                        </div>
+              
+                                    {% endfor %}
+                                    </div>
+                                    </div>
+                                {% endif %}
+                                {% block content %}{% endblock %}
+                            </div>
+                        </div>  
+                        <div id="footer">
+                            <div class="block">
+                                <p>Copyright &copy; 2007 Roberto Rosario.</p>
+                            </div>
+                        </div>
                     </div>                    
                 </div>                    
-            </div>                    
-
+            </div>
         </div>
-
-    
-        
-        <div id="loading">
-		{% trans 'Loading' %}...<img src="{{ MEDIA_URL }}images/loading.gif" alt="" />
-		</div>
-		<div id="container">
-			<div id="header" style='float: none;'>
-				<div id='info-box' style='float: right;'>
-					<div id="userbox">
-						<strong>{% trans 'User' %}:</strong>
-						{% if user.is_anonymous %}
-							{% trans 'Anonymous' %}
-							<input type="hidden" id="auth_user" value="" />
-							<a href="{% url user_login %}?next={{ request.get_full_path }}">({% trans 'Login' %})</a>
-						{% else %}
-							{{ user }}
-							<input type="hidden" id="auth_user" value="{{ user }}" />
-							<a href="{% url user_logout %}">({% trans 'Logout' %})</a>
-							<a href="{% url user_me_password_change %}">({% trans 'New password' %})</a>
-						{% endif %}
-						{% ifequal LANGUAGE_CODE 'es' %}
-							<a href="{% url set_language %}?language=en"><img src='{{ MEDIA_URL }}images/flag-us.png' alt="US-flag" /> {% trans 'English' %}</a>
-						{% else %}
-							<a href="{% url set_language %}?language=es"><img src='{{ MEDIA_URL }}images/flag-pr.png' alt="PR-flag" /> {% trans 'Spanish' %}</a>
-						{% endifequal %}
-					</div>
-					<div id='searchbox'>
-
-                    <form action='{% url search %}' method='get'>
-                        <input id="keyword" type="text" name="keyword" maxlength="64" />
-                        <input type="submit" value="{% trans 'Search' %}" />
-                    </form>
-					</div>
-				</div> <!-- end infobox -->
-
-					<div id="nav-spacer">
-					&nbsp;
-					</div>
-					<div id="nav">			
-						<ul>
-							<li style="width: 6em;"><a href="{% url home %}">{% trans "Home" %}<img src="{{ MEDIA_URL }}images/go-home.png" /></a></li>
-							<li style="width: 7em;"><a href="{% url person_list %}">{% trans "Users" %}<img src="{{ MEDIA_URL }}images/system-users.png" /></a>
-								<ul>
-									<li><a href="{% url person_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
-									{% if user.is_authenticated %}
-									<li><a href="{% url person_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/contact-new.png" /></a></li>
-									{% endif %}
-								</ul>
-							</li>
-
-                            <li style="width: 9em;"><a class='parent' href="{% url template_list %}">{% trans "Templates" %}<img src="{{ MEDIA_URL }}images/font-x-generic.png" /></a>
-                                <ul>
-                                    <li><a href="{% url template_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
-                                    {% if user.is_authenticated %}
-                                    <li><a href="{% url template_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
-                                    {% endif %}
-                                    <li><a href="{% url template_orphans_list %}">{% trans "Orphan" %}</a></li>
-                                </ul>
-                            </li>
-
-							<li style="width: 7em;"><a href="{% url item_list %}">{% trans "Assets" %}<img src="{{ MEDIA_URL }}images/computer.png" /></a>
-								<ul>
-									<li><a href="{% url item_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
-									{% if user.is_authenticated %}
-									<li><a href="{% url item_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
-									{% endif %}
-									<li><a href="{% url item_orphans_list %}">{% trans "Orphan" %}</a></li>
-									<li style="width: 7em;"><a class='parent' href="{% url group_list %}">{% trans "States" %}</a>
-										<ul>
-                                            {% get_all_states as states %}
-                                            {% for state in states %}
-                                                <li style=""><a href="{% url item_state_list state.id %}">{% blocktrans with state.name as state %}View all '{{ state }}'{% endblocktrans %}</a></li>
-                                            {% endfor %}
-                                        
-                                        </ul>
-                                    </li>
-
-
-									{#<li><a href="{% url retireditem_list %}">{% trans "Retired" %}<img src="{{ MEDIA_URL }}images/user-trash.png" /></a></li>#}
-									{#<li><a href="{% url inrepairsitem_list %}">{% trans "In repairs" %}<img src="{{ MEDIA_URL }}images/broken-computer.png" /></a></li>#}
-
-									<li style="width: 7em;"><a class='parent' href="{% url group_list %}">{% trans "Groups" %}<img src="{{ MEDIA_URL }}images/network-workgroup.png" /></a>
-										<ul>
-											<li><a href="{% url group_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
-											{% if user.is_authenticated %}									
-											<li><a href="{% url group_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
-											{% endif %}
-										</ul>
-									</li>
-
-
-									
-								</ul>
-							</li>
-
-                          
-                            <li><a href="#">{% trans "Inventory" %}<img src="{{ MEDIA_URL }}images/package-x-generic.png" /></a>
-                                <ul>
-									<li><a style="width: 10em;" href="{% url inventory_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/package-x-generic.png" /></a></li>
-
-									<li style="width: 7em;"><a class='parent' href="{% url inventory_transaction_list %}">{% trans "Transactions" %}</a>
-										<ul>
-											<li><a href="{% url inventory_transaction_list %}">{% trans "View all" %}<img src="{{ MEDIA_URL }}images/video-display.png" /></a></li>
-											{% if user.is_authenticated %}
-											<li><a href="{% url inventory_transaction_create %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
-											{% endif %}
-										</ul>
-									</li>
-
-								</ul>
-							</li>
-							<li style="width: 10em;"><a href="#">{% trans "Tools" %}<img src="{{ MEDIA_URL }}images/preferences-system.png" /></a>
-								<ul>
-									<li><a style="width: 10em;" href="{% url location_list %}">{% trans "Locations" %}<img src="{{ MEDIA_URL }}images/view-fullscreen.png" /></a></li>
-									<li><a style="width: 10em;" href="{% url state_list %}">{% trans "States" %}</a></li>
-									{% if user.is_staff %}
-									<li><a style="width: 10em;" href="{% url settings %}">{% trans "Settings" %}<img src="{{ MEDIA_URL }}images/emblem-system.png" /></a></li>
-									{% endif %}
-								</ul>
-							</li>
-
-{% comment %}				{% if user.is_staff %}
-							<li style="width: 8em;"><a href="/admin">{% trans "Users" %}<img src="{{ MEDIA_URL }}images/preferences-desktop.png" /></a></li>
-							{% endif %}
-{% endcomment %}
-							<li style="width: 3em;"><a href="{% url about %}">{% trans "About" %}<img src="{{ MEDIA_URL }}images/dialog-information.png" /></a></li>
-						</ul>	
-					</div>	<!-- Nav -->		
-				</div> <!-- left box -->
-			</div> <!-- Header -->
-			<div style='float: right; width: 100%;'>
-			{% block banner %}{% endblock %}		
-			</div>
-		</div>		<!-- container -->
-		<div id="content-container">
-			<div id="content">
-				{% if messages %}
-				<ul id="flashmessages">
-					{% for message in messages %}
-						<li id="flashmessage"><a href="#" onclick="$(this).parent().fadeOut(); return false;">{% trans 'ok' %}</a>
-							<img src='{{ MEDIA_URL }}images/internet-group-chat.png' alt='message'/>&nbsp;&quot;{{ message }}&quot;
-						</li>
-					{% endfor %}
-				</ul>
-				{% endif %}
-				{% block content %}{% endblock %}
-
-			</div>
-			<div id="footer">
-				<hr />
-				{% block footer %}{% endblock %}
-			</div> <!-- END #footer -->
-		</div>	<!-- END #container -->
+        {#<div id="loading">#}
+		{#{% trans 'Loading' %}...<img src="{{ MEDIA_URL }}images/loading.gif" alt="" />#}
+		{#</div>#}
+       
+        {% comment %}
+        <div style='float: right; width: 100%;'>
+        {% block banner %}{% endblock %}		
+        </div>
+        {% endcomment %}
 	</body>
 </html>

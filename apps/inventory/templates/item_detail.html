@@ -8,7 +8,7 @@
 
 {% block banner %}<div id="banner"><h2>{% trans 'Details for' %} {{ title }}</h2></div>{% endblock %}
 {% block content %}
-<h3>{{ subtitle }}</h3>
+<h2>{{ subtitle }}</h2>
 
 <h3>
 <ul>
@@ -17,6 +17,16 @@
 {% endfor %}
 </ul>
 </h3>
+
+{% include 'item_subtemplate.html' %}
+
+{% with item_photos_title as title %}
+    {% include 'generic_photos_subtemplate.html' %}
+{% endwith %}
+
+{% include 'state_subtemplate.html' %}
+{% comment %}
+<br />
 
 {% with template as object %}
     {% include "template_subtemplate.html" %}
@@ -27,28 +37,11 @@
     {% include 'generic_photos_subtemplate.html' %}
 {% endwith %}
 {% endwith %}
+{% endcomment %}
 
 <br />
-
-{% include 'item_subtemplate.html' %}
-
-{% with item_photos_title as title %}
-    {% include 'generic_photos_subtemplate.html' %}
-{% endwith %}
-
-{% include 'state_subtemplate.html' %}
-
-<br />
-<div class='userbar'>
-	<div style='font-size:100%;'>
-		<ul>
-			{#{% if not "item_create"|login_required or user.is_authenticated %}#}
-			{% if item_create %}
-			<li><a href="{% url item_create %}">{% trans 'Create new' %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
-			{% endif %}
-			{#{% endif %}#}
-			{% include "generic_navigation.html" %}
-		</ul>
-	</div>
-</div>	
+{#{% if item_create %}#}
+<a href="{% url item_create %}">{% trans 'Create new' %}</a> | 
+{#{% endif %}#}
+{% include "generic_navigation.html" %}
 {% endblock %}

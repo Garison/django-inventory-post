@@ -89,8 +89,10 @@ def generic_delete(*args, **kwargs):
         kwargs['post_delete_redirect'] = reverse(kwargs['post_delete_redirect'])
     except NoReverseMatch:
         pass
+
+    kwargs['extra_context']['delete_view'] = True
   
-    return delete_object(template_name='generic_delete.html', *args, **kwargs)
+    return delete_object(template_name='generic_confirm.html', *args, **kwargs)
 
 def generic_confirm(request, _view, _title=None, _model=None, _object_id=None, _message='', *args, **kwargs):
     if request.method == 'POST':

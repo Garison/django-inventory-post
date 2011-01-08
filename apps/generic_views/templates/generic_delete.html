@@ -1,18 +1,33 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block title %} :: {% trans 'Confirm delete' %}{% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Confirm delete' %}</h2></div>{% endblock %}
 {% block content %}
-    <form action="" method="post" class="uniForm">{% csrf_token %}
-        {% if next %}
-            <input name='next' type='hidden' value='{{ next }}' />
-        {% endif %}
 
-        <h3>{% blocktrans %}Are you sure you wish to delete: {{ object }}?{% endblocktrans %}</h3>
-        <center><h4>{{ message }}</h4>
-        <br />
-        <input type="button" value="{% trans 'No' %}" class="btn" ONCLICK='{% if previous %}window.location.replace("{{ previous }}");{% else %}history.go(-1){% endif %}' />
-        <input type="submit" value="{% trans 'Yes' %}" class="" />
-        </center>
-   </form>
+
+    <div id="box">
+      <div class="block" id="block-login">
+        <h2>{% trans 'Confirm delete' %}</h2>
+        <div class="content login">
+          <form action="." method="post" class="form login">{% csrf_token %}
+            {% if next %}
+                <input name='next' type='hidden' value='{{ next }}' />
+            {% endif %}          
+
+            <h3>{% blocktrans %}Are you sure you wish to delete: {{ object }}?{% endblocktrans %}</h3>
+            <h4>{{ message }}</h4>
+
+            <div class="group navform wat-cf">        
+              <button class="button" type="submit">
+                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% trans 'Yes' %}" /> {% trans 'Yes' %}
+              </button>
+              <a href="#header" class="button">
+                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/cross.png" ONCLICK='{% if previous %}window.location.replace("{{ previous }}");{% else %}history.go(-1){% endif %}' alt="{% trans 'No' %}"/> {% trans 'No' %}
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
 {% endblock %}
