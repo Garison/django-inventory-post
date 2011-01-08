@@ -9,19 +9,22 @@ from inventory import navigation
 register = Library()
 
 
-def process_links(links, view_name):
+def process_links(links, view_name, url):
     items = []
     active_item = None
     for item, count in zip(links, range(len(links))):
         item_view = 'view' in item and item['view']
-        if view_name == item_view:
+        item_url = 'url' in item and item['url']
+        if view_name == item_view or url == item_url:
             active = True
             active_item = item
         else:
             active = False
             if 'links' in item:
                 for child_link in item['links']:
-                    if view_name == child_link['view']:
+                    child_view = 'view' in child_link and child_link['view']
+                    child_url = 'url' in child_link and child_link['url']
+                    if view_name == child_view or url == child_url:
                         active = True
                         active_item = item                
             
@@ -29,7 +32,7 @@ def process_links(links, view_name):
             {
                 'first':count==0,
                 'active':active,
-                'url':item_view and reverse(item_view) or '#',
+                'url':item_view and reverse(item_view) or item_url or '#',
                 'text':unicode(item['text']),
             }
         )
@@ -44,10 +47,10 @@ class NavigationNode(Node):
         request = Variable('request').resolve(context)
         view_name = resolve_to_name(request.META['PATH_INFO'])
 
-        main_items, active_item = process_links(links=self.navigation, view_name=view_name)
+        main_items, active_item = process_links(links=self.navigation, view_name=view_name, url=request.META['PATH_INFO'])
         context['navigation_main_links'] = main_items
         if active_item and 'links' in active_item:
-            secondary_links, active_item = process_links(links=active_item['links'], view_name=view_name)
+            secondary_links, active_item = process_links(links=active_item['links'], view_name=view_name, url=request.META['PATH_INFO'])
             context['navigation_secondary_links'] = secondary_links
         return ''                
 
