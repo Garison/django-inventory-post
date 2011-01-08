@@ -41,7 +41,11 @@
 
 <br />
 {#{% if item_create %}#}
-<a href="{% url item_create %}">{% trans 'Create new' %}</a> | 
+                        <div class="actions-bar wat-cf">
+                            <div class="pagination">
+<a href="{% url item_create %}">{% trans 'Create new' %}</a>
+</div>
+</div>
 {#{% endif %}#}
 {% include "generic_navigation.html" %}
 {% endblock %}

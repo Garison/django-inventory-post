@@ -1,17 +1,16 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% load project_tags %}
-{% block javascript %}
-{% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Home' %}</h2></div>{% endblock %}
 {% block content %}
-<br /><br />
-<center>
-<strong>{% trans "Statistics" %}</strong><br>
-{% trans "Users" %}: {{ person.count }}<br />
-{% trans "Items" %}: {{ item.count }}<br />
-{% trans "Retired items" %}: {{ retired.count }}<br />
-{% trans "Templates" %}: {{ template.count }}<br />
-</center>
+<div class="block">
+          <h3>{% trans "Statistics" %}</h3>
+          <div class="content">
+            <p>
+                {% trans "Users" %}: {{ person.count }}<br />
+                {% trans "Items" %}: {{ item.count }}<br />
+                {% trans "Retired items" %}: {{ retired.count }}<br />
+                {% trans "Templates" %}: {{ template.count }}<br />
+            </p>
+          </div>
+        </div>
 
 {% endblock %}

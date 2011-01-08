@@ -26,7 +26,13 @@
 
             <div class="group">
               <label class="label">{% trans 'Assigned to' %}</label>
-                <ul>{% for i in object.get_owners %}<li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>{% endfor %}</ul>
+                <ul>
+                    {% for i in object.get_owners %}
+                        <li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>
+                    {% empty %}
+                        <li>{% trans 'Nobody' %}</li>
+                    {% endfor %}
+                </ul>
             </div>
 
 

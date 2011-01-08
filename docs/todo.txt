@@ -6,13 +6,13 @@
 # Implement django photologue and improve custom photo app              - DONE
 # Use new django messages system                                        - DONE
 # Eliminate inrepair/retired and implement user defined 'item states'   - DONE
-# Fix html and make it compliant (Remove <CENTER>, etc)
+# Fix html and make it compliant (Remove <CENTER>, etc)                 - DONE
+# Skinable interface                                                    - DONE
 # Transfer items from one inventory to another
 # Transfer asset from/to users
 # Add clear button to filter by form in generic_list or substitue
     '----' to 'Any' in filter drop down
 # Use django reversion for changelogs
-# Skinable interface
 # Suppliers object
 # Add reporting/hard copies
 # Supply reorder thresholds

@@ -5,6 +5,9 @@
 {% block banner %}<div id="banner"><h2>{% blocktrans %}List of {{ title }}{% endblocktrans %}</h2></div>{% endblock %}
 {% block content %}
 
+{% if filter_form %}
+{% include "filter_form_subtemplate.html" %}	
+{% endif %}
 
 <h2 class="title">{% trans 'List of' %} {{ title }}</h2>
     <div class="inner">
@@ -14,7 +17,11 @@
             <tfoot>
                 <tr>
                     <th colspan='15' class='tc'>
-                        <a href="{% dynurl create_view %}">{% trans "Create new" %}</a>
+                        <div class="actions-bar wat-cf">
+                            <div class="pagination">
+                                <a href="{% dynurl create_view %}">{% trans "Create new" %}</a>
+                            </div>
+                        </div>
                     </th>
                 </tr>
             </tfoot>
@@ -23,7 +30,7 @@
           <tr>
             <th class="first">{% trans 'Identifier' %}</th>
             {% if record_links %}
-                <th class="last">{% trans 'Action' %}</th>
+                <th class="last">&nbsp;</th>
             {% else %}
                 <th class="last">&nbsp;</th>
             {% endif %}
