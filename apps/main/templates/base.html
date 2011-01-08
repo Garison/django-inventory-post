@@ -85,7 +85,7 @@
                                     {% for link in navigation_secondary_links %}
                                         <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}</a></li>
                                     {% endfor %}     
-                                    {% block secondary_link %}{% endblock %}                       
+                                    {% block secondary_links %}{% endblock %}                       
                                 </ul>
                             </div>                    
                             <div class="content">
