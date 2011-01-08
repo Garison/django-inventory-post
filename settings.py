@@ -88,6 +88,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'middleware.login_required_middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'urls'
@@ -127,6 +128,31 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 GRAPPELLI_ADMIN_TITLE = PROJECT_TITLE
 
 LOGIN_URL = '/login/'
+
+#===== LoginRequiredMiddleware =============
+#Instead of /accounts/login/?.... blah....
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+#AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+
+LOGIN_EXEMPT_URLS = (
+    r'^favicon\.ico$',
+    r'^about\.html$',
+    r'^legal/', # allow the entire /legal/* subsection
+    r'^site_media/',
+
+    r'^accounts/register/$',
+    r'^accounts/register/complete/$',
+    r'^accounts/register/closed/$',
+
+    r'^accounts/activate/complete/',
+    r'^accounts/activate/(?P<activation_key>\w+)/$',
+
+    r'^password/reset/$',
+    r'^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
+    r'^password/reset/complete/$',
+    r'^password/reset/done/$',
+)
 
 try:
     from settings_local import *
