@@ -42,7 +42,7 @@ def person_assign_remove_item(request, object_id):
 
     return generic_assign_remove(
         request,
-        title=_(u'Assign assets to the person: <a href="%s">%s</a>' % (person.get_absolute_url(), person)),
+        title=_(u'Assign assets to the person: <a href="%(url)s">%(obj)s</a>' % {'url':person.get_absolute_url(), 'obj':person}),
         obj=person,
         left_list_qryset=Item.objects.exclude(person=object_id), 
         right_list_qryset=person.inventory.all(), 
@@ -59,7 +59,7 @@ def supplier_assign_remove_itemtemplates(request, object_id):
 
     return generic_assign_remove(
         request,
-        title=_(u'Assign templates to the supplier: <a href="%s">%s</a>' % (obj.get_absolute_url(), obj)),
+        title=_(u'Assign templates to the supplier: <a href="%(url)s">%(obj)s</a>' % {'url':obj.get_absolute_url(), 'obj':obj}),
         obj=obj,
         left_list_qryset=ItemTemplate.objects.exclude(suppliers=obj), 
         right_list_qryset=obj.itemtemplate_set.all(), 
@@ -75,7 +75,7 @@ def template_assign_remove_supply(request, object_id):
 
     return generic_assign_remove(
         request,
-        title=_(u'Assign supplies to the template: <a href="%s">%s</a>' % (obj.get_absolute_url(), obj)),        
+        title=_(u'Assign supplies to the template: <a href="%(url)s">%(obj)s</a>' % {'url':obj.get_absolute_url(), 'obj':obj}),        
         obj=obj,
         left_list_qryset=ItemTemplate.objects.exclude(supplies=obj).exclude(pk=obj.pk),
         right_list_qryset=obj.supplies.all(),
@@ -91,7 +91,7 @@ def template_assign_remove_suppliers(request, object_id):
 
     return generic_assign_remove(
         request,
-        title=_(u'Assign suppliers to the template: <a href="%s">%s</a>' % (obj.get_absolute_url(), obj)),        
+        title=_(u'Assign suppliers to the template: <a href="%(url)s">%(obj)s</a>' % {'url':obj.get_absolute_url(), 'obj':obj}),        
         obj=obj,
         left_list_qryset=Supplier.objects.exclude(itemtemplate=obj),
         right_list_qryset=obj.suppliers.all(),
@@ -131,7 +131,7 @@ def item_assign_remove_person(request, object_id):
 
     return generic_assign_remove(
         request,
-        title=_(u'Assign people to the asset: <a href="%s">%s</a>' % (obj.get_absolute_url(), obj)),                
+        title=_(u'Assign people to the asset: <a href="%(url)s">%(obj)s</a>' % {'url':obj.get_absolute_url(), 'obj':obj}),        
         obj=obj,
         left_list_qryset=obj.get_nonowners(),
         right_list_qryset=obj.get_owners(),
@@ -299,7 +299,7 @@ def group_assign_remove_item(request, object_id):
 
     return generic_assign_remove(
         request,
-        title=_(u'Assign assets to the group: <a href="%s">%s</a>' % (obj.get_absolute_url(), obj)),                
+        title=_(u'Assign assets to the group: <a href="%(url)s">%(obj)s</a>' % {'url':obj.get_absolute_url(), 'obj':obj}),
         obj=obj,
         left_list_qryset=Item.objects.exclude(itemgroup=obj),
         right_list_qryset=obj.items.all(),

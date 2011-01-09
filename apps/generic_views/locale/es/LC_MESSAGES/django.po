@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-05 14:12-0400\n"
-"PO-Revision-Date: 2011-01-05 14:18\n"
+"POT-Creation-Date: 2011-01-09 17:33-0400\n"
+"PO-Revision-Date: 2011-01-09 17:34\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,131 +19,130 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: views.py:149
+#: views.py:144
 #, python-format
-msgid "The %s were added."
-msgstr "Los %s fueron agregados."
+msgid "The selected %s were added."
+msgstr "Los %s seleccionados fueron agregados."
 
-#: views.py:155
+#: views.py:150
 #, python-format
-msgid "The %s were removed."
-msgstr "Los %s fueron removidos."
+msgid "The selected %s were removed."
+msgstr "Los %s seleccionados fueron removidos."
 
-#: templates/filter_form_subtemplate.html:8
-msgid "Filter list by:"
+#: templates/filter_form_subtemplate.html:6
+msgid "Filter list by"
 msgstr "Filtrar la lista por"
 
-#: templates/filter_form_subtemplate.html:15 templates/generic_form.html:24
+#: templates/filter_form_subtemplate.html:12 templates/generic_form.html:20
+msgid "required"
+msgstr "requerido"
+
+#: templates/filter_form_subtemplate.html:21
 msgid "Submit"
 msgstr "Enviar"
 
-#: templates/generic_assign_remove.html:5
+#: templates/generic_assign_remove.html:3
 #, python-format
 msgid "Assign %(title)s %(object)s"
 msgstr "Asignar %(title)s %(object)s"
 
-#: templates/generic_assign_remove.html:6
-#, python-format
-msgid "Assign %(title)s"
-msgstr "Asignar %(title)s"
-
-#: templates/generic_assign_remove.html:12
-msgid "Assign"
-msgstr "Asignar"
-
-#: templates/generic_assign_remove.html:26 templates/generic_detail.html:32
-msgid "Data"
-msgstr "Datos"
-
-#: templates/generic_confirm.html:3 templates/generic_confirm.html.py:4
+#: templates/generic_confirm.html:3 templates/generic_confirm.html.py:10
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: templates/generic_confirm.html:14 templates/generic_delete.html:14
-msgid "No"
-msgstr "No"
-
-#: templates/generic_confirm.html:15 templates/generic_delete.html:15
-msgid "Yes"
-msgstr "Sí"
-
-#: templates/generic_delete.html:3 templates/generic_delete.html.py:4
+#: templates/generic_confirm.html:8
 msgid "Confirm delete"
 msgstr "Confirmar eliminación"
 
-#: templates/generic_delete.html:11
+#: templates/generic_confirm.html:19
 #, python-format
 msgid "Are you sure you wish to delete: %(object)s?"
 msgstr "¿Está seguro que desea eliminar: %(object)s?"
 
-#: templates/generic_detail.html:6
+#: templates/generic_confirm.html:27
+msgid "Yes"
+msgstr "Sí"
+
+#: templates/generic_confirm.html:30
+msgid "No"
+msgstr "No"
+
+#: templates/generic_detail.html:5
 #, python-format
 msgid "Details for %(title)s %(object)s"
 msgstr "Detalles para %(title)s %(object)s"
 
-#: templates/generic_detail.html:17
-msgid "Details for"
-msgstr "Detalles para"
-
-#: templates/generic_detail.html:63 templates/generic_form.html:3
-#: templates/generic_form.html.py:4
+#: templates/generic_detail.html:27 templates/generic_form.html:4
+#: templates/generic_form.html.py:12 templates/generic_navigation.html:6
 msgid "Create"
 msgstr "Create"
 
-#: templates/generic_form.html:3 templates/generic_form.html.py:4
+#: templates/generic_form.html:4
 msgid "Edit"
 msgstr "Editar"
 
-#: templates/generic_form.html:17
-msgid "Data entry"
-msgstr "Entrada de datos"
+#: templates/generic_form.html:29
+msgid "Save"
+msgstr "Guardar"
 
-#: templates/generic_form.html:30
-msgid "required"
-msgstr "requerido"
+#: templates/generic_form.html:33
+msgid "Cancel"
+msgstr "Cancelar"
 
-#: templates/generic_list.html:6 templates/generic_list.html.py:7
+#: templates/generic_list.html:5
 #, python-format
 msgid "List of %(title)s"
 msgstr "Lista de %(title)s "
 
-#: templates/generic_list.html:19 templates/generic_list.html.py:80
-msgid "Previous page"
-msgstr "Página anterior"
-
-#: templates/generic_list.html:23 templates/generic_list.html.py:84
-msgid "Page"
-msgstr "Página"
-
-#: templates/generic_list.html:23 templates/generic_list.html.py:84
-msgid "of"
-msgstr "de"
-
-#: templates/generic_list.html:27 templates/generic_list.html.py:88
-msgid "Next page"
-msgstr "Página siguiente"
-
-#: templates/generic_list.html:34
+#: templates/generic_list.html:17
 msgid "List of"
 msgstr "Lista de"
 
-#: templates/generic_list.html:34
-#, python-format
-msgid "%(from)s-%(to)s of %(hits)s"
-msgstr "%(from)s-%(to)s de %(hits)s"
-
-#: templates/generic_list.html:42
+#: templates/generic_list.html:27 templates/generic_list_subtemplate.html:13
 msgid "Create new"
 msgstr "Crear nuevo"
 
-#: templates/generic_list.html:52
+#: templates/generic_list.html:36 templates/generic_list_subtemplate.html:22
 msgid "Identifier"
 msgstr "Identificador"
 
-#: templates/generic_list.html:54
-msgid "Action"
-msgstr "Acción"
+#: templates/generic_list.html:55 templates/generic_list_subtemplate.html:45
+#, python-format
+msgid "There are no %(title)s"
+msgstr "No hay %(title)s "
 
-#: templates/generic_navigation.html:6
-msgid "Crear nuevo"
-msgstr "Crear nuevo"
+#~ msgid "Assign %(title)s"
+#~ msgstr "Asignar %(title)s"
+
+#~ msgid "Assign"
+#~ msgstr "Asignar"
+
+#~ msgid "Data"
+#~ msgstr "Datos"
+
+#~ msgid "Details for"
+#~ msgstr "Detalles para"
+
+#~ msgid "Data entry"
+#~ msgstr "Entrada de datos"
+
+#~ msgid "Previous page"
+#~ msgstr "Página anterior"
+
+#~ msgid "Page"
+#~ msgstr "Página"
+
+#~ msgid "of"
+#~ msgstr "de"
+
+#~ msgid "Next page"
+#~ msgstr "Página siguiente"
+
+#~ msgid "%(from)s-%(to)s of %(hits)s"
+#~ msgstr "%(from)s-%(to)s de %(hits)s"
+
+#~ msgid "Action"
+#~ msgstr "Acción"
+
+#~ msgid "Crear nuevo"
+#~ msgstr "Crear nuevo"

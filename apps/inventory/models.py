@@ -60,7 +60,7 @@ class ItemState(models.Model):
         verbose_name_plural = _(u"item states")
         
     def __unicode__(self):
-        return _(u"%s, %s since %s") % (self.item, self.state.name, self.date)
+        return _(u"%(asset)s, %(state)s since %(date)s") % {'asset':self.item, 'state':self.state.name, 'date':self.date}
 
     def get_absolute_url(self):
         return ('state_update', [str(self.id)])

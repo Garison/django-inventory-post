@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-05 13:59-0400\n"
-"PO-Revision-Date: 2011-01-05 14:30\n"
+"POT-Creation-Date: 2011-01-09 17:24-0400\n"
+"PO-Revision-Date: 2011-01-09 17:33\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,524 +19,600 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: __init__.py:16 __init__.py:24 __init__.py:38 __init__.py:46 __init__.py:51
-#: __init__.py:60 __init__.py:71 __init__.py:76
+#: __init__.py:6
+msgid "View all people"
+msgstr "Ver todas las personas"
+
+#: __init__.py:7
+msgid "Create new person"
+msgstr "Crear nueva persona"
+
+#: __init__.py:8 __init__.py:19 __init__.py:35 __init__.py:49 __init__.py:61
+#: __init__.py:78 __init__.py:84 __init__.py:112 __init__.py:117
 msgid "Edit"
 msgstr "Editar"
 
-#: __init__.py:17 __init__.py:25 __init__.py:39 __init__.py:47 __init__.py:52
-#: __init__.py:61 __init__.py:72 __init__.py:77
+#: __init__.py:9 __init__.py:20 __init__.py:34 __init__.py:50 __init__.py:62
+#: __init__.py:79 __init__.py:85 __init__.py:113 __init__.py:118
 msgid "Delete"
 msgstr "Eliminar"
 
-#: __init__.py:18 __init__.py:26 models.py:57 models.py:90
-msgid "Photos"
-msgstr "Fotos"
-
-#: __init__.py:19
-msgid "Assets that use this template"
-msgstr "Activos que utilizan esta plantilla"
-
-#: __init__.py:20
-#, fuzzy
-msgid "Assign/Remove supplies"
-msgstr "Asignar o quitar suministros"
-
-#: __init__.py:27
-msgid "Assign/Remove"
-msgstr "Asignar o quitar"
-
-#: __init__.py:28
-msgid "Retire"
-msgstr "Decomisar"
-
-#: __init__.py:29
-msgid "Repair"
-msgstr "Reparar"
-
-#: __init__.py:30
-msgid "Template"
-msgstr "Plantilla"
-
-#: __init__.py:34
-msgid "Reactivate"
-msgstr "Reactivar"
-
-#: __init__.py:40
+#: __init__.py:10
 msgid "Edit photos"
 msgstr "Editar fotos"
 
-#: __init__.py:41
+#: __init__.py:11
 msgid "Assign/Remove asset"
 msgstr "Asignar o quitar activos"
 
-#: __init__.py:56
-msgid "Repaired"
-msgstr "Reparado"
+#: __init__.py:13
+msgid "View all assets"
+msgstr "Ver todos los activos"
 
-#: __init__.py:62
-msgid "Privileges"
-msgstr "Privilegios"
+#: __init__.py:14
+msgid "Create new asset"
+msgstr "Crear nuevo activo"
+
+#: __init__.py:15
+msgid "Orphans assets"
+msgstr "activos huérfanos"
+
+#: __init__.py:17
+msgid "View all groups"
+msgstr "Ver todos los grupos"
+
+#: __init__.py:18
+msgid "Create group"
+msgstr "Crear grupo"
+
+#: __init__.py:22
+msgid "View all inventories"
+msgstr "Ver todos los inventarios"
+
+#: __init__.py:23
+msgid "Create new inventory"
+msgstr "Crear nuevo inventario"
+
+#: __init__.py:25
+msgid "View all transactions"
+msgstr "Ver todas las transacciones"
+
+#: __init__.py:26
+msgid "Create new transaction"
+msgstr "Crear nueva transacción"
+
+#: __init__.py:28
+msgid "Locations"
+msgstr "Localizaciones"
+
+#: __init__.py:29
+msgid "States"
+msgstr "Estados"
+
+#: __init__.py:30
+msgid "Settings"
+msgstr "Configuración"
+
+#: __init__.py:32
+msgid "Create new supplier"
+msgstr "Crear nuevo suplidor"
+
+#: __init__.py:33
+msgid "Suppliers"
+msgstr "Suministros"
+
+#: __init__.py:36
+msgid "Assign/Remove templates"
+msgstr "Asignar o quitar plantillas"
+
+#: __init__.py:43
+msgid "View all"
+msgstr "Ver todos"
+
+#: __init__.py:44
+msgid "Create new"
+msgstr "Crear nuevo"
+
+#: __init__.py:45
+msgid "Orphans"
+msgstr "Huérfanos"
+
+#: __init__.py:51 __init__.py:63
+msgid "Photos"
+msgstr "Fotos"
+
+#: __init__.py:52
+msgid "Assets that use this template"
+msgstr "Activos que utilizan esta plantilla"
+
+#: __init__.py:53
+msgid "Assign/Remove supplies"
+msgstr "Asignar o quitar suministros"
+
+#: __init__.py:64
+msgid "Assign/Remove people"
+msgstr "Asignar o quitar personas"
+
+#: __init__.py:65
+msgid "Template"
+msgstr "Plantilla"
+
+#: __init__.py:77
+msgid "Current balances"
+msgstr "Balances corrients"
+
+#: __init__.py:90
+msgid "Home"
+msgstr "Inicio"
+
+#: __init__.py:91
+msgid "People"
+msgstr "Personas"
+
+#: __init__.py:94 templates/home.html:9
+msgid "Templates"
+msgstr "Plantillas"
+
+#: __init__.py:95 templates/home.html:10
+msgid "Assets"
+msgstr "Activos"
+
+#: __init__.py:98
+msgid "Asset states"
+msgstr ""
+
+#: __init__.py:99
+msgid "Inventories"
+msgstr "Inventarios"
+
+#: __init__.py:100
+msgid "Tools"
+msgstr "Herramientas"
+
+#: __init__.py:103 templates/search_results.html:17
+msgid "Search"
+msgstr "Busqueda"
+
+#: __init__.py:104
+msgid "About"
+msgstr "Acerca"
+
+#: forms.py:48
+msgid "Search term"
+msgstr "Término de la busqueda"
 
 #: models.py:14
-msgid "Maximum photo size."
-msgstr "Máximo tamaño de la foto"
+msgid "maximum photo size"
+msgstr "tamaño máximo de la foto"
 
 #: models.py:14
 msgid "Limit in kilobytes."
 msgstr "Límite en kilobytes."
 
 #: models.py:15
-msgid "Maximum photos per item."
+msgid "maximum photos per item"
 msgstr "Máximo de fotos por artículo"
 
 #: models.py:16
-msgid "Maximum photos per item template."
+msgid "maximum photos per item template"
 msgstr "Máximo de fotos por plantilla"
 
 #: models.py:17
-msgid "Maximum photos per user."
-msgstr "Máximo de fotos por usuario"
+msgid "maximum photos per user"
+msgstr "Máximo de fotos por persona"
 
 #: models.py:18
-msgid "Required login?"
+msgid "required login?"
 msgstr ""
 
 #: models.py:21 models.py:22 models.py:25
 msgid "settings"
 msgstr "configuración"
 
-#: models.py:32 models.py:260
+#: models.py:32 models.py:71 models.py:179 models.py:236 models.py:284
 msgid "name"
 msgstr "nombre"
 
-#: models.py:33 models.py:34 models.py:35 models.py:36
-msgid "address"
-msgstr "dirección"
+#: models.py:33 models.py:40
+msgid "exclusive"
+msgstr "exclusivo"
 
-#: models.py:37 models.py:38
-msgid "phone number"
-msgstr "número de teléfono"
+#: models.py:36 models.py:53
+msgid "state"
+msgstr "estado"
 
-#: models.py:42 models.py:205 models.py:261
-msgid "location"
-msgstr "localización"
+#: models.py:37 urls.py:86 urls.py:87 urls.py:88 urls.py:89
+msgid "states"
+msgstr "estados"
 
-#: models.py:43 urls.py:91 urls.py:92 urls.py:93 urls.py:94
-msgid "locations"
-msgstr "localizaciones"
+#: models.py:40
+msgid "inclusive"
+msgstr "inclusivo"
 
-#: models.py:53 templates/supply_subtemplate.html:14
-#: templates/template_subtemplate.html:14
-msgid "Description"
-msgstr "Descripción"
-
-#: models.py:54 templates/supply_subtemplate.html:16
-#: templates/template_subtemplate.html:16
-msgid "Brand"
-msgstr "Marca"
-
-#: models.py:55 templates/supply_subtemplate.html:18
-#: templates/template_subtemplate.html:18
-msgid "Model"
-msgstr "Model"
-
-#: models.py:56 templates/supply_subtemplate.html:20
-#: templates/template_subtemplate.html:20
-msgid "Part number"
-msgstr "Número de pieza"
-
-#: models.py:58 models.py:87
-msgid "Notes/Observations"
-msgstr "Notas/Observaciones"
-
-#: models.py:59
-msgid "supplies"
-msgstr "suministros"
-
-#: models.py:63 models.py:85 urls.py:46 urls.py:47 urls.py:48 urls.py:49
-msgid "item template"
-msgstr "plantilla"
-
-#: models.py:64
-msgid "item templates"
-msgstr "plantillas"
-
-#: models.py:86 templates/item_subtemplate.html:14
-msgid "Asset number"
-msgstr "Número de propiedad"
-
-#: models.py:88 templates/item_subtemplate.html:20
-msgid "Serial number"
-msgstr "Número de serie"
-
-#: models.py:89 templates/item_subtemplate.html:23
-#: templates/person_detail.html:41
-msgid "Location"
-msgstr "Localización"
-
-#: models.py:97 urls.py:56 urls.py:57 urls.py:58
-msgid "asset"
-msgstr "activos"
-
-#: models.py:98 models.py:206 urls.py:63 views.py:113
-msgid "assets"
-msgstr "activos"
-
-#: models.py:107
-msgid "(in repairs)"
-msgstr "(en reparaciones)"
-
-#: models.py:151 templates/person_detail.html:37
-msgid "Name"
-msgstr "Nombre"
-
-#: models.py:152
-msgid "Item"
-msgstr "Artículo"
-
-#: models.py:156 urls.py:68 urls.py:69 urls.py:70 urls.py:72 urls.py:73
-msgid "item group"
-msgstr "Grupo de artículos"
-
-#: models.py:157
-msgid "item groups"
-msgstr "grupos de artículos"
-
-#: models.py:168 models.py:185 models.py:291
-msgid "date"
-msgstr "fecha"
-
-#: models.py:169 models.py:186
+#: models.py:52 models.py:180
 msgid "item"
 msgstr "tema"
 
-#: models.py:173
-msgid "retired item"
-msgstr "artículo decomisado"
+#: models.py:54 models.py:267
+msgid "date"
+msgstr "fecha"
 
-#: models.py:174
-msgid "retired items"
-msgstr "artículos decomisados"
+#: models.py:59
+msgid "item state"
+msgstr "estado del activo"
 
-#: models.py:189
-msgid "item in repairs"
-msgstr "artículo en reparación"
+#: models.py:60
+msgid "item states"
+msgstr "estados de los activos"
 
-#: models.py:190
-msgid "items in repairs"
-msgstr "artículos en reparaciónes"
+#: models.py:63
+#, python-format
+msgid "%(asset)s, %(state)s since %(date)s"
+msgstr ""
 
-#: models.py:201
-msgid "last name"
-msgstr "apellido paterno"
+#: models.py:72 models.py:73 models.py:74 models.py:75 models.py:285
+#: models.py:286 models.py:287 models.py:288
+msgid "address"
+msgstr "dirección"
 
-#: models.py:202
-msgid "second last name"
-msgstr "apellido materno"
+#: models.py:76 models.py:77 models.py:289 models.py:290
+msgid "phone number"
+msgstr "número de teléfono"
 
-#: models.py:203
-msgid "first name"
-msgstr "nombre"
+#: models.py:81 models.py:128 models.py:200 models.py:237
+msgid "location"
+msgstr "localización"
 
-#: models.py:204
-msgid "second name or initial"
-msgstr "segundo nombre o inicial"
+#: models.py:82 urls.py:81 urls.py:82 urls.py:83 urls.py:84
+msgid "locations"
+msgstr "localizaciones"
 
-#: models.py:207
-msgid "photos"
-msgstr "fotos"
-
-#: models.py:211
-msgid "person"
-msgstr "person"
-
-#: models.py:212
-msgid "people"
-msgstr "personas"
-
-#: models.py:241
-msgid "timedate"
-msgstr "tiempo y hora"
-
-#: models.py:243
+#: models.py:92 models.py:219
 msgid "description"
 msgstr "descripción"
 
-#: models.py:264 urls.py:40 urls.py:41 urls.py:42 urls.py:43
+#: models.py:93
+msgid "brand"
+msgstr "marca"
+
+#: models.py:94
+msgid "model"
+msgstr "model"
+
+#: models.py:95
+msgid "part number"
+msgstr "número de pieza"
+
+#: models.py:96 models.py:126
+msgid "notes"
+msgstr "notas"
+
+#: models.py:97 views.py:86
+msgid "supplies"
+msgstr "suministros"
+
+#: models.py:102 models.py:124 urls.py:43 urls.py:44 urls.py:45 urls.py:46
+msgid "item template"
+msgstr "plantilla"
+
+#: models.py:103
+msgid "item templates"
+msgstr "plantillas"
+
+#: models.py:125
+msgid "asset number"
+msgstr "número de propiedad"
+
+#: models.py:127
+msgid "serial number"
+msgstr "número de serie"
+
+#: models.py:135 urls.py:54 urls.py:55 urls.py:56
+msgid "asset"
+msgstr "activos"
+
+#: models.py:136 models.py:201 urls.py:59 views.py:53 views.py:310
+msgid "assets"
+msgstr "activos"
+
+#: models.py:184 urls.py:68 urls.py:69 urls.py:71
+msgid "item group"
+msgstr "Grupo de artículos"
+
+#: models.py:185 urls.py:67
+msgid "item groups"
+msgstr "grupos de artículos"
+
+#: models.py:196
+msgid "last name"
+msgstr "apellido paterno"
+
+#: models.py:197
+msgid "second last name"
+msgstr "apellido materno"
+
+#: models.py:198
+msgid "first name"
+msgstr "nombre"
+
+#: models.py:199
+msgid "second name or initial"
+msgstr "segundo nombre o inicial"
+
+#: models.py:205 urls.py:76 urls.py:77 urls.py:78
+msgid "person"
+msgstr "person"
+
+#: models.py:206 urls.py:75 views.py:142
+msgid "people"
+msgstr "personas"
+
+#: models.py:217
+msgid "timedate"
+msgstr "tiempo y hora"
+
+#: models.py:240 urls.py:37 urls.py:38 urls.py:39 urls.py:40
 msgid "inventory"
 msgstr "inventario"
 
-#: models.py:265 urls.py:39
+#: models.py:241 urls.py:36
 msgid "inventories"
 msgstr "inventarios"
 
-#: models.py:295
+#: models.py:271
 msgid "inventory transaction"
 msgstr "transacción de inventario"
 
-#: models.py:296
+#: models.py:272
 msgid "inventory transactions"
 msgstr "transacciones de inventarios"
 
-#: urls.py:33
+#: models.py:295 urls.py:91 urls.py:93 urls.py:94 urls.py:95
+msgid "supplier"
+msgstr "suplidor"
+
+#: models.py:296 urls.py:92 views.py:102
+msgid "suppliers"
+msgstr "suplidores"
+
+#: urls.py:30
 msgid "transactions"
 msgstr "transacciones"
 
-#: urls.py:35
+#: urls.py:32
 msgid "transaction"
 msgstr "transacción"
 
-#: urls.py:49
+#: urls.py:46
 msgid "Will be deleted from any user that may have it assigned and from any item group."
 msgstr "Se eliminara de cualquier usuario que lo tenga asignado y de cualquier grupo de artículos."
 
-#: urls.py:50
+#: urls.py:47
 msgid "orphan templates"
 msgstr "plantillas huérfanas"
 
-#: urls.py:62
+#: urls.py:58
 msgid "orphan assets"
 msgstr "activos huérfanos"
 
-#: urls.py:72
-msgid "Unassigned items"
-msgstr "Artículos sin asignar"
-
-#: urls.py:72 templates/person_detail.html:43
-msgid "Assigned items"
-msgstr "Artículos asignados"
-
-#: urls.py:72
-msgid "items"
-msgstr "artículos"
-
-#: urls.py:77 views.py:147
-msgid "users"
-msgstr "usuarios"
-
-#: urls.py:78 urls.py:79 urls.py:80
-msgid "user"
-msgstr "usuario"
-
-#: urls.py:83
-msgid "retired assets"
-msgstr "activos decomisados"
-
-#: urls.py:87
-msgid "assets in repairs"
-msgstr "activos en reparación"
-
-#: views.py:34
+#: views.py:45
 #, python-format
-msgid "Asset log: %s"
+msgid "Assign assets to the person: <a href=\"%(url)s\">%(obj)s</a>"
 msgstr ""
 
-#: views.py:49
+#: views.py:51 views.py:308
+msgid "Unassigned assets"
+msgstr "Activos sin asignar"
+
+#: views.py:52 views.py:309 templates/person_detail.html:38
+msgid "Assigned assets"
+msgstr "Activos asignados"
+
+#: views.py:62
+#, python-format
+msgid "Assign templates to the supplier: <a href=\"%(url)s\">%(obj)s</a>"
+msgstr ""
+
+#: views.py:68
+msgid "Unassigned templates"
+msgstr "Plantillas sin asignar"
+
+#: views.py:69
+msgid "Assigned templates"
+msgstr "Plantillas asignados"
+
+#: views.py:70
+msgid "templates"
+msgstr "plantillas"
+
+#: views.py:78
+#, python-format
+msgid "Assign supplies to the template: <a href=\"%(url)s\">%(obj)s</a>"
+msgstr ""
+
+#: views.py:84
+msgid "Unassigned supplies"
+msgstr "Suministros sin asignar"
+
+#: views.py:85
+msgid "Assigned supplies"
+msgstr "Suministros asignados"
+
+#: views.py:94
+#, python-format
+msgid "Assign suppliers to the template: <a href=\"%(url)s\">%(obj)s</a>"
+msgstr ""
+
+#: views.py:100
+msgid "Unassigned suppliers"
+msgstr "Ssuministros sin asignar"
+
+#: views.py:101
+msgid "Assigned suppliers"
+msgstr "Suministros asignados"
+
+#: views.py:122
+msgid "assets that use the template"
+msgstr "activos que utilizan la plantilla"
+
+#: views.py:134
+#, python-format
+msgid "Assign people to the asset: <a href=\"%(url)s\">%(obj)s</a>"
+msgstr ""
+
+#: views.py:140
+msgid "People that don't have this asset"
+msgstr "Personas que no tienen este activo"
+
+#: views.py:141
+msgid "People that have this asset"
+msgstr "Personas que tienen este activo"
+
+#: views.py:155
 msgid "the asset"
 msgstr "el activo"
 
-#: views.py:51
+#: views.py:157
 msgid "item photos"
 msgstr "foto del activo"
 
-#: views.py:52
+#: views.py:158
 msgid "template photos"
 msgstr "fotos de la plantilla"
 
-#: views.py:58 views.py:308
-msgid "In repairs since"
-msgstr "en reparación desde"
-
-#: views.py:105
-msgid "asset to user"
-msgstr "activo al usuario"
-
-#: views.py:111
-msgid "Unassigned assets"
-msgstr ""
-
-#: views.py:112
-msgid "Assigned assets"
-msgstr ""
-
-#: views.py:123
-msgid "template supplies"
-msgstr ""
-
-#: views.py:129
-msgid "Unassigned supplies"
-msgstr ""
-
-#: views.py:130
-msgid "Assigned supplies"
-msgstr ""
-
-#: views.py:131
-msgid "Supplies"
-msgstr "Suministros"
-
-#: views.py:139
-msgid "to users of the asset"
-msgstr ""
-
-#: views.py:145
-msgid "Users that don't have this asset"
-msgstr "Usuarios que no tienen este activo"
-
-#: views.py:146
-msgid "Users that have this asset"
-msgstr "Usuarios que tienen este activo"
-
-#: views.py:166
-msgid "assets that use the template"
-msgstr ""
-
-#: views.py:234
-msgid "retired asset"
-msgstr ""
-
-#: views.py:237
-msgid "Retired"
-msgstr ""
-
-#: views.py:250
+#: views.py:196
 #, python-format
-msgid "Are you sure you wish to retire the asset: %s?"
-msgstr ""
+msgid "This asset has already been marked as '%s'."
+msgstr "Este activo ya se marco como '%s'."
 
-#: views.py:251
-msgid "Will be removed from any user that may have it assigned and from any item group it may belong."
-msgstr ""
-
-#: views.py:270
-msgid "The asset has been marked as retired."
-msgstr ""
-
-#: views.py:285
+#: views.py:203
 #, python-format
-msgid "Are you sure you wish to reactivate the asset: %s?"
+msgid "Are you sure you wish to mark this asset as '%s'?"
 msgstr ""
 
-#: views.py:306
-msgid "asset in repairs"
+#: views.py:207
+msgid "Any other states this asset may be marked as, will be cleared."
 msgstr ""
 
-#: views.py:322
+#: views.py:217
 #, python-format
-msgid "Are you sure you wish to send the asset: %s, to repairs?"
+msgid "This asset has already been exclusively marked as '%s'.  Clear this state first."
 msgstr ""
 
-#: views.py:327
-msgid "This asset is already in repairs."
-msgstr ""
-
-#: views.py:334
-msgid "The asset has been marked as 'in repairs'."
-msgstr ""
-
-#: views.py:347
+#: views.py:227
 #, python-format
-msgid "Are you sure you wish to mark the asset: %s, as repaired?"
+msgid "The asset has been marked as '%s'."
 msgstr ""
 
-#: views.py:353
-msgid "The asset has been marked as repaired."
+#: views.py:242
+#, python-format
+msgid "This asset is not marked as '%s'"
 msgstr ""
 
-#: views.py:355
-msgid "This asset is not in repairs."
+#: views.py:248
+#, python-format
+msgid "Are you sure you wish to unmark this asset as '%s'?"
 msgstr ""
 
-#: templates/home.html:13
-msgid "Home"
-msgstr "Inicio"
-
-#: templates/home.html:15
-msgid "Django Inventory"
+#: views.py:254
+#, python-format
+msgid "The asset has been unmarked as '%s'."
 msgstr ""
 
-#: templates/home.html:20
+#: views.py:256
+#, python-format
+msgid "Unable to unmark this asset as '%s'"
+msgstr ""
+
+#: views.py:269
+msgid "There are no asset states."
+msgstr ""
+
+#: views.py:290
+#, python-format
+msgid "assets marked as '%s'"
+msgstr ""
+
+#: views.py:302
+#, python-format
+msgid "Assign assets to the group: <a href=\"%(url)s\">%(obj)s</a>"
+msgstr ""
+
+#: templates/home.html:5
 msgid "Statistics"
-msgstr ""
+msgstr "Estadísticas"
 
-#: templates/home.html:21
+#: templates/home.html:8
 msgid "Users"
 msgstr "Usuarios"
-
-#: templates/home.html:22
-msgid "Items"
-msgstr ""
-
-#: templates/home.html:23
-msgid "Retired items"
-msgstr ""
-
-#: templates/home.html:24
-msgid "Templates"
-msgstr "Plantillas"
 
 #: templates/inventory_current.html:13
 msgid "Data entry"
 msgstr "Entrada de datos"
 
-#: templates/item_detail.html:5 templates/item_detail.html.py:17
+#: templates/item_detail.html:5 templates/item_detail.html.py:10
 msgid "Details for"
 msgstr "Detalles para"
 
-#: templates/item_detail.html:53 templates/itemtemplate_detail.html:29
-msgid "Create new"
-msgstr "Crear nuevo"
+#: templates/item_detail.html:12
+msgid "Asset"
+msgstr "Activos"
 
-#: templates/item_subtemplate.html:8
-msgid "Item specific data"
-msgstr ""
+#: templates/item_subtemplate.html:5
+msgid "Asset number"
+msgstr "Número de propiedad"
 
-#: templates/item_subtemplate.html:17
+#: templates/item_subtemplate.html:10
+msgid "Serial number"
+msgstr "Número de serie"
+
+#: templates/item_subtemplate.html:15 templates/person_detail.html:33
+msgid "Location"
+msgstr "Localización"
+
+#: templates/item_subtemplate.html:20 templates/template_subtemplate.html:28
 msgid "Notes"
 msgstr "Notas"
 
-#: templates/item_subtemplate.html:26
+#: templates/item_subtemplate.html:25
 msgid "Assigned to"
 msgstr "Asignado a"
 
-#: templates/itemtemplate_detail.html:5 templates/itemtemplate_detail.html:16
+#: templates/item_subtemplate.html:30
+msgid "Nobody"
+msgstr "Nadie"
+
+#: templates/itemtemplate_detail.html:3
 msgid "Template details"
 msgstr "Detalles de la plantilla"
 
-#: templates/person_detail.html:6 templates/person_detail.html.py:17
+#: templates/itemtemplate_detail.html:7
+msgid "Item template"
+msgstr "Plantilla"
+
+#: templates/person_detail.html:4
 msgid "User details"
 msgstr "Detalles del usuario"
 
-#: templates/person_detail.html:27 templates/supply_subtemplate.html:8
-#: templates/template_subtemplate.html:8
-msgid "Data"
-msgstr ""
-
-#: templates/person_detail.html:33
+#: templates/person_detail.html:13
 msgid "Last name"
 msgstr "Apellido paterno"
 
-#: templates/person_detail.html:35
+#: templates/person_detail.html:18
 msgid "Second last name"
 msgstr "Apellido materno"
 
-#: templates/person_detail.html:39
+#: templates/person_detail.html:23
+msgid "First name"
+msgstr "Nombre"
+
+#: templates/person_detail.html:28
 msgid "Second name or initial"
 msgstr "Segundo nombre o inicial"
 
-#: templates/person_detail.html:60
-#, fuzzy
-msgid "User photos"
-msgstr "foto"
-
-#: templates/person_detail.html:90
-msgid "There are no photos for this user"
-msgstr "No hay fotos para ese usuario"
-
-#: templates/person_detail.html:99
-msgid "Create another user"
-msgstr "Crear otro usuario"
+#: templates/person_detail.html:43 templates/template_subtemplate.html:38
+msgid "None"
+msgstr "Ninguno"
 
 #: templates/report-items_per_person.html:14
 msgid "User assets report"
@@ -562,54 +638,139 @@ msgstr ""
 msgid "NOTES"
 msgstr ""
 
-#: templates/search_results.html:9
-msgid "Search results"
-msgstr "Resultados de la busqueda"
-
-#: templates/search_results.html:12
+#: templates/search_results.html:26
 #, python-format
 msgid "Results with: %(keyword)s"
 msgstr "Resultados con: %(keyword)s"
 
-#: templates/search_results.html:15
+#: templates/search_results.html:29
 msgid "No results found"
 msgstr ""
 
-#: templates/search_results.html:19
+#: templates/search_results.html:33
 msgid "Results in users"
 msgstr "Resultados en usuarios"
 
-#: templates/search_results.html:41
+#: templates/search_results.html:55
 msgid "Results in assets"
 msgstr ""
 
-#: templates/search_results.html:63
+#: templates/search_results.html:77
 msgid "Results in templates"
 msgstr "Resultados en plantillas"
 
-#: templates/search_results.html:85
+#: templates/search_results.html:99
 msgid "Results in groups"
 msgstr "Resultados en grupos"
 
-#: templates/search_results.html:107
-msgid "Results in retired items"
+#: templates/state_subtemplate.html:4
+msgid "Item states"
 msgstr ""
 
-#: templates/supply_detail.html:5 templates/supply_detail.html.py:16
-msgid "Supply details"
+#: templates/state_subtemplate.html:8
+msgid "Identifier"
+msgstr "Identificador"
+
+#: templates/state_subtemplate.html:21
+msgid "Unmark"
 msgstr ""
 
-#: templates/supply_detail.html:29
-msgid "Crear nuevo"
+#: templates/state_subtemplate.html:23
+msgid "Mark"
 msgstr ""
 
-#: templates/supply_subtemplate.html:22 templates/template_subtemplate.html:22
-msgid "Notes/observations"
+#: templates/state_subtemplate.html:29
+msgid "There are no states defined."
 msgstr ""
 
-#: templates/template_subtemplate.html:25
+#: templates/template_subtemplate.html:8
+msgid "Description"
+msgstr "Descripción"
+
+#: templates/template_subtemplate.html:13
+msgid "Brand"
+msgstr "Marca"
+
+#: templates/template_subtemplate.html:18
+msgid "Model"
+msgstr "Model"
+
+#: templates/template_subtemplate.html:23
+msgid "Part number"
+msgstr "Número de pieza"
+
+#: templates/template_subtemplate.html:33
 msgid "Related supplies"
 msgstr "Suministros relacionados"
+
+#~ msgid "Assign/Remove"
+#~ msgstr "Asignar o quitar"
+
+#~ msgid "Retire"
+#~ msgstr "Decomisar"
+
+#~ msgid "Repair"
+#~ msgstr "Reparar"
+
+#~ msgid "Reactivate"
+#~ msgstr "Reactivar"
+
+#~ msgid "Repaired"
+#~ msgstr "Reparado"
+
+#~ msgid "Privileges"
+#~ msgstr "Privilegios"
+
+#~ msgid "Notes/Observations"
+#~ msgstr "Notas/Observaciones"
+
+#~ msgid "(in repairs)"
+#~ msgstr "(en reparaciones)"
+
+#~ msgid "Name"
+#~ msgstr "Nombre"
+
+#~ msgid "Item"
+#~ msgstr "Artículo"
+
+#~ msgid "retired item"
+#~ msgstr "artículo decomisado"
+
+#~ msgid "retired items"
+#~ msgstr "artículos decomisados"
+
+#~ msgid "item in repairs"
+#~ msgstr "artículo en reparación"
+
+#~ msgid "items in repairs"
+#~ msgstr "artículos en reparaciónes"
+
+#~ msgid "photos"
+#~ msgstr "fotos"
+
+#~ msgid "items"
+#~ msgstr "artículos"
+
+#~ msgid "users"
+#~ msgstr "usuarios"
+
+#~ msgid "user"
+#~ msgstr "usuario"
+
+#~ msgid "assets in repairs"
+#~ msgstr "activos en reparación"
+
+#~ msgid "In repairs since"
+#~ msgstr "en reparación desde"
+
+#~ msgid "asset to user"
+#~ msgstr "activo al usuario"
+
+#~ msgid "User photos"
+#~ msgstr "foto"
+
+#~ msgid "Create another user"
+#~ msgstr "Crear otro usuario"
 
 #~ msgid "Regional"
 #~ msgstr "Regional"
