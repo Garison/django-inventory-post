@@ -141,13 +141,13 @@ def generic_assign_remove(request, title, obj, left_list_qryset, left_list_title
                 for item in form.cleaned_data['left_list']:
                     add_method(item)
                 if form.cleaned_data['left_list']:
-                    messages.success(request, _(u"The %s were added.") % unicode(item_name))
+                    messages.success(request, _(u"The selected %s were added.") % unicode(item_name))
 
             if action == "remove":
                 for item in form.cleaned_data['right_list']:
                     remove_method(item)
                 if form.cleaned_data['right_list']:
-                    messages.success(request, _(u"The %s were removed.") % unicode(item_name))
+                    messages.success(request, _(u"The selected %s were removed.") % unicode(item_name))
 
     form = GenericAssignRemoveForm(left_list_qryset=left_list_qryset, right_list_qryset=right_list_qryset, left_filter=left_filter)
         
