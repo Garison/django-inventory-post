@@ -215,24 +215,6 @@ class Person(models.Model):
     def __unicode__(self):
         return "%s%s, %s%s" % (self.last_name, self.second_last_name and " %s" % self.second_last_name, self.first_name, self.second_name and " %s" % self.second_name)
 
-        
-class Permission(models.Model):
-    user = models.ForeignKey(User)
-
-    PERMISSION_CHOICES = (
-        ('ro', 'Read-only'),
-        ('rw', 'Read-Write'),
-        ('wd', 'Read-Write-Delete'),
-       )
-    permission = models.CharField(max_length=2, choices=PERMISSION_CHOICES)
-
-    def get_absolute_url(self):
-        return ('permission_update', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)	
-
-    def __unicode__(self):
-        return "%s - %s" % (self.user.username, self.get_permission_display())
-
     
 class Log(models.Model):
     timedate = models.DateTimeField(auto_now_add=True, verbose_name=_(u"timedate"))

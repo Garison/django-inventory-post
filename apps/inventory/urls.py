@@ -90,16 +90,14 @@ urlpatterns = patterns('inventory.views',
     url(r'^state/(?P<object_id>\d+)/update/$', generic_update, dict({'model':State}, extra_context={'title':_(u'states')}), 'state_update'),
     url(r'^state/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':State}, post_delete_redirect="state_list", extra_context=dict(title=_(u'states'))), 'state_delete'),
 
-
 #    url(r'^log/list/$', generic_list, dict(queryset=Log.objects.all(), extra_context={'title' : _(u'log')}), 'log_list'),
 #    url(r'^log/(?P<object_id>\d+)/$', generic_detail, dict(form_class=LogForm, model=Log, title=_(u'log')), 'log_view'),
+
     url(r'^search/$', 'search', (), 'search'),
 
     url(r'^settings/$', generic_update, dict({'model':Settings, 'object_id':1}), 'settings'),
 
 #    url(r'^reports/items_per_person/(?P<object_id>\d+)/$', 'report_items_per_person', (), 'report_items_per_person'),
-  
-#    url(r'^assign_remove/$', generic_assign_remove, (), generic_assign_remove),
     
 #	url(r'^user/list/$', generic_list, dict({ 'queryset' : CustomUser.objects.all() }, extra_context = dict( title = 'usuarios', record_links=user_links) ), 'user_list'),
 #	url(r'^user/(?P<object_id>\d+)/$', generic_detail, dict(form_class=CustomUserForm, model=CustomUser, title='usuario', create_view = 'user_create', record_links=user_links), 'user_view'),
@@ -107,9 +105,6 @@ urlpatterns = patterns('inventory.views',
 #	url(r'^user/(?P<object_id>\d+)/update/$', generic_update, dict({ 'model' : CustomUser }, extra_context={ 'title': 'usuario' }) , 'user_update'),
 #	url(r'^user/(?P<object_id>\d+)/delete/$', generic_delete, dict({ 'model' : CustomUser }, post_delete_redirect = "/user/list", extra_context={ 'title': 'el usuario' }) , 'user_delete'),
 #	url(r'^user/(?P<user_id>\d+)/permission/list$', generic_list, dict({ 'queryset' : Permission.objects.all() }, queryset_filter={ 'field' : 'user', 'source' : 'user_id'}, extra_context = dict( title = 'privilegios', create_view = 'permission_create', record_links=permission_links)), 'permission_list'),
-#	url(r'^permission/(?P<object_id>\d+)/update/$', generic_update, dict({ 'model' : Permission }, extra_context = dict( title = 'privilegio') ), 'permission_update'),
-#	url(r'^permission/create/$', generic_create, dict({ 'model' : Permission }, extra_context={ 'title': 'privilegio' }), 'permission_create'),
-#	url(r'^permission/(?P<object_id>\d+)/delete/$', generic_delete, dict({ 'model' : Permission }, post_delete_redirect = "/user/list", extra_context={ 'title': 'el privilegio' }) , 'permission_delete'),
 )
     
 

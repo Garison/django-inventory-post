@@ -15,11 +15,11 @@ person_links = [
     {'text':_(u'Assign/Remove asset'), 'view':'person_assign_item', 'icon':settings.MEDIA_URL + 'images/item-plus-user.png'},
 ]
 
-user_links = [
-    {'text':_(u'Edit'), 'view':'user_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
-    {'text':_(u'Delete'), 'view':'user_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
-    {'text':_(u'Privileges'), 'view':'permission_list', 'icon':'#'}
-]
+#user_links = [
+#    {'text':_(u'Edit'), 'view':'user_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
+#    {'text':_(u'Delete'), 'view':'user_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
+#    {'text':_(u'Privileges'), 'view':'permission_list', 'icon':'#'}
+#]
 
 template_menu_links = [
     {'text':_('View all'), 'view':'template_list'},
@@ -45,7 +45,7 @@ item_record_links = [
     {'text':_(u'Edit'), 'view':'item_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
     {'text':_(u'Delete'), 'view':'item_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
     {'text':_(u'Photos'), 'view':'item_photos', 'icon':settings.MEDIA_URL + 'images/camera-photo.png'},
-    {'text':_(u'Assign/Remove'), 'view':'item_assign_person', 'icon':settings.MEDIA_URL + 'images/item-plus-user.png'},
+    {'text':_(u'Assign/Remove people'), 'view':'item_assign_person', 'icon':settings.MEDIA_URL + 'images/item-plus-user.png'},
     {'text':_(u'Template'), 'view':'template_view', 'icon':settings.MEDIA_URL + 'images/font-x-generic.png', 'args':'object.item_template.id'},
 ]
 
@@ -85,7 +85,6 @@ tools_menu_links = [
     {'text':_('Settings'), 'view':'settings'},
 ]
 
-#TODO: Item groups, item states, search
 navigation = [
     {'text':_('Home'), 'view':'home'},
     {'text':_('Users'), 'view':'person_list', 'links':person_menu_links},
@@ -103,7 +102,6 @@ navigation = [
 location_filter = {
     'location':{'queryset':Location.objects.all(), 'destination':'location'},
 }
-
 
 location_links = [
     {'text':_(u'Edit'), 'view':'location_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},

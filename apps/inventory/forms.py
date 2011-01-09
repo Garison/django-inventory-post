@@ -1,6 +1,6 @@
 from django import forms 
 
-from models import Item, Person, ItemTemplate, ItemGroup, Log, Permission, \
+from models import Item, Person, ItemTemplate, ItemGroup, Log, \
                    InventoryTransaction, Inventory
 
 class ItemForm(forms.ModelForm):
@@ -30,11 +30,6 @@ class ItemGroupForm(forms.ModelForm):
 class LogForm(forms.ModelForm):
     class Meta:
         model = Log
-
-
-class PermissionForm(forms.ModelForm):
-    class Meta:
-        model = Permission
 
 
 class InventoryForm(forms.ModelForm):
