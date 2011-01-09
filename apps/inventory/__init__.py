@@ -65,6 +65,7 @@ inventory_menu_links = [
 ]
 
 inventory_links = [
+    {'text':_(u'Current balances'), 'view':'inventory_current'},
     {'text':_(u'Edit'), 'view':'inventory_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
     {'text':_(u'Delete'), 'view':'inventory_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
 ]
