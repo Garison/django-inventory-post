@@ -140,13 +140,9 @@ class Item(models.Model):
     get_absolute_url = models.permalink(get_absolute_url)
 
     def __unicode__(self):
-        #in_repairs = self.is_inrepairs()
-        #if in_repairs:
-        #    rep=_(u"(in repairs)")
-        #else:
-        rep=''
-            
-        return "#%s, '%s' %s" % (self.property_number, self.item_template.description, rep)
+        states = ', '.join([itemstate.state.name for itemstate in ItemState.objects.states_for_item(self)])
+                
+        return "#%s, '%s' %s" % (self.property_number, self.item_template.description, states and "(%s)" % states)
 
     def is_orphan(self):
         if self.person_set.all():
