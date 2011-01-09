@@ -7,3 +7,6 @@
   float: left;    
 }
 
+#main-navigation ul li a {
+  line-height: 22px;
+}

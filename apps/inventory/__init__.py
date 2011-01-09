@@ -15,12 +15,6 @@ person_links = [
     {'text':_(u'Assign/Remove asset'), 'view':'person_assign_item', 'icon':settings.MEDIA_URL + 'images/item-plus-user.png'},
 ]
 
-#user_links = [
-#    {'text':_(u'Edit'), 'view':'user_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
-#    {'text':_(u'Delete'), 'view':'user_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
-#    {'text':_(u'Privileges'), 'view':'permission_list', 'icon':'#'}
-#]
-
 template_menu_links = [
     {'text':_('View all'), 'view':'template_list'},
     {'text':_('Create new'), 'view':'template_create'},
@@ -87,16 +81,16 @@ tools_menu_links = [
 ]
 
 navigation = [
-    {'text':_('Home'), 'view':'home'},
-    {'text':_('Users'), 'view':'person_list', 'links':person_menu_links},
-    {'text':_('Templates'), 'view':'template_list', 'links':template_menu_links},
+    {'text':_('Home'), 'view':'home', 'famfam':'house'},
+    {'text':_('Users'), 'view':'person_list', 'links':person_menu_links, 'famfam':'group'},
+    {'text':_('Templates'), 'view':'template_list', 'links':template_menu_links, 'famfam':'page'},
     {'text':_('Assets'), 'view':'item_list', 'links':item_menu_links},
     {'text':_('Asset groups'), 'view':'group_list', 'links':group_menu_links},
     {'text':_('Asset states'), 'view':'item_state_list_init'},
-    {'text':_('Inventories'), 'view':'inventory_list', 'links':inventory_menu_links},
-    {'text':_('Inventory transactions'), 'view':'inventory_transaction_list', 'links':inventory_transactions_menu_links},
-    {'text':_('Tools'), 'view':'location_list', 'links':tools_menu_links},
-    {'text':_('Search'), 'view':'search'},
+    {'text':_('Inventories'), 'view':'inventory_list', 'links':inventory_menu_links,'famfam':'book'},
+    {'text':_('Inventory transactions'), 'view':'inventory_transaction_list', 'links':inventory_transactions_menu_links,'famfam':'book_open'},
+    {'text':_('Tools'), 'view':'location_list', 'links':tools_menu_links,'famfam':'wrench'},
+    {'text':_('Search'), 'view':'search', 'famfam':'zoom'},
     {'text':_('About'), 'view':'about'},
 ]
 
@@ -113,11 +107,4 @@ state_links = [
     {'text':_(u'Edit'), 'view':'state_update', 'icon':settings.MEDIA_URL + 'images/accessories-text-editor.png'},
     {'text':_(u'Delete'), 'view':'state_delete', 'icon':settings.MEDIA_URL + 'images/emblem-unreadable.png'},
 ]
-
-
-#permission_links = [
-#        { 'text' : 	_(u'Edit'), 'view': 'permission_update', 'icon' : MEDIA_URL+'images/accessories-text-editor.png' },
-#        { 'text' : 	_(u'Delete'), 'view' : 'permission_delete', 'icon' : MEDIA_URL+'images/emblem-unreadable.png'},
-#    ]
-
 

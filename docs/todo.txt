@@ -16,7 +16,7 @@
 # Suppliers object
 # Add reporting/hard copies
 # Supply reorder thresholds
-# Change to famfamfam icons
+# Change to famfamfam icons                                             - DONE
 # Implement South for database migration
 # Add google maps api to locations model
 # Add inventory transactions from RMAs & customer invoices
