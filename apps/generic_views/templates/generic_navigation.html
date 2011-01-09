@@ -1,17 +1,9 @@
 {% load generic_views_helpers %}
 {% load i18n %}
 
-        <div class="actions-bar wat-cf">
-          <div class="pagination">
-
-        
-{% comment %}
-		{% if not create_view|login_required or user.is_authenticated %}
-		{% if create_view %}
-		<li><a href="{% url create_view %}">{% trans 'Crear nuevo' %}<img src="{{ create_view.icon }}" /></a></li>
-		{% endif %}
-		{% endif %}
-{% endcomment %}
+<div class="actions-bar wat-cf">
+  <div class="pagination">
+    	{% if create_view %}<a href="{% dynurl create_view %}">{% trans 'Create' %}</a>{% endif %}
 
 		{% for link in record_links %}
 			{% if link.view %}
@@ -32,6 +24,5 @@
 				{% endif %}
 			{% endif %}
 		{% endfor %}			
-
-          </div>
-        </div>
+  </div>
+</div>

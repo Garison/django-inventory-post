@@ -3,7 +3,7 @@
 {% load generic_views_helpers %}
 {% block title %} :: {% blocktrans %}List of {{ title }}{% endblocktrans %}{% endblock %}
 {% block banner %}<div id="banner"><h2>{% blocktrans %}List of {{ title }}{% endblocktrans %}</h2></div>{% endblock %}
-{% block secondary_links %}{{ secondary_links|safe }}{% endblock %}
+{#{% block secondary_links %}{{ secondary_links|safe }}{% endblock %}#}
 
 {% block content %}
 
@@ -21,7 +21,7 @@
                     <th colspan='15' class='tc'>
                         <div class="actions-bar wat-cf">
                             <div class="pagination">
-                                <a href="{% dynurl create_view %}">{% trans "Create new" %}</a>
+                                <button><a href="{% dynurl create_view %}">{% trans "Create new" %}</a></button>
                             </div>
                         </div>
                     </th>
@@ -42,13 +42,9 @@
                     <td><a href="{{ object.get_absolute_url}}">{{ object }}</a></td>
                         {% if record_links %}
                     <td>
-                        <div class='userbar'>
-                            <div style='font-size:100%;'>
-                                <ul>
-                                    {% include "generic_navigation.html" %}
-                                </ul>
-                            </div>
-                        </div>	
+                        {% with '' as  create_view %}
+                        {% include "generic_navigation.html" %}
+                        {% endwith %}
                     </td>
                 {% endif %}
                 </tr>

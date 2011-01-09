@@ -15,25 +15,101 @@ from photos.views import generic_photos
 from generic_views.views import generic_assign_remove, generic_list
 
 from models import Settings, Person, Item, ItemTemplate, \
-                   ItemGroup, State, ItemState
+                   ItemGroup, State, ItemState, Inventory, \
+                   InventoryTransaction
 
 from inventory import person_links, item_record_links, \
                       template_record_links, \
                       location_filter, navigation
 
 
-def item_log_list(request, object_id):
-    item = Item.objects_passthru.get(pk=object_id)
-    ctype = ContentType.objects.get_for_model(item)
-    log=Log.objects.filter(content_type__pk=ctype.id, object_id=item.id)
+def person_detail(request, object_id):
+    return object_detail(
+        request,
+        queryset = Person.objects.all(),
+        object_id = object_id,
+        template_name = 'person_detail.html',
+        extra_context={
+            'record_links':person_links,
+        },
+    )
+
+
+def person_assign_remove_item(request, object_id):
+    person = get_object_or_404(Person, pk=object_id)
+
+    return generic_assign_remove(
+        request,
+        title=_(u'Assign assets to the person: <a href="%(object)s.get_absolute_url">%(object)s</a>' % {'object':person}),
+        obj=person,
+        left_list_qryset=Item.objects.exclude(person=object_id), 
+        right_list_qryset=person.inventory.all(), 
+        add_method=person.inventory.add, 
+        remove_method=person.inventory.remove, 
+        left_list_title=_(u'Unassigned assets'), 
+        right_list_title=_(u'Assigned assets'), 
+        item_name=_(u"assets"), 
+        list_filter=location_filter
+    )
+
+
+def template_assign_remove_supply(request, object_id):
+    obj = get_object_or_404(ItemTemplate, pk=object_id)
+
+    return generic_assign_remove(
+        request,
+        title=_(u'Assign supplies to the template: <a href="%(object)s.get_absolute_url">%(object)s</a>' % {'object':obj}),
+        obj=obj,
+        left_list_qryset=ItemTemplate.objects.exclude(supplies=obj).exclude(pk=obj.pk),
+        right_list_qryset=obj.supplies.all(),
+        add_method=obj.supplies.add,
+        remove_method=obj.supplies.remove,
+        left_list_title=_(u'Unassigned supplies'),
+        right_list_title=_(u'Assigned supplies'),
+        item_name=_(u"Supplies"))
+            
+
+def template_detail(request, object_id):
+    return object_detail(
+        request,
+        queryset = ItemTemplate.objects.all(),
+        object_id = object_id,
+        template_name = 'itemtemplate_detail.html',
+        extra_context={'record_links':template_record_links},
+    )
+
+
+def template_items(request, object_id):
+    template = get_object_or_404(ItemTemplate, pk=object_id)
     return object_list(
         request,
-        queryset=log,
-        template_name='generic_list.html',
-        extra_context={'title':_(u"Asset log: %s") % item},
-        ) 
+        queryset = template.item_set.all(),
+        template_name = "generic_list.html", 
+        extra_context=dict(
+            title = '%s: %s' % (_(u"assets that use the template"), template),
+            create_view = 'item_create',
+            record_links=item_record_links			
+        ),
+    )
 
-    
+
+def item_assign_remove_person(request, object_id):
+    obj = get_object_or_404(Item, pk=object_id)
+
+    return generic_assign_remove(
+        request,
+        title=_(u'Assign people to the asset: <a href="%(object)s.get_absolute_url">%(object)s</a>' % {'object':obj}),
+        obj=obj,
+        left_list_qryset=obj.get_nonowners(),
+        right_list_qryset=obj.get_owners(),
+        add_method=obj.add_owner,
+        remove_method=obj.remove_owner,
+        left_list_title=_(u"People that don't have this asset"),
+        right_list_title=_(u"People that have this asset"),
+        item_name=_(u"users"),
+        list_filter=location_filter)
+
+   
 def item_detail(request, object_id, template_name=None, extra_data=None, passthru=False, show_create_view=True):
     if passthru:
         item = Item.objects_passthru.get(pk=object_id)
@@ -78,143 +154,6 @@ def item_detail(request, object_id, template_name=None, extra_data=None, passthr
             extra_context=extra_context,
             template_name = 'item_detail.html'
         )
-
-
-def person_detail(request, object_id):
-    return object_detail(
-        request,
-        queryset = Person.objects.all(),
-        object_id = object_id,
-        template_name = 'person_detail.html',
-        extra_context={
-            'record_links':person_links,
-        },
-    )
-
-def person_assign_remove_item(request, object_id):
-    person = get_object_or_404(Person, pk=object_id)
-
-    return generic_assign_remove(
-        request,
-        title=_(u"asset to user"), 
-        obj=person,
-        left_list_qryset=Item.objects.exclude(person=object_id), 
-        right_list_qryset=person.inventory.all(), 
-        add_method=person.inventory.add, 
-        remove_method=person.inventory.remove, 
-        left_list_title=_(u'Unassigned assets'), 
-        right_list_title=_(u'Assigned assets'), 
-        item_name=_(u"assets"), 
-        list_filter=location_filter
-    )
-
-
-def template_assign_remove_supply(request, object_id):
-    obj = get_object_or_404(ItemTemplate, pk=object_id)
-
-    return generic_assign_remove(
-        request,
-        title=_(u"template supplies"),
-        obj=obj,
-        left_list_qryset=ItemTemplate.objects.exclude(supplies=obj).exclude(pk=obj.pk),
-        right_list_qryset=obj.supplies.all(),
-        add_method=obj.supplies.add,
-        remove_method=obj.supplies.remove,
-        left_list_title=_(u'Unassigned supplies'),
-        right_list_title=_(u'Assigned supplies'),
-        item_name=_(u"Supplies"))
-    
-        
-def item_assign_remove_person(request, object_id):
-    obj = get_object_or_404(Item, pk=object_id)
-
-    return generic_assign_remove(
-        request,
-        title=_(u"to users of the asset"),
-        obj=obj,
-        left_list_qryset=obj.get_nonowners(),
-        right_list_qryset=obj.get_owners(),
-        add_method=obj.add_owner,
-        remove_method=obj.remove_owner,
-        left_list_title=_(u"Users that don't have this asset"),
-        right_list_title=_(u"Users that have this asset"),
-        item_name=_(u"users"),
-        list_filter=location_filter)
-
-def template_detail(request, object_id):
-    return object_detail(
-        request,
-        queryset = ItemTemplate.objects.all(),
-        object_id = object_id,
-        template_name = 'itemtemplate_detail.html',
-        extra_context={'record_links':template_record_links},
-    )
-
-def template_items(request, object_id):
-    template = get_object_or_404(ItemTemplate, pk=object_id)
-    return object_list(
-        request,
-        queryset = template.item_set.all(),
-        template_name = "generic_list.html", 
-        extra_context=dict(
-            title = '%s: %s' % (_(u"assets that use the template"), template),
-            create_view = 'item_create',
-            record_links=item_record_links			
-        ),
-    )
-
-
-def search(request):
-    keyword=''
-    people=None
-    items=None
-    templates=None
-    groups=None
-    
-    if request.method == 'GET':
-        keyword=request.GET.get('keyword','')
-        
-        if keyword:
-            people = Person.objects.filter(
-                Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword) | Q(second_name__icontains=keyword) | Q(second_last_name__icontains=keyword ) | Q(location__name__icontains=keyword)
-                )		
-
-            items = Item.objects.filter(
-                Q(property_number__icontains=keyword) | Q(notes__icontains=keyword) | Q(serial_number__icontains=keyword) | Q(location__name__icontains=keyword) | Q(item_template__description__icontains=keyword)
-                )		
-
-            templates = ItemTemplate.objects.filter(
-                Q(description__icontains=keyword) | Q(brand__icontains=keyword) | Q(model__icontains=keyword) | Q(part_number__icontains=keyword) | Q(notes__icontains=keyword)
-                )		
-
-            groups = ItemGroup.objects.filter(
-                Q(name__icontains=keyword)
-                )	
-
-                
-#			results = []
-#			for i in people:
-#				results.append(i)
-#
-#			for i in items:
-#				results.append(i)
-#
-#			for i in templates:
-#				results.append(i)
-#
-#			for i in groups:
-#				results.append(i)
-
-    return render_to_response('search_results.html', {
-        'people':people,
-        'items':items,
-        'templates':templates,
-        'groups':groups,
-        'keyword':keyword,
-#		'results': results,
-        },
-    context_instance=RequestContext(request))
-
 
 def item_setstate(request, object_id, state_id):
     item = get_object_or_404(Item, pk=object_id)
@@ -263,7 +202,6 @@ def item_setstate(request, object_id, state_id):
 def item_remove_state(request, object_id, state_id):
     item = get_object_or_404(Item, pk=object_id)
     state = get_object_or_404(State, pk=state_id)    
-
     next = reverse("item_view", args=[item.id])
 
     item_state = ItemState.objects.filter(item=item, state=state)
@@ -322,7 +260,70 @@ def item_state_list(request, state_id):
         }
     )
    
-  
+def inventory_current(request, object_id):
+    inventory = get_object_or_404(Inventory, pk=object_id)
+    transactions = InventoryTransaction.objects.filter(inventory=inventory)
+    supply_qty={}
+    for t in transactions:
+        if t.supply in supply_qty:
+            supply_qty[t.supply] = supply_qty[t.supply] + t.quantity
+        else:
+            supply_qty[t.supply] = t.quantity
+        
+    return render_to_response('inventory_current.html', {
+        'inventory': inventory,
+        'supply_qty': supply_qty,
+    },
+    context_instance=RequestContext(request))
+
+def search(request):
+    keyword=''
+    people=None
+    items=None
+    templates=None
+    groups=None
+    
+    if request.method == 'GET':
+        keyword=request.GET.get('keyword','')
+        
+        if keyword:
+            people = Person.objects.filter(
+                Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword) | Q(second_name__icontains=keyword) | Q(second_last_name__icontains=keyword ) | Q(location__name__icontains=keyword)
+                )		
+
+            items = Item.objects.filter(
+                Q(property_number__icontains=keyword) | Q(notes__icontains=keyword) | Q(serial_number__icontains=keyword) | Q(location__name__icontains=keyword) | Q(item_template__description__icontains=keyword)
+                )		
+
+            templates = ItemTemplate.objects.filter(
+                Q(description__icontains=keyword) | Q(brand__icontains=keyword) | Q(model__icontains=keyword) | Q(part_number__icontains=keyword) | Q(notes__icontains=keyword)
+                )		
+
+            groups = ItemGroup.objects.filter(
+                Q(name__icontains=keyword)
+                )	
+         
+
+    return render_to_response('search_results.html', {
+        'people':people,
+        'items':items,
+        'templates':templates,
+        'groups':groups,
+        'keyword':keyword,
+        },
+    context_instance=RequestContext(request))
+
+def item_log_list(request, object_id):
+    item = Item.objects_passthru.get(pk=object_id)
+    ctype = ContentType.objects.get_for_model(item)
+    log=Log.objects.filter(content_type__pk=ctype.id, object_id=item.id)
+    return object_list(
+        request,
+        queryset=log,
+        template_name='generic_list.html',
+        extra_context={'title':_(u"Asset log: %s") % item},
+        ) 
+
 
 '''
 def render_to_pdf(template_src, context_dict):
@@ -365,19 +366,3 @@ def fetch_resources(uri, rel):
     path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
     return path
 '''
-
-def inventory_current(request, object_id):
-    inventory = get_object_or_404(Inventory, pk=object_id)
-    transactions = InventoryTransaction.objects.filter(inventory=inventory)
-    supply_qty={}
-    for t in transactions:
-        if t.supply in supply_qty:
-            supply_qty[t.supply] = supply_qty[t.supply] + t.quantity
-        else:
-            supply_qty[t.supply] = t.quantity
-        
-    return render_to_response('inventory_current.html', {
-        'inventory': inventory,
-        'supply_qty': supply_qty,
-    },
-    context_instance=RequestContext(request))

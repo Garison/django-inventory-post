@@ -4,11 +4,12 @@
 {% endblock %}
 {% block title %} :: {% trans 'Details for' %} {{ title }} {{ object }}{% endblock %}
 {% load generic_views_helpers %}
+{% load inventory_tags %}
 
 
 {% block banner %}<div id="banner"><h2>{% trans 'Details for' %} {{ title }}</h2></div>{% endblock %}
 {% block content %}
-<h2>{{ subtitle }}</h2>
+<h2>{% trans 'Asset' %}: {{ subtitle }}</h2>
 
 <h3>
 <ul>
@@ -24,28 +25,12 @@
     {% include 'generic_photos_subtemplate.html' %}
 {% endwith %}
 
+
 {% include 'state_subtemplate.html' %}
-{% comment %}
-<br />
 
-{% with template as object %}
-    {% include "template_subtemplate.html" %}
+
+{% with 'item_create' as create_view %}
+    {% include "generic_navigation.html" %}
 {% endwith %}
 
-{% with template_photos_title as title %}
-{% with template as object %}
-    {% include 'generic_photos_subtemplate.html' %}
-{% endwith %}
-{% endwith %}
-{% endcomment %}
-
-<br />
-{#{% if item_create %}#}
-                        <div class="actions-bar wat-cf">
-                            <div class="pagination">
-<a href="{% url item_create %}">{% trans 'Create new' %}</a>
-</div>
-</div>
-{#{% endif %}#}
-{% include "generic_navigation.html" %}
 {% endblock %}

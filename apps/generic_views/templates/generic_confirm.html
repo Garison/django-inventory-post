@@ -2,8 +2,6 @@
 {% load i18n %}
 {% block title %} :: {% trans 'Confirm' %} {{ title }}{% endblock %}
 {% block content %}
-
-
     <div id="box">
       <div class="block" id="block-login">
         {% if delete_view %}      
@@ -12,7 +10,7 @@
             <h2>{% trans 'Confirm' %}</h2>
         {% endif %}
         <div class="content login">
-          <form action="." method="post" class="form login">{% csrf_token %}
+          <form action="" method="post" class="form login">{% csrf_token %}
             {% if next %}
                 <input name='next' type='hidden' value='{{ next }}' />
             {% endif %}          
@@ -28,8 +26,8 @@
               <button class="button" type="submit">
                 <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% trans 'Yes' %}" /> {% trans 'Yes' %}
               </button>
-              <a href="#header" class="button">
-                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/cross.png" ONCLICK='{% if previous %}window.location.replace("{{ previous }}");{% else %}history.go(-1){% endif %}' alt="{% trans 'No' %}"/> {% trans 'No' %}
+              <a href="#header" onclick='{% if previous %}window.location.replace("{{ previous }}");{% else %}history.go(-1);{% endif %}' class="button">
+                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/cross.png"  alt="{% trans 'No' %}"/> {% trans 'No' %}
               </a>
             </div>
           </form>

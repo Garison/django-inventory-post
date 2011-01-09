@@ -1,42 +1,35 @@
 {% load i18n %}
-
-<h3>{% trans 'Asset details' %}</h3>
 <div class="inner">
   <form action="" method="post" class="form">{% csrf_token %}
+    <div class="group">
+      <label class="label">{% trans 'Asset number' %}</label>
+        <input type="text" value="{{ object.property_number }}" class="text_field" />
+    </div>
 
-            <div class="group">
-              <label class="label">{% trans 'Asset number' %}</label>
-                <input type="text" value="{{ object.property_number }}" class="text_field" />
-            </div>
+    <div class="group">
+      <label class="label">{% trans 'Serial number' %}</label>
+        <input type="text" value="{{ object.serial_number }}" class="text_field" />
+    </div>
 
-            <div class="group">
-              <label class="label">{% trans 'Serial number' %}</label>
-                <input type="text" value="{{ object.serial_number }}" class="text_field" />
-            </div>
+    <div class="group">
+      <label class="label">{% trans 'Location' %}</label>
+        <input type="text" value="{{ object.location }}" class="text_field" />
+    </div>
 
-            <div class="group">
-              <label class="label">{% trans 'Location' %}</label>
-                <input type="text" value="{{ object.location }}" class="text_field" />
-            </div>
+    <div class="group">
+      <label class="label">{% trans 'Notes' %}</label>
+      <textarea class="text_area" rows="10" cols="80">{{ object.notes }}</textarea>
+    </div>
 
-            <div class="group">
-              <label class="label">{% trans 'Notes' %}</label>
-              <textarea class="text_area" rows="10" cols="80">{{ object.notes }}</textarea>
-            </div>
-
-            <div class="group">
-              <label class="label">{% trans 'Assigned to' %}</label>
-                <ul>
-                    {% for i in object.get_owners %}
-                        <li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>
-                    {% empty %}
-                        <li>{% trans 'Nobody' %}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-
-    <div class="group navform wat-cf">
+    <div class="group">
+      <label class="label">{% trans 'Assigned to' %}</label>
+        <ul>
+            {% for i in object.get_owners %}
+                <li><a href="{{ i.get_absolute_url}}">{{ i }}</a></li>
+            {% empty %}
+                <li>{% trans 'Nobody' %}</li>
+            {% endfor %}
+        </ul>
     </div>
   </form>
 </div>

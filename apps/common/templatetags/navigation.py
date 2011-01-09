@@ -103,39 +103,8 @@ RegexURLPattern.resolve_to_name = _pattern_resolve_to_name
 RegexURLResolver.resolve_to_name = _resolver_resolve_to_name
 
 def resolve_to_name(path, urlconf=None):
-        return get_resolver(urlconf).resolve_to_name(path)
+    return get_resolver(urlconf).resolve_to_name(path)
 
 @register.filter
 def resolve_url_name(value):
-        return resolve_to_name(value)
-
-
-
-
-'''
-class DynUrlNode(Node):
-    def __init__(self, *args):
-        self.name_var = Variable(args[0])
-        if len(args)>1:
-            #Process view arguments
-            self.args = [Variable(a) for a in args[1].split(',')]
-        else:
-            self.args = []
-
-    def render(self, context):
-        name = self.name_var.resolve(context)
-        args = [a.resolve(context) for a in self.args]
-        try:
-            return reverse(name, args = args)
-        except:
-            #Argument might be pointing to a context variable
-            args = [Variable(a).resolve(context) for a in args]
-            return reverse(name, args = args)
-
-
-@register.tag
-def dynurl(parser, token):
-    args = token.split_contents()
-    return DynUrlNode(*args[1:])
-
-'''
+    return resolve_to_name(value)

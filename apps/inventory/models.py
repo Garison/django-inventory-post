@@ -62,6 +62,10 @@ class ItemState(models.Model):
     def __unicode__(self):
         return _(u"%s, %s since %s") % (self.item, self.state.name, self.date)
 
+    def get_absolute_url(self):
+        return ('state_update', [str(self.id)])
+    get_absolute_url = models.permalink(get_absolute_url)
+        
  
 class Location(models.Model):
     name = models.CharField(max_length=32, verbose_name=_("name"))
@@ -209,7 +213,7 @@ class Person(models.Model):
     get_absolute_url = models.permalink(get_absolute_url)
 
     def __unicode__(self):
-        return "%s %s, %s %s" % (self.last_name, self.second_last_name, self.first_name, self.second_name)
+        return "%s%s, %s%s" % (self.last_name, self.second_last_name and " %s" % self.second_last_name, self.first_name, self.second_name and " %s" % self.second_name)
 
         
 class Permission(models.Model):

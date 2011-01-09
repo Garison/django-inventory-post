@@ -80,6 +80,7 @@ navigation = [
     {'text':_('Inventories'), 'view':'inventory_list', 'links':inventory_menu_links},
     {'text':_('Inventory transactions'), 'view':'inventory_transaction_list', 'links':inventory_transactions_menu_links},
     {'text':_('Tools'), 'view':'location_list', 'links':tools_menu_links},
+    {'text':_('Search'), 'view':'search'},
     {'text':_('About'), 'view':'about'},
 ]
 

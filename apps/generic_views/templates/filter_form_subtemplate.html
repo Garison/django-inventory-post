@@ -1,25 +1,27 @@
 {% load i18n %}
-<div class="data-entry">
-<form method="get" action="">
-	<table>
-		<thead>
-			<tr>
-				<td colspan=10>
-					{% trans 'Filter list by' %}:
-				</td>
-			</tr>
-		</thead>
-		<tfoot>
-			<tr>
-				<td colspan=2>
-					<input type="submit" value="{% trans 'Submit' %}" />
-				</td>
-			</tr>
-		</tfoot>
-		<tbody>
-			{{ filter_form }}
-			{{ filter_form.media|safe }}
-		</tbody>
-	</table>
-</form>
-</div>		
+{% load styling %}
+
+    {% add_classes_to_form filter_form %}
+    {{ filter_form.media|safe }}              
+    <h2 class="title">{% trans 'Filter list by' %}</h2>
+    <div class="inner">
+        <form action="" method="get" class="form">{% csrf_token %}
+            {% for field in filter_form %}
+                <div class="group">
+                    {% if field.errors %}<div class="fieldWithErrors">{% endif %}
+                    <label class="label">{{ field.label_tag }}{% if field.field.required %} ({% trans 'required' %}){% endif %}</label>
+                    <span class="error">{{ field.errors }}</span>
+                    {% if field.errors %}</div>{% endif %} 
+                    {{ field }}
+                    {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
+                </div>
+            {% endfor %} 
+            <div class="group navform wat-cf">
+                <button class="button" type="submit">
+                    <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% trans 'Submit' %}" /> {% trans 'Submit' %}
+                </button>
+            </div>
+        </form>
+    </div>
+
+

@@ -1,20 +1,21 @@
 {% load i18n %}
 {% load inventory_tags %}
-<center>
-<div class="data-entry" >
-	<table>
-		<thead>
-			<tr>
-				<td colspan='2'>
-					{% trans 'Item states' %}
-				</td>
-			</tr>
-		</thead>	
-		<tbody>
-            {% get_all_states as states %}
+{% get_all_states as states %}
+        <h3>{% trans 'Item states' %}</h3>
+        <table class="table">
+        <tbody>
+          <tr>
+            <th class="first">{% trans 'Identifier' %}</th>
+            {% if record_links %}
+                <th class="last">&nbsp;</th>
+            {% else %}
+                <th class="last">&nbsp;</th>
+            {% endif %}
+          </tr>
+          
             {% for state in states %}
-                <tr>
-                    <th>{{ state.name }}:</th>
+                <tr class="{% cycle 'odd' 'even2' %}">
+                    <td>{{ state.name }}</td>
                     <td>
                         {% if state in object.states %}
                             <a href="{% url item_remove_state object.id state.id %}">{% trans 'Unmark' %}</a>
@@ -24,8 +25,9 @@
                     
                     </td>
                 </tr>
-            {% endfor %}             
-		</tbody>
-	</table>
-</div>
-</center>
+            {% empty %}
+                <tr><td colspan=2 class="tc">{% blocktrans %}There are no states defined.{% endblocktrans %}</td></tr>                
+            {% endfor %}      
+            
+            </tbody>
+        </table>

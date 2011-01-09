@@ -1,69 +1,45 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block keywords %}
-{% endblock %}
+{% load styling %}
 {% load generic_views_helpers %}
 {% block title %} :: {% blocktrans %}Details for {{ title }} {{ object }}{% endblocktrans %}{% endblock %}
 {% block javascript %}
 <script type="text/javascript">
 $(function() {
-	$("#data :input").each(function() {
+	$("form :input").each(function() {
 		this.disabled = true;
 	});
 });
 </script>
-
 {% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Details for' %} {{ title }}</h2></div>{% endblock %}
 {% block content %}
 
-<h3>{{ object }}</h3>
-
 <style type="text/css">
-	#data textarea:focus, #data input:focus, #data select, #data textarea, #data input { background: none; color: white; border: none; }
+	form textarea:focus, form input:focus, form select, form textarea, form input { background: none; color: black; border: none; }
 </style>
-<center>
-<form id='data'>
-<div class="data-entry">
-	<table>
-		<thead>
-			<tr>
-				<td colspan='2'>
-					{% trans 'Data' %}
-				</td>
-			</tr>
-		</thead>	
-		<tbody>
-			{% for field in form %}
-				<tr><th>{{ field.label_tag }}: </th><td>
-				{% if field.field|is_class:"ModelMultipleChoiceField" %}
-				{{ field }}
-{% comment %}
-					<ul>
-					{% for item in field|get_selected_choices:form %}
-						<li><a href="{{ item.get_absolute_url }}">{{ item }}</a></li>
-					{% endfor %}
-					</ul>
-{% endcomment %}					
-				{% else %}
-					{{ field }}
-				{% endif %}
-				</td></tr>
-			{% endfor %} 
-		</tbody>
-	</table>
-</div>
-</form>
-<br />
-</center>
-<div class='userbar'>
-	<div style='font-size:100%;'>
-		<ul>
-			{#{% if not create_view|login_required or user.is_authenticated %}#}
-			{% if create_view %}<li><a href="{% dynurl create_view %}">{% trans 'Create' %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>{% endif %}
-			{#{% endif %}#}
-			{% include "generic_navigation.html" %}
-		</ul>
-	</div>
-</div>	
+
+    {% add_classes_to_form form %}
+    {{ form.media|safe }}              
+    <h2 class="title">
+        {% if object %}
+            <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+        {% else %}
+            {% trans 'Create' %}
+        {% endif %}                
+    </h2>
+    <div class="inner">
+        <form action="" method="post" class="form">{% csrf_token %}
+            {% for field in form %}
+                <div class="group">
+                    <label class="label">{{ field.label_tag }}</label>
+                    {{ field }}
+                    {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
+                </div>
+            {% endfor %} 
+        </form>
+    </div>
+    
+            
+{% include "generic_navigation.html" %}
+
 {% endblock %}
