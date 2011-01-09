@@ -95,6 +95,7 @@ class ItemTemplate(models.Model):
     part_number = models.CharField(verbose_name=_(u"Part number"), max_length=32, null=True, blank=True)
     notes = models.TextField(verbose_name=_(u"Notes/Observations"), null=True, blank=True)	
     supplies = models.ManyToManyField("self", null=True, blank=True, verbose_name=_(u"supplies"))
+    suppliers = models.ManyToManyField("Supplier", null=True, blank=True)
     
     class Meta:
         ordering = ['description']	
@@ -280,3 +281,27 @@ class InventoryTransaction(models.Model):
     
     def __unicode__(self):
         return "%s: '%s' qty=%s @ %s" % (self.inventory, self.supply, self.quantity, self.date)
+
+
+class Supplier(models.Model):
+    #TODO: Contact, extension
+    name = models.CharField(max_length=32, verbose_name=_("name"))
+    address_line1 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
+    address_line2 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
+    address_line3 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
+    address_line4 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
+    phone_number1 = models.CharField(max_length=32, null=True, blank=True, verbose_name=_(u'phone number'))
+    phone_number2 = models.CharField(max_length=32, null=True, blank=True, verbose_name=_(u'phone number'))
+    notes = models.TextField(null=True, blank=True, verbose_name=(u'notes'))
+    
+    class Meta:
+        ordering = ['name']
+        verbose_name = _(u"supplier")
+        verbose_name_plural = _(u"suppliers")
+        
+    def __unicode__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return ('supplier_view', [str(self.id)])
+    get_absolute_url = models.permalink(get_absolute_url)	

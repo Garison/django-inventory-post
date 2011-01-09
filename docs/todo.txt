@@ -8,15 +8,16 @@
 # Eliminate inrepair/retired and implement user defined 'item states'   - DONE
 # Fix html and make it compliant (Remove <CENTER>, etc)                 - DONE
 # Skinable interface                                                    - DONE
+# Change to famfamfam icons                                             - DONE
+# Suppliers object                                                      - DONE
 # Transfer items from one inventory to another
 # Transfer asset from/to users
 # Add clear button to filter by form in generic_list or substitue
     '----' to 'Any' in filter drop down
 # Use django reversion for changelogs
-# Suppliers object
+# Smarter search
 # Add reporting/hard copies
 # Supply reorder thresholds
-# Change to famfamfam icons                                             - DONE
 # Implement South for database migration
 # Add google maps api to locations model
 # Add inventory transactions from RMAs & customer invoices

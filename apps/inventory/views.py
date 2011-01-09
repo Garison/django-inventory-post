@@ -16,7 +16,7 @@ from generic_views.views import generic_assign_remove, generic_list
 
 from models import Settings, Person, Item, ItemTemplate, \
                    ItemGroup, State, ItemState, Inventory, \
-                   InventoryTransaction
+                   InventoryTransaction, Supplier
 
 from inventory import person_links, item_record_links, \
                       template_record_links, \
@@ -54,7 +54,22 @@ def person_assign_remove_item(request, object_id):
         list_filter=location_filter
     )
 
+def supplier_assign_remove_itemtemplates(request, object_id):
+    obj = get_object_or_404(Supplier, pk=object_id)
 
+    return generic_assign_remove(
+        request,
+        title=_(u'Assign templates to the supplier: <a href="%s">%s</a>' % (obj.get_absolute_url(), obj)),
+        obj=obj,
+        left_list_qryset=ItemTemplate.objects.exclude(suppliers=obj), 
+        right_list_qryset=obj.itemtemplate_set.all(), 
+        add_method=obj.itemtemplate_set.add, 
+        remove_method=obj.itemtemplate_set.remove, 
+        left_list_title=_(u'Unassigned templates'), 
+        right_list_title=_(u'Assigned templates'), 
+        item_name=_(u"templates"), 
+    )
+    
 def template_assign_remove_supply(request, object_id):
     obj = get_object_or_404(ItemTemplate, pk=object_id)
 
@@ -68,7 +83,23 @@ def template_assign_remove_supply(request, object_id):
         remove_method=obj.supplies.remove,
         left_list_title=_(u'Unassigned supplies'),
         right_list_title=_(u'Assigned supplies'),
-        item_name=_(u"Supplies"))
+        item_name=_(u"supplies"))
+           
+
+def template_assign_remove_suppliers(request, object_id):
+    obj = get_object_or_404(ItemTemplate, pk=object_id)
+
+    return generic_assign_remove(
+        request,
+        title=_(u'Assign suppliers to the template: <a href="%s">%s</a>' % (obj.get_absolute_url(), obj)),        
+        obj=obj,
+        left_list_qryset=Supplier.objects.exclude(itemtemplate=obj),
+        right_list_qryset=obj.suppliers.all(),
+        add_method=obj.suppliers.add,
+        remove_method=obj.suppliers.remove,
+        left_list_title=_(u'Unassigned suppliers'),
+        right_list_title=_(u'Assigned suppliers'),
+        item_name=_(u"suppliers"))
             
 
 def template_detail(request, object_id):

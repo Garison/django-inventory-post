@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 from models import Item, Person, ItemTemplate, ItemGroup, Log, \
-                   InventoryTransaction, Inventory
+                   InventoryTransaction, Inventory, Supplier
 
 
 class ItemForm(forms.ModelForm):
@@ -48,3 +48,6 @@ class SearchForm(forms.Form):
     keyword = forms.CharField(max_length=128, label=_(u'Search term'))
     
         
+class SupplierForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
