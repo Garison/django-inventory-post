@@ -11,11 +11,11 @@ from django.core.urlresolvers import reverse
 from photos.models import GenericPhoto
 
 class Settings(models.Model):
-    max_photo_size = models.IntegerField(default=1000000, verbose_name=_(u'Maximum photo size'), help_text=_(u'Limit in kilobytes.'))
-    max_item_photos = models.IntegerField(default=5, verbose_name=_(u'Maximum photos per item'))
-    max_template_photos = models.IntegerField(default=5, verbose_name=_(u'Maximum photos per item template'))
-    max_person_photos = models.IntegerField(default=5, verbose_name=_(u'Maximum photos per user'))
-    is_anon_restricted = models.BooleanField(default=True, verbose_name=_(u'Required login?'))
+    max_photo_size = models.IntegerField(default=1000000, verbose_name=_(u'maximum photo size'), help_text=_(u'Limit in kilobytes.'))
+    max_item_photos = models.IntegerField(default=5, verbose_name=_(u'maximum photos per item'))
+    max_template_photos = models.IntegerField(default=5, verbose_name=_(u'maximum photos per item template'))
+    max_person_photos = models.IntegerField(default=5, verbose_name=_(u'maximum photos per user'))
+    is_anon_restricted = models.BooleanField(default=True, verbose_name=_(u'required login?'))
 
     class Meta:
         verbose_name = _(u"settings")
@@ -89,11 +89,11 @@ class Location(models.Model):
    
             
 class ItemTemplate(models.Model):
-    description = models.CharField(verbose_name=_(u"Description"), max_length=64)
-    brand = models.CharField(verbose_name=_(u"Brand"), max_length=32, null=True, blank=True)
-    model = models.CharField(verbose_name=_(u"Model"), max_length=32, null=True, blank=True)
-    part_number = models.CharField(verbose_name=_(u"Part number"), max_length=32, null=True, blank=True)
-    notes = models.TextField(verbose_name=_(u"Notes/Observations"), null=True, blank=True)	
+    description = models.CharField(verbose_name=_(u"description"), max_length=64)
+    brand = models.CharField(verbose_name=_(u"brand"), max_length=32, null=True, blank=True)
+    model = models.CharField(verbose_name=_(u"model"), max_length=32, null=True, blank=True)
+    part_number = models.CharField(verbose_name=_(u"part number"), max_length=32, null=True, blank=True)
+    notes = models.TextField(verbose_name=_(u"notes"), null=True, blank=True)	
     supplies = models.ManyToManyField("self", null=True, blank=True, verbose_name=_(u"supplies"))
     suppliers = models.ManyToManyField("Supplier", null=True, blank=True)
     
@@ -122,10 +122,10 @@ class ItemManagerPassthru(models.Manager):
 
 class Item(models.Model):
     item_template = models.ForeignKey(ItemTemplate, verbose_name=_(u"item template"))
-    property_number = models.CharField(verbose_name=_(u"Asset number"), max_length=10)
-    notes = models.TextField(verbose_name=_(u"Notes"), null=True, blank=True)	
-    serial_number = models.CharField(verbose_name=_(u"Serial number"), max_length=30, null=True, blank=True)
-    location = models.ForeignKey(Location, verbose_name=_(u"Location"), null=True, blank=True)
+    property_number = models.CharField(verbose_name=_(u"asset number"), max_length=10)
+    notes = models.TextField(verbose_name=_(u"notes"), null=True, blank=True)	
+    serial_number = models.CharField(verbose_name=_(u"serial number"), max_length=30, null=True, blank=True)
+    location = models.ForeignKey(Location, verbose_name=_(u"location"), null=True, blank=True)
     active = models.BooleanField(default=True)
     objects = ItemManager()
     objects_passthru = ItemManagerPassthru()
@@ -180,8 +180,8 @@ class Item(models.Model):
     
     
 class ItemGroup(models.Model):
-    name = models.CharField(verbose_name=_(u"Name"), max_length=32)
-    items = models.ManyToManyField(Item, blank=True, null=True, verbose_name=_(u"Item"))
+    name = models.CharField(verbose_name=_(u"name"), max_length=32)
+    items = models.ManyToManyField(Item, blank=True, null=True, verbose_name=_(u"item"))
     
     class Meta:
         ordering = ['name']
