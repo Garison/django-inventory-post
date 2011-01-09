@@ -34,6 +34,7 @@ def process_links(links, view_name, url):
                 'active':active,
                 'url':item_view and reverse(item_view) or item_url or '#',
                 'text':unicode(item['text']),
+                'famfam':'famfam' in item and item['famfam'],
             }
         )
     return items, active_item
