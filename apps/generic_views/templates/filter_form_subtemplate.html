@@ -5,7 +5,7 @@
     {{ filter_form.media|safe }}              
     <h2 class="title">{% trans 'Filter list by' %}</h2>
     <div class="inner">
-        <form action="" method="get" class="form">{% csrf_token %}
+        <form action="" method="get" class="form">
             {% for field in filter_form %}
                 <div class="group">
                     {% if field.errors %}<div class="fieldWithErrors">{% endif %}

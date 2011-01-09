@@ -1,0 +1,54 @@
+{% load i18n %}
+{% load generic_views_helpers %}
+
+    <div class="inner">
+      <form action="#" class="form">
+        <table class="table">
+            {% if create_view %}
+            <tfoot>
+                <tr>
+                    <th colspan='15' class='tc'>
+                        <div class="actions-bar wat-cf">
+                            <div class="pagination">
+                                <a href="{% dynurl create_view %}">{% trans "Create new" %}</a>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </tfoot>
+            {% endif %}
+        <tbody>
+          <tr>
+            <th class="first">{% trans 'Identifier' %}</th>
+            {% if record_links %}
+                <th class="last">&nbsp;</th>
+            {% else %}
+                <th class="last">&nbsp;</th>
+            {% endif %}
+          </tr>
+            {% for object in object_list %}
+                <tr class="{% cycle 'odd' 'even2' %}">
+                    <td><a href="{{ object.get_absolute_url}}">{{ object }}</a></td>
+                    {% if record_links %}
+                        <td>
+                            <div class='userbar'>
+                                <div style='font-size:100%;'>
+                                    <ul>
+                                        {% include "generic_navigation.html" %}
+                                    </ul>
+                                </div>
+                            </div>	
+                        </td>
+                    {% endif %}
+                </tr>
+            {% empty %}
+            <tr><td colspan=2 class="tc">{% blocktrans %}There are no {{ title }}{% endblocktrans %}</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="actions-bar wat-cf">
+          <div class="pagination">
+            <span class="disabled prev_page">« Previous</span><span class="current">1</span><a rel="next" href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a><a href="#">8</a><a href="#">9</a><a href="#">10</a><a href="#">11</a><a rel="next" class="next_page" href="#">Next »</a>
+          </div>
+        </div>
+      </form>

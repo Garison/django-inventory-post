@@ -40,7 +40,7 @@ def person_assign_remove_item(request, object_id):
 
     return generic_assign_remove(
         request,
-        title=_(u'Assign assets to the person: <a href="%(object)s.get_absolute_url">%(object)s</a>' % {'object':person}),
+        title=_(u'Assign assets to the person: <a href="%s">%s</a>' % (person.get_absolute_url(), person)),
         obj=person,
         left_list_qryset=Item.objects.exclude(person=object_id), 
         right_list_qryset=person.inventory.all(), 
@@ -58,7 +58,7 @@ def template_assign_remove_supply(request, object_id):
 
     return generic_assign_remove(
         request,
-        title=_(u'Assign supplies to the template: <a href="%(object)s.get_absolute_url">%(object)s</a>' % {'object':obj}),
+        title=_(u'Assign supplies to the template: <a href="%s">%s</a>' % (obj.get_absolute_url(), obj)),        
         obj=obj,
         left_list_qryset=ItemTemplate.objects.exclude(supplies=obj).exclude(pk=obj.pk),
         right_list_qryset=obj.supplies.all(),
@@ -98,7 +98,7 @@ def item_assign_remove_person(request, object_id):
 
     return generic_assign_remove(
         request,
-        title=_(u'Assign people to the asset: <a href="%(object)s.get_absolute_url">%(object)s</a>' % {'object':obj}),
+        title=_(u'Assign people to the asset: <a href="%s">%s</a>' % (obj.get_absolute_url(), obj)),                
         obj=obj,
         left_list_qryset=obj.get_nonowners(),
         right_list_qryset=obj.get_owners(),
@@ -106,7 +106,7 @@ def item_assign_remove_person(request, object_id):
         remove_method=obj.remove_owner,
         left_list_title=_(u"People that don't have this asset"),
         right_list_title=_(u"People that have this asset"),
-        item_name=_(u"users"),
+        item_name=_(u"people"),
         list_filter=location_filter)
 
    
@@ -259,6 +259,24 @@ def item_state_list(request, state_id):
             'record_links':item_record_links,
         }
     )
+   
+
+def group_assign_remove_item(request, object_id):
+    obj = get_object_or_404(ItemGroup, pk=object_id)
+
+    return generic_assign_remove(
+        request,
+        title=_(u'Assign assets to the group: <a href="%s">%s</a>' % (obj.get_absolute_url(), obj)),                
+        obj=obj,
+        left_list_qryset=Item.objects.exclude(itemgroup=obj),
+        right_list_qryset=obj.items.all(),
+        add_method=obj.items.add,
+        remove_method=obj.items.remove,
+        left_list_title=_(u"Unassigned assets"),
+        right_list_title=_(u"Assigned assets"),
+        item_name=_(u"assets"),
+        list_filter=location_filter)
+
    
 def inventory_current(request, object_id):
     inventory = get_object_or_404(Inventory, pk=object_id)

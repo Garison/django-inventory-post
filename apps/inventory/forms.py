@@ -24,6 +24,7 @@ class ItemTemplateForm(forms.ModelForm):
 class ItemGroupForm(forms.ModelForm):
     class Meta:
         model = ItemGroup
+        exclude = ('items',)
 
     
 class LogForm(forms.ModelForm):

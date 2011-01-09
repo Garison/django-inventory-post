@@ -66,11 +66,10 @@ urlpatterns = patterns('inventory.views',
     url(r'^asset/state/init/$', 'item_state_list_init', (), 'item_state_list_init'),
     url(r'^asset/state/(?P<state_id>\d+)/list/$', 'item_state_list', (), 'item_state_list'),
 
-    url(r'^group/list/$', generic_list, dict({'queryset':ItemGroup.objects.all()}, extra_context=dict(title=_(u'item group'), create_view='group_create', record_links=group_links)), 'group_list'),
+    url(r'^group/list/$', generic_list, dict({'queryset':ItemGroup.objects.all()}, extra_context=dict(title=_(u'item groups'), create_view='group_create', record_links=group_links)), 'group_list'),
     url(r'^group/create/$', generic_create, dict({'form_class':ItemGroupForm}, extra_context={'title':_(u'item group')}), 'group_create'),
     url(r'^group/(?P<object_id>\d+)/$', generic_detail, dict(form_class=ItemGroupForm, model=ItemGroup, title=_(u'item group'), create_view='group_create', record_links=group_links), 'group_view'),
-    #TODO: convert to new generic_assign_remove
-    url(r'^group/(?P<object_id>\d+)/update/$', generic_assign_remove, dict(title=_(u"item group"), object=ItemGroup.objects.all(), left_list_qryset='Item.objects.exclude(itemgroup=object)', right_list_qryset='object.items.all()', add_method='object.items.add', remove_method="object.items.remove", left_list_title=_(u'Unassigned items'), right_list_title=_(u'Assigned items'), item_name=_(u"items")), name='group_update'),
+    url(r'^group/(?P<object_id>\d+)/update/$', 'group_assign_remove_item', (), name='group_update'),
     url(r'^group/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':ItemGroup}, post_delete_redirect="group_list", extra_context=dict(title=_(u'item group'))), 'group_delete'),
 
     url(r'^person/(?P<object_id>\d+)/photos/$', generic_photos, {'model':Person, 'max_photos':Settings.objects.get(pk=1).max_person_photos}, 'person_photos'), 

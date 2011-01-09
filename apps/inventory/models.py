@@ -180,7 +180,7 @@ class Item(models.Model):
     
 class ItemGroup(models.Model):
     name = models.CharField(verbose_name=_(u"Name"), max_length=32)
-    items = models.ManyToManyField(Item, verbose_name=_(u"Item"))
+    items = models.ManyToManyField(Item, blank=True, null=True, verbose_name=_(u"Item"))
     
     class Meta:
         ordering = ['name']
