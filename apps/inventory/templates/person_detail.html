@@ -44,19 +44,13 @@
                     {% endfor %}
                 </ul>
             </div>
-
-
-    <div class="group navform wat-cf">
-    </div>
   </form>
 </div>
 {% with photos_title as title %}
     {% include 'generic_photos_subtemplate.html' %}
 {% endwith %}
 
-
-{#{% if not "person_create"|login_required or user.is_authenticated %}#}
-<a href="{% url person_create %}">{% trans 'Create another user' %}</a> | 
-{#{% endif %}#}
-{% include "generic_navigation.html" %}
+{% with 'person_create' as create_view %}
+    {% include "generic_navigation.html" %}
+{% endwith %}
 {% endblock %}
