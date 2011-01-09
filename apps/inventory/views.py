@@ -331,6 +331,7 @@ def search(request):
         },
     context_instance=RequestContext(request))
 
+'''
 def item_log_list(request, object_id):
     item = Item.objects_passthru.get(pk=object_id)
     ctype = ContentType.objects.get_for_model(item)
@@ -342,7 +343,7 @@ def item_log_list(request, object_id):
         extra_context={'title':_(u"Asset log: %s") % item},
         ) 
 
-
+'''
 '''
 def render_to_pdf(template_src, context_dict):
     from django import http
