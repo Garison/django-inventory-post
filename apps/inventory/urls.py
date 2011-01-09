@@ -25,9 +25,6 @@ from generic_views.views import generic_assign_remove, \
                                 generic_detail, generic_list, \
                                 generic_update
 
-#template_orphan_dict = dict(
-#    queryset = ItemTemplate.objects.filter(item=None)
-#)
 
 urlpatterns = patterns('inventory.views',
     url(r'^transaction/list/$', generic_list, dict({'queryset':InventoryTransaction.objects.all()}, extra_context=dict(title=_(u'transactions'), create_view='inventory_transaction_create', record_links=inventory_transaction_links)), 'inventory_transaction_list'),
@@ -62,7 +59,6 @@ urlpatterns = patterns('inventory.views',
     url(r'^asset/list/$', generic_list, dict({'queryset':Item.objects.all()}, list_filter=location_filter, extra_context=dict(title=_(u'assets'), create_view='item_create', record_links=item_record_links)), 'item_list'),
     url(r'^asset/(?P<object_id>\d+)/$', 'item_detail', (), 'item_view'),
     url(r'^asset/(?P<object_id>\d+)/photos/$', generic_photos, dict(model=Item, max_photos=Settings.objects.get(pk=1).max_item_photos), 'item_photos'), 
-#    url(r'^asset/(?P<object_id>\d+)/log/$', 'item_log_list',() , 'item_log_list'),
     url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/set/$', 'item_setstate', (), 'item_setstate'),
     url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/unset$', 'item_remove_state', (), 'item_remove_state'),
     url(r'^asset/state/init/$', 'item_state_list_init', (), 'item_state_list_init'),
@@ -98,10 +94,6 @@ urlpatterns = patterns('inventory.views',
     url(r'^supplier/(?P<object_id>\d+)/update/$', generic_update, dict({'form_class':SupplierForm}, extra_context={'title':_(u'supplier')}), 'supplier_update'),
     url(r'^supplier/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Supplier}, post_delete_redirect="supplier_list", extra_context=dict(title=_(u'supplier'))), 'supplier_delete'),
     url(r'^supplier/(?P<object_id>\d+)/assign/itemtemplates/$', 'supplier_assign_remove_itemtemplates', (), 'supplier_assign_itemtemplates'),
-
-
-#    url(r'^log/list/$', generic_list, dict(queryset=Log.objects.all(), extra_context={'title' : _(u'log')}), 'log_list'),
-#    url(r'^log/(?P<object_id>\d+)/$', generic_detail, dict(form_class=LogForm, model=Log, title=_(u'log')), 'log_view'),
 
     url(r'^search/$', 'search', (), 'search'),
 

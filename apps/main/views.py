@@ -1,7 +1,15 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 
-def set_language(request):
-    if request.method == "GET":
-        request.session['django_language'] = request.GET.get('language', 'en')
-            
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
+from inventory.models import Person, Item, ItemTemplate
+
+
+def home(request):
+    data =  {
+        'person':Person.objects.all(),
+        'item':Item.objects.all(),
+        'template':ItemTemplate.objects.all(),
+    }
+
+    return render_to_response('home.html', data,
+    context_instance=RequestContext(request))     
