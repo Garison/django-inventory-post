@@ -60,11 +60,14 @@
                                 {% endif %}
                             </li>
                             <li>
-                                {% ifequal LANGUAGE_CODE 'es' %}
-                                    <a href="{% url set_language %}?language=en"><img src='{{ MEDIA_URL }}images/flag-us.png' alt="US-flag" /> {% trans 'English' %}</a>
-                                {% else %}
-                                    <a href="{% url set_language %}?language=es"><img src='{{ MEDIA_URL }}images/flag-pr.png' alt="PR-flag" /> {% trans 'Spanish' %}</a>
-                                {% endifequal %}                        
+                                <form action="/i18n/setlang/" method="post">{% csrf_token %}
+                                    <select name="language">
+                                        {% for lang in LANGUAGES %}
+                                            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <input type="submit" value="{% trans 'Go' %}" />
+                                </form>                                
                             </li>
                             <li><a class="logout" href="{% if user.is_anonymous %}{% url user_login %}?next=/{% else %}{% url user_logout %}{% endif %}">{% if user.is_anonymous %}{% trans 'Login' %}{% else %}{% trans 'Logout' %}{% endif %}</a></li>
                         </ul>
