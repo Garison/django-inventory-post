@@ -7,7 +7,7 @@
     {{ form.media|safe }}              
     <h2 class="title">
         {% if object %}
-            <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+            <a href="{{ object.get_absolute_url }}">{{ object|capfirst }}</a>
         {% else %}
             {% trans 'Create' %}
         {% endif %}                
