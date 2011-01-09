@@ -3,7 +3,6 @@
 {% load generic_views_helpers %}
 {% load pagination_tags %}
 {% block title %} :: {% blocktrans %}List of {{ title }}{% endblocktrans %}{% endblock %}
-{% block banner %}<div id="banner"><h2>{% blocktrans %}List of {{ title }}{% endblocktrans %}</h2></div>{% endblock %}
 {#{% block secondary_links %}{{ secondary_links|safe }}{% endblock %}#}
 
 {% block content %}
@@ -12,7 +11,7 @@
 {% include "filter_form_subtemplate.html" %}	
 {% endif %}
 
-{% autopaginate object_list 2 %} 
+{% autopaginate object_list 15 %} 
 
 
 <h2 class="title">{% trans 'List of' %} {{ title }}</h2>
