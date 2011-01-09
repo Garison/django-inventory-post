@@ -1,7 +1,9 @@
 from django import forms 
+from django.utils.translation import ugettext_lazy as _
 
 from models import Item, Person, ItemTemplate, ItemGroup, Log, \
                    InventoryTransaction, Inventory
+
 
 class ItemForm(forms.ModelForm):
     class Meta:
@@ -40,4 +42,9 @@ class InventoryForm(forms.ModelForm):
 class InventoryTransactionForm(forms.ModelForm):
     class Meta:
         model = InventoryTransaction
+        
+        
+class SearchForm(forms.Form):
+    keyword = forms.CharField(max_length=128, label=_(u'Search term'))
+    
         

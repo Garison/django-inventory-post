@@ -22,6 +22,8 @@ from inventory import person_links, item_record_links, \
                       template_record_links, \
                       location_filter, navigation
 
+from forms import SearchForm
+
 
 def person_detail(request, object_id):
     return object_detail(
@@ -295,15 +297,16 @@ def inventory_current(request, object_id):
     context_instance=RequestContext(request))
 
 def search(request):
-    keyword=''
-    people=None
-    items=None
-    templates=None
-    groups=None
+    keyword = ''
+    people = None
+    items = None
+    templates = None
+    groups = None
+    form = SearchForm()
     
     if request.method == 'GET':
         keyword=request.GET.get('keyword','')
-        
+        form = SearchForm(initial={'keyword':keyword})        
         if keyword:
             people = Person.objects.filter(
                 Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword) | Q(second_name__icontains=keyword) | Q(second_last_name__icontains=keyword ) | Q(location__name__icontains=keyword)
@@ -323,6 +326,7 @@ def search(request):
          
 
     return render_to_response('search_results.html', {
+        'form':form,
         'people':people,
         'items':items,
         'templates':templates,

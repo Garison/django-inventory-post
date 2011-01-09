@@ -1,7 +1,26 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load styling %}
 {% block title %} :: Search results{% endblock %}
 {% block content %}
+
+{% add_classes_to_form form %}
+
+
+<div class="inner">
+    <form action="" method="get" class="form">{% csrf_token %}
+    <div class="group">
+    {{ form }}
+    </div>
+        <div class="group navform wat-cf">
+            <button class="button" type="submit">
+                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% trans 'Search' %}" /> {% trans 'Search' %}
+            </button>
+        </div>
+
+    </form>
+</div>    
+
 
 {% if keyword %}
     <h3>{% blocktrans %}Results with: {{ keyword }}{% endblocktrans %}</h3>
@@ -97,15 +116,6 @@
     </div>
     <br />
     {% endif %}
-{% else %}
-    <form action="" method="get" class="form">{% csrf_token %}
-        <input type='text' name='keyword' />
-        <div class="group navform wat-cf">
-            <button class="button" type="submit">
-                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% trans 'Search' %}" /> {% trans 'Search' %}
-            </button>
-        </div>
-    </form>
 {% endif %}
 
 
