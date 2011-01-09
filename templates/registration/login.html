@@ -1,10 +1,11 @@
 {% extends "base-plain.html" %}
 {% load i18n %}
 {% load project_tags %}
+{% load styling %}
 {% block title %} :: {% trans 'Login' %}{% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Login' %}</h2></div>{% endblock %}
 {% block content %}
 
+{% add_classes_to_form form %}
 
 <div id="box">
       <h1>{% project_name %}</h1>
@@ -26,7 +27,6 @@
                 <label class="label right">{% trans 'Username' %}</label>
               </div>
               <div class="right">
-                {#<input type="text" class="text_field" />#}
 				{{ form.username }}                
               </div>
             </div>
@@ -35,7 +35,6 @@
                 <label class="label right">{% trans 'Password' %}</label>
               </div>
               <div class="right">
-                {#<input type="password" class="text_field" />#}
 				{{ form.password }}                
               </div>
             </div>
