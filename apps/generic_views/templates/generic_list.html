@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load generic_views_helpers %}
+{% load pagination_tags %}
 {% block title %} :: {% blocktrans %}List of {{ title }}{% endblocktrans %}{% endblock %}
 {% block banner %}<div id="banner"><h2>{% blocktrans %}List of {{ title }}{% endblocktrans %}</h2></div>{% endblock %}
 {#{% block secondary_links %}{{ secondary_links|safe }}{% endblock %}#}
@@ -10,6 +11,9 @@
 {% if filter_form %}
 {% include "filter_form_subtemplate.html" %}	
 {% endif %}
+
+{% autopaginate object_list 2 %} 
+
 
 <h2 class="title">{% trans 'List of' %} {{ title }}</h2>
     <div class="inner">
@@ -53,99 +57,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <div class="actions-bar wat-cf">
-          <div class="pagination">
-            <span class="disabled prev_page">« Previous</span><span class="current">1</span><a rel="next" href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a><a href="#">8</a><a href="#">9</a><a href="#">10</a><a href="#">11</a><a rel="next" class="next_page" href="#">Next »</a>
-          </div>
-        </div>
+        {% paginate %}          
       </form>
     </div>
-{% comment %}
-
-<h3>{{ subtitle }}</h3>
-
-{% if filter_form %}
-{% include "filter_form_subtemplate.html" %}	
-{% endif %}
-
-{% if is_paginated %}
-<div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}{{ new_url }}">[{% trans 'Previous page' %}]</a>
-        {% endif %}
-
-        <span class="current">
-            {% trans 'Page' %} {{ page_obj.number }} {% trans 'of' %} {{ page_obj.paginator.num_pages }}
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}{{ new_url }}">[{% trans 'Next page' %}]</a>
-        {% endif %}
-    </span>
-</div>
-{% endif %}	
-<div class='data-entry'>
-	<table>
-		<thead><tr><td colspan='15'>{% trans 'List of' %} {{ title }} ({% if is_paginated %}{% blocktrans with range_base|add:1 as from and range_base|add:object_list.count as to %}{{ from }}-{{ to }} of {{ hits }}{% endblocktrans %}{% else %}{{ object_list.count }}{% endif %})</td></tr></thead>
-		{#{% if not create_view|login_required or user.is_authenticated %}#}
-		{% if create_view %}
-		<tfoot>
-			<tr>
-				<td colspan='15' style='background: #2020ff;'>
-					<div class='userbar'>
-						<ul>
-							<li><a href="{% dynurl create_view %}">{% trans "Create new" %}<img src="{{ MEDIA_URL }}images/window-new.png" /></a></li>
-						</ul>
-					</div>
-				</td>
-			</tr>
-		</tfoot>
-		{% endif %}
-		{#{% endif %}#}
-		<tbody>
-			<tr>
-				<th style="text-align:center;"><strong>{% trans 'Identifier' %}</strong></th>
-				{% if record_links %}
-				<th style="text-align:center;"><strong>{% trans 'Action' %}</strong></th>
-				{% endif %}
-			</tr>
-			{% for object in object_list %}
-				<tr>
-					<th><a href="{{ object.get_absolute_url}}">{{ object }}</a></th>
-						{% if record_links %}
-					<td>
-						<div class='userbar'>
-							<div style='font-size:100%;'>
-								<ul>
-									{% include "generic_navigation.html" %}
-								</ul>
-							</div>
-						</div>	
-					</td>
-				{% endif %}
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-</div>
-{% if is_paginated %}
-<div class="pagination">
-	<span class="step-links">
-		{% if page_obj.has_previous %}
-			<a href="?page={{ page_obj.previous_page_number }}{{ new_url }}">[{% trans 'Previous page' %}]</a>
-		{% endif %}
-
-		<span class="current">
-			{% trans 'Page' %} {{ page_obj.number }} {% trans 'of' %} {{ page_obj.paginator.num_pages }}
-		</span>
-
-		{% if page_obj.has_next %}
-			<a href="?page={{ page_obj.next_page_number }}{{ new_url }}">[{% trans 'Next page' %}]</a>
-		{% endif %}
-	</span>
-</div>
-{% endif %}
-
-{% endcomment %}
 {% endblock %}

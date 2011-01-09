@@ -49,16 +49,9 @@ def generic_list(request, list_filter=None, queryset_filter=None, *args, **kwarg
                 kwargs['extra_context']['new_url'] = '&' + raw_url
 
         kwargs['extra_context']['filter_form'] = result['filter_form']
-
-    if queryset_filter:
-#		locals()[val+'_str']= x
-        exec("kwargs['queryset'] = kwargs['queryset'].filter(" + queryset_filter['field'] + "=kwargs['" +queryset_filter['source'] +"'])")
-        if queryset_filter['source'] in kwargs:
-            kwargs.pop(queryset_filter['source'])
         
-    results_per_page = 20
-    kwargs['extra_context']['range_base'] = (int(request.GET.get('page', 1))-1) * results_per_page
-    return object_list(request, paginate_by=results_per_page, template_name = 'generic_list.html', *args, **kwargs)
+    return object_list(request,  template_name='generic_list.html', *args, **kwargs)
+
 
 def generic_create(*args, **kwargs):
     if 'model' in kwargs:

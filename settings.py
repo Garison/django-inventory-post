@@ -89,6 +89,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'middleware.login_required_middleware.LoginRequiredMiddleware',
+    'pagination.middleware.PaginationMiddleware',  
 ]
 
 ROOT_URLCONF = 'urls'
@@ -108,6 +109,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'pagination',
     'photologue',
     'photos',
     'common',
