@@ -20,7 +20,7 @@ class PersonForm(forms.ModelForm):
 class ItemTemplateForm(forms.ModelForm):
     class Meta:
         model = ItemTemplate
-        exclude = ('photos', 'supplies')
+        exclude = ('photos', 'supplies', 'suppliers')
 
 
 class ItemGroupForm(forms.ModelForm):
