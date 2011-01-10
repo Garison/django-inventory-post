@@ -35,6 +35,8 @@ supplier_delete = {'text':_('Delete'), 'view':'supplier_delete'}
 supplier_update = {'text':_('Edit'), 'view':'supplier_update'}
 supplier_assign_itemtemplate = {'text':_(u'Assign/Remove templates'), 'view':'supplier_assign_itemtemplates'}
 
+template_assign_suppliers = {'text':_(u'Assign/Remove suppliers'), 'view':'template_assign_suppliers'}
+
 person_links = [
     person_update, person_delete, person_photos, person_assign_item
 ]
@@ -51,6 +53,7 @@ template_record_links = [
     {'text':_(u'Photos'), 'view':'template_photos'},
     {'text':_(u'Assets that use this template'), 'view':'template_items_list'},
     {'text':_(u'Assign/Remove supplies'), 'view':'template_assign_supply'},
+    template_assign_suppliers
 ]
 
 item_menu_links = [
