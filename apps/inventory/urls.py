@@ -17,7 +17,8 @@ from models import ItemTemplate, InventoryTransaction, \
                    Log, Location, State, Supplier
                    
 from forms import InventoryTransactionForm, InventoryForm, \
-                  ItemTemplateForm, ItemForm, ItemGroupForm, PersonForm, \
+                  ItemTemplateForm, ItemTemplateForm_view, ItemForm, \
+                  ItemGroupForm, PersonForm, \
                   LogForm, SupplierForm
 
 from generic_views.views import generic_assign_remove, \
@@ -46,7 +47,8 @@ urlpatterns = patterns('inventory.views',
     url(r'^template/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':ItemTemplate}, post_delete_redirect="template_list", extra_context=dict(title=_(u'item template'), _message=_(u"Will be deleted from any user that may have it assigned and from any item group."))), 'template_delete' ),
     url(r'^template/orphans/$', generic_list, dict({'queryset':ItemTemplate.objects.filter(item=None)}, extra_context=dict(title=_('orphan templates'), create_view='template_create', update_view='template_update', delete_view='template_delete', extra_record_links={'Edit photos':{'view':'template_photos', 'icon':settings.MEDIA_URL+'images/camera-photo.png'}})), 'template_orphans_list'),
     url(r'^template/(?P<object_id>\d+)/photos/$', generic_photos, {'model':ItemTemplate, 'max_photos':Settings.objects.get(pk=1).max_template_photos }, 'template_photos'), 
-    url(r'^template/(?P<object_id>\d+)/$', 'template_detail', (), 'template_view'),
+#    url(r'^template/(?P<object_id>\d+)/$', 'template_detail', (), 'template_view'),
+    url(r'^template/(?P<object_id>\d+)/$', generic_detail, dict(form_class=ItemTemplateForm_view, model=ItemTemplate, create_view='template_create', record_links=template_record_links), 'template_view'),
     url(r'^template/(?P<object_id>\d+)/items/$', 'template_items', (), 'template_items_list'),
     url(r'^template/(?P<object_id>\d+)/assign/supplies$', 'template_assign_remove_supply', (), name='template_assign_supply'),
     url(r'^template/(?P<object_id>\d+)/assign/suppliers/$', 'template_assign_remove_suppliers', (), name='template_assign_suppliers'),

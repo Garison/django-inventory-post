@@ -15,16 +15,16 @@ $(function() {
 {% block content %}
 
 <style type="text/css">
-	form textarea:focus, form input:focus, form select, form textarea, form input { background: none; color: black; border: none; }
+	form textarea:focus, form select option, form input:focus, form select, form textarea, form input { background: none; color: black; border: none; }
 </style>
 
     {% add_classes_to_form form %}
     {{ form.media|safe }}              
     <h2 class="title">
-        {% if object %}
-            <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+        {% if title %}
+            {{ title }}
         {% else %}
-            {% trans 'Create' %}
+            {% blocktrans %}Details for: {{ object }}{% endblocktrans %}
         {% endif %}                
     </h2>
     <div class="inner">

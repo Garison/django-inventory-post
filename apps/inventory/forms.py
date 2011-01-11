@@ -1,6 +1,9 @@
 from django import forms 
 from django.utils.translation import ugettext_lazy as _
 
+
+from generic_views.forms import DetailForm
+
 from models import Item, Person, ItemTemplate, ItemGroup, Log, \
                    InventoryTransaction, Inventory, Supplier
 
@@ -21,6 +24,12 @@ class ItemTemplateForm(forms.ModelForm):
     class Meta:
         model = ItemTemplate
         exclude = ('photos', 'supplies', 'suppliers')
+
+
+class ItemTemplateForm_view(DetailForm):
+    class Meta:
+        model = ItemTemplate
+        exclude = ('photos',)
 
 
 class ItemGroupForm(forms.ModelForm):
