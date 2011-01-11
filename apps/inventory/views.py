@@ -102,16 +102,6 @@ def template_assign_remove_suppliers(request, object_id):
         item_name=_(u"suppliers"))
             
 
-def template_detail(request, object_id):
-    return object_detail(
-        request,
-        queryset = ItemTemplate.objects.all(),
-        object_id = object_id,
-        template_name = 'itemtemplate_detail.html',
-        extra_context={'record_links':template_record_links},
-    )
-
-
 def template_items(request, object_id):
     template = get_object_or_404(ItemTemplate, pk=object_id)
     return object_list(

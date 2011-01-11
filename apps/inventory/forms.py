@@ -14,10 +14,22 @@ class ItemForm(forms.ModelForm):
         exclude = ('photos', 'active')
 
 
+class ItemForm_view(DetailForm):
+    class Meta:
+        model = Item
+        exclude = ('photos', 'active')
+
+
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
         exclude = ('photos', 'inventory')
+
+
+class PersonForm_view(DetailForm):
+    class Meta:
+        model = Person
+        exclude = ('photos',)
 
         
 class ItemTemplateForm(forms.ModelForm):

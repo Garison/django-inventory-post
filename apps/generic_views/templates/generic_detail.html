@@ -6,7 +6,7 @@
 {% block javascript %}
 <script type="text/javascript">
 $(function() {
-	$("form :input").each(function() {
+	$(".detail_form :input").each(function() {
 		this.disabled = true;
 	});
 });
@@ -15,9 +15,12 @@ $(function() {
 {% block content %}
 
 <style type="text/css">
-	form textarea:focus, form select option, form input:focus, form select, form textarea, form input { background: none; color: black; border: none; }
+	.detail_form textarea, 
+    .detail_form select option,
+    .detail_form input, 
+    .detail_form select, 
+    .detail_form input { background: none; color: black; border: none; }
 </style>
-
     {% add_classes_to_form form %}
     {{ form.media|safe }}              
     <h2 class="title">
@@ -28,7 +31,7 @@ $(function() {
         {% endif %}                
     </h2>
     <div class="inner">
-        <form action="" method="post" class="form">{% csrf_token %}
+        <form action="" method="post" class="form detail_form">{% csrf_token %}
             {% for field in form %}
                 <div class="group">
                     <label class="label">{{ field.label_tag }}</label>
@@ -38,7 +41,11 @@ $(function() {
             {% endfor %} 
         </form>
     </div>
-    
+
+{% for subtemplate in subtemplates %}
+    {% include subtemplate %}
+{% endfor %}
+  
             
 {% include "generic_navigation.html" %}
 
