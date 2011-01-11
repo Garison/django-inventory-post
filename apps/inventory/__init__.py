@@ -65,7 +65,7 @@ item_record_links = [
     {'text':_(u'Delete'), 'view':'item_delete'},
     {'text':_(u'Photos'), 'view':'item_photos'},
     {'text':_(u'Assign/Remove people'), 'view':'item_assign_person'},
-    {'text':_(u'Template'), 'view':'template_view'},
+    {'text':_(u'Template'), 'view':'template_view', 'args':'object.item_template.id'},
 ]
 
 group_links = [

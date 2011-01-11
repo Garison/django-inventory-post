@@ -103,12 +103,11 @@ def template_assign_remove_suppliers(request, object_id):
             
 
 def template_detail(request, object_id):
-    item = get_object_or_404(Item, pk=object_id)
     return object_detail(
         request,
-        queryset=ItemTemplate.objects.all(),
-        object_id=item.item_template.id,
-        template_name='itemtemplate_detail.html',
+        queryset = ItemTemplate.objects.all(),
+        object_id = object_id,
+        template_name = 'itemtemplate_detail.html',
         extra_context={'record_links':template_record_links},
     )
 
