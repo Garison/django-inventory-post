@@ -110,16 +110,6 @@ class ItemTemplate(models.Model):
         return self.description
 
 
-class ItemManager(models.Manager):
-    def get_query_set(self):
-        return super(ItemManager, self).get_query_set().filter(active=True)
-
-
-class ItemManagerPassthru(models.Manager):
-    def get_query_set(self):
-        return super(ItemManagerPassthru, self).get_query_set()
-
-
 class Item(models.Model):
     item_template = models.ForeignKey(ItemTemplate, verbose_name=_(u"item template"))
     property_number = models.CharField(verbose_name=_(u"asset number"), max_length=10)
@@ -127,8 +117,6 @@ class Item(models.Model):
     serial_number = models.CharField(verbose_name=_(u"serial number"), max_length=30, null=True, blank=True)
     location = models.ForeignKey(Location, verbose_name=_(u"location"), null=True, blank=True)
     active = models.BooleanField(default=True)
-    objects = ItemManager()
-    objects_passthru = ItemManagerPassthru()
     
     class Meta:
         ordering = ['property_number']
