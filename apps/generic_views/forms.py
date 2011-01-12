@@ -23,20 +23,28 @@ def return_attrib(obj, attrib, arguments=None):
 
 
 class DetailSelectMultiple(forms.widgets.SelectMultiple):
+    def __init__(self, queryset=None, *args, **kwargs):
+        self.queryset=queryset
+        super(DetailSelectMultiple, self).__init__(*args, **kwargs)
+            
     def render(self, name, value, attrs=None, choices=()):
         if value is None: value = ''
         #final_attrs = self.build_attrs(attrs, name=name)
-        output = u''
+        output = u'<ul class="list">'
         if value:
-            options = [string for index, string in self.choices if index in value]
+            options = [(index, string) for index, string in self.choices if index in value]
         else:
-            options = [string for index, string in self.choices]
+            options = [(index, string) for index, string in self.choices]
         if options:
-            output += ', '.join(options)
+            for index, string in options:
+                if self.queryset:
+                    output += u'<li><a href="%s">%s</a></li>' % (self.queryset.get(pk=index).get_absolute_url(), string)
+                else:
+                 output += u'<li>%s</li>' % string
         else:
-            output = _(u"None")
-        return mark_safe(output + u'\n')
-         
+            output += u'<li>%s</li>' % _(u"None")
+        return mark_safe(output + u'</ul>\n')
+
 
 class DetailForm(forms.ModelForm):
     def __init__(self, extra_fields=None, *args, **kwargs):
@@ -54,7 +62,9 @@ class DetailForm(forms.ModelForm):
                 self.fields[field_name].widget = DetailSelectMultiple(
                     choices=field.widget.choices,
                     attrs=field.widget.attrs,
+                    queryset=getattr(field, 'queryset', None),
                 )
+                
                 self.fields[field_name].help_text=''
 
 
