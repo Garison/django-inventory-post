@@ -132,51 +132,6 @@ def item_assign_remove_person(request, object_id):
         item_name=_(u"people"),
         list_filter=location_filter)
 
-   
-def item_detail(request, object_id, template_name=None, extra_data=None, passthru=False, show_create_view=True):
-    if passthru:
-        item = Item.objects_passthru.get(pk=object_id)
-    else:
-        item = get_object_or_404(Item, pk=object_id)
-
-    extra_context={ 
-        'template':item.item_template,
-        'record_links':item_record_links,
-        'title':_(u'the asset'),
-        'subtitle':item,
-        'item_photos_title':_(u'item photos'),
-        'template_photos_title':_(u'template photos'),
-        }
-
-
-    if extra_data:
-        for k, v in extra_data.iteritems():
-            extra_context[k] = v
-
-    if passthru:
-        queryset = Item.objects_passthru.all()
-    else:
-        queryset = Item.objects.all()
-        
-    if not show_create_view:
-        extra_context['item_create']=''
-        
-    if template_name:
-        return object_detail(
-            request,
-            queryset = queryset,
-            object_id = object_id,
-            template_name = template_name,
-            extra_context=extra_context,
-        )
-    else:
-        return object_detail(
-            request,
-            queryset = queryset,
-            object_id = object_id,
-            extra_context=extra_context,
-            template_name = 'item_detail.html'
-        )
 
 def item_setstate(request, object_id, state_id):
     item = get_object_or_404(Item, pk=object_id)
