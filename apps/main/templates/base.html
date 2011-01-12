@@ -48,90 +48,89 @@
 	<body>
     
         <div id="container">
-            <div id="header">
-                <h1><a href="{% url home %}">{% project_name %}</a></h1>
-                    <div id="user-navigation">
-                        <ul class="wat-cf">
-                            <li><strong>{% trans 'User' %}:</strong>
-                                {% if user.is_anonymous %}
-                                    {% trans 'Anonymous' %}
-                                {% else %}
-                                    {{ user }}
-                                    <a href="{% url user_me_password_change %}">({% trans 'New password' %})</a>
-                                {% endif %}
-                            </li>
-                            <li>
-                                <form action="/i18n/setlang/" method="post">{% csrf_token %}
-                                    <select name="language">
-                                        {% for lang in LANGUAGES %}
-                                            <option value="{{ lang.0 }}">{{ lang.1 }}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <input type="submit" value="{% trans 'Go' %}" />
-                                </form>                                
-                            </li>
-                            <li><a class="logout" href="{% if user.is_anonymous %}{% url user_login %}?next=/{% else %}{% url user_logout %}{% endif %}">{% if user.is_anonymous %}{% trans 'Login' %}{% else %}{% trans 'Logout' %}{% endif %}</a></li>
-                        </ul>
-                    </div>
-
-                    {% main_navigation %}                    
-                    <div id="main-navigation">
-                        <ul class="wat-cf">
-                            {% for link in navigation_main_links %}
-                                <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}">{% endif %}</span></a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-            </div>
-            <div class="block" id="block-text">
-                <div id="wrapper" class="wat-cf">
-                    <div id="main">
-                        <div class="block" id="block-text">                    
-                            <div class="secondary-navigation">
-                                <ul class="wat-cf">
-                                    {% for link in navigation_secondary_links %}
-                                        <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}</a></li>
-                                    {% endfor %}     
-                                    {% block secondary_links %}{% endblock %}                       
-                                </ul>
-                            </div>                    
-                            <div class="content">
-                                {% if messages %}
-
-                                     <div class="inner">
-
-                                      <div class="flash">
-                                    {% for message in messages %}
-
-                                        <div class="message{% if message.tags %}{% if 'success' in message.tags %} notice{% endif %} {{ message.tags }}{% else %} notice{% endif %}">
-                                          <p onclick="$(this).parent().parent().fadeOut(); return false;">{{ message }}</p>
-                                          
-                                        </div>
-              
-                                    {% endfor %}
-                                    </div>
-                                    </div>
-                                {% endif %}
-                                {% block content %}{% endblock %}
-                            </div>
-                        </div>  
-                        <div id="footer">
-                            <div class="block">
-                                <p>Copyright &copy; 2007 Roberto Rosario.</p>
-                            </div>
+            {% if user.is_anonymous %}
+                <div class="block" id="block-text">
+                  <div id="wrapper" class="wat-cf">
+                    {% block content_plain %}{% endblock %}
+                  </div>
+                </div>
+            {% endif %}
+        
+            {% if not user.is_anonymous %}
+                <div id="header">
+                    <h1><a href="{% url home %}">{% project_name %}</a></h1>
+                        <div id="user-navigation">
+                            <ul class="wat-cf">
+                                <li><strong>{% trans 'User' %}:</strong>
+                                    {% if user.is_anonymous %}
+                                        {% trans 'Anonymous' %}
+                                    {% else %}
+                                        {{ user }}
+                                        <a href="{% url user_me_password_change %}">({% trans 'New password' %})</a>
+                                    {% endif %}
+                                </li>
+                                <li>
+                                    <form action="/i18n/setlang/" method="post">{% csrf_token %}
+                                        <select name="language">
+                                            {% for lang in LANGUAGES %}
+                                                <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <input type="submit" value="{% trans 'Go' %}" />
+                                    </form>                                
+                                </li>
+                                <li><a class="logout" href="{% if user.is_anonymous %}{% url user_login %}?next=/{% else %}{% url user_logout %}{% endif %}">{% if user.is_anonymous %}{% trans 'Login' %}{% else %}{% trans 'Logout' %}{% endif %}</a></li>
+                            </ul>
                         </div>
+
+                        {% main_navigation %}                    
+                        <div id="main-navigation">
+                            <ul class="wat-cf">
+                                {% for link in navigation_main_links %}
+                                    <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}">{% endif %}</span></a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                </div>
+                <div class="block" id="block-text">
+                    <div id="wrapper" class="wat-cf">
+                        <div id="main">
+                            <div class="block" id="block-text">                    
+                                <div class="secondary-navigation">
+                                    <ul class="wat-cf">
+                                        {% for link in navigation_secondary_links %}
+                                            <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}</a></li>
+                                        {% endfor %}     
+                                        {% block secondary_links %}{% endblock %}                       
+                                    </ul>
+                                </div>                    
+                                <div class="content">
+                                    {% if messages %}
+                                         <div class="inner">
+                                          <div class="flash">
+                                        {% for message in messages %}
+                                            <div class="message{% if message.tags %}{% if 'success' in message.tags %} notice{% endif %} {{ message.tags }}{% else %} notice{% endif %}">
+                                              <p onclick="$(this).parent().parent().fadeOut(); return false;">{{ message }}</p>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                        </div>
+                                    {% endif %}
+                                    {% block content %}{% endblock %}
+                                </div>
+                            </div>  
+                            <div id="footer">
+                                <div class="block">
+                                    <p>Copyright &copy; 2007 Roberto Rosario.</p>
+                                </div>
+                            </div>
+                        </div>                    
                     </div>                    
-                </div>                    
-            </div>
+                </div>
+            {% endif %}
         </div>
         {#<div id="loading">#}
 		{#{% trans 'Loading' %}...<img src="{{ MEDIA_URL }}images/loading.gif" alt="" />#}
 		{#</div>#}
-       
-        {% comment %}
-        <div style='float: right; width: 100%;'>
-        {% block banner %}{% endblock %}		
-        </div>
-        {% endcomment %}
 	</body>
 </html>

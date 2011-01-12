@@ -1,9 +1,9 @@
-{% extends "base-plain.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 {% load project_tags %}
 {% load styling %}
 {% block title %} :: {% trans 'Login' %}{% endblock %}
-{% block content %}
+{% block content_plain %}
 
 {% add_classes_to_form form %}
 
