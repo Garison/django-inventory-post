@@ -19,7 +19,7 @@ from models import ItemTemplate, InventoryTransaction, \
 from forms import InventoryTransactionForm, InventoryForm, \
                   ItemTemplateForm, ItemTemplateForm_view, ItemForm, \
                   ItemForm_view, ItemGroupForm, PersonForm, \
-                  LogForm, SupplierForm, PersonForm_view
+                  LogForm, SupplierForm, PersonForm_view, LocationForm_view
 
 from generic_views.views import generic_assign_remove, \
                                 generic_create, generic_delete, \
@@ -83,6 +83,7 @@ urlpatterns = patterns('inventory.views',
     url(r'^location/create/$', generic_create, dict({'model':Location}, extra_context={'title':_(u'locations')}), 'location_create'),
     url(r'^location/(?P<object_id>\d+)/update/$', generic_update, dict({'model':Location}, extra_context={'title':_(u'locations')}), 'location_update'),
     url(r'^location/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Location}, post_delete_redirect="location_list", extra_context=dict(title=_(u'locations'))), 'location_delete'),
+    url(r'^location/(?P<object_id>\d+)/$', generic_detail, dict(form_class=LocationForm_view, queryset=Location.objects.all(), create_view='location_create', record_links=location_links), 'location_view'),
 
     url(r'^state/list/$', generic_list, dict({'queryset':State.objects.all()}, extra_context=dict(title =_(u'states'), create_view='state_create', record_links=state_links)), 'state_list'),
     url(r'^state/create/$', generic_create, dict({'model':State}, extra_context={'title':_(u'states')}), 'state_create'),

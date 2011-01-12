@@ -84,10 +84,11 @@ class Location(models.Model):
     def __unicode__(self):
         return self.name
 
+    @permalink
     def get_absolute_url(self):
-        return reverse('location_list')
-   
-            
+        return ('location_view', [str(self.id)])
+    
+                
 class ItemTemplate(models.Model):
     description = models.CharField(verbose_name=_(u"description"), max_length=64)
     brand = models.CharField(verbose_name=_(u"brand"), max_length=32, null=True, blank=True)
