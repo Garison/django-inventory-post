@@ -72,7 +72,6 @@ urlpatterns = patterns('inventory.views',
     url(r'^group/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':ItemGroup}, post_delete_redirect="group_list", extra_context=dict(title=_(u'item group'))), 'group_delete'),
 
     url(r'^person/(?P<object_id>\d+)/photos/$', generic_photos, {'model':Person, 'max_photos':Settings.objects.get(pk=1).max_person_photos}, 'person_photos'), 
-#    url(r'^person/(?P<object_id>\d+)/$', 'person_detail', (), 'person_view'),
     url(r'^person/(?P<object_id>\d+)/$', generic_detail, dict(form_class=PersonForm_view, queryset=Person.objects.all(), create_view='person_create', record_links=person_links, extra_context={'subtemplates':['generic_photos_subtemplate.html']}), 'person_view'),
     url(r'^person/list/$', generic_list, dict({'queryset':Person.objects.all()}, list_filter=location_filter, extra_context=dict(title=_(u'people'), create_view="person_create", record_links=person_links)), 'person_list'),
     url(r'^person/create/$', generic_create, dict({'form_class':PersonForm}, extra_context={'title':_(u'person')}), 'person_create'),
