@@ -1,14 +1,36 @@
 from django import forms 
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
+from django.db import models
+import types
+
+
+def return_attrib(obj, attrib, arguments=None):
+    try:
+        result = reduce(getattr, attrib.split("."), obj)
+        if isinstance(result, types.MethodType):
+            if arguments:
+                return result(**arguments)
+            else:
+                return result()
+        else:
+            return result
+    except Exception, err:
+        if settings.DEBUG:
+            return "Attribute error: %s; %s" % (attrib, err)
+        else:
+            pass
 
 
 class DetailSelectMultiple(forms.widgets.SelectMultiple):
     def render(self, name, value, attrs=None, choices=()):
         if value is None: value = ''
-        final_attrs = self.build_attrs(attrs, name=name)
+        #final_attrs = self.build_attrs(attrs, name=name)
         output = u''
-        options = [string for index, string in self.choices if index in value]
+        if value:
+            options = [string for index, string in self.choices if index in value]
+        else:
+            options = [string for index, string in self.choices]
         if options:
             output += ', '.join(options)
         else:
@@ -17,8 +39,16 @@ class DetailSelectMultiple(forms.widgets.SelectMultiple):
          
 
 class DetailForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, extra_fields=None, *args, **kwargs):
         super(DetailForm, self).__init__(*args, **kwargs)
+        if extra_fields:
+            for extra_field in extra_fields:
+                result = return_attrib(self.instance, extra_field['field'])
+                label = 'label' in extra_field and extra_field['label'] or None
+                #TODO: Add others result types <=> Field types
+                if isinstance(result, models.query.QuerySet):
+                    self.fields[extra_field['field']]=forms.ModelMultipleChoiceField(queryset=result, label=label)
+
         for field_name, field in self.fields.items():
             if isinstance(field.widget, forms.widgets.SelectMultiple):
                 self.fields[field_name].widget = DetailSelectMultiple(

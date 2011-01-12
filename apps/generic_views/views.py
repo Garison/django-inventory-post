@@ -10,7 +10,8 @@ from django.utils.translation import ugettext as _
 from django.views.generic.list_detail import object_detail, object_list
 from django.views.generic.create_update import create_object, update_object, delete_object
 
-from forms import FilterForm, GenericConfirmForm, GenericAssignRemoveForm
+from forms import FilterForm, GenericConfirmForm, GenericAssignRemoveForm, \
+                  DetailForm
 
 def add_filter(request, list_filter):
     result={}
@@ -163,7 +164,11 @@ def generic_assign_remove(request, title, obj, left_list_qryset, left_list_title
 
 
 def generic_detail(request, object_id, form_class, queryset, title=None, create_view=None, record_links=None, extra_context={}, extra_fields=[]):
-    form = form_class(instance=queryset.filter(id=object_id)[0])
+    #if isinstance(form_class, DetailForm):
+    try:
+        form = form_class(instance=queryset.filter(id=object_id)[0], extra_fields=extra_fields)
+    except:
+        form = form_class(instance=queryset.filter(id=object_id)[0])
     
     extra_context['form'] = form
     extra_context['title'] = title
