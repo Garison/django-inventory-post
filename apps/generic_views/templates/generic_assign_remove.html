@@ -6,10 +6,10 @@
 <style>
     #id_right_list,#id_left_list { min-width: 28em; min-height: 13em; }
 </style>
-<h2>{{ title|safe }}</h2>
+<h2 class="title">{{ title|safe }}</h2>
 
 {% if filter_form %}
-{% include "filter_form_subtemplate.html" %}	
+    {% include "filter_form_subtemplate.html" %}	
 {% endif %}
 
 <form method='POST' action='' id='assign_remove'>{% csrf_token %}
