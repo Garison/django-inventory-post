@@ -24,6 +24,7 @@
 # Add inventory transactions from RMAs & customer invoices
 # Implement django-permissions
 # Connect w/ descartes for BI charts
+# Export data to CSV
 
 # Deferred, deprecated
 ==========================
