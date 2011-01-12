@@ -10,6 +10,7 @@
 # Skinable interface                                                    - DONE
 # Change to famfamfam icons                                             - DONE
 # Suppliers object                                                      - DONE
+# User setting (theme, language, timezone, changepassword)
 # Add sorting by column to generic_list
 # Transfer items from one inventory to another
 # Transfer asset from/to users
