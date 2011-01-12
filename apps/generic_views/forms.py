@@ -32,7 +32,10 @@ class DetailSelectMultiple(forms.widgets.SelectMultiple):
         #final_attrs = self.build_attrs(attrs, name=name)
         output = u'<ul class="list">'
         if value:
-            options = [(index, string) for index, string in self.choices if index in value]
+            if getattr(value, '__iter__', None):
+                options = [(index, string) for index, string in self.choices if index in value]
+            else:
+                options = [(index, string) for index, string in self.choices if index == value]
         else:
             options = [(index, string) for index, string in self.choices]
         if options:
@@ -59,6 +62,12 @@ class DetailForm(forms.ModelForm):
 
         for field_name, field in self.fields.items():
             if isinstance(field.widget, forms.widgets.SelectMultiple):
+                self.fields[field_name].widget = DetailSelectMultiple(
+                    choices=field.widget.choices,
+                    attrs=field.widget.attrs,
+                    queryset=getattr(field, 'queryset', None),
+                )
+            if isinstance(field.widget, forms.widgets.Select):
                 self.fields[field_name].widget = DetailSelectMultiple(
                     choices=field.widget.choices,
                     attrs=field.widget.attrs,
