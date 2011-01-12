@@ -89,7 +89,7 @@ urlpatterns = patterns('inventory.views',
     url(r'^state/(?P<object_id>\d+)/update/$', generic_update, dict({'model':State}, extra_context={'title':_(u'states')}), 'state_update'),
     url(r'^state/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':State}, post_delete_redirect="state_list", extra_context=dict(title=_(u'states'))), 'state_delete'),
 
-    url(r'^supplier/(?P<object_id>\d+)/$', generic_detail, dict(form_class=SupplierForm, model=Supplier, title=_(u'supplier'), create_view='supplier_create', record_links=suppliers_record_links), 'supplier_view'),
+    url(r'^supplier/(?P<object_id>\d+)/$', generic_detail, dict(form_class=SupplierForm, queryset=Supplier.objects.all(), create_view='supplier_create', record_links=suppliers_record_links), 'supplier_view'),
     url(r'^supplier/list/$', generic_list, dict({'queryset':Supplier.objects.all()}, extra_context=dict(title=_(u'suppliers'), create_view="supplier_create", record_links=suppliers_record_links)), 'supplier_list'),
     url(r'^supplier/create/$', generic_create, dict({'form_class':SupplierForm}, extra_context={'title':_(u'supplier')}), 'supplier_create'),
     url(r'^supplier/(?P<object_id>\d+)/update/$', generic_update, dict({'form_class':SupplierForm}, extra_context={'title':_(u'supplier')}), 'supplier_update'),
