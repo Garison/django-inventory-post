@@ -2,9 +2,10 @@
 {% load styling %}
 
     {% add_classes_to_form filter_form %}
-    {{ filter_form.media|safe }}              
-    <h2 class="title">{% trans 'Filter list by' %}</h2>
-    <div class="inner">
+    {{ filter_form.media|safe }} 
+  <div class="block" id="block-filter-form">
+    <h2>{% trans 'Filter list by' %}</h2>
+       <div class="content">
         <form action="" method="get" class="form">
             {% for field in filter_form %}
                 <div class="group">
@@ -22,6 +23,7 @@
                 </button>
             </div>
         </form>
+        </div>
     </div>
 
 

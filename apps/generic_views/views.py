@@ -53,31 +53,6 @@ def generic_list(request, list_filter=None, queryset_filter=None, *args, **kwarg
         
     return object_list(request,  template_name='generic_list.html', *args, **kwargs)
 
-
-def generic_create(*args, **kwargs):
-    if 'model' in kwargs:
-        try:
-            if 'extra_context' in kwargs:
-                kwargs['extra_context']['title'] = kwargs['model']._meta.verbose_name
-            else:
-                kwargs['extra_context']= { 'title': kwargs['model']._meta.verbose_name }
-        except:
-            pass
-    
-    return create_object(template_name='generic_form.html', *args, **kwargs)
-
-def generic_update(*args, **kwargs):
-    if 'model' in kwargs:
-        try:
-            if 'extra_context' in kwargs:
-                kwargs['extra_context']['title'] = kwargs['model']._meta.verbose_name
-            else:
-                kwargs['extra_context']= { 'title': kwargs['model']._meta.verbose_name }
-        except:
-            pass
-                
-    return update_object(template_name='generic_form.html', *args, **kwargs)
-
 def generic_delete(*args, **kwargs):
     try:
         kwargs['post_delete_redirect'] = reverse(kwargs['post_delete_redirect'])

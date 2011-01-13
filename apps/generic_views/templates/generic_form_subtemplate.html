@@ -1,0 +1,51 @@
+{% load i18n %}
+{% load styling %}
+{% add_classes_to_form form %}
+{{ form.media|safe }}              
+
+<h2 class="title">
+{% if title %}
+    {{ title }}
+{% else %}
+    {% if read_only %}
+        {% blocktrans %}Details for: {{ object }}{% endblocktrans %}
+    {% else %}
+        {% if object %}
+            <a href="{{ object.get_absolute_url }}">{{ object|capfirst }}</a>
+        {% else %}
+            {% trans 'Create' %}
+        {% endif %}                
+    {% endif %}
+{% endif %}
+</h2>
+<div class="inner">
+    {% if form.is_multipart %}
+        <form enctype="multipart/form-data" method="post" action="" class="form">
+    {% else %}
+        <form method="post" action="" class="form">
+    {% endif %}
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="group">
+                {% if field.errors %}<div class="fieldWithErrors">{% endif %}
+                <label class="label">{{ field.label_tag }}{% if field.field.required and not read_only %} ({% trans 'required' %}){% endif %}</label>
+                <span class="error">{{ field.errors }}</span>
+                {% if field.errors %}</div>{% endif %} 
+                {{ field }}
+                {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
+            </div>
+        {% endfor %} 
+        {% if not read_only %}
+        <div class="group navform wat-cf">
+            <button class="button" type="submit">
+                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% trans 'Save' %}" /> {% trans 'Save' %}
+            </button>
+            {% comment %}
+            <a href="#header" class="button">
+                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/cross.png" alt="{% trans 'Cancel' %}"/> {% trans 'Cancel' %}
+            </a>
+            {% endcomment %}
+        </div>
+        {% endif %}
+    </form>
+</div>

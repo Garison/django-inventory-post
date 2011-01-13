@@ -6,7 +6,7 @@
 {% block javascript %}
 <script type="text/javascript">
 $(function() {
-	$(".detail_form :input").each(function() {
+	$("#subform form :input").each(function() {
 		this.disabled = true;
 	});
 });
@@ -15,32 +15,18 @@ $(function() {
 {% block content %}
 
 <style type="text/css">
-	.detail_form textarea, 
-    .detail_form select option,
-    .detail_form input, 
-    .detail_form select, 
-    .detail_form input { background: none; color: black; border: none; }
+	#subform form  textarea, 
+    #subform form  select option,
+    #subform form  input, 
+    #subform form  select, 
+    #subform form  input { background: none; color: black; border: none; }
 </style>
-    {% add_classes_to_form form %}
-    {{ form.media|safe }}              
-    <h2 class="title">
-        {% if title %}
-            {{ title }}
-        {% else %}
-            {% blocktrans %}Details for: {{ object }}{% endblocktrans %}
-        {% endif %}                
-    </h2>
-    <div class="inner">
-        <form action="" method="post" class="form detail_form">{% csrf_token %}
-            {% for field in form %}
-                <div class="group">
-                    <label class="label">{{ field.label_tag }}</label>
-                    {{ field }}
-                    {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
-                </div>
-            {% endfor %} 
-        </form>
-    </div>
+
+<div id="subform">
+    {% with 'true' as read_only %}
+        {% include "generic_form_subtemplate.html" %}
+    {% endwith %}
+</div>
 
 {% for subtemplate in subtemplates %}
     {% include subtemplate %}

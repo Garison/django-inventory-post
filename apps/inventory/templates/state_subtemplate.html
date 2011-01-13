@@ -1,7 +1,11 @@
 {% load i18n %}
 {% load inventory_tags %}
 {% get_all_states as states %}
-        <h3>{% trans 'Item states' %}</h3>
+    <div id="box">
+        <div class="block"  id="block-item-states">
+        <h2>{% trans 'Item states' %}</h2>
+        <div class="content tc">
+        <h3></h3>
         <table class="table">
         <tbody>
           <tr>
@@ -31,3 +35,6 @@
             
             </tbody>
         </table>
+       </div>
+    </div>
+   </div>

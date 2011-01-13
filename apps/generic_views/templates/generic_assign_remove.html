@@ -9,14 +9,13 @@
 <h2 class="title">{{ title|safe }}</h2>
 
 {% if filter_form %}
-    {% include "filter_form_subtemplate.html" %}	
+       {% include "filter_form_subtemplate.html" %}	
 {% endif %}
 
 <form method='POST' action='' id='assign_remove'>{% csrf_token %}
 <input name='action' value='' type='hidden' />
 
-    <div class="data-entry" >
-        <table>
+         <table>
             <tbody>
                 <tr>
                     <th style='text-align:center;'>{{ left_list_title }}</th><td></td><th style='text-align:center;'>{{ right_list_title }}</th>
@@ -42,7 +41,6 @@
                 {{ form.media|safe }}			
             </tbody>
         </table>
-    </div>
     
 </form>
 
