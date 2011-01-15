@@ -1,5 +1,6 @@
 # 2011 Refactor list
 ========================
+# Bring code up to latest Django version (1.2.4)                        - DONE
 # Eliminate CustomUser model                                            - DONE
 # New location based object (absorbs regional, section, dept, ect)      - DONE
 # Merge supplies with itemtemplate and allow for circular dependencies  - DONE
@@ -10,6 +11,7 @@
 # Skinable interface                                                    - DONE
 # Change to famfamfam icons                                             - DONE
 # Suppliers object                                                      - DONE
+# Split project into smaller apps
 # User setting (theme, language, timezone, changepassword)
 # Add sorting by column to generic_list
 # Transfer items from one inventory to another
@@ -30,26 +32,13 @@
 # Deferred, deprecated
 ==========================
 # WISH LIST
-# - view main photo in list 
-# - 1 new template to multiple users at a time
-# - 1 group to multiple users at a time
-# - remind user to print forms when retiring items
-# - session length, very much or browser session
-# - improve the create_view issue
-# - create item from template and assign to user in one action
-# - if item is in repairs another regional may 'see' the item
-	usefull if the repair dept is in another regional office
-# - icon identifiers, "template_icon" instead of {{ MEDIA_URL }}+'images/foo.png'
-# - prettyfy messages (http://traviscline.com/blog/2008/08/23/django-middleware-session-backed-messaging/)
+# - View item template/item main photo in list 
+# - Assign a new template to multiple users in one step
+# - Assign an item group to multiple users at a time
+# - Remind user to print forms when retiring items
+# - Session length, very much or browser session (remember me button @ login)
+# - Create item from template and assign to user in one action
+# - Prettyfy messages (http://traviscline.com/blog/2008/08/23/django-middleware-session-backed-messaging/)
 # - Inventory transactions in bulk (inventory transaction events)
-
-# TODO list
-# - template groups
-# - make results_per_page a user adjustable setting
-# - Make new form widget for m2m fields
-# - Grab model name & plural in generic list, create, update & delete views
+# - Make results_per_page a user adjustable setting
 # - User alert blinking icon, jquery
-
-# CLEANUP - REFACTOR
-# - update generic_assign_remove to use model.verbose_name_plural, fallback to model.name (to eliminate arg item_name)
-# - Hide items from item_group create view, or maybe make a custom item group detail view
