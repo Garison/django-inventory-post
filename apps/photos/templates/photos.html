@@ -20,94 +20,58 @@ $(function() {
 {% block title %} :: {% trans 'Edit photos' %}{% endblock %}
 {% block banner %}<div id="banner"><h2>{% trans 'Edit photos' %}</h2></div>{% endblock %}
 {% block content %}
-<center>
+    <h3>{% trans 'Photos for' %}: <a href="{{ model_instance.get_absolute_url }}">{{ model_instance }}</a> ({% trans 'Maximum of' %} {{ max_photos }}):</h3>
 
-<h3>{% trans 'Photos for' %}: <a href="{{ model_instance.get_absolute_url }}">{{ model_instance }}</a> ({% trans 'Maximum of' %} {{ max_photos }}):</h3>
+    {% if photos %}
+        <form method='POST' action='.' id='photo_selector'>{% csrf_token %}
+        <input name='action' value='default' type='hidden' />
+        <input name='photo_num' value='' type='hidden' />
+        <div class='data-entry'>
+            <table style="margin:auto;">
+                <tbody>
+                    <tr style="vertical-align: top;">
+                        {% for photo in photos %}
+                            <td>
+                                <div class="gallery">							
+                                    <a href="{{ photo.get_display_url }}" title="{{ photo.title }}">
+                                    <img src="{{ photo.get_thumbnail_url }}" alt='photo' />
+                                    {% if photo.title %}
+                                        <div id='caption' class='tc'>
+                                           {{ photo.title }}
+                                        </div>
+                                    {% endif %}
+                                    </a>
+                                </div>
+                                <div class='tc'>
+                                    <input type="radio" name="main" id="main{{ forloop.counter }}" value="{{ photo.id }}" {{ photo.main|yesno:"checked='checked',"|safe }} disabled='disabled' />
+                                    <label for="choice{{ forloop.counter }}">{{ choice.choice }}</label><br />
+                
+                                    <input style="width: 80px; font-size:80%;" type='button' onclick='document.forms["photo_selector"].action.value="make_main";document.forms["photo_selector"].photo_num.value="{{ photo.id }}";document.forms["photo_selector"].submit();' value="{% trans 'Main photo' %}" /><br />
+                                    <input style="width: 80px; font-size:80%;" type='button' onclick='document.forms["photo_selector"].action.value="delete";document.forms["photo_selector"].photo_num.value="{{ photo.id }}";document.forms["photo_selector"].submit();' value="{% trans 'Delete photo' %}" /><br />
+                                </div>
+                            </td>
+                            {% if forloop.counter|divisibleby:"4" %}
+                                </tr>
+                                <tr>
+                            {% endif %}
+                        {% endfor %}				
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </form>
+    {% else %}
+        <div class="gallery"><h3>{% trans 'There are no photos.' %}</h3>
+        </div>
+    {% endif %}
 
-{% if photos %}
-<form method='POST' action='.' id='photo_selector'>{% csrf_token %}
-<input name='action' value='default' type='hidden' />
-<input name='photo_num' value='' type='hidden' />
-<div class='data-entry'>
-	<table>
-		<thead><tr><td colspan='10'>{% trans 'Photos' %}</td></tr></thead>
-		<tbody>
-			<tr style="vertical-align: top;">
-				{% for photo in photos %}
-					<td>
-						<div class="gallery">							
-							<a href="{{ photo.get_display_url }}" title="{{ photo.title }}">
-							<img src="{{ photo.get_thumbnail_url }}" alt='photo' />
-							{% if photo.title %}
-								<div id='caption'>
-								   {{ photo.title }}
-								</div>
-							{% endif %}
-							</a>
-						</div>
-						<center>
-							<input type="radio" name="main" id="main{{ forloop.counter }}" value="{{ photo.id }}" {{ photo.main|yesno:"checked='checked',"|safe }} disabled='disabled' />
-							<label for="choice{{ forloop.counter }}">{{ choice.choice }}</label><br />
-		
-							<input style="width: 80px; font-size:80%;" type='button' onclick='document.forms["photo_selector"].action.value="make_main";document.forms["photo_selector"].photo_num.value="{{ photo.id }}";document.forms["photo_selector"].submit();' value="{% trans 'Main photo' %}" /><br />
-							<input style="width: 80px; font-size:80%;" type='button' onclick='document.forms["photo_selector"].action.value="delete";document.forms["photo_selector"].photo_num.value="{{ photo.id }}";document.forms["photo_selector"].submit();' value="{% trans 'Delete photo' %}" /><br />
-						</center>
-					</td>
-					{% if forloop.counter|divisibleby:"4" %}
-						</tr>
-						<tr>
-					{% endif %}
-				{% endfor %}				
-			</tr>
-		</tbody>
-	</table>
-</div>
-</form>
+    <div id='photo-upload' style="display: none;">
+    <div><img src='/site_media/images/loading-bar.gif' /></div>
+    {% trans 'Uploading photo...' %}</div>
 
-				
-{% else %}
-
-<div class="gallery"><h3>{% trans 'There are no photos.' %}</h3>
-<table><tr>
-<td>
-<ul>
-</ul>
-</td></tr>
-</table>
-</div>
-{% endif %}
-
-<center>
-
-<div id='photo-upload' style="display: none;">
-<div><img src='/site_media/images/loading-bar.gif' /></div>
-{% trans 'Uploading photo...' %}</div>
-
-{% if form %}
-<br style="clear: both;" />
-<form method='POST' action='.' enctype="multipart/form-data" class="form_w_progress">{% csrf_token %}
-<div class='data-entry'>
-<table>
-	<thead>
-		<tr>
-			<td colspan='10'>
-				{% trans 'Upload photos' %}
-			</td>
-		</tr>
-	</thead>
-	<tfoot>
-		<tr>
-			<td colspan='2'>
-				<input type="submit" value="{% trans 'Submit' %}" />
-			</td>
-		</tr>
-	</tfoot>
-	<tbody>
-		{{ form }}
-	</tbody>
-</table>
-</div>
-</form>
-{% endif %}
-</center>
+    {% if form %}
+        <div style="width: 300px; margin:auto;">
+            {% include 'generic_form_subtemplate.html' %}
+        </div>
+    {% endif %}
 {% endblock %}
