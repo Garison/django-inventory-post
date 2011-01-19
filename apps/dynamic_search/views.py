@@ -8,6 +8,8 @@ from django.db.models import Q
 from api import search_list
 from forms import SearchForm
 
+#original code from:
+#http://www.julienphalip.com/blog/2008/08/16/adding-search-django-site-snap/
 
 def normalize_query(query_string,
                     findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
@@ -76,55 +78,3 @@ def search(request):
                             'title':_(u'results with: %s') % query_string
                             },
                           context_instance=RequestContext(request))
-"""                          
-                              
-    keyword = ''
-    results = {}
-    form = SearchForm()
-    
-    if request.method == 'GET':
-        keyword=request.GET.get('keyword','')
-        form = SearchForm(initial={'keyword':keyword})        
-        if keyword:
-            for model, fields in search_list.items():
-                model_searches = Q(
-            results = []
-#            people = Person.objects.filter(
-#                Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword) | Q(second_name__icontains=keyword) | Q(second_last_name__icontains=keyword ) | Q(location__name__icontains=keyword)
-#                )		
-
-#            items = Item.objects.filter(
-#                Q(property_number__icontains=keyword) | Q(notes__icontains=keyword) | Q(serial_number__icontains=keyword) | Q(location__name__icontains=keyword) | Q(item_template__description__icontains=keyword)
-#                )		
-
-#            templates = ItemTemplate.objects.filter(
-#                Q(description__icontains=keyword) | Q(brand__icontains=keyword) | Q(model__icontains=keyword) | Q(part_number__icontains=keyword) | Q(notes__icontains=keyword)
-#                )		
-
-#            groups = ItemGroup.objects.filter(
-#                Q(name__icontains=keyword)
-#                )	
-         
-
-    return render_to_response('search_results.html', {
-        'form':form,
-        'results':results,
-        'keyword':keyword,
-        },
-    context_instance=RequestContext(request))
-
-
-def search(request):
-    query_string = ''
-    found_entries = None
-    if ('q' in request.GET) and request.GET['q'].strip():
-        query_string = request.GET['q']
-        
-        entry_query = get_query(query_string, ['title', 'body',])
-        
-        found_entries = Entry.objects.filter(entry_query).order_by('-pub_date')
-
-    return render_to_response('search/search_results.html',
-                          { 'query_string': query_string, 'found_entries': found_entries },
-                          context_instance=RequestContext(request))
-"""
