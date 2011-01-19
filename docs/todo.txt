@@ -13,6 +13,10 @@
 # Suppliers object                                                      - DONE
 # Split project into smaller apps                                       - DONE
 # Move to new per app settings.py file                                  - DONE
+# Credit all contributions and used software or media in about view or
+    CREDITS file                                                        - STARTED
+# Insert license header to every .py file
+# Allow templates and items to have attachments (not just photos)
 # Rename all instances of the word 'item' to 'asset'
 # User setting (theme, language, timezone, changepassword)
 # Add sorting by column to generic_list
