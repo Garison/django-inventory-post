@@ -14,7 +14,7 @@ from generic_views.views import generic_assign_remove, generic_list
 from photos.views import generic_photos
 
 from assets.models import Person, Item, ItemGroup
-
+import assets
 
 from models import ItemTemplate, Inventory, \
                    InventoryTransaction, Supplier
@@ -80,7 +80,7 @@ def template_items(request, object_id):
         extra_context=dict(
             title = '%s: %s' % (_(u"assets that use the template"), template),
             create_view = 'item_create',
-            record_links=item_record_links			
+            record_links=assets.asset_record_links			
         ),
     )
 
