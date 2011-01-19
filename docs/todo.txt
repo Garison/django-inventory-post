@@ -13,6 +13,7 @@
 # Suppliers object                                                      - DONE
 # Split project into smaller apps                                       - DONE
 # Move to new per app settings.py file                                  - DONE
+# Rename all instances of the word 'item' to 'asset'
 # User setting (theme, language, timezone, changepassword)
 # Add sorting by column to generic_list
 # Transfer items from one inventory to another
