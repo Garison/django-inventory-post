@@ -48,27 +48,33 @@ def get_query(terms, search_fields):
 def search(request):
     query_string = ''
     found_entries = {}
-    form = SearchForm()
+    object_list = []
 
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
+        form = SearchForm(initial={'q':query_string})
         
         terms = normalize_query(query_string)
         
         for model, data in search_list.items():
-            #print model, fields
             query = get_query(terms, data['fields'])            
 
-#            for entry in model.objects.filter(query):
             results = model.objects.filter(query)
             if results:
                 found_entries[data['text']] = results
-        #found_entries = Entry.objects.filter(entry_query).order_by('-pub_date')
+                for result in results:
+                    object_list.append(result)
+    else:
+        form = SearchForm()
 
     return render_to_response('search_results.html', {
                             'query_string':query_string, 
                             'found_entries':found_entries,
-                            'form':form },
+                            'form':form,
+                            'object_list':object_list,
+                            'form_title':_(u'Search'),
+                            'title':_(u'results with: %s') % query_string
+                            },
                           context_instance=RequestContext(request))
 """                          
                               
