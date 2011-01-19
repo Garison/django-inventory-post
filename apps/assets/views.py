@@ -162,7 +162,7 @@ def item_state_list(request, state_id):
         queryset=Item.objects.filter(itemstate__state=state),
         extra_context={
             'title':_(u"assets marked as '%s'") % state.name,
-            'create_view':'item_create',
+            'create_view':'state_create',
             'record_links':asset_record_links,
         }
     )
