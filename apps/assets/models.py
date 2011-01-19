@@ -6,8 +6,8 @@ from django.contrib.auth.models import User, UserManager
 
 from photos.models import GenericPhoto
 
+from dynamic_search.api import register
 from inventory.models import ItemTemplate, Location
-
 
 class State(models.Model):
     name = models.CharField(max_length=32, verbose_name=_(u'name'))
@@ -139,3 +139,8 @@ class Person(models.Model):
     def __unicode__(self):
         return "%s%s, %s%s" % (self.last_name, self.second_last_name and " %s" % self.second_last_name, self.first_name, self.second_name and " %s" % self.second_name)
     
+     
+register(ItemState, _(u'states'), ['state__name'])
+register(Item, _(u'assets'), ['property_number', 'notes', 'serial_number'])
+register(ItemGroup, _(u'asset groups'), ['name'])
+register(Person, _(u'people'), ['last_name', 'second_last_name', 'first_name', 'second_name', 'location__name'])

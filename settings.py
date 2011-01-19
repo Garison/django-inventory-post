@@ -116,6 +116,7 @@ INSTALLED_APPS = [
     'generic_views',
     'inventory',
     'assets',
+    'dynamic_search',
     'main',
 ]
 

@@ -40,10 +40,6 @@ class InventoryTransactionForm(forms.ModelForm):
         model = InventoryTransaction
         
         
-class SearchForm(forms.Form):
-    keyword = forms.CharField(max_length=128, label=_(u'Search term'))
-    
-        
 class SupplierForm(forms.ModelForm):
     class Meta:
         model = Supplier

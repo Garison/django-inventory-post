@@ -9,7 +9,9 @@ from django.core.urlresolvers import reverse
 
 from photos.models import GenericPhoto
 
- 
+from dynamic_search.api import register
+
+
 class Location(models.Model):
     name = models.CharField(max_length=32, verbose_name=_("name"))
     address_line1 = models.CharField(max_length=64, null=True, blank=True, verbose_name=_(u'address'))
@@ -142,3 +144,7 @@ class Supplier(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('supplier_view', [str(self.id)])
+
+register(ItemTemplate, _(u'templates'), ['description', 'brand', 'model', 'part_number', 'notes'])
+register(Location, _(u'locations'), ['name', 'address_line1', 'address_line2', 'address_line3', 'address_line4', 'phone_number1', 'phone_number2'])
+register(Inventory, _(u'inventory'), ['name'])

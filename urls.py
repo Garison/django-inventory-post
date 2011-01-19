@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     (r'^', include('main.urls')),
     (r'^inventory/', include('inventory.urls')),
     (r'^assets/', include('assets.urls')),
+    (r'^search/', include('dynamic_search.urls')),
 )
 
 if settings.DEVELOPMENT:

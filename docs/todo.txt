@@ -27,7 +27,7 @@
 # Add clear button to filter by form in generic_list or substitue
     '----' to 'Any' in filter drop down
 # Use django reversion for changelogs
-# Smarter search
+# Smarter search                                                        - DONE
 # Add reporting/hard copies
 # Supply reorder thresholds
 # Implement South for database migration

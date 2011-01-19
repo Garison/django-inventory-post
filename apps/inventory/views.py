@@ -2,7 +2,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
-from django.db.models import Q
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic.list_detail import object_detail, object_list
@@ -22,8 +21,6 @@ from models import ItemTemplate, Inventory, \
 
 from inventory import template_record_links, \
                       location_filter, navigation
-
-from forms import SearchForm
 
 
 def supplier_assign_remove_itemtemplates(request, object_id):
@@ -104,44 +101,6 @@ def inventory_current(request, object_id):
     },
     context_instance=RequestContext(request))
 
-def search(request):
-    keyword = ''
-    people = None
-    items = None
-    templates = None
-    groups = None
-    form = SearchForm()
-    
-    if request.method == 'GET':
-        keyword=request.GET.get('keyword','')
-        form = SearchForm(initial={'keyword':keyword})        
-        if keyword:
-            people = Person.objects.filter(
-                Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword) | Q(second_name__icontains=keyword) | Q(second_last_name__icontains=keyword ) | Q(location__name__icontains=keyword)
-                )		
-
-            items = Item.objects.filter(
-                Q(property_number__icontains=keyword) | Q(notes__icontains=keyword) | Q(serial_number__icontains=keyword) | Q(location__name__icontains=keyword) | Q(item_template__description__icontains=keyword)
-                )		
-
-            templates = ItemTemplate.objects.filter(
-                Q(description__icontains=keyword) | Q(brand__icontains=keyword) | Q(model__icontains=keyword) | Q(part_number__icontains=keyword) | Q(notes__icontains=keyword)
-                )		
-
-            groups = ItemGroup.objects.filter(
-                Q(name__icontains=keyword)
-                )	
-         
-
-    return render_to_response('search_results.html', {
-        'form':form,
-        'people':people,
-        'items':items,
-        'templates':templates,
-        'groups':groups,
-        'keyword':keyword,
-        },
-    context_instance=RequestContext(request))
 
 '''
 def item_log_list(request, object_id):
