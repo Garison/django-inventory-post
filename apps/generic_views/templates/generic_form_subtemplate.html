@@ -20,9 +20,9 @@
 </h2>
 <div class="inner">
     {% if form.is_multipart %}
-        <form enctype="multipart/form-data" method="post" action="" class="form">
+        <form enctype="multipart/form-data" method="{{ submit_method|default:'post' }}" action="" class="form">
     {% else %}
-        <form method="post" action="" class="form">
+        <form method="{{ submit_method|default:'post' }}" action="" class="form">
     {% endif %}
         {% csrf_token %}
         {% for field in form %}
