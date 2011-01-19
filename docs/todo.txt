@@ -14,7 +14,8 @@
 # Split project into smaller apps                                       - DONE
 # Move to new per app settings.py file                                  - DONE
 # Credit all contributions and used software or media in about view or
-    CREDITS file                                                        - STARTED
+    CREDITS file                                                        - DONE
+# Smarter search                                                        - DONE
 # Insert license header to every .py file
 # Allow templates and items to have attachments (not just photos)
 # Implement uploadify
@@ -27,7 +28,6 @@
 # Add clear button to filter by form in generic_list or substitue
     '----' to 'Any' in filter drop down
 # Use django reversion for changelogs
-# Smarter search                                                        - DONE
 # Add reporting/hard copies
 # Supply reorder thresholds
 # Implement South for database migration
