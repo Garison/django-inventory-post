@@ -1,7 +1,10 @@
 from django.conf.urls.defaults import *
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.create_update import create_object, update_object
+
+from generic_views.views import generic_assign_remove, \
+                                generic_delete, \
+                                generic_detail, generic_list
 
 from photos.views import generic_photos
 
@@ -11,15 +14,13 @@ from inventory import template_record_links, inventory_links, \
                       suppliers_record_links
 
 from models import ItemTemplate, InventoryTransaction, \
-                   Inventory, Settings, Log, Location, Supplier
+                   Inventory, Log, Location, Supplier
                    
 from forms import InventoryTransactionForm, InventoryForm, \
                   ItemTemplateForm, ItemTemplateForm_view, LogForm, \
                   SupplierForm, LocationForm_view
 
-from generic_views.views import generic_assign_remove, \
-                                generic_delete, \
-                                generic_detail, generic_list
+from conf import settings as inventory_settings
                                 
 
 urlpatterns = patterns('inventory.views',
@@ -28,7 +29,7 @@ urlpatterns = patterns('inventory.views',
     url(r'^template/(?P<object_id>\d+)/update/$', update_object, {'form_class':ItemTemplateForm, 'template_name':'generic_form.html'}, 'template_update' ),
     url(r'^template/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':ItemTemplate}, post_delete_redirect="template_list", extra_context=dict(title=_(u'item template'), _message=_(u"Will be deleted from any user that may have it assigned and from any item group."))), 'template_delete' ),
     url(r'^template/orphans/$', generic_list, dict({'queryset':ItemTemplate.objects.filter(item=None)}, extra_context=dict(title=_('orphan templates'), create_view='template_create', record_links=template_record_links)), 'template_orphans_list'),
-    url(r'^template/(?P<object_id>\d+)/photos/$', generic_photos, {'model':ItemTemplate, 'max_photos':Settings.objects.get(pk=1).max_template_photos }, 'template_photos'), 
+    url(r'^template/(?P<object_id>\d+)/photos/$', generic_photos, {'model':ItemTemplate, 'max_photos':inventory_settings.MAX_TEMPLATE_PHOTOS}, 'template_photos'), 
     url(r'^template/(?P<object_id>\d+)/$', generic_detail, dict(form_class=ItemTemplateForm_view, queryset=ItemTemplate.objects.all(), create_view='template_create', record_links=template_record_links, extra_context={'subtemplates':['generic_photos_subtemplate.html']}), 'template_view'),
     url(r'^template/(?P<object_id>\d+)/items/$', 'template_items', (), 'template_items_list'),
     url(r'^template/(?P<object_id>\d+)/assign/supplies$', 'template_assign_remove_supply', (), name='template_assign_supply'),
@@ -61,8 +62,6 @@ urlpatterns = patterns('inventory.views',
     url(r'^supplier/(?P<object_id>\d+)/assign/itemtemplates/$', 'supplier_assign_remove_itemtemplates', (), 'supplier_assign_itemtemplates'),
 
     url(r'^search/$', 'search', (), 'search'),
-
-    url(r'^settings/$', update_object, {'model':Settings, 'template_name':'generic_form.html', 'object_id':1}, 'settings'),
 
 #    url(r'^reports/items_per_person/(?P<object_id>\d+)/$', 'report_items_per_person', (), 'report_items_per_person'),
 )

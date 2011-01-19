@@ -11,7 +11,6 @@ inventory_transaction_list = {'text':_('View all transactions'), 'view':'invento
 inventory_transaction_create = {'text':_('Create new transaction'), 'view':'inventory_transaction_create'}
 
 location_list = {'text':_('Locations'), 'view':'location_list'}
-settings = {'text':_('Settings'), 'view':'settings'}
 
 supplier_create = {'text':_('Create new supplier'), 'view':'supplier_create'}
 supplier_list = {'text':_('Suppliers'), 'view':'supplier_list'}
@@ -68,30 +67,11 @@ navigation = [
     {'text':_('Asset states'), 'view':'item_state_list_init'},
     {'text':_('Inventories'), 'view':'inventory_list', 'links':inventory_menu_links,'famfam':'book'},
     {'text':_('Tools'), 'view':'location_list', 'links': [
-        location_list, assets.state_list, supplier_list, settings
+        location_list, assets.state_list, supplier_list
     ],'famfam':'wrench'},
     {'text':_('Search'), 'view':'search', 'famfam':'zoom'},
     {'text':_('About'), 'view':'about'},
 ]
-"""
-navigation = [
-    {'text':_('Home'), 'view':'home', 'famfam':'house'},
-    {'text':_('People'), 'view':'person_list', 'famfam':'group', 'links':[
-        person_list, person_create
-    ]},
-    {'text':_('Templates'), 'view':'template_list', 'links':template_menu_links, 'famfam':'page'},
-    {'text':_('Assets'), 'view':'item_list', 'links':[
-        asset_list, asset_create, asset_orphan_list, group_list, group_create 
-    ]},
-    {'text':_('Asset states'), 'view':'item_state_list_init'},
-    {'text':_('Inventories'), 'view':'inventory_list', 'links':inventory_menu_links,'famfam':'book'},
-    {'text':_('Tools'), 'view':'location_list', 'links': [
-        location_list, state_list, supplier_list, settings
-    ],'famfam':'wrench'},
-    {'text':_('Search'), 'view':'search', 'famfam':'zoom'},
-    {'text':_('About'), 'view':'about'},
-]
-"""
 
 location_filter = {
     'location':{'queryset':Location.objects.all(), 'destination':'location'},

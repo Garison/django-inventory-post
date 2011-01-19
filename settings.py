@@ -128,16 +128,13 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'django.contrib.messages.context_processors.messages',
 ]
 
+#===== Configuration options ===============
+#--------- Grappelli ----------------
 GRAPPELLI_ADMIN_TITLE = PROJECT_TITLE
-
-LOGIN_URL = '/login/'
-
-#===== LoginRequiredMiddleware =============
-#Instead of /accounts/login/?.... blah....
+#--------- Django -------------------
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
-#AUTH_PROFILE_MODULE = 'accounts.UserProfile'
-
+#-------- LoginRequiredMiddleware ----------
 LOGIN_EXEMPT_URLS = (
     r'^favicon\.ico$',
     r'^about\.html$',
@@ -156,7 +153,12 @@ LOGIN_EXEMPT_URLS = (
     r'^password/reset/complete/$',
     r'^password/reset/done/$',
 )
-
+#--------- Generic photos --------------
+#PHOTOS_MAX_PHOTO_SIZE = 1000000
+#INVENTORY_MAX_TEMPLATE_PHOTOS = 5
+#ASSETS_MAX_ASSET_PHOTOS = 5
+#ASSETS_MAX_PERSON_PHOTOS = 5
+#======== End of configuration options =======
 try:
     from settings_local import *
 except ImportError:

@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 
-from inventory.models import Settings
+from conf import settings as photos_settings
 
 from forms import PhotoForm
 
@@ -54,7 +54,7 @@ def generic_photos(request, model, object_id, max_photos=5):
             form = PhotoForm(post_data, request.FILES)
             if form.is_valid():
                 instance = form.save(commit=False)
-                if instance.image.size > Settings.objects.get(pk=1).max_photo_size:
+                if instance.image.size > photos_settings.MAX_PHOTO_SIZE:
                     messages.error(request, _(u'The photo is too big.'))
                     os.unlink(instance.photo.path)
                     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))

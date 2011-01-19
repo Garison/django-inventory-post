@@ -10,23 +10,6 @@ from django.core.urlresolvers import reverse
 
 from photos.models import GenericPhoto
 
-class Settings(models.Model):
-    max_photo_size = models.IntegerField(default=1000000, verbose_name=_(u'maximum photo size'), help_text=_(u'Limit in kilobytes.'))
-    max_item_photos = models.IntegerField(default=5, verbose_name=_(u'maximum photos per item'))
-    max_template_photos = models.IntegerField(default=5, verbose_name=_(u'maximum photos per item template'))
-    max_person_photos = models.IntegerField(default=5, verbose_name=_(u'maximum photos per user'))
-    is_anon_restricted = models.BooleanField(default=True, verbose_name=_(u'required login?'))
-
-    class Meta:
-        verbose_name = _(u"settings")
-        verbose_name_plural = _(u"settings")
-        
-    def __unicode__(self):
-        return unicode(_(u"settings"))
-
-    def get_absolute_url(self):
-        return reverse('settings')
- 
  
 class Location(models.Model):
     name = models.CharField(max_length=32, verbose_name=_("name"))
@@ -71,9 +54,7 @@ class ItemTemplate(models.Model):
     def __unicode__(self):
         return self.description
 
-
-
-    
+   
 class Log(models.Model):
     timedate = models.DateTimeField(auto_now_add=True, verbose_name=_(u"timedate"))
     action = models.CharField(max_length=32)

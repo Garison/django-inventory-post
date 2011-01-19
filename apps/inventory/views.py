@@ -14,7 +14,7 @@ from photos.views import generic_photos
 
 from generic_views.views import generic_assign_remove, generic_list
 
-from models import Settings, ItemTemplate, Inventory, \
+from models import ItemTemplate, Inventory, \
                    InventoryTransaction, Supplier
 
 from inventory import template_record_links, \

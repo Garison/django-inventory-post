@@ -1,26 +1,23 @@
 from django.conf.urls.defaults import *
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.create_update import create_object, update_object
-
-from photos.views import generic_photos
-
-from inventory.models import Settings
-from inventory import location_filter
-
-from assets import person_record_links, asset_record_links, state_record_links, group_record_links
-
-from models import Item, ItemGroup, Person, State
-                   
-from forms import ItemForm, ItemForm_view, ItemGroupForm, PersonForm, PersonForm_view
 
 from generic_views.views import generic_assign_remove, \
                                 generic_delete, \
                                 generic_detail, generic_list
-                                
 
+from photos.views import generic_photos
+
+from inventory import location_filter
+
+from assets import person_record_links, asset_record_links, state_record_links, group_record_links
+from models import Item, ItemGroup, Person, State
+from forms import ItemForm, ItemForm_view, ItemGroupForm, PersonForm, PersonForm_view
+from conf import settings as asset_settings                             
+
+                                
 urlpatterns = patterns('assets.views',
-    url(r'^person/(?P<object_id>\d+)/photos/$', generic_photos, {'model':Person, 'max_photos':Settings.objects.get(pk=1).max_person_photos}, 'person_photos'), 
+    url(r'^person/(?P<object_id>\d+)/photos/$', generic_photos, {'model':Person, 'max_photos':asset_settings.MAX_PERSON_PHOTOS}, 'person_photos'), 
     url(r'^person/(?P<object_id>\d+)/$', generic_detail, {'form_class':PersonForm_view, 'queryset':Person.objects.all(), 'create_view':'person_create', 'record_links':person_record_links, 'extra_context':{'subtemplates':['generic_photos_subtemplate.html']}}, 'person_view'),
     url(r'^person/list/$', generic_list, {'queryset':Person.objects.all(), 'list_filter':location_filter, 'extra_context':{'title':_(u'people'), 'create_view':"person_create", 'record_links':person_record_links}}, 'person_list'),
     url(r'^person/create/$', create_object, {'form_class':PersonForm, 'template_name':'generic_form.html'}, 'person_create'),
@@ -35,7 +32,7 @@ urlpatterns = patterns('assets.views',
     url(r'^asset/orphans/$', generic_list, dict({'queryset':Item.objects.filter(person=None)}, list_filter=location_filter, extra_context=dict(title=_(u'orphan assets'), create_view='item_create', record_links=asset_record_links)), 'item_orphans_list'),
     url(r'^asset/list/$', generic_list, dict({'queryset':Item.objects.all()}, list_filter=location_filter, extra_context=dict(title=_(u'assets'), create_view='item_create', record_links=asset_record_links)), 'item_list'),
     url(r'^asset/(?P<object_id>\d+)/$', generic_detail, dict(form_class=ItemForm_view, queryset=Item.objects.all(), create_view='item_create', record_links=asset_record_links, extra_context={'subtemplates':['generic_photos_subtemplate.html', 'state_subtemplate.html']}, extra_fields=[{'field':'get_owners', 'label':_(u'Assigned to users:')}]), 'item_view'),
-    url(r'^asset/(?P<object_id>\d+)/photos/$', generic_photos, dict(model=Item, max_photos=Settings.objects.get(pk=1).max_item_photos), 'item_photos'), 
+    url(r'^asset/(?P<object_id>\d+)/photos/$', generic_photos, dict(model=Item, max_photos=asset_settings.MAX_ASSET_PHOTOS), 'item_photos'), 
     url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/set/$', 'item_setstate', (), 'item_setstate'),
     url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/unset$', 'item_remove_state', (), 'item_remove_state'),
     url(r'^asset/state/init/$', 'item_state_list_init', (), 'item_state_list_init'),
