@@ -1,6 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 
-state_list = {'text':_('states'), 'view':'state_list'}
+state_list = {'text':_('states'), 'view':'state_list', 'famfam':'error_go'}
 state_edit = {'text':_(u'edit'), 'view':'state_update'}
 state_delete = {'text':_(u'delete'), 'view':'state_delete'}
 

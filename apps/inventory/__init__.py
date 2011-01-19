@@ -10,10 +10,10 @@ inventory_create = {'text':_('create new inventory'), 'view':'inventory_create'}
 inventory_transaction_list = {'text':_('view all transactions'), 'view':'inventory_transaction_list'}
 inventory_transaction_create = {'text':_('create new transaction'), 'view':'inventory_transaction_create'}
 
-location_list = {'text':_('locations'), 'view':'location_list'}
+location_list = {'text':_('locations'), 'view':'location_list', 'famfam':'map'}
 
 supplier_create = {'text':_('create new supplier'), 'view':'supplier_create'}
-supplier_list = {'text':_('suppliers'), 'view':'supplier_list'}
+supplier_list = {'text':_('suppliers'), 'view':'supplier_list', 'famfam':'lorry'}
 supplier_delete = {'text':_('delete'), 'view':'supplier_delete'}
 supplier_update = {'text':_('edit'), 'view':'supplier_update'}
 supplier_assign_itemtemplate = {'text':_(u'assign/remove templates'), 'view':'supplier_assign_itemtemplates'}
