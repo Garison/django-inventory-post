@@ -22,7 +22,7 @@ class State(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('state_list')
+        return ('state_list', [])
         
 
 class ItemStateManager(models.Manager):
@@ -93,10 +93,6 @@ class Item(models.Model):
     def remove_owner(self, person):
 #		if self in person.inventory.all():
         person.inventory.remove(self)		
-
-    def get_absolute_url(self):
-        return ('item_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)
     
     def states(self):
         return [State.objects.get(pk=id) for id in self.itemstate_set.all().values_list('state', flat=True)]
