@@ -1,15 +1,9 @@
 {% extends "base.html" %}
+{% load project_tags %}
 {% load i18n %}
 {% block content %}
-<div class="block">
-          <h2 class='tc'>{% trans "Statistics" %}</h2>
-          <div class="content">
-            <p class='tc'>
-                {% trans "Users" %}: {{ person.count }}<br />
-                {% trans "Templates" %}: {{ template.count }}<br />
-                {% trans "Assets" %}: {{ item.count }}<br />
-            </p>
-          </div>
-        </div>
-
+    <div class="block">
+        <div class='tc'><h1>{% project_name %}</h1></div>
+        <div class='tc'><img src='{{ MEDIA_URL }}images/1269206_36297494-resized.jpg' /></div>
+    </div>
 {% endblock %}
