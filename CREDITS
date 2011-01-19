@@ -24,11 +24,16 @@ Web App Theme
     git://github.com/pilu/web-app-theme.git
 
 FAMFAMFAM Silk icons
+    Copyright Mark James (http://www.twitter.com/markjames)
     http://www.famfamfam.com/lab/icons/silk/
 
-FAMFAMFAM CSS sprites
+3 state FAMFAMFAM Silk icon sets: discrete images and CSS sprite palette
+    Copyright Sky Sanders
+    skysanders.net/subtext
 
-Image file 1269206_36297494 (Stoch Exchange)
+Image file 1269206_36297494 "Fish boxes" (Stock Exchange)
+    Lars Sundstrom (sundphoto@bredband.net)
+    http://www.rgbstock.com/gallery/sundstrom
 
 django-extensions - Extensions for Django
     Copyright Bas van Oostveen (v.oostveen@gmail.com)
