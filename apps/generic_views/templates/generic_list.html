@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% load generic_views_helpers %}
-{% load pagination_tags %}
 {% block title %} :: {% blocktrans %}List of {{ title }}{% endblocktrans %}{% endblock %}
 {#{% block secondary_links %}{{ secondary_links|safe }}{% endblock %}#}
 
@@ -10,51 +8,7 @@
        {% include "filter_form_subtemplate.html" %}	
 {% endif %}
 
-{% autopaginate object_list 15 %} 
 
-<h2 class="title">{% trans 'List of' %} {{ title }}</h2>
-    <div class="inner">
-      <form action="#" class="form">
-        <table class="table tc">
-            {% if create_view %}
-            <tfoot>
-                <tr>
-                    <th colspan='15'>
-                        <div class="actions-bar wat-cf">
-                            <div class="pagination">
-                                <button><a href="{% dynurl create_view %}">{% trans "Create new" %}</a></button>
-                            </div>
-                        </div>
-                    </th>
-                </tr>
-            </tfoot>
-            {% endif %}
-        <tbody>
-          <tr>
-            <th class="first">{% trans 'Identifier' %}</th>
-            {% if record_links %}
-                <th class="last">&nbsp;</th>
-            {% else %}
-                <th class="last">&nbsp;</th>
-            {% endif %}
-          </tr>
-            {% for object in object_list %}
-                <tr class="{% cycle 'odd' 'even2' %}">
-                    <td><a href="{{ object.get_absolute_url}}">{{ object }}</a></td>
-                        {% if record_links %}
-                    <td>
-                        {% with '' as  create_view %}
-                        {% include "generic_navigation.html" %}
-                        {% endwith %}
-                    </td>
-                {% endif %}
-                </tr>
-            {% empty %}
-            <tr><td colspan=2 class="tc">{% blocktrans %}There are no {{ title }}{% endblocktrans %}</td></tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% paginate %}          
-      </form>
-    </div>
+    {% include 'generic_list_subtemplate.html' %}
+    
 {% endblock %}
