@@ -10,9 +10,12 @@ from django.views.generic.list_detail import object_detail, object_list
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
+from generic_views.views import generic_assign_remove, generic_list
+
 from photos.views import generic_photos
 
-from generic_views.views import generic_assign_remove, generic_list
+from assets.models import Person, Item, ItemGroup
+
 
 from models import ItemTemplate, Inventory, \
                    InventoryTransaction, Supplier
