@@ -1,7 +1,6 @@
 import datetime
 
 from django.db import models
-from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -28,7 +27,7 @@ class Location(models.Model):
     def __unicode__(self):
         return self.name
 
-    @permalink
+    @models.permalink
     def get_absolute_url(self):
         return ('location_view', [str(self.id)])
     
@@ -47,9 +46,9 @@ class ItemTemplate(models.Model):
         verbose_name = _(u"item template")
         verbose_name_plural = _(u"item templates")        
     
+    @models.permalink
     def get_absolute_url(self):
         return ('template_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)
     
     def __unicode__(self):
         return self.description
@@ -69,9 +68,9 @@ class Log(models.Model):
 #		return "%Y-%m-%d %H:%M:%S" % (self.timedate) #& user  && item
         return "%s, %s - %s" % (self.timedate, self.action, self.content_object)
 
+    @models.permalink
     def get_absolute_url(self):
         return ('log_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)
 
 
 class Inventory(models.Model):
@@ -82,9 +81,9 @@ class Inventory(models.Model):
         verbose_name = _(u'inventory')
         verbose_name_plural = _(u'inventories')
 
+    @models.permalink
     def get_absolute_url(self):
         return ('inventory_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)		
 
     def __unicode__(self):
         return "%s @ %s" % (self.name, self.location)
@@ -113,9 +112,9 @@ class InventoryTransaction(models.Model):
         verbose_name = _(u'inventory transaction')
         verbose_name_plural = _(u'inventory transactions')
 
+    @models.permalink
     def get_absolute_url(self):
         return ('inventory_transaction_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)	
     
     def __unicode__(self):
         return "%s: '%s' qty=%s @ %s" % (self.inventory, self.supply, self.quantity, self.date)
@@ -140,6 +139,6 @@ class Supplier(models.Model):
     def __unicode__(self):
         return self.name
 
+    @models.permalink
     def get_absolute_url(self):
         return ('supplier_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)	

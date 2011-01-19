@@ -1,16 +1,14 @@
 from django.db import models
-from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User, UserManager
-from django.core.urlresolvers import reverse
 
 from photos.models import GenericPhoto
 
 from inventory.models import ItemTemplate, Location
 
-#TODO: Use @models.permalink decorator
+
 class State(models.Model):
     name = models.CharField(max_length=32, verbose_name=_(u'name'))
     exclusive = models.BooleanField(default=False, verbose_name=_(u'exclusive'))
@@ -22,8 +20,9 @@ class State(models.Model):
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.exclusive and _(u'exclusive') or _(u'inclusive'))
 
+    @models.permalink
     def get_absolute_url(self):
-        return reverse('state_list')
+        return ('state_list')
         
 
 class ItemStateManager(models.Manager):
@@ -45,9 +44,9 @@ class ItemState(models.Model):
     def __unicode__(self):
         return _(u"%(asset)s, %(state)s since %(date)s") % {'asset':self.item, 'state':self.state.name, 'date':self.date}
 
+    @models.permalink
     def get_absolute_url(self):
         return ('state_update', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)
     
     
 class Item(models.Model):
@@ -63,9 +62,9 @@ class Item(models.Model):
         verbose_name = _(u"asset")
         verbose_name_plural = _(u"assets")        
 
+    @models.permalink
     def get_absolute_url(self):
         return ('item_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)
 
     def __unicode__(self):
         states = ', '.join([itemstate.state.name for itemstate in ItemState.objects.states_for_item(self)])
@@ -115,9 +114,9 @@ class ItemGroup(models.Model):
     def __unicode__(self):
         return self.name
 
+    @models.permalink
     def get_absolute_url(self):
         return ('group_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)		
 
         
 class Person(models.Model):
@@ -133,9 +132,9 @@ class Person(models.Model):
         verbose_name = _(u"person")
         verbose_name_plural = _(u"people")
 
+    @models.permalink
     def get_absolute_url(self):
         return ('person_view', [str(self.id)])
-    get_absolute_url = models.permalink(get_absolute_url)
 
     def __unicode__(self):
         return "%s%s, %s%s" % (self.last_name, self.second_last_name and " %s" % self.second_last_name, self.first_name, self.second_name and " %s" % self.second_name)
