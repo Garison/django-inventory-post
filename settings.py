@@ -117,6 +117,7 @@ INSTALLED_APPS = [
     'inventory',
     'assets',
     'dynamic_search',
+    'importer',
     'main',
 ]
 
