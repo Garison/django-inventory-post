@@ -9,18 +9,18 @@
 			{% if link.view %}
 				{#{% if not link.view|login_required or user.is_authenticated %}#}
 					{% if wrapper_object %}
-						<a href="{% dynurl data.view wrapper_object.id %}">{{ link.text }}</a>{#{% if not forloop.last %} | {% endif %}#}
+						<a href="{% dynurl data.view wrapper_object.id %}">{{ link.text|capfirst }}</a>{#{% if not forloop.last %} | {% endif %}#}
 					{% else %}			
 						{% if link.args %}
-							<a href="{% dynurl link.view link.args %}">{{ link.text }}</a>{#{% if not forloop.last %} | {% endif %}#}
+							<a href="{% dynurl link.view link.args %}">{{ link.text|capfirst }}</a>{#{% if not forloop.last %} | {% endif %}#}
 						{% else %}
-							<a href="{% dynurl link.view object.id %}">{{ link.text }}</a>{#{% if not forloop.last %} | {% endif %}#}
+							<a href="{% dynurl link.view object.id %}">{{ link.text|capfirst }}</a>{#{% if not forloop.last %} | {% endif %}#}
 						{% endif %}
 					{% endif %}
 				{#{% endif %}#}
 			{% else %} 
 				{% if link.url %}
-				<a href="{{ link.url }}">{{ link.text }}</a>{% if not forloop.last %} | {% endif %}
+				<a href="{{ link.url }}">{{ link.text|capfirst }}</a>{% if not forloop.last %} | {% endif %}
 				{% endif %}
 			{% endif %}
 		{% endfor %}			

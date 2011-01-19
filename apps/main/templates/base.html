@@ -86,7 +86,7 @@
                         <div id="main-navigation">
                             <ul class="wat-cf">
                                 {% for link in navigation_main_links %}
-                                    <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}">{% endif %}</span></a></li>
+                                    <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text|capfirst }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}">{% endif %}</span></a></li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -98,7 +98,7 @@
                                 <div class="secondary-navigation">
                                     <ul class="wat-cf">
                                         {% for link in navigation_secondary_links %}
-                                            <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text }}</a></li>
+                                            <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text|capfirst }}</a></li>
                                         {% endfor %}     
                                         {% block secondary_links %}{% endblock %}                       
                                     </ul>
