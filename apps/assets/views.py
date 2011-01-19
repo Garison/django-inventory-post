@@ -6,9 +6,7 @@ from django.db.models import Q
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic.list_detail import object_detail, object_list
-
 from django.core.urlresolvers import reverse
-#from django.contrib.auth.decorators import login_required
 
 from photos.views import generic_photos
 
@@ -100,9 +98,6 @@ def item_setstate(request, object_id, state_id):
         new = ItemState(item=item, state=state)
         new.save()
             
-        #item.active=False
-        #item.save()		
-
         messages.success(request, _(u"The asset has been marked as '%s'.") % state.name)
 
         return HttpResponseRedirect(next)

@@ -28,9 +28,6 @@ asset_photos = {'text':_(u'Photos'), 'view':'item_photos'}
 asset_assign_person = {'text':_(u'Assign/Remove people'), 'view':'item_assign_person'}
 asset_template = {'text':_(u'Template'), 'view':'template_view', 'args':'object.item_template.id'}
 
-#asset_menu_links = [
-#    asset_list, asset_create, asset_orphan_list   
-#]
 
 asset_record_links = [
     asset_edit, asset_delete, asset_photos, asset_assign_person, asset_template
