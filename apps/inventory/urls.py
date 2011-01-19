@@ -5,22 +5,17 @@ from django.views.generic.create_update import create_object, update_object
 
 from photos.views import generic_photos
 
-from inventory import person_links, \
-                      template_record_links, inventory_links, \
-                      item_record_links, state_links, \
+from inventory import template_record_links, inventory_links, \
                       inventory_transaction_links, \
-                      group_links, location_filter, location_links, \
+                      location_filter, location_links, \
                       suppliers_record_links
 
-
 from models import ItemTemplate, InventoryTransaction, \
-                   Inventory, Settings, Item, ItemGroup, Person, \
-                   Log, Location, State, Supplier
+                   Inventory, Settings, Log, Location, Supplier
                    
 from forms import InventoryTransactionForm, InventoryForm, \
-                  ItemTemplateForm, ItemTemplateForm_view, ItemForm, \
-                  ItemForm_view, ItemGroupForm, PersonForm, \
-                  LogForm, SupplierForm, PersonForm_view, LocationForm_view
+                  ItemTemplateForm, ItemTemplateForm_view, LogForm, \
+                  SupplierForm, LocationForm_view
 
 from generic_views.views import generic_assign_remove, \
                                 generic_delete, \
@@ -28,14 +23,6 @@ from generic_views.views import generic_assign_remove, \
                                 
 
 urlpatterns = patterns('inventory.views',
-    url(r'^person/(?P<object_id>\d+)/photos/$', generic_photos, {'model':Person, 'max_photos':Settings.objects.get(pk=1).max_person_photos}, 'person_photos'), 
-    url(r'^person/(?P<object_id>\d+)/$', generic_detail, {'form_class':PersonForm_view, 'queryset':Person.objects.all(), 'create_view':'person_create', 'record_links':person_links, 'extra_context':{'subtemplates':['generic_photos_subtemplate.html']}}, 'person_view'),
-    url(r'^person/list/$', generic_list, {'queryset':Person.objects.all(), 'list_filter':location_filter, 'extra_context':{'title':_(u'people'), 'create_view':"person_create", 'record_links':person_links}}, 'person_list'),
-    url(r'^person/create/$', create_object, {'form_class':PersonForm, 'template_name':'generic_form.html'}, 'person_create'),
-    url(r'^person/(?P<object_id>\d+)/update/$', update_object, {'form_class':PersonForm, 'template_name':'generic_form.html'}, 'person_update'),
-    url(r'^person/(?P<object_id>\d+)/delete/$', generic_delete, {'model':Person, 'post_delete_redirect':'person_list', 'extra_context':{'title':_(u'person')}}, 'person_delete'),
-    url(r'^person/(?P<object_id>\d+)/assign/$', 'person_assign_remove_item', (), 'person_assign_item'),
-
     url(r'^template/list/$', generic_list, dict({'queryset':ItemTemplate.objects.all()}, extra_context=dict(title=_(u'item template'), create_view="template_create", record_links=template_record_links)), 'template_list'),
     url(r'^template/create/$', create_object, {'form_class':ItemTemplateForm, 'template_name':'generic_form.html'}, 'template_create'),
     url(r'^template/(?P<object_id>\d+)/update/$', update_object, {'form_class':ItemTemplateForm, 'template_name':'generic_form.html'}, 'template_update' ),
@@ -46,25 +33,6 @@ urlpatterns = patterns('inventory.views',
     url(r'^template/(?P<object_id>\d+)/items/$', 'template_items', (), 'template_items_list'),
     url(r'^template/(?P<object_id>\d+)/assign/supplies$', 'template_assign_remove_supply', (), name='template_assign_supply'),
     url(r'^template/(?P<object_id>\d+)/assign/suppliers/$', 'template_assign_remove_suppliers', (), name='template_assign_suppliers'),
-
-    url(r'^asset/create/$', create_object, {'form_class':ItemForm, 'template_name':'generic_form.html'}, 'item_create'),
-    url(r'^asset/(?P<object_id>\d+)/update/$', update_object, {'form_class':ItemForm, 'template_name':'generic_form.html'}, 'item_update'),
-    url(r'^asset/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Item}, post_delete_redirect="item_list", extra_context=dict(title=_(u'asset'))), 'item_delete'),
-    url(r'^asset/(?P<object_id>\d+)/assign/$', 'item_assign_remove_person', (), name='item_assign_person'),
-    url(r'^asset/orphans/$', generic_list, dict({'queryset':Item.objects.filter(person=None)}, list_filter=location_filter, extra_context=dict(title=_(u'orphan assets'), create_view='item_create', record_links=item_record_links)), 'item_orphans_list'),
-    url(r'^asset/list/$', generic_list, dict({'queryset':Item.objects.all()}, list_filter=location_filter, extra_context=dict(title=_(u'assets'), create_view='item_create', record_links=item_record_links)), 'item_list'),
-    url(r'^asset/(?P<object_id>\d+)/$', generic_detail, dict(form_class=ItemForm_view, queryset=Item.objects.all(), create_view='item_create', record_links=item_record_links, extra_context={'subtemplates':['generic_photos_subtemplate.html', 'state_subtemplate.html']}, extra_fields=[{'field':'get_owners', 'label':_(u'Assigned to users:')}]), 'item_view'),
-    url(r'^asset/(?P<object_id>\d+)/photos/$', generic_photos, dict(model=Item, max_photos=Settings.objects.get(pk=1).max_item_photos), 'item_photos'), 
-    url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/set/$', 'item_setstate', (), 'item_setstate'),
-    url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/unset$', 'item_remove_state', (), 'item_remove_state'),
-    url(r'^asset/state/init/$', 'item_state_list_init', (), 'item_state_list_init'),
-    url(r'^asset/state/(?P<state_id>\d+)/list/$', 'item_state_list', (), 'item_state_list'),
-
-    url(r'^group/list/$', generic_list, dict({'queryset':ItemGroup.objects.all()}, extra_context=dict(title=_(u'item groups'), create_view='group_create', record_links=group_links)), 'group_list'),
-    url(r'^group/create/$', create_object, {'form_class':ItemGroupForm, 'template_name':'generic_form.html'}, 'group_create'),
-    url(r'^group/(?P<object_id>\d+)/$', generic_detail, dict(form_class=ItemGroupForm, queryset=ItemGroup.objects.all(), create_view='group_create', record_links=group_links), 'group_view'),
-    url(r'^group/(?P<object_id>\d+)/update/$', 'group_assign_remove_item', (), name='group_update'),
-    url(r'^group/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':ItemGroup}, post_delete_redirect="group_list", extra_context=dict(title=_(u'item group'))), 'group_delete'),
 
     url(r'^inventory/list/$', generic_list, dict({'queryset':Inventory.objects.all()}, extra_context=dict(title=_(u'inventories'), create_view='inventory_create', record_links=inventory_links)), 'inventory_list'),
     url(r'^inventory/create/$', create_object, {'model':Inventory, 'template_name':'generic_form.html'}, 'inventory_create'),
@@ -84,11 +52,6 @@ urlpatterns = patterns('inventory.views',
     url(r'^location/(?P<object_id>\d+)/update/$', update_object, {'model':Location, 'template_name':'generic_form.html'}, 'location_update'),
     url(r'^location/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Location}, post_delete_redirect="location_list", extra_context=dict(title=_(u'locations'))), 'location_delete'),
     url(r'^location/(?P<object_id>\d+)/$', generic_detail, dict(form_class=LocationForm_view, queryset=Location.objects.all(), create_view='location_create', record_links=location_links), 'location_view'),
-
-    url(r'^state/list/$', generic_list, dict({'queryset':State.objects.all()}, extra_context=dict(title =_(u'states'), create_view='state_create', record_links=state_links)), 'state_list'),
-    url(r'^state/create/$', create_object, {'model':State, 'template_name':'generic_form.html'}, 'state_create'),
-    url(r'^state/(?P<object_id>\d+)/update/$', update_object, {'model':State, 'template_name':'generic_form.html'}, 'state_update'),
-    url(r'^state/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':State}, post_delete_redirect="state_list", extra_context=dict(title=_(u'states'))), 'state_delete'),
 
     url(r'^supplier/(?P<object_id>\d+)/$', generic_detail, dict(form_class=SupplierForm, queryset=Supplier.objects.all(), create_view='supplier_create', record_links=suppliers_record_links), 'supplier_view'),
     url(r'^supplier/list/$', generic_list, dict({'queryset':Supplier.objects.all()}, extra_context=dict(title=_(u'suppliers'), create_view="supplier_create", record_links=suppliers_record_links)), 'supplier_list'),

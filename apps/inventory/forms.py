@@ -4,39 +4,15 @@ from django.utils.translation import ugettext_lazy as _
 
 from generic_views.forms import DetailForm
 
-from models import Item, Person, ItemTemplate, ItemGroup, Log, \
+from models import ItemTemplate, Log, \
                    InventoryTransaction, Inventory, Supplier, Location
 
 
 class LocationForm_view(DetailForm):
     class Meta:
         model = Location
-        
-
-class ItemForm(forms.ModelForm):
-    class Meta:
-        model = Item
-        exclude = ('photos', 'active')
-
-
-class ItemForm_view(DetailForm):
-    class Meta:
-        model = Item
-        exclude = ('photos', 'active')
-
-
-class PersonForm(forms.ModelForm):
-    class Meta:
-        model = Person
-        exclude = ('photos', 'inventory')
-
-
-class PersonForm_view(DetailForm):
-    class Meta:
-        model = Person
-        exclude = ('photos',)
-
-        
+       
+      
 class ItemTemplateForm(forms.ModelForm):
     class Meta:
         model = ItemTemplate
@@ -47,12 +23,6 @@ class ItemTemplateForm_view(DetailForm):
     class Meta:
         model = ItemTemplate
         exclude = ('photos',)
-
-
-class ItemGroupForm(forms.ModelForm):
-    class Meta:
-        model = ItemGroup
-        exclude = ('items',)
 
     
 class LogForm(forms.ModelForm):

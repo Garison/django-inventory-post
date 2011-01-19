@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     (r'^', include('common.urls')),
     (r'^', include('main.urls')),
     (r'^inventory/', include('inventory.urls')),
+    (r'^assets/', include('assets.urls')),
 )
 
 if settings.DEVELOPMENT:

@@ -115,6 +115,7 @@ INSTALLED_APPS = [
     'common',
     'generic_views',
     'inventory',
+    'assets',
     'main',
 ]
 

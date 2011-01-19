@@ -1,9 +1,7 @@
 from django.contrib import admin
 
-from inventory.models import State, ItemState, \
-                             ItemTemplate, Item, \
-                             ItemGroup, Log, \
-                             Person, Inventory, Location, Supplier
+from inventory.models import ItemTemplate, Log, \
+                             Inventory, Location, Supplier
 
 
 class ItemTemplateAdmin(admin.ModelAdmin):
@@ -13,12 +11,7 @@ class ItemTemplateAdmin(admin.ModelAdmin):
 admin.site.register(Location)
 admin.site.register(Log)
 admin.site.register(ItemTemplate, ItemTemplateAdmin)
-admin.site.register(Item)
-admin.site.register(ItemGroup)
-admin.site.register(Person)
 admin.site.register(Inventory)
-admin.site.register(State)
-admin.site.register(ItemState)
 admin.site.register(Supplier)
 
 
