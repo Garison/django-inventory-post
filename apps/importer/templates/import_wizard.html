@@ -1,13 +1,37 @@
 {% extends "base.html" %}
-
+{% load i18n %}
+{% load styling %}
+{% add_classes_to_form form %}
 {% block content %}
-<p>Step {{ step }} of {{ step_count }}</p>
-<form enctype="multipart/form-data" action="" method="post">{% csrf_token %}
-<table>
-{{ form }}
-</table>
-<input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
-{{ previous_fields|safe }}
-<input type="submit">
-</form>
+    <h2 class="title">
+        {{ form.title|capfirst }}
+    </h2>
+
+    <h2 class="title">Step {{ step }} of {{ step_count }}</h2>
+    <div class="inner">
+        <form action="" method="post" class="form">{% csrf_token %}
+            <table>
+                {{ form.media|safe }}
+                {% if form.management_form %}
+                    {% with form as formset %}
+                        {% for form in formset.forms %}
+                            {% include "generic_form_instance.html" %}
+                        {% endfor %}
+                        {{ formset.management_form }}
+                    {% endwith %}
+                {% else %}
+                        {% include "generic_form_instance.html" %}
+                {% endif %}                
+            </table>
+            <input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+            {{ previous_fields|safe }}
+
+        <div class="group navform wat-cf">
+            <button class="button" type="submit">
+                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% trans 'Save' %}" /> {% trans 'Save' %}
+            </button>
+        </div>
+
+    </form>
+</div>
 {% endblock %}
