@@ -1,8 +1,6 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load styling %}
-{% block title %} :: {% if object %}{% trans 'Edit' %}{% else %}{% trans 'Create' %}{% endif %} {{ title }} {{ object }}{% endblock %}
+{% block title %} :: {% include 'calculate_form_title.html' %}{% endblock %}
 {% block content %}
-    {% include "generic_form_subtemplate.html" %}
+    {% include 'generic_form_subtemplate.html' %}
 {% endblock %}
 

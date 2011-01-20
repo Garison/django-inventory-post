@@ -1,0 +1,14 @@
+{% load i18n %}
+{% if title %}
+    {{ title }}
+{% else %}
+    {% if read_only %}
+        {% blocktrans %}Details for: {{ object }}{% endblocktrans %}
+    {% else %}
+        {% if object %}
+            <a href="{{ object.get_absolute_url }}">{{ object|capfirst }}</a>
+        {% else %}
+            {% trans 'Create' %}
+        {% endif %}                
+    {% endif %}
+{% endif %}
