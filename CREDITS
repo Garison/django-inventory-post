@@ -47,3 +47,6 @@ Werkzeug - The Swiss Army knife of Python web development
     Copyright Armin Ronacher (armin.ronacher@active-4.com)
     http://werkzeug.pocoo.org/
 
+BoundFormWizard - A subclass of Django's FormWizard that handled FormSets.
+    Matthew Flanagan (http://www.blogger.com/profile/15093905875465763876)
+    http://code.google.com/p/wadofstuff/
