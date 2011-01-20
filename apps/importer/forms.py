@@ -115,22 +115,23 @@ def perform_import(csvfilename, model, form, remove_top=None, dryrun=True):
         line_error = False
         for field_exp in form.cleaned_data:
             if field_exp['enabled']:
-                field = model_fields[field_exp['model_field']][0]
-                expression = eval(field_exp['expression'], {'csv_column':column})
-                if hasattr(field, 'related'):
-                    arguments = {field_exp['arguments']:expression}
-                    try:
+                try:
+                    field = model_fields[field_exp['model_field']][0]
+
+                    expression = eval(field_exp['expression'], {'csv_column':column})
+                    if hasattr(field, 'related'):
+                        arguments = {field_exp['arguments']:expression}
                         value = field.related.parent_model.objects.get(**arguments)
-                    except Exception, err:
-                        value = None
-                        line_error = True
-                        errors += 1
-                        results.append(_(u'Foreign key fetch error, line: %s, expression: %s, error: %s') % (line, expression, err))
-                else:
-                    value = expression
+                    else:
+                        value = expression
 
-                model_line[field_exp['model_field']] = value
+                    model_line[field_exp['model_field']] = value
 
+                except Exception, err:
+                    value = None
+                    line_error = True
+                    errors += 1
+                    results.append(_(u'Foreign key fetch error, line: %s, expression: %s, error: %s') % (line, expression, err))
         try:
             if not line_error:
                 if dryrun:
