@@ -31,13 +31,17 @@ class DetailSelectMultiple(forms.widgets.SelectMultiple):
         if value is None: value = ''
         #final_attrs = self.build_attrs(attrs, name=name)
         output = u'<ul class="list">'
+        options = None
         if value:
             if getattr(value, '__iter__', None):
                 options = [(index, string) for index, string in self.choices if index in value]
             else:
                 options = [(index, string) for index, string in self.choices if index == value]
         else:
-            options = [(index, string) for index, string in self.choices]
+            if self.choices:
+                if self.choices[0] != (u'', u'---------') and value != []:
+                    options = [(index, string) for index, string in self.choices]
+                
         if options:
             for index, string in options:
                 if self.queryset:
