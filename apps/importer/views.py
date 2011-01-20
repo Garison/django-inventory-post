@@ -33,8 +33,12 @@ def import_wizard(request):
     
    
 def import_file(request):
+    models = ['assets.asset', 'assets.item_group', 'assets.item_state', 
+            'assets.person', 'assets_state', 'inventory.inventory', 
+            'inventory.inventory transaction', 'inventory.item_template', 
+            'inventory.location', 'inventory.supplier'] 
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
+        form = DocumentForm(request.POST, request.FILES)#, models=models)
         if form.is_valid():
             temp_file = handle_uploaded_file(form.cleaned_data['local_document'])
             return HttpResponseRedirect(
@@ -46,7 +50,7 @@ def import_file(request):
                     })]))
          
     else:
-        form = DocumentForm()
+        form = DocumentForm()#models=models)
 
 
     return render_to_response('generic_form.html', {

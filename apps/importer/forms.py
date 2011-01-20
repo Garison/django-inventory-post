@@ -15,6 +15,33 @@ from wizard import BoundFormWizard
 
 #TODO: Allow row 0 to be used as column names
 #TODO: Save mapping
+'''import os, tempfile, zipfile
+from django.http import HttpResponse
+from django.core.servers.basehttp import FileWrapper
+
+
+def send_file(request):
+    """                                                                         
+    Send a file through Django without loading the whole file into              
+    memory at once. The FileWrapper will turn the file object into an           
+    iterator for chunks of 8KB.                                                 
+    """
+    filename = __file__ # Select your file here.                                
+    wrapper = FileWrapper(file(filename))
+    response = HttpResponse(wrapper, content_type='text/plain')
+    response['Content-Length'] = os.path.getsize(filename)
+    return response
+    
+  lat = float(request.GET.get('lat'))
+lng = float(request.GET.get('lng'))
+a = Authority.objects.get(area__contains=Point(lng, lat))
+if a:
+    return HttpResponse(simplejson.dumps({'name': a.name, 
+                                          'area': a.area.geojson,
+                                          'id': a.id}), 
+                        mimetype='application/json')  
+'''
+#TODO: remove spaces in model names
 #TODO: Load mapping in step 0
 #TODO: Allow user to tweak dialect in preview 
 #TODO: Close & delete temp file
@@ -41,8 +68,6 @@ class DocumentField(forms.FileField):
 
 class DocumentForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        super(DocumentForm, self).__init__(*args, **kwargs)
-
         models = kwargs.pop('models', [])
         if models:
             choices = models
@@ -53,6 +78,8 @@ class DocumentForm(forms.Form):
         exclude = kwargs.pop('exclude', [])
         for exclusion in exclude:
             choices.remove(exclusion)
+
+        super(DocumentForm, self).__init__(*args, **kwargs)
             
         self.fields['model_name'].choices=zip(choices, choices)
         
@@ -100,6 +127,11 @@ class ImportResultForm(forms.Form):
         
     result_area = forms.CharField(label=_(u'Results'), required=False, widget=forms.widgets.Textarea(attrs={'cols':80, 'rows':10}))
     
+
+def save_settings(settings):
+    return HttpResponse(simplejson.dumps(settings), 
+                        mimetype='application/json')  
+                            
 
 class ImportWizard(BoundFormWizard):
     def parse_params(self, request, *args, **kwargs):
