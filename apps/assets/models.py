@@ -133,7 +133,18 @@ class Person(models.Model):
         return ('person_view', [str(self.id)])
 
     def __unicode__(self):
-        return "%s%s, %s%s" % (self.last_name, self.second_last_name and " %s" % self.second_last_name, self.first_name, self.second_name and " %s" % self.second_name)
+        if self.second_last_name:
+            second_last_name = " %s" % self.second_last_name
+        else:
+            second_last_name = ''
+      
+
+        if self.second_name:
+            second_name = " %s" % self.second_name
+        else:
+            second_name = ''
+
+        return "%s%s, %s%s" % (self.last_name, second_last_name and second_last_name, self.first_name, second_name)
     
      
 register(ItemState, _(u'states'), ['state__name'])
