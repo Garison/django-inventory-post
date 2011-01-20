@@ -24,11 +24,10 @@
                 {% endif %}                
             </table>
             <input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
-            {{ previous_fields|safe }}
-
+            {% for f in previous_fields %}{{ f.as_hidden }}{% endfor %}
         <div class="group navform wat-cf">
             <button class="button" type="submit">
-                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% if step != step_count %}{% trans 'Next' %}{% else %}{% trans 'Save' %}{% endif %}" /> {% if step != step_count %}{% trans 'Next' %}{% else %}{% trans 'Save' %}{% endif %}
+                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% if step != step_count %}{% trans 'Next' %}{% else %}{% trans 'Finalize' %}{% endif %}" /> {% if step != step_count %}{% trans 'Next' %}{% else %}{% trans 'Finalize' %}{% endif %}
             </button>
         </div>
 
