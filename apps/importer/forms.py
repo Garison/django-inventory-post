@@ -11,6 +11,13 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 
 
+#TODO: Allow row 0 to be used as column names
+#TODO: Save mapping
+#TODO: Load mapping in step 0
+#TODO: Allow user to tweak dialect in preview 
+#TODO: Close & delete temp file
+
+
 class DocumentValidationError(forms.ValidationError):
     def __init__(self):
         msg = _(u'Only CSV files are valid uploads.')
@@ -53,7 +60,6 @@ class DocumentForm(forms.Form):
 
 class PreviewForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        #print 'PreviewForm', args, kwargs
         self.title = _(u'import preview')
         super(PreviewForm, self).__init__(*args, **kwargs)
             
@@ -67,6 +73,7 @@ class ExpressionForm(forms.Form):
 
     model_field = forms.CharField(label=_(u'Model field'))
     expression = forms.CharField(label=_(u'Expression'))
+    arguments = forms.CharField(label=_(u'Arguments'), required=False)
     enabled = forms.BooleanField(label=_(u'Enabled'), required=False)
 
 
@@ -77,6 +84,72 @@ class ImportResultForm(forms.Form):
         
     result_area = forms.CharField(label=_(u'Results'), required=False, widget=forms.widgets.Textarea(attrs={'cols':80, 'rows':10}))
     
+    
+def perform_import(csvfilename, model, form, remove_top=None, dryrun=True):
+    csvfile = open(csvfilename, 'rb')
+    dialect = csv.Sniffer().sniff(csvfile.read(1024))
+    csvfile.seek(0)
+    
+    try:
+        csvfile = file(csvfilename, 'r')
+    except IOError:
+        self.error(_(u'Could not open specified csv file, %s, or it does not exist') % datafile, 0)
+    else:
+        # CSV Reader returns an iterable, but as we possibly need to
+        # perform list commands and since list is an acceptable iterable, 
+        # we'll just transform it.
+        csvfile = list(csv.reader(csvfile, dialect=dialect))
+
+    if remove_top:
+        self.csvfile.pop(0)
+
+
+    #model_fields = dict([(f.name,f) for f in self.model._meta.fields])
+    model_fields = model._meta.init_name_map()
+    imported_lines = 0
+    errors = 0
+    results = []
+    line = 1
+    for column in csvfile:
+        model_line = {}
+        line_error = False
+        for field_exp in form.cleaned_data:
+            if field_exp['enabled']:
+                field = model_fields[field_exp['model_field']][0]
+                expression = eval(field_exp['expression'], {'csv_column':column})
+                if hasattr(field, 'related'):
+                    arguments = {field_exp['arguments']:expression}
+                    try:
+                        value = field.related.parent_model.objects.get(**arguments)
+                    except Exception, err:
+                        value = None
+                        line_error = True
+                        errors += 1
+                        results.append(_(u'Foreign key fetch error, line: %s, expression: %s, error: %s') % (line, expression, err))
+                else:
+                    value = expression
+
+                model_line[field_exp['model_field']] = value
+
+        try:
+            if not line_error:
+                if dryrun:
+                    entry = model(**model_line)
+                else:
+                    entry = model.objects.create(**model_line)
+
+                imported_lines += 1
+        except Exception, err:
+            errors += 1
+            results.append(_(u'Import error, line: %s, error: %s') % (line, err))
+        
+        line += 1
+    
+    results.append(_(u'Imported %s lines') % imported_lines)
+    results.append(_(u'There were %s errors') % errors)
+    
+    return results
+            
 
 class ImportWizard(FormWizard):
     def parse_params(self, request, *args, **kwargs):
@@ -99,13 +172,7 @@ class ImportWizard(FormWizard):
         
     def get_template(self, step):
         return 'import_wizard.html'
-        
-#    def render_template(self, request, form, previous_fields, step, context=None):
-        #context={'title':'asdf'}
-        #if step == 0:
-#            self.temp_file = request.GET.get('temp_file', None)
-#            self.mode_name = request.GET.get('mode_name', None)
-#        return super(ImportWizard, self).render_template(request, form, previous_fields, step, context)
+
     def render(self, form, request, step, context=None):
         "Renders the given Form object, returning an HttpResponse."
         old_data = request.POST
@@ -138,6 +205,7 @@ class ImportWizard(FormWizard):
         
     def process_step(self, request, form, step):
         if step == 0:
+            self.discard_firstrow = form.cleaned_data['discard_firstrow']
             app_label, name = self.model_name.split('.')
             ct = ContentType.objects.get(app_label=app_label, name=name)
             self.model = ct.model_class()
@@ -153,59 +221,15 @@ class ImportWizard(FormWizard):
                 {'initial':initial}
             }
         elif step == 1:
-            csvfile = open(self.temp_file, 'rb')
-            dialect = csv.Sniffer().sniff(csvfile.read(1024))
-            csvfile.seek(0)
-            
-            #reader = csv.reader(open(self.temp_file, 'r'), dialect=dialect)
+            remove_top = self.discard_firstrow and 0 or None
+            results = perform_import(self.temp_file, self.model, form, remove_top=remove_top, dryrun=False)
 
-            try:
-                csvfile = file(self.temp_file, 'r')
-            except IOError:
-                self.error('Could not open specified csv file, %s, or it does not exist' % datafile, 0)
-            else:
-                # CSV Reader returns an iterable, but as we possibly need to
-                # perform list commands and since list is an acceptable iterable, 
-                # we'll just transform it.
-                csvfile = list(csv.reader(csvfile, dialect=dialect))
-
-            #model_fields = dict([(f.name,f) for f in self.model._meta.fields])
-            model_fields = self.model._meta.init_name_map()
-            for line, column in zip(range(len(csvfile)), csvfile):
-                model_line = {}
-                print 'line', line
-                for field_exp in form.cleaned_data:
-                    if field_exp['enabled']:
-                        #if model._meta.
-                        field = model_fields[field_exp['model_field']][0]
-                        print field
-                        if hasattr(field, 'related'):
-                            value = field.related.parent_model.objects.get(description='Dell')
-                            value = 9
-                        else:
-                            value = eval(field_exp['expression'], {'csv_column':column})
-                            print 'value', value
-                            
-                        #related.parent_model
-                        model_line[field_exp['model_field']] = value
-                    #print value
-                    #except:
-                
-                #print model_line
-                try:
-                    entry = self.model(**model_line)
-                except Exception, err:
-                    print 'Import error, line: %s, error: %s' % (line, err)
-                
-                #print 'entry', entry
-                #print entry.full_clean()
+            self.initial = {2:
+                {'result_area':'\n'.join(results)}
+            }
         #elif step == 2:
-        #    self.initial = {2:
-        #        {'result_area':'as'}
-        #    }            
+
             
-            
-        #print 'process_step', step
    
     def done(self, request, form_list):
         return HttpResponseRedirect('/')
