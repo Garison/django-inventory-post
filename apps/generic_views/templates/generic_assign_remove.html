@@ -1,16 +1,19 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block title %} :: {% blocktrans %}Assign {{ title }} {{ object }}{% endblocktrans %}{% endblock %}
+
+{% block sidebar %}
+    {% if filter_form %}
+           {% include "filter_form_subtemplate.html" %}	
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 
 <style>
     #id_right_list,#id_left_list { min-width: 28em; min-height: 13em; }
 </style>
 <h2 class="title">{{ title|safe }}</h2>
-
-{% if filter_form %}
-       {% include "filter_form_subtemplate.html" %}	
-{% endif %}
 
 <form method='POST' action='' id='assign_remove'>{% csrf_token %}
 <input name='action' value='' type='hidden' />
