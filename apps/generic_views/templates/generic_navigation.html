@@ -1,28 +1,27 @@
 {% load generic_views_helpers %}
 {% load i18n %}
 
-<div class="actions-bar wat-cf">
-  <div class="pagination">
-    	{% if create_view %}<a href="{% dynurl create_view %}">{% trans 'Create' %}</a>{% endif %}
+{% if as_li %}<li>{% endif %}
+{% if create_view %}<a href="{% dynurl create_view %}">{% trans 'Create' %}</a>{% if horizontal %} | {% endif %}{% endif %}
+{% if as_li %}</li>{% endif %}
 
-		{% for link in record_links %}
-			{% if link.view %}
-				{#{% if not link.view|login_required or user.is_authenticated %}#}
-					{% if wrapper_object %}
-						<a href="{% dynurl data.view wrapper_object.id %}">{{ link.text|capfirst }}</a>{#{% if not forloop.last %} | {% endif %}#}
-					{% else %}			
-						{% if link.args %}
-							<a href="{% dynurl link.view link.args %}">{{ link.text|capfirst }}</a>{#{% if not forloop.last %} | {% endif %}#}
-						{% else %}
-							<a href="{% dynurl link.view object.id %}">{{ link.text|capfirst }}</a>{#{% if not forloop.last %} | {% endif %}#}
-						{% endif %}
-					{% endif %}
-				{#{% endif %}#}
-			{% else %} 
-				{% if link.url %}
-				<a href="{{ link.url }}">{{ link.text|capfirst }}</a>{% if not forloop.last %} | {% endif %}
-				{% endif %}
-			{% endif %}
-		{% endfor %}			
-  </div>
-</div>
+{% for link in record_links %}
+    {% if as_li %}<li>{% endif %}
+
+    {% if link.view %}
+        {% if wrapper_object %}
+            <a href="{% dynurl data.view wrapper_object.id %}">{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}{{ link.text|capfirst }}</a>{% if horizontal %}{% if not forloop.last %} | {% endif %}{% endif %}
+        {% else %}			
+            {% if link.args %}
+                <a href="{% dynurl link.view link.args %}">{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}{{ link.text|capfirst }}</a>{% if horizontal %}{% if not forloop.last %} | {% endif %}{% endif %}
+            {% else %}
+                <a href="{% dynurl link.view object.id %}">{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}{{ link.text|capfirst }}</a>{% if horizontal %}{% if not forloop.last %} | {% endif %}{% endif %}
+            {% endif %}
+        {% endif %}
+    {% else %} 
+        {% if link.url %}
+        <a href="{{ link.url }}">{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}{{ link.text|capfirst }}</a>{% if horizontal %}{% if not forloop.last %} | {% endif %}{% endif %}
+        {% endif %}
+    {% endif %}
+    {% if as_li %}</li>{% endif %}    
+{% endfor %}			

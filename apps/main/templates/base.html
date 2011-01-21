@@ -86,7 +86,7 @@
                         <div id="main-navigation">
                             <ul class="wat-cf">
                                 {% for link in navigation_main_links %}
-                                    <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text|capfirst }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}">{% endif %}</span></a></li>
+                                    <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text|capfirst }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -98,7 +98,7 @@
                                 <div class="secondary-navigation">
                                     <ul class="wat-cf">
                                         {% for link in navigation_secondary_links %}
-                                            <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text|capfirst }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}">{% endif %}</a></li>
+                                            <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text|capfirst }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}</a></li>
                                         {% endfor %}     
                                         {% block secondary_links %}{% endblock %}                       
                                     </ul>
@@ -123,8 +123,21 @@
                                     <p>Copyright &copy; 2007 Roberto Rosario.</p>
                                 </div>
                             </div>
+                        </div> 
+                        <div id="sidebar">
+                            {% if record_links and object %}
+                                <div class="block">
+                                    <h3>Record links</h3>
+                                    <ul class="navigation">
+                                        {% with 'true' as as_li %}
+                                            {% include 'generic_navigation.html' %}
+                                        {% endwith %}
+                                    </ul>
+                                </div>
+                            
+                            {% endif %}
+                            <div class="block">{% block sidebar %}{% endblock %}</div>
                         </div>                    
-                    </div>                    
                 </div>
             {% endif %}
         </div>

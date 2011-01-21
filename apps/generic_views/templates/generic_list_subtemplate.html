@@ -33,7 +33,9 @@
                     {% if record_links %}
                         <td>
                             {% with '' as  create_view %}
+                            {% with 'true' as horizontal %}
                             {% include "generic_navigation.html" %}
+                            {% endwith %}
                             {% endwith %}
                         </td>
                     {% endif %}

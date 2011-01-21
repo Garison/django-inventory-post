@@ -13,26 +13,21 @@ $(function() {
 </script>
 {% endblock %}
 {% block content %}
+    <style type="text/css">
+        #subform form  textarea, 
+        #subform form  select option,
+        #subform form  input, 
+        #subform form  select, 
+        #subform form  input { background: none; color: black; border: none; }
+    </style>
 
-<style type="text/css">
-	#subform form  textarea, 
-    #subform form  select option,
-    #subform form  input, 
-    #subform form  select, 
-    #subform form  input { background: none; color: black; border: none; }
-</style>
+    <div id="subform">
+        {% with 'true' as read_only %}
+            {% include "generic_form_subtemplate.html" %}
+        {% endwith %}
+    </div>
 
-<div id="subform">
-    {% with 'true' as read_only %}
-        {% include "generic_form_subtemplate.html" %}
-    {% endwith %}
-</div>
-
-{% for subtemplate in subtemplates %}
-    {% include subtemplate %}
-{% endfor %}
-  
-            
-{% include "generic_navigation.html" %}
-
+    {% for subtemplate in subtemplates %}
+        {% include subtemplate %}
+    {% endfor %}
 {% endblock %}
