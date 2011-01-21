@@ -66,7 +66,7 @@ navigation = [
     {'text':_('inventories'), 'view':'inventory_list', 'links':inventory_menu_links,'famfam':'book'},
     {'text':_('tools'), 'view':'location_list', 'links': [
         location_list, assets.state_list, supplier_list,
-        {'text':_('import'), 'view':'import'}
+        {'text':_('import'), 'view':'import_wizard'}
     ],'famfam':'wrench'},
     {'text':_('search'), 'view':'search', 'famfam':'zoom'},
     {'text':_('about'), 'view':'about'},

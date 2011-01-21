@@ -7,7 +7,7 @@
         {{ form.title|capfirst }}
     </h2>
 
-    <h2 class="title">Step {{ step }} of {{ step_count }}</h2>
+    <h2 class="title">{% blocktrans %}Step {{ step }} of {{ step_count }}{% endblocktrans %}</h2>
     <div class="inner">
         <form action="" method="post" class="form">{% csrf_token %}
             <table>
@@ -15,6 +15,8 @@
                 {% if form.management_form %}
                     {% with form as formset %}
                         {% for form in formset.forms %}
+                            <hr />
+                            <h3>Field {{ forloop.counter }}</h3>
                             {% include "generic_form_instance.html" %}
                         {% endfor %}
                         {{ formset.management_form }}
@@ -25,6 +27,8 @@
             </table>
             <input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
             {% for f in previous_fields %}{{ f.as_hidden }}{% endfor %}
+            
+            {#{% if step == step_count %}<a href="{% url download_last_settings %}">{% trans 'Download import settings' %}</a>{% endif %}#}
         <div class="group navform wat-cf">
             <button class="button" type="submit">
                 <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% if step != step_count %}{% trans 'Next' %}{% else %}{% trans 'Finalize' %}{% endif %}" /> {% if step != step_count %}{% trans 'Next' %}{% else %}{% trans 'Finalize' %}{% endif %}
