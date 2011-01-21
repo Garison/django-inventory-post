@@ -1,12 +1,12 @@
 .tc {
     text-align: center;
 }
-
+/*
 #main {  
   width: 100%;
-  float: left;    
-}
 
+}
+*/
 #main-navigation ul li a {
   line-height: 22px;
 }
