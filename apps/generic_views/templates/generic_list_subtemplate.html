@@ -13,7 +13,7 @@
 
 <div class="inner">
   <form action="#" class="form">
-    <table class="table tc">
+    <table class="table">
         {% if create_view %}
         <tfoot>
             <tr>
@@ -29,19 +29,32 @@
         {% endif %}
     <tbody>
       <tr>
-        <th class="first">{% trans 'Identifier' %}</th>
+        <th>{% trans 'Identifier' %}</th>
+        {% for column in extra_columns %}
+            <th>{{ column.name|capfirst }}</th>
+        {% endfor %}        
         {% if record_links %}
-            <th class="last">&nbsp;</th>
+            <th class="">&nbsp;</th>
         {% endif %}
       </tr>
         {% for object in object_list %}
             <tr class="{% cycle 'odd' 'even2' %}">
-                <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                {% if main_object %}
+                    {% with object|object_property:main_object as object %}
+                        <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                    {% endwith %}
+                {% else %}
+                    <td><a href="{{ object.get_absolute_url }}">{{ object }}</a></td>
+                {% endif %}
+                {% for column in extra_columns %}
+                    <td>{{ object|object_property:column.attribute }}</td>
+                {% endfor %}
+
                     {% if record_links %}
-                        <td>
+                        <td class='last'>
                             {% with '' as  create_view %}
                             {% with 'true' as horizontal %}
-                            {% include "generic_navigation.html" %}
+                                {% include "generic_navigation.html" %}
                             {% endwith %}
                             {% endwith %}
                         </td>
