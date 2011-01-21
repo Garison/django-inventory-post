@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% if as_li %}<li>{% endif %}
-{% if create_view %}<a href="{% dynurl create_view %}">{% trans 'Create' %}</a>{% if horizontal %} | {% endif %}{% endif %}
+{% if create_view %}<a href="{% dynurl create_view %}"><span class="famfam active famfam-add"></span>{% trans 'Create' %}</a>{% if horizontal %} | {% endif %}{% endif %}
 {% if as_li %}</li>{% endif %}
 
 {% for link in record_links %}
