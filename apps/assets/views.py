@@ -124,39 +124,6 @@ def item_remove_state(request, object_id, state_id):
     context_instance=RequestContext(request))      
 
 
-def item_state_list_init(request):
-    try:
-        state = State.objects.all()[0]
-        return HttpResponseRedirect(reverse('item_state_list', args=[state.id]))
-    except:
-        messages.error(request, _(u"There are no asset states."))
-        return HttpResponseRedirect(reverse('state_list'))
-       
-    
-def item_state_list(request, state_id):
-    item_state_menu_links = []
-    
-    for temp_state in State.objects.all():
-        item_state_menu_links.append({
-            'text':temp_state.name,
-            'url':reverse(item_state_list, args=[temp_state.id]),
-        })
-    #TODO: HACKISH fix properly
-    navigation[4]['links'] = item_state_menu_links
-
-    state = get_object_or_404(State, pk=state_id)
-    return generic_list(
-        request,
-        list_filter=location_filter, 
-        queryset=Item.objects.filter(itemstate__state=state),
-        extra_context={
-            'title':_(u"assets marked as '%s'") % state.name,
-            'create_view':'state_create',
-            'record_links':asset_record_links,
-        }
-    )
-   
-
 def group_assign_remove_item(request, object_id):
     obj = get_object_or_404(ItemGroup, pk=object_id)
 

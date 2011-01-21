@@ -23,7 +23,7 @@ person_record_links = [
 
 asset_list = {'text':_('view all assets'), 'view':'item_list', 'famfam':'computer'}
 asset_create = {'text':_('create new asset'), 'view':'item_create', 'famfam':'computer_add'}
-asset_orphan_list = {'text':_('orphans assets'), 'view':'item_orphans_list'}
+asset_orphan_list = {'text':_('orphan assets'), 'view':'item_orphans_list'}
 asset_edit = {'text':_(u'edit'), 'view':'item_update', 'famfam':'computer_edit'}
 asset_delete = {'text':_(u'delete'), 'view':'item_delete', 'famfam':'computer_delete'}
 asset_photos = {'text':_(u'photos'), 'view':'item_photos', 'famfam':'picture_edit'}
