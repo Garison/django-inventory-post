@@ -12,6 +12,14 @@ $(function() {
 });
 </script>
 {% endblock %}
+
+{% block sidebar %}
+    {% for subtemplate in subtemplates %}
+        {% include subtemplate %}
+    {% endfor %}
+{% endblock %}
+
+
 {% block content %}
     <style type="text/css">
         #subform form  textarea, 
@@ -21,13 +29,11 @@ $(function() {
         #subform form  input { background: none; color: black; border: none; }
     </style>
 
+
     <div id="subform">
         {% with 'true' as read_only %}
             {% include "generic_form_subtemplate.html" %}
         {% endwith %}
     </div>
 
-    {% for subtemplate in subtemplates %}
-        {% include subtemplate %}
-    {% endfor %}
 {% endblock %}
