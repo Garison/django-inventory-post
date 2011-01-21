@@ -85,14 +85,11 @@ def generic_assign_remove(request, title, obj, left_list_qryset, left_list_title
     left_filter = None
     filter_form = None
     if list_filter:
-        result = add_filter(request, list_filter)
-        if 'filter' in result:
-            left_filter = result['filter']
+        filter_form, filters = add_filter(request, list_filter)
+        if filters:
+            left_filter = filters
+            
 
-#	filter_form = None
-#	if list_filter:
-        filter_form = result['filter_form']
-  
     if request.method == 'POST':
         post_data = request.POST
         form = GenericAssignRemoveForm(left_list_qryset, right_list_qryset, left_filter, request.POST)

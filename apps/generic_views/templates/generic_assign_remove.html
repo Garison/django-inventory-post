@@ -4,7 +4,14 @@
 
 {% block sidebar %}
     {% if filter_form %}
-           {% include "filter_form_subtemplate.html" %}	
+        {% with filter_form as form %}
+        {% with 'true' as side_bar %}
+        {% with 'get' as submit_method %}
+          {#{% include "filter_form_subtemplate.html" %}#}
+           {% include "generic_form_subtemplate.html" %}
+        {% endwith %}
+        {% endwith %}
+        {% endwith %}
     {% endif %}
 {% endblock %}
 

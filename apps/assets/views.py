@@ -33,7 +33,7 @@ def person_assign_remove_item(request, object_id):
         left_list_title=_(u'Unassigned assets'), 
         right_list_title=_(u'Assigned assets'), 
         item_name=_(u"assets"), 
-        list_filter=location_filter
+        list_filter=[location_filter]
     )
     
     
@@ -51,7 +51,7 @@ def item_assign_remove_person(request, object_id):
         left_list_title=_(u"People that don't have this asset"),
         right_list_title=_(u"People that have this asset"),
         item_name=_(u"people"),
-        list_filter=location_filter)
+        list_filter=[location_filter])
         
         
 def item_setstate(request, object_id, state_id):
@@ -138,6 +138,6 @@ def group_assign_remove_item(request, object_id):
         left_list_title=_(u"Unassigned assets"),
         right_list_title=_(u"Assigned assets"),
         item_name=_(u"assets"),
-        list_filter=location_filter)
+        list_filter=[location_filter])
 
    
