@@ -1,9 +1,9 @@
 Django Inventory
 =============
 
-    Django based inventory and asset control.
+Django based inventory and asset control.
 
-    (http://img814.imageshack.us/img814/5088/screenshot1fz.png)
+(http://img814.imageshack.us/img814/5088/screenshot1fz.png)
  
 
 Features
