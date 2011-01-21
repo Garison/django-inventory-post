@@ -19,18 +19,6 @@ from models import Person, Item, ItemGroup, State, ItemState
 from assets import person_record_links, asset_record_links
 
 
-def person_detail(request, object_id):
-    return object_detail(
-        request,
-        queryset = Person.objects.all(),
-        object_id = object_id,
-        template_name = 'person_detail.html',
-        extra_context={
-            'record_links':person_record_links,
-        },
-    )
-    
-
 def person_assign_remove_item(request, object_id):
     person = get_object_or_404(Person, pk=object_id)
 
