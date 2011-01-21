@@ -2,6 +2,7 @@ from django.utils.translation import ugettext as _
 
 import assets
 import inventory
+import movements
 
 navigation = [
     {'text':_('home'), 'view':'home', 'famfam':'house'},
@@ -11,7 +12,7 @@ navigation = [
     ], 'famfam':'computer'},
     {'text':_('inventories'), 'view':'inventory_list', 'links':inventory.inventory_menu_links,'famfam':'package_go'},
     {'text':_('tools'), 'view':'location_list', 'links': [
-        inventory.location_list, assets.state_list, inventory.supplier_list,
+        inventory.location_list, assets.state_list, inventory.supplier_list, movements.purchase_request_state_list,
         {'text':_('import'), 'view':'import_wizard', 'famfam':'lightning_add'}
     ],'famfam':'wrench'},
     {'text':_('search'), 'view':'search', 'famfam':'zoom'},
