@@ -13,10 +13,10 @@ navigation = [
         assets.asset_list, assets.asset_create, assets.asset_orphan_list, assets.group_list, assets.group_create 
     ], 'famfam':'computer'},
     {'text':_('asset states'), 'view':'item_state_list_init', 'famfam':'computer_error'},
-    {'text':_('inventories'), 'view':'inventory_list', 'links':inventory.inventory_menu_links,'famfam':'book'},
+    {'text':_('inventories'), 'view':'inventory_list', 'links':inventory.inventory_menu_links,'famfam':'package_go'},
     {'text':_('tools'), 'view':'location_list', 'links': [
         inventory.location_list, assets.state_list, inventory.supplier_list,
-        {'text':_('import'), 'view':'import_wizard'}
+        {'text':_('import'), 'view':'import_wizard', 'famfam':'lightning_add'}
     ],'famfam':'wrench'},
     {'text':_('search'), 'view':'search', 'famfam':'zoom'},
     {'text':_('about'), 'view':'about'},
