@@ -2,61 +2,72 @@
 {% load generic_photos_tags %}
 
 {% block javascript %}
-<script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-lightbox-0.5/js/jquery.lightbox-0.5.js"></script>
-<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}packages/jquery-lightbox-0.5/css/jquery.lightbox-0.5.css" media="screen" />
-<script type="text/javascript">
-$(function() {
-        $('.gallery a').lightBox();
-    });
-</script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-lightbox-0.5/js/jquery.lightbox-0.5.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}packages/jquery-lightbox-0.5/css/jquery.lightbox-0.5.css" media="screen" />
+    <script type="text/javascript">
+    $(function() {
+            $('.gallery a').lightBox();
+        });
+    </script>
 {% endblock %}
 
-{% if object|get_photos_for_object %}
-<div>
-	<table style='margin: auto;'>
-		<thead>
-			<tr>
-				<td colspan='10' style='font-weight: bold; text-align: center;'>
-					{% if title %}
-						{{ title|capfirst }}
-					{% else %}
-						{% trans 'Photos' %}
-					{% endif %}
-				</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr style="vertical-align: top;">
-			{% for photo in object|get_photos_for_object %}
-				<td>
-					<div class="gallery">							
-						<a href="{{ photo.get_display_url }}" title="{{ photo.title }}">
-							<img src="{{ photo.get_thumbnail_url }}" alt='thumbnail' />
-							{% if photo.title %}
-								<div id='caption' class='tc'>
-								   {{ photo.title }}
-								</div>
-							{% endif %}
-						</a>
-					</div>
-				</td>
+  <h3>{% trans 'Photos' %}</h3>
+   <div class="content">
+    <form action="" method="get" class="form">
 
-				{% if forloop.counter|divisibleby:"4" %}
-				</tr><tr>
-				{% endif %}
-			{% endfor %}				
-			</tr>
-		</tbody>
-	</table>
-</div>	
-{% else %}
+    {% if object|get_photos_for_object %}
+    <div>
+        <table style='margin: auto;'>
+            {% comment %}
+            <thead>
+                <tr>
+                    <td colspan='10' style='font-weight: bold; text-align: center;'>
+                        {% if title %}
+                            {{ title|capfirst }}
+                        {% else %}
+                            {% trans 'Photos' %}
+                        {% endif %}
+                    </td>
+                </tr>
+            </thead>
+            {% endcomment %}
+            <tbody>
+                <tr style="vertical-align: top;">
+                {% for photo in object|get_photos_for_object %}
+                    <td>
+                        <div class="gallery">							
+                            <a href="{{ photo.get_display_url }}" title="{{ photo.title }}">
+                                <img src="{{ photo.get_thumbnail_url }}" alt='thumbnail' />
+                                {% if photo.title %}
+                                    <div id='caption' class='tc'>
+                                       {{ photo.title }}
+                                    </div>
+                                {% endif %}
+                            </a>
+                        </div>
+                    </td>
 
-<p style='font-weight: bold; text-align:center;'>
-{% if title %}
-	{% blocktrans %}There are no {{ title }} {% endblocktrans %}
-{% else %}
-	{% trans 'There are no photos' %}
-{% endif %}
-</p>
+                    {% if forloop.counter|divisibleby:"3" %}
+                    </tr><tr>
+                    {% endif %}
+                {% endfor %}				
+                </tr>
+            </tbody>
+        </table>
+    </div>	
+    {% else %}
 
-{% endif %}
+    <p style='text-align:center;'>
+    {% if title %}
+        {% blocktrans %}There are no {{ title }} {% endblocktrans %}
+    {% else %}
+        {% trans 'There are no photos' %}
+    {% endif %}
+    </p>
+
+    {% endif %}
+
+    </form>
+    </div>
+
+
