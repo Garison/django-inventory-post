@@ -12,7 +12,8 @@ from photos.views import generic_photos
 
 from generic_views.views import generic_assign_remove, generic_list
 
-from inventory import location_filter, navigation
+from inventory import location_filter
+from main import navigation
 
 from models import Person, Item, ItemGroup, State, ItemState
 from assets import person_record_links, asset_record_links

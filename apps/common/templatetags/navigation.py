@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse#, NoReverseMatch
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern, Resolver404, get_resolver
 
-from inventory import navigation
+from main import navigation
 
 register = Library()
 

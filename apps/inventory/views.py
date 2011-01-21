@@ -20,7 +20,7 @@ from models import ItemTemplate, Inventory, \
                    InventoryTransaction, Supplier
 
 from inventory import template_record_links, \
-                      location_filter, navigation
+                      location_filter
 
 
 def supplier_assign_remove_itemtemplates(request, object_id):
