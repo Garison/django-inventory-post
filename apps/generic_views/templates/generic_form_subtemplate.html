@@ -1,14 +1,24 @@
 {% load i18n %}
-<h2 class="title">
-{% include 'calculate_form_title.html' %}
-</h2>
+{% if side_bar %}
+    <h3>
+        {% include 'calculate_form_title.html' %}
+    </h3>
+       <div class="content">
+{% else %}
+    <h2 class="title">
+        {% include 'calculate_form_title.html' %}
+    </h2>
+{% endif %}
+
 <div class="inner">
     {% if form.is_multipart %}
         <form enctype="multipart/form-data" method="{{ submit_method|default:'post' }}" action="" class="form">
     {% else %}
         <form method="{{ submit_method|default:'post' }}" action="" class="form">
     {% endif %}
-        {% csrf_token %}
+        {% if submit_method != 'GET' and submit_method != 'get' %}
+            {% csrf_token %}
+        {% endif %}
         {% if hidden_fields %}
             {% for name, value in hidden_fields.items %}
                 <input name='{{ name }}' type='hidden' value='{{ value }}' />
@@ -37,4 +47,8 @@
         {% endif %}
     </form>
 </div>
+
+{% if side_bar %}
+    </div>
+{% endif %}
     
