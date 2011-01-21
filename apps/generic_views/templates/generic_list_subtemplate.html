@@ -1,9 +1,16 @@
 {% load i18n %}
 {% load generic_views_helpers %}
 {% load pagination_tags %}
-{% autopaginate object_list 15 %} 
+{% autopaginate object_list 10 %} 
 
-<h2 class="title">{% trans 'List of' %} {{ title }}</h2>
+<h2 class="title">
+    {% ifnotequal page_obj.paginator.num_pages 1 %}
+        {% blocktrans with page_obj.start_index as start and page_obj.end_index as end and page_obj.paginator.object_list.count as total %}List of {{ title }} ({{ start }} - {{ end }} out of {{ total }}){% endblocktrans %}
+    {% else %}
+        {% blocktrans with page_obj.paginator.object_list|length as total %}List of {{ title }} ({{ total }}){% endblocktrans %}
+    {% endifnotequal %}
+</h2>
+
 <div class="inner">
   <form action="#" class="form">
     <table class="table tc">
