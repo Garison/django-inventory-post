@@ -13,43 +13,28 @@ from django.views.generic.create_update import create_object, update_object, del
 from forms import FilterForm, GenericConfirmForm, GenericAssignRemoveForm, \
                   DetailForm
 
-def add_filter(request, list_filter):
-    result={}
-    if(len(request.GET)>0):
-        filter_form=FilterForm(list_filter, request.GET)
+def add_filter(request, list_filters):
+    filters = []
+    filter_dict = dict([(f['name'], f) for f in list_filters])
+    if request.method == 'GET':
+        filter_form = FilterForm(list_filters, request.GET)
         if filter_form.is_valid():
-            filterdict = filter_form.cleaned_data
-            q_objs = [Q(**{list_filter[k]['destination']: filterdict[k]}) for k in list_filter.keys() if filterdict.get(k, None)]
-            result['filter']=q_objs
-            result['filterdict'] = filterdict
-            
-            id_dict={}
-            for key in filterdict.keys():
-                if hasattr(filterdict[key], 'id'):
-                    id_dict[key] = filterdict[key].id
+            for name, data in filter_form.cleaned_data.items():
+                if data:
+                    filters.append(Q(**{filter_dict[name]['destination']:data}))
+
     else:			
-        filter_form = FilterForm(list_filter)
+        filter_form = FilterForm(list_filters)
             
-    result['filter_form'] = filter_form
-    return result
+    return filter_form, filters
 
-def generic_list(request, list_filter=None, queryset_filter=None, *args, **kwargs):
-    if list_filter:
-        result = add_filter(request, list_filter)
-        if 'filter' in result:
-            kwargs['queryset'] = kwargs['queryset'].filter(*result['filter'])
+def generic_list(request, list_filters=[], queryset_filter=None, *args, **kwargs):
+    if list_filters:
+        filter_form, filters = add_filter(request, list_filters)
+        if filters:
+            kwargs['queryset'] = kwargs['queryset'].filter(*filters)
 
-            id_dict={}
-            for key in result['filterdict'].keys():
-                if hasattr(result['filterdict'][key], 'id'):
-                    id_dict[key] = result['filterdict'][key].id
-
-            raw_url = urllib.urlencode(id_dict)
-            
-            if len(raw_url):
-                kwargs['extra_context']['new_url'] = '&' + raw_url
-
-        kwargs['extra_context']['filter_form'] = result['filter_form']
+        kwargs['extra_context']['filter_form'] = filter_form
         
     return object_list(request,  template_name='generic_list.html', *args, **kwargs)
 

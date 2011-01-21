@@ -1,8 +1,10 @@
 from django.utils.translation import ugettext_lazy as _
 
-state_list = {'text':_('states'), 'view':'state_list', 'famfam':'error_go'}
-state_edit = {'text':_(u'edit'), 'view':'state_update', 'famfam':'error'}
-state_delete = {'text':_(u'delete'), 'view':'state_delete', 'famfam':'error_delete'}
+from models import State
+
+state_list = {'text':_('assets states'), 'view':'state_list', 'famfam':'error_go'}
+state_edit = {'text':_(u'edit asset state'), 'view':'state_update', 'famfam':'error'}
+state_delete = {'text':_(u'delete asset state'), 'view':'state_delete', 'famfam':'error_delete'}
 
 state_record_links = [
     state_edit, state_delete
@@ -41,3 +43,5 @@ group_delete = {'text' : _(u'delete'), 'view':'group_delete'}
 group_record_links = [
     group_update, group_delete
 ]
+
+state_filter = {'name':'state', 'queryset':State.objects.all(), 'destination':'itemstate'}

@@ -50,9 +50,7 @@ inventory_links = [inventory_balances, inventory_edit, inventory_delete]
 
 inventory_transaction_links = [inventory_transaction_edit, inventory_transaction_delete]
 
-location_filter = {
-    'location':{'queryset':Location.objects.all(), 'destination':'location'},
-}
+location_filter = {'name':'location', 'queryset':Location.objects.all(), 'destination':'location'}
 
 location_links = [location_edit, location_delete]
 
