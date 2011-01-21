@@ -1,21 +1,11 @@
 {% load i18n %}
 {% load assets_tags %}
 {% get_all_states as states %}
-    <div id="box">
-        <div class="block"  id="block-item-states">
-        <h2>{% trans 'Item states' %}</h2>
-        <div class="content tc">
-        <h3></h3>
+  <h3>{% trans 'Item states' %}</h3>
+   <div class="content">
+    <form action="" method="get" class="form">
         <table class="table">
         <tbody>
-          <tr>
-            <th class="first">{% trans 'Identifier' %}</th>
-            {% if record_links %}
-                <th class="last">&nbsp;</th>
-            {% else %}
-                <th class="last">&nbsp;</th>
-            {% endif %}
-          </tr>
           
             {% for state in states %}
                 <tr class="{% cycle 'odd' 'even2' %}">
@@ -35,6 +25,18 @@
             
             </tbody>
         </table>
-       </div>
+    
+    
+    {% comment %}
+        {% with filter_form as form %}
+            {% include "generic_form_instance.html" %}
+        {% endwith %}
+
+        <div class="group navform wat-cf">
+            <button class="button" type="submit">
+                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% trans 'Submit' %}" /> {% trans 'Submit' %}
+            </button>
+        </div>
+    {% endcomment %}        
+    </form>
     </div>
-   </div>
