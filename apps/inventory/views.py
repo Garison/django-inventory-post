@@ -94,10 +94,13 @@ def inventory_current(request, object_id):
             supply_qty[t.supply] = supply_qty[t.supply] + t.quantity
         else:
             supply_qty[t.supply] = t.quantity
-        
-    return render_to_response('inventory_current.html', {
-        'inventory': inventory,
-        'supply_qty': supply_qty,
+    
+    supplies_list = [{'item_template':x, 'qty':y} for x,y in supply_qty.items()]
+    return render_to_response('generic_list.html', {
+        'object_list':supplies_list,
+        'extra_columns':[{'name':_(u'quantity'),'attribute':'qty'}],
+        'main_object':'item_template',
+        'title':_(u'current balances'),
     },
     context_instance=RequestContext(request))
 
