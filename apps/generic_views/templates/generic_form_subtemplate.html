@@ -36,7 +36,7 @@
         {% if not read_only %}
         <div class="group navform wat-cf">
             <button class="button" type="submit">
-                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% trans 'Save' %}" /> {% trans 'Save' %}
+                <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/tick.png" alt="{% if object %}{% trans 'Save' %}{% else %}{% trans 'Submit' %}{% endif %}" /> {% if object %}{% trans 'Save' %}{% else %}{% trans 'Submit' %}{% endif %}
             </button>
             {% comment %}
             <a href="#header" class="button">
