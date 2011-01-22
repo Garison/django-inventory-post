@@ -118,6 +118,7 @@ INSTALLED_APPS = [
     'assets',
     'dynamic_search',
     'importer',
+    'movements',
     'main',
 ]
 

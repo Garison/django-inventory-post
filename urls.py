@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     (r'^assets/', include('assets.urls')),
     (r'^search/', include('dynamic_search.urls')),
     (r'^import/', include('importer.urls')),
+    (r'^movements/', include('movements.urls')),
 )
 
 if settings.DEVELOPMENT:

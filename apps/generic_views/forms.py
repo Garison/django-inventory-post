@@ -99,7 +99,7 @@ class GenericAssignRemoveForm(forms.Form):
 
         
 class FilterForm(forms.Form):
-    def __init__(self, field_dict, *args, **kwargs):
+    def __init__(self, list_filters, *args, **kwargs):
         super(FilterForm, self).__init__(*args, **kwargs)
-        for key in field_dict.keys():
-            self.fields[key] = forms.ModelChoiceField(queryset=field_dict[key]['queryset'], required=False)
+        for list_filter in list_filters:
+            self.fields[list_filter['name']] = forms.ModelChoiceField(queryset=list_filter['queryset'], required=False)

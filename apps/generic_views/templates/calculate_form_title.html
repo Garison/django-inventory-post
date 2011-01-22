@@ -1,6 +1,6 @@
 {% load i18n %}
 {% if title %}
-    {{ title }}
+    {{ title|capfirst }}
 {% else %}
     {% if read_only %}
         {% blocktrans %}Details for: {{ object }}{% endblocktrans %}

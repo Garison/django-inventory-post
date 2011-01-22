@@ -51,9 +51,9 @@ class ItemState(models.Model):
     
 class Item(models.Model):
     item_template = models.ForeignKey(ItemTemplate, verbose_name=_(u"item template"))
-    property_number = models.CharField(verbose_name=_(u"asset number"), max_length=10)
+    property_number = models.CharField(verbose_name=_(u"asset number"), max_length=48)
     notes = models.TextField(verbose_name=_(u"notes"), null=True, blank=True)	
-    serial_number = models.CharField(verbose_name=_(u"serial number"), max_length=30, null=True, blank=True)
+    serial_number = models.CharField(verbose_name=_(u"serial number"), max_length=48, null=True, blank=True)
     location = models.ForeignKey(Location, verbose_name=_(u"location"), null=True, blank=True)
     active = models.BooleanField(default=True)
     
