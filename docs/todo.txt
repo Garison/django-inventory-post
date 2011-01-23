@@ -16,6 +16,7 @@
 # Credit all contributions and used software or media in about view or
     CREDITS file                                                        - DONE
 # Smarter search                                                        - DONE
+# Allow import of CSV data                                              - DONE
 # Insert license header to every .py file
 # Allow templates and items to have attachments (not just photos)
 # Implement uploadify
