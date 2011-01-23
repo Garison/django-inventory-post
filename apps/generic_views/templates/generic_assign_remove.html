@@ -3,6 +3,8 @@
 {% block title %} :: {% blocktrans %}Assign {{ title }} {{ object }}{% endblocktrans %}{% endblock %}
 
 {% block sidebar %}
+    {% include 'sidebar_navigation.html' %}
+
     {% if filter_form %}
         {% with filter_form as form %}
         {% with 'true' as side_bar %}

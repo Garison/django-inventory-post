@@ -18,7 +18,15 @@ $(function() {
 </script>
 {% endblock %}
 {% block title %} :: {% trans 'Edit photos' %}{% endblock %}
-{% block banner %}<div id="banner"><h2>{% trans 'Edit photos' %}</h2></div>{% endblock %}
+{% block sidebar %}
+{% with model_instance as object %}
+    {% include 'sidebar_navigation.html' %}
+
+    {% for subtemplate in subtemplates %}
+        {% include subtemplate %}
+    {% endfor %}
+{% endwith %}
+{% endblock %}
 {% block content %}
     <h3>{% trans 'Photos for' %}: <a href="{{ model_instance.get_absolute_url }}">{{ model_instance }}</a> ({% trans 'Maximum of' %} {{ max_photos }}):</h3>
 
