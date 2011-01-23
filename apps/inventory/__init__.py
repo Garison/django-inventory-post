@@ -25,15 +25,15 @@ supplier_delete = {'text':_('delete'), 'view':'supplier_delete', 'famfam':'lorry
 supplier_update = {'text':_('edit'), 'view':'supplier_update', 'famfam':'lorry'}
 supplier_assign_itemtemplate = {'text':_(u'assign templates'), 'view':'supplier_assign_itemtemplates', 'famfam':'page_go'}
 
-template_assign_suppliers = {'text':_(u'assign suppliers'), 'view':'template_assign_suppliers', 'famfam':'lorry_go'}
 template_list = {'text':_('view all'), 'view':'template_list', 'famfam':'page_go'}
 template_create = {'text':_('create new'), 'view':'template_create', 'famfam':'page_add'}
 template_orphan_list = {'text':_('orphans'), 'view':'template_orphans_list'}
-template_edit = {'text':_(u'edit'), 'view':'template_update', 'famfam':'page_edit'}
-template_delete = {'text':_(u'delete'), 'view':'template_delete', 'famfam':'page_delete'}
-template_photos = {'text':_(u'photos'), 'view':'template_photos', 'famfam':'picture_go'}
-template_assets = {'text':_(u'related assets'), 'view':'template_items_list', 'famfam':'computer_go'}
-template_assign_supplies = {'text':_(u'assign supplies'), 'view':'template_assign_supply', 'famfam':'monitor'}
+template_edit = {'text':_(u'edit'), 'view':'template_update', 'args':'object.id', 'famfam':'page_edit'}
+template_delete = {'text':_(u'delete'), 'view':'template_delete', 'args':'object.id', 'famfam':'page_delete'}
+template_photos = {'text':_(u'photos'), 'view':'template_photos', 'args':'object.id', 'famfam':'picture_go'}
+template_assets = {'text':_(u'related assets'), 'view':'template_items_list', 'args':'object.id', 'famfam':'computer_go'}
+template_assign_supplies = {'text':_(u'assign supplies'), 'view':'template_assign_supply', 'args':'object.id', 'famfam':'monitor'}
+template_assign_suppliers = {'text':_(u'assign suppliers'), 'view':'template_assign_suppliers', 'args':'object.id', 'famfam':'lorry_go'}
 
 
 template_menu_links = [template_list, template_create, template_orphan_list]

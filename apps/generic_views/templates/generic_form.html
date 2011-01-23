@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block title %} :: {% include 'calculate_form_title.html' %}{% endblock %}
+
+{% block sidebar %}
+    {% include 'sidebar_navigation.html' %}
+{% endblock %}
+
 {% block content %}
     {% include 'generic_form_subtemplate.html' %}
 {% endblock %}

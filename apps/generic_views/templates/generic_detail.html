@@ -12,8 +12,9 @@ $(function() {
 });
 </script>
 {% endblock %}
-
 {% block sidebar %}
+    {% include 'sidebar_navigation.html' %}
+
     {% for subtemplate in subtemplates %}
         {% include subtemplate %}
     {% endfor %}

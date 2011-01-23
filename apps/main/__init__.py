@@ -4,6 +4,15 @@ import assets
 import inventory
 import movements
 
+from assets.models import Item, Person
+from inventory.models import ItemTemplate
+
+new_navigation = {
+    Item:[assets.asset_edit, assets.asset_delete, assets.asset_photos, assets.asset_assign_person, assets.asset_template],
+    Person:[assets.person_update, assets.person_delete, assets.person_photos, assets.person_assign_item]
+}
+    
+    
 navigation = [
     {'text':_('home'), 'view':'home', 'famfam':'house'},
     {'text':_('templates'), 'view':'template_list', 'links':inventory.template_menu_links, 'famfam':'page'},

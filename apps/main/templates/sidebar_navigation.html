@@ -1,0 +1,15 @@
+{% load generic_views_helpers %}
+
+{% get_navigation_links %}
+
+{#{% if object and new_navigation_links %}#}
+{% if new_navigation_links %}
+        <h3>Side bar links</h3>
+        <ul class="navigation">
+            {#{% with new_navigation_links as record_links %}#}
+            {% with 'true' as as_li %}
+                {% include 'generic_navigation.html' %}
+            {#{% endwith %}#}
+            {% endwith %}
+        </ul>
+{% endif %}

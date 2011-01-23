@@ -125,6 +125,7 @@
                             </div>
                         </div> 
                         <div id="sidebar">
+                        {% comment %}
                             {% if record_links and object %}
                                 <div class="block">
                                     <h3>Record links</h3>
@@ -136,6 +137,7 @@
                                 </div>
                             
                             {% endif %}
+                        {% endcomment %}
                             <div class="block">{% block sidebar %}{% endblock %}</div>
                         </div>                    
                 </div>

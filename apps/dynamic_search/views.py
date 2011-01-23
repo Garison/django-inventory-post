@@ -75,6 +75,7 @@ def search(request):
                             'form':form,
                             'object_list':object_list,
                             'form_title':_(u'Search'),
+                            'extra_columns':[{'name':'type', 'attribute':lambda x:x._meta.verbose_name[0].upper() + x._meta.verbose_name[1:]}],
                             'title':_(u'results with: %s') % query_string
                             },
                           context_instance=RequestContext(request))
