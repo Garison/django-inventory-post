@@ -123,7 +123,7 @@ def generic_assign_remove(request, title, obj, left_list_qryset, left_list_title
     context_instance=RequestContext(request))
 
 
-def generic_detail(request, object_id, form_class, queryset, title=None, create_view=None, record_links=None, extra_context={}, extra_fields=[]):
+def generic_detail(request, object_id, form_class, queryset, title=None, extra_context={}, extra_fields=[]):
     #if isinstance(form_class, DetailForm):
     try:
         form = form_class(instance=queryset.filter(id=object_id)[0], extra_fields=extra_fields)
@@ -132,8 +132,6 @@ def generic_detail(request, object_id, form_class, queryset, title=None, create_
     
     extra_context['form'] = form
     extra_context['title'] = title
-    extra_context['create_view'] = create_view
-    extra_context['record_links'] = record_links
    
     return object_detail(
         request,
