@@ -19,13 +19,14 @@ inventory_transaction_update = {'text':_(u'edit'), 'view':'inventory_transaction
 inventory_transaction_delete = {'text':_(u'delete'), 'view':'inventory_transaction_delete', 'args':'object.id', 'famfam':'book_delete'}
 
 location_list = {'text':_('locations'), 'view':'location_list', 'famfam':'map'}
+location_create = {'text':_(u'edit'), 'view':'location_create', 'famfam':'map_add'}
 location_update = {'text':_(u'edit'), 'view':'location_update', 'args':'object.id', 'famfam':'map_edit'}
 location_delete = {'text':_(u'delete'), 'view':'location_delete', 'args':'object.id', 'famfam':'map_delete'}
 
-supplier_create = {'text':_('create new supplier'), 'view':'supplier_create'}
+supplier_create = {'text':_('create new supplier'), 'view':'supplier_create', 'famfam':'lorry_add'}
 supplier_list = {'text':_('suppliers'), 'view':'supplier_list', 'famfam':'lorry'}
-supplier_delete = {'text':_('delete'), 'view':'supplier_delete', 'args':'object.id', 'famfam':'lorry_delete'}
 supplier_update = {'text':_('edit'), 'view':'supplier_update', 'args':'object.id', 'famfam':'lorry'}
+supplier_delete = {'text':_('delete'), 'view':'supplier_delete', 'args':'object.id', 'famfam':'lorry_delete'}
 supplier_assign_itemtemplate = {'text':_(u'assign templates'), 'view':'supplier_assign_itemtemplates', 'args':'object.id', 'famfam':'page_go'}
 
 template_list = {'text':_('view all'), 'view':'template_list', 'famfam':'page_go'}
@@ -46,8 +47,20 @@ inventory_menu_links = [
 
 location_filter = {'name':'location', 'queryset':Location.objects.all(), 'destination':'location'}
 
+register_links(['template_list', 'template_create', 'template_orphans_list', 'template_update', 'template_delete', 'template_photos', 'template_assign_supply', 'template_assign_suppliers'], [template_create], menu_name='sidebar')
 register_links(ItemTemplate, [template_update, template_delete, template_photos, template_assets, template_assign_supplies, template_assign_suppliers])
+
+register_links(['supplier_list', 'supplier_create', 'supplier_update', 'supplier_view', 'supplier_delete', 'supplier_assign_itemtemplates'], [supplier_create], menu_name='sidebar')
 register_links(Supplier, [supplier_update, supplier_delete, supplier_assign_itemtemplate])
+
+register_links(['inventory_list', 'inventory_create', 'inventory_current', 'inventory_update', 'inventory_delete'], [inventory_create], menu_name='sidebar')
 register_links(Inventory, [inventory_balances, inventory_update, inventory_delete])
+
+register_links(['inventory_transaction_list', 'inventory_transaction_create', 'inventory_transaction_update', 'inventory_transaction_delete'], [inventory_transaction_create], menu_name='sidebar')
 register_links(InventoryTransaction, [inventory_transaction_update, inventory_transaction_delete])
+
+register_links(['location_list', 'location_create', 'location_update', 'location_delete'], [location_create], menu_name='sidebar')
 register_links(Location, [location_update, location_delete])
+
+
+

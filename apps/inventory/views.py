@@ -97,6 +97,7 @@ def inventory_current(request, object_id):
         'object_list':supplies_list,
         'extra_columns':[{'name':_(u'quantity'),'attribute':'qty'}],
         'main_object':'item_template',
+        'object':inventory,
         'title':_(u'current balances for inventory: %s') % inventory,
     },
     context_instance=RequestContext(request))
