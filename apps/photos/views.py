@@ -84,6 +84,7 @@ def generic_photos(request, model, object_id, max_photos=5):
         'photos':photos,
         'form':form,
         'max_photos':max_photos,
+        'title':_(u'Upload new photo')
     },
     context_instance=RequestContext(request))
     
