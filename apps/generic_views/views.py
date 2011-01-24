@@ -44,7 +44,10 @@ def generic_delete(*args, **kwargs):
     except NoReverseMatch:
         pass
 
-    kwargs['extra_context']['delete_view'] = True
+    if 'extra_context' in kwargs:
+        kwargs['extra_context']['delete_view'] = True
+    else:
+        kwargs['extra_context'] = {'delete_view':True}
   
     return delete_object(template_name='generic_confirm.html', *args, **kwargs)
 
