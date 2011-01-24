@@ -128,16 +128,32 @@
                             </div>
                         </div> 
                         <div id="sidebar">
-                            {% get_object_navigation_links %}
-                            {#{% if object and object_navigation_links %}#}
+                            {% get_object_navigation_links "sidebar" %}
+
                             {% if object_navigation_links %}
-                                <h3>{% blocktrans %}Actions for: {{ object }}{% endblocktrans %}</h3>
+                                <h3>{% trans 'Available actions' %}</h3>
                                 <ul class="navigation">
                                     {% with 'true' as as_li %}
                                         {% include 'generic_navigation.html' %}
                                     {% endwith %}
                                 </ul>
                             {% endif %}
+                        
+                        
+                            {% get_object_navigation_links %}
+                            {% if object_navigation_links %}
+                                {% if object %}
+                                    <h3>{% blocktrans %}Actions for: {{ object }}{% endblocktrans %}</h3>
+                                {% else %}
+                                    <h3>}{% trans 'Actions' %}</h3>
+                                {% endif %}
+                                <ul class="navigation">
+                                    {% with 'true' as as_li %}
+                                        {% include 'generic_navigation.html' %}
+                                    {% endwith %}
+                                </ul>
+                            {% endif %}
+
 
                             {% if filter_form %}
                                 {% with 'true' as side_bar %}

@@ -31,7 +31,11 @@ group_delete = {'text' : _(u'delete'), 'view':'group_delete', 'args':'object.id'
 
 state_filter = {'name':'state', 'queryset':State.objects.all(), 'destination':'itemstate'}
 
+
+register_links(['item_list', 'item_orphans_list', 'item_update', 'item_delete', 'item_photos', 'item_assign_person'], [asset_create], menu_name='sidebar')
 register_links(Item, [asset_edit, asset_delete, asset_photos, asset_assign_person, asset_template])
+
+register_links(['person_list', 'person_update', 'person_delete', 'person_photos', 'person_assign_item'], [person_create], menu_name='sidebar')
 register_links(Person, [person_update, person_delete, person_photos, person_assign_item])
 register_links(ItemGroup, [group_update, group_delete])
 register_links(State, [state_edit, state_delete])

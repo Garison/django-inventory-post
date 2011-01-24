@@ -1,35 +1,7 @@
 {% load i18n %}
-{#{% load generic_views_helpers %}#}
-
-{% comment %}
-{% if as_li %}<li>{% endif %}
-{% if create_view %}<a href="{% dynurl create_view %}"><span class="famfam active famfam-add"></span>{% trans 'Create' %}</a>{% if horizontal %} | {% endif %}{% endif %}
-{% if as_li %}</li>{% endif %}
-{% endcomment %}
-
 
 {% for link in object_navigation_links %}
     {% if as_li %}<li>{% endif %}
         <a href="{{ link.url }}">{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}{{ link.text|capfirst }}{% if link.error %} - {{ link.error }}{% endif %}{% if link.active %}<span class="famfam active famfam-resultset_previous"></span>{% endif %}</a>{% if horizontal %}{% if not forloop.last %} | {% endif %}{% endif %}
     {% if as_li %}</li>{% endif %}    
-{% endfor %}			
-
-
-{% comment %}
-{% for link in object_navigation_links_DISA %}
-    {% if as_li %}<li>{% endif %}
-    {% if link.view %}
-        {% if link.args %}
-            <a href="{% dynurl link.view link.args %}">{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}{{ link.text|capfirst }}</a>{% if horizontal %}{% if not forloop.last %} | {% endif %}{% endif %}
-        {% else %}
-            <a href="{% dynurl link.view %}">{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}{{ link.text|capfirst }}</a>{% if horizontal %}{% if not forloop.last %} | {% endif %}{% endif %}
-        {% endif %}
-    {% else %} 
-        {% if link.url %}
-        <a href="{{ link.url }}">{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}{{ link.text|capfirst }}</a>{% if horizontal %}{% if not forloop.last %} | {% endif %}{% endif %}
-        {% endif %}
-    {% endif %}
-
-    {% if as_li %}</li>{% endif %}    
-{% endfor %}			
-{% endcomment %}
+{% endfor %}
