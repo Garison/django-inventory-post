@@ -24,10 +24,10 @@ asset_photos = {'text':_(u'photos'), 'view':'item_photos', 'args':'object.id', '
 asset_assign_person = {'text':_(u'assign people'), 'view':'item_assign_person', 'args':'object.id', 'famfam':'user_go'}
 asset_template = {'text':_(u'template'), 'view':'template_view', 'args':'object.item_template.id', 'famfam':'page_go'}
 
-group_list = {'text':_(u'view all groups'), 'view':'group_list'}
-group_create = {'text':_(u'create group'), 'view':'group_create'}
-group_update = {'text':_(u'edit'), 'view':'group_update', 'args':'object.id'}
-group_delete = {'text' : _(u'delete'), 'view':'group_delete', 'args':'object.id'}
+group_list = {'text':_(u'view all groups'), 'view':'group_list', 'famfam':'chart_pie'}
+group_create = {'text':_(u'create group'), 'view':'group_create', 'famfam':'chart_pie_add'}
+group_update = {'text':_(u'edit'), 'view':'group_update', 'args':'object.id', 'famfam':'chart_pie_edit'}
+group_delete = {'text' : _(u'delete'), 'view':'group_delete', 'args':'object.id', 'famfam':'chart_pie_delete'}
 
 state_filter = {'name':'state', 'queryset':State.objects.all(), 'destination':'itemstate'}
 
