@@ -13,10 +13,9 @@ from photos.views import generic_photos
 from generic_views.views import generic_assign_remove, generic_list
 
 from inventory import location_filter
-from main import navigation
 
 from models import Person, Item, ItemGroup, State, ItemState
-from assets import person_record_links, asset_record_links
+#from assets import person_record_links, asset_record_links
 
 
 def person_assign_remove_item(request, object_id):

@@ -2,31 +2,14 @@
 {% load i18n %}
 {% block title %} :: {% blocktrans %}Assign {{ title }} {{ object }}{% endblocktrans %}{% endblock %}
 
-{% block sidebar %}
-    {% include 'sidebar_navigation.html' %}
-
-    {% if filter_form %}
-        {% with filter_form as form %}
-        {% with 'true' as side_bar %}
-        {% with 'get' as submit_method %}
-          {#{% include "filter_form_subtemplate.html" %}#}
-           {% include "generic_form_subtemplate.html" %}
-        {% endwith %}
-        {% endwith %}
-        {% endwith %}
-    {% endif %}
-{% endblock %}
 
 {% block content %}
-
-<style>
-    #id_right_list,#id_left_list { min-width: 28em; min-height: 13em; }
-</style>
-<h2 class="title">{{ title|safe }}</h2>
-
-<form method='POST' action='' id='assign_remove'>{% csrf_token %}
-<input name='action' value='' type='hidden' />
-
+    <style>
+        #id_right_list,#id_left_list { min-width: 28em; min-height: 13em; }
+    </style>
+    <h2 class="title">{{ title|safe }}</h2>
+    <form method='POST' action='' id='assign_remove'>{% csrf_token %}
+        <input name='action' value='' type='hidden' />
          <table>
             <tbody>
                 <tr>
@@ -53,7 +36,5 @@
                 {{ form.media|safe }}			
             </tbody>
         </table>
-    
-</form>
-
+    </form>
 {% endblock %}

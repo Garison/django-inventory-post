@@ -1,6 +1,8 @@
 {% load i18n %}
 {% load generic_views_helpers %}
 {% load pagination_tags %}
+{% load navigation %}
+
 {% autopaginate object_list 10 %} 
 <h2 class="title">
     {% ifnotequal page_obj.paginator.num_pages 1 %}
@@ -50,13 +52,8 @@
                 {% endfor %}
 
                     {% if not hide_links %}
-                        {% get_navigation_links %}
                         <td class='last'>
-                            {% with '' as  create_view %}
-                            {% with 'true' as horizontal %}
-                                {% include "generic_navigation.html" %}
-                            {% endwith %}
-                            {% endwith %}
+                            {% object_navigation_template %}
                         </td>
                     {% endif %}
             </tr>

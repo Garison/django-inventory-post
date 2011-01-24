@@ -3,19 +3,6 @@
 {% block title %} :: {% blocktrans %}List of {{ title }}{% endblocktrans %}{% endblock %}
 {#{% block secondary_links %}{{ secondary_links|safe }}{% endblock %}#}
 
-{% block sidebar %}
-    {% if filter_form %}
-        {% with filter_form as form %}
-        {% with 'true' as side_bar %}
-        {% with 'get' as submit_method %}
-          {#{% include "filter_form_subtemplate.html" %}#}
-           {% include "generic_form_subtemplate.html" %}
-        {% endwith %}
-        {% endwith %}
-        {% endwith %}
-    {% endif %}
-{% endblock %}
-
 {% block content %}
     {% include 'generic_list_subtemplate.html' %}
 {% endblock %}

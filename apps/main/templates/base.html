@@ -2,6 +2,9 @@
 {% load project_tags %}
 {% load assets_tags %}
 {% load navigation %}
+{% load generic_views_tags %}
+{% load generic_views_helpers %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -125,26 +128,27 @@
                             </div>
                         </div> 
                         <div id="sidebar">
-                        {% comment %}
-                            {% if record_links and object %}
-                                <div class="block">
-                                    <h3>Record links</h3>
-                                    <ul class="navigation">
-                                        {% with 'true' as as_li %}
-                                            {% include 'generic_navigation.html' %}
-                                        {% endwith %}
-                                    </ul>
-                                </div>
-                            
+                            {% get_object_navigation_links %}
+                            {#{% if object and object_navigation_links %}#}
+                            {% if object_navigation_links %}
+                                <h3>{% blocktrans %}Actions for: {{ object }}{% endblocktrans %}</h3>
+                                <ul class="navigation">
+                                    {% with 'true' as as_li %}
+                                        {% include 'generic_navigation.html' %}
+                                    {% endwith %}
+                                </ul>
                             {% endif %}
-                        {% endcomment %}
+
+                            {% if filter_form %}
+                                {% with 'true' as side_bar %}
+                                    {% filter_form %}
+                                {% endwith %}
+                            {% endif %}
+                            
                             <div class="block">{% block sidebar %}{% endblock %}</div>
                         </div>                    
                 </div>
             {% endif %}
         </div>
-        {#<div id="loading">#}
-		{#{% trans 'Loading' %}...<img src="{{ MEDIA_URL }}images/loading.gif" alt="" />#}
-		{#</div>#}
 	</body>
 </html>

@@ -80,8 +80,7 @@ def generic_photos(request, model, object_id, max_photos=5):
         form = ''
 
     return render_to_response('photos.html', {
-        'object_id':object_id,
-        'model_instance':model_instance,
+        'object':model_instance,
         'photos':photos,
         'form':form,
         'max_photos':max_photos,

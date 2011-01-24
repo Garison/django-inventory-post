@@ -1,10 +1,11 @@
+from django.conf import settings
+from django.core.urlresolvers import reverse, NoReverseMatch
+from django.core.urlresolvers import RegexURLResolver, RegexURLPattern, Resolver404, get_resolver
 from django.template import TemplateSyntaxError, Library, \
                             VariableDoesNotExist, Node, Variable
-from django.conf import settings
-from django.core.urlresolvers import reverse#, NoReverseMatch
-from django.core.urlresolvers import RegexURLResolver, RegexURLPattern, Resolver404, get_resolver
+from django.utils.text import unescape_string_literal
 
-from main import navigation
+from main import menu_navigation, object_navigation
 
 register = Library()
 
@@ -64,39 +65,39 @@ def main_navigation(parser, token):
 #        raise TemplateSyntaxError("'get_all_states' requires 'as variable' (got %r)" % args)
 
     #return NavigationNode(variable=args[2], navigation=navigation)    
-    return NavigationNode(navigation=navigation)    
+    return NavigationNode(navigation=menu_navigation)    
 
 
 #http://www.djangosnippets.org/snippets/1378/
 __all__ = ('resolve_to_name',)
 
 def _pattern_resolve_to_name(self, path):
-        match = self.regex.search(path)
-        if match:
-                name = ""
-                if self.name:
-                        name = self.name
-                elif hasattr(self, '_callback_str'):
-                        name = self._callback_str
-                else:
-                        name = "%s.%s" % (self.callback.__module__, self.callback.func_name)
-                return name
+    match = self.regex.search(path)
+    if match:
+        name = ""
+        if self.name:
+            name = self.name
+        elif hasattr(self, '_callback_str'):
+            name = self._callback_str
+        else:
+            name = "%s.%s" % (self.callback.__module__, self.callback.func_name)
+        return name
 
 def _resolver_resolve_to_name(self, path):
-        tried = []
-        match = self.regex.search(path)
-        if match:
-                new_path = path[match.end():]
-                for pattern in self.url_patterns:
-                        try:
-                                name = pattern.resolve_to_name(new_path)
-                        except Resolver404, e:
-                                tried.extend([(pattern.regex.pattern + '   ' + t) for t in e.args[0]['tried']])
-                        else:
-                                if name:
-                                        return name
-                                tried.append(pattern.regex.pattern)
-                raise Resolver404, {'tried': tried, 'path': new_path}
+    tried = []
+    match = self.regex.search(path)
+    if match:
+        new_path = path[match.end():]
+        for pattern in self.url_patterns:
+            try:
+                name = pattern.resolve_to_name(new_path)
+            except Resolver404, e:
+                tried.extend([(pattern.regex.pattern + '   ' + t) for t in e.args[0]['tried']])
+            else:
+                if name:
+                    return name
+                tried.append(pattern.regex.pattern)
+        raise Resolver404, {'tried': tried, 'path': new_path}
 
 
 # here goes monkeypatching
@@ -109,3 +110,94 @@ def resolve_to_name(path, urlconf=None):
 @register.filter
 def resolve_url_name(value):
     return resolve_to_name(value)
+
+
+def _get_object_navigation_links(context):
+    current_view = resolve_to_name(Variable('request').resolve(context).META['PATH_INFO'])#.get_full_path())
+    context_links = []    
+    try:
+        object_name = Variable('object_name').resolve(context)
+    except VariableDoesNotExist:
+        object_name = 'object'
+
+    try:
+        object = Variable(object_name).resolve(context)
+
+        for id, links in object_navigation.items():
+            if isinstance(object, id):
+                for link in links:
+                    if 'view' in link:
+                        link['active'] = link['view'] == current_view
+                        args = []
+                        kwargs = {}
+                        if 'args' in link:
+                            link_args = link['args']
+                            if type(link_args) == type([]):
+                                for i in link_args:
+                                    val = resolve_template_variable(i, context)
+                                    if val:
+                                        args.append(val)
+                            elif type(link_args) == type({}):
+                                for key, value in link_args.items():
+                                    val = resolve_template_variable(value, context)
+                                    if val:
+                                        kwargs[key] = val
+                            else:
+                                val = resolve_template_variable(link_args, context)
+                                if val:
+                                    args.append(val)
+                        try:
+                            if kwargs:
+                                link['url'] = reverse(link['view'], kwargs=kwargs)
+                            else:
+                                link['url'] = reverse(link['view'], args=args)
+                        except NoReverseMatch, err:
+                            link['url'] = '#'
+                            link['error'] = err#"ERR: %s, %s, %s" % (link['view'], args, kwargs)
+
+                    context_links.append(link)
+                    
+                    
+    except VariableDoesNotExist:
+        pass
+    return context_links
+
+
+def resolve_template_variable(name, context):
+    try:
+        return unescape_string_literal(name)
+    except ValueError:
+        return Variable(name).resolve(context)
+    except TypeError:
+        return name
+
+
+class GetNavigationLinks(Node):
+    def __init__(self, *args):
+        pass
+        #self.name_var = Variable(args[0])
+        #if len(args)>1:
+        #    #Process view arguments
+        #    self.args = [Variable(a) for a in args[1].split(',')]
+        #else:
+        #    self.args = []
+
+    def render(self, context):
+        context['object_navigation_links'] = _get_object_navigation_links(context)
+        return ''
+
+
+@register.tag
+def get_object_navigation_links(parser, token):
+    #args = token.split_contents()
+    return GetNavigationLinks()#*args[1:])
+    
+    
+def object_navigation_template(context):
+    return {
+        'horizontal':True,
+        'object_navigation_links':_get_object_navigation_links(context)
+    }
+    return new_context
+register.inclusion_tag('generic_navigation.html', takes_context=True)(object_navigation_template)
+ 
