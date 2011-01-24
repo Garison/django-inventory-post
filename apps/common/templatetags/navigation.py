@@ -115,6 +115,26 @@ def resolve_to_name(path, urlconf=None):
 def resolve_url_name(value):
     return resolve_to_name(value)
 
+def resolve_arguments(context, src_args):
+    args = []
+    kwargs = {}
+    if type(src_args) == type([]):
+        for i in src_args:
+            val = resolve_template_variable(i, context)
+            if val:
+                args.append(val)
+    elif type(src_args) == type({}):
+        for key, value in src_args.items():
+            val = resolve_template_variable(value, context)
+            if val:
+                kwargs[key] = val
+    else:
+        val = resolve_template_variable(src_args, context)
+        if val:
+            args.append(val)    
+
+    return args, kwargs
+
 
 def _get_object_navigation_links(context):
     current_path = Variable('request').resolve(context).META['PATH_INFO']
@@ -133,24 +153,29 @@ def _get_object_navigation_links(context):
                 for link in links:
                     if 'view' in link:
                         link['active'] = link['view'] == current_view
-                        args = []
-                        kwargs = {}
-                        if 'args' in link:
-                            link_args = link['args']
-                            if type(link_args) == type([]):
-                                for i in link_args:
-                                    val = resolve_template_variable(i, context)
-                                    if val:
-                                        args.append(val)
-                            elif type(link_args) == type({}):
-                                for key, value in link_args.items():
-                                    val = resolve_template_variable(value, context)
-                                    if val:
-                                        kwargs[key] = val
-                            else:
-                                val = resolve_template_variable(link_args, context)
+                        args, kwargs = resolve_arguments(context, link.get('args', {}))
+                        #args = []
+                        #kwargs = {}
+                        #if 'args' in link:
+                        #    args, kwargs = resolve_arguments(context, link.get('args'), {})
+                        """
+                        link_args = link['args']
+                        if type(link_args) == type([]):
+                            for i in link_args:
+                                val = resolve_template_variable(i, context)
                                 if val:
                                     args.append(val)
+                        elif type(link_args) == type({}):
+                            for key, value in link_args.items():
+                                val = resolve_template_variable(value, context)
+                                if val:
+                                    kwargs[key] = val
+                        else:
+                            val = resolve_template_variable(link_args, context)
+                            if val:
+                                args.append(val)
+                        """
+                            
                         try:
                             if kwargs:
                                 link['url'] = reverse(link['view'], kwargs=kwargs)
