@@ -15,19 +15,6 @@
 <div class="inner">
   <form action="#" class="form">
     <table class="table">
-        {% if create_view %}
-        <tfoot>
-            <tr>
-                <th colspan='15'>
-                    <div class="actions-bar wat-cf">
-                        <div class="pagination">
-                            <a href="{% dynurl create_view %}">{% trans "Create new" %}</a>
-                        </div>
-                    </div>
-                </th>
-            </tr>
-        </tfoot>
-        {% endif %}
     <tbody>
       <tr>
         <th>{% trans 'Identifier' %}</th>
