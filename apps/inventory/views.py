@@ -14,12 +14,10 @@ from generic_views.views import generic_assign_remove, generic_list
 from photos.views import generic_photos
 
 from assets.models import Person, Item, ItemGroup
-#import assets
 
 from models import ItemTemplate, Inventory, \
                    InventoryTransaction, Supplier
 
-#from inventory import template_record_links, \
 from inventory import location_filter
 
 
@@ -80,7 +78,6 @@ def template_items(request, object_id):
         extra_context=dict(
             title = '%s: %s' % (_(u"assets that use the template"), template),
             create_view = 'item_create',
-            #record_links=assets.asset_record_links			
         ),
     )
 
@@ -100,7 +97,7 @@ def inventory_current(request, object_id):
         'object_list':supplies_list,
         'extra_columns':[{'name':_(u'quantity'),'attribute':'qty'}],
         'main_object':'item_template',
-        'title':_(u'current balances'),
+        'title':_(u'current balances for inventory: %s') % inventory,
     },
     context_instance=RequestContext(request))
 

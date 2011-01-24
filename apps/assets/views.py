@@ -15,7 +15,6 @@ from generic_views.views import generic_assign_remove, generic_list
 from inventory import location_filter
 
 from models import Person, Item, ItemGroup, State, ItemState
-#from assets import person_record_links, asset_record_links
 
 
 def person_assign_remove_item(request, object_id):

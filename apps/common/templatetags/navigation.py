@@ -113,7 +113,8 @@ def resolve_url_name(value):
 
 
 def _get_object_navigation_links(context):
-    current_view = resolve_to_name(Variable('request').resolve(context).META['PATH_INFO'])#.get_full_path())
+    current_path = Variable('request').resolve(context).META['PATH_INFO']
+    current_view = resolve_to_name(current_path)#.get_full_path())
     context_links = []    
     try:
         object_name = Variable('object_name').resolve(context)
@@ -154,6 +155,11 @@ def _get_object_navigation_links(context):
                         except NoReverseMatch, err:
                             link['url'] = '#'
                             link['error'] = err#"ERR: %s, %s, %s" % (link['view'], args, kwargs)
+                    elif 'url' in link:
+                        link['active'] = link['url'] == current_path
+                    else:
+                        link['active'] = False
+                                       
 
                     context_links.append(link)
                     

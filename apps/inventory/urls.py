@@ -8,10 +8,6 @@ from generic_views.views import generic_assign_remove, \
 
 from photos.views import generic_photos
 
-#from inventory import template_record_links, inventory_links, \
-#                      inventory_transaction_links, \
-#                      location_filter, location_links, \
-#                      suppliers_record_links
 from inventory import location_filter
 
 from models import ItemTemplate, InventoryTransaction, \
