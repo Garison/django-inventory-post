@@ -16,7 +16,7 @@ object_navigation = {
     Supplier:[inventory.supplier_update, inventory.supplier_delete, inventory.supplier_assign_itemtemplate],
     Inventory:[inventory.inventory_balances, inventory.inventory_update, inventory.inventory_delete],
     InventoryTransaction:[inventory.inventory_transaction_update, inventory.inventory_transaction_delete],
-    Location:[inventory.location_update, inventory.location_delete]
+    Location:[inventory.location_update, inventory.location_delete],
 }
 
     

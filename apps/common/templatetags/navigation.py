@@ -1,3 +1,5 @@
+import types
+
 from django.conf import settings
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern, Resolver404, get_resolver
@@ -124,8 +126,8 @@ def _get_object_navigation_links(context):
     try:
         object = Variable(object_name).resolve(context)
 
-        for id, links in object_navigation.items():
-            if isinstance(object, id):
+        for src, links in object_navigation.items():
+            if isinstance(object, src):
                 for link in links:
                     if 'view' in link:
                         link['active'] = link['view'] == current_view
@@ -159,8 +161,7 @@ def _get_object_navigation_links(context):
                         link['active'] = link['url'] == current_path
                     else:
                         link['active'] = False
-                                       
-
+                    
                     context_links.append(link)
                     
                     
