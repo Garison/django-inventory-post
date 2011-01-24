@@ -7,7 +7,9 @@ from django.template import TemplateSyntaxError, Library, \
                             VariableDoesNotExist, Node, Variable
 from django.utils.text import unescape_string_literal
 
-from main import menu_navigation, object_navigation
+from common.api import object_navigation
+#TODO: move this to common app
+from main import menu_navigation
 
 register = Library()
 

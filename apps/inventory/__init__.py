@@ -1,6 +1,9 @@
 from django.utils.translation import ugettext_lazy as _
 
-from models import Location
+from models import Location, ItemTemplate, Inventory, InventoryTransaction, Supplier
+
+from common.api import register_links
+
 import assets
 
 
@@ -37,22 +40,14 @@ template_assign_suppliers = {'text':_(u'assign suppliers'), 'view':'template_ass
 
 
 template_menu_links = [template_list, template_create, template_orphan_list]
-
-#template_record_links = [template_edit, template_delete, template_photos,
-#    template_assets, template_assign_supplies, template_assign_suppliers]
-
 inventory_menu_links = [
     inventory_list, inventory_create, inventory_transaction_list, inventory_transaction_create
 ]
 
-#inventory_links = [inventory_balances, inventory_edit, inventory_delete]
-
-#inventory_transaction_links = [inventory_transaction_edit, inventory_transaction_delete]
-
 location_filter = {'name':'location', 'queryset':Location.objects.all(), 'destination':'location'}
 
-#location_links = [location_edit, location_delete]
-
-#suppliers_record_links = [
-#    supplier_delete, supplier_update, supplier_assign_itemtemplate
-#]
+register_links(ItemTemplate, [template_update, template_delete, template_photos, template_assets, template_assign_supplies, template_assign_suppliers])
+register_links(Supplier, [supplier_update, supplier_delete, supplier_assign_itemtemplate])
+register_links(Inventory, [inventory_balances, inventory_update, inventory_delete])
+register_links(InventoryTransaction, [inventory_transaction_update, inventory_transaction_delete])
+register_links(Location, [location_update, location_delete])
