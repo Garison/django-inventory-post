@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 17:33-0400\n"
-"PO-Revision-Date: 2011-01-09 17:34\n"
+"POT-Creation-Date: 2011-01-24 16:46-0400\n"
+"PO-Revision-Date: 2011-01-24 16:48\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,51 +19,56 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: views.py:144
+#: forms.py:52
+msgid "None"
+msgstr "Ninguno"
+
+#: views.py:105
 #, python-format
 msgid "The selected %s were added."
 msgstr "Los %s seleccionados fueron agregados."
 
-#: views.py:150
+#: views.py:111
 #, python-format
 msgid "The selected %s were removed."
 msgstr "Los %s seleccionados fueron removidos."
 
-#: templates/filter_form_subtemplate.html:6
-msgid "Filter list by"
-msgstr "Filtrar la lista por"
+#: templates/calculate_form_title.html:6
+#, python-format
+msgid "Details for: %(object)s"
+msgstr "Detalles para: %(object)s "
 
-#: templates/filter_form_subtemplate.html:12 templates/generic_form.html:20
-msgid "required"
-msgstr "requerido"
+#: templates/calculate_form_title.html:9
+msgid "Edit"
+msgstr "Editar"
 
-#: templates/filter_form_subtemplate.html:21
-msgid "Submit"
-msgstr "Enviar"
+#: templates/calculate_form_title.html:11
+msgid "Create"
+msgstr "Create"
 
 #: templates/generic_assign_remove.html:3
 #, python-format
 msgid "Assign %(title)s %(object)s"
 msgstr "Asignar %(title)s %(object)s"
 
-#: templates/generic_confirm.html:3 templates/generic_confirm.html.py:10
+#: templates/generic_confirm.html:3 templates/generic_confirm.html.py:16
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: templates/generic_confirm.html:8
+#: templates/generic_confirm.html:14
 msgid "Confirm delete"
 msgstr "Confirmar eliminación"
 
-#: templates/generic_confirm.html:19
+#: templates/generic_confirm.html:25
 #, python-format
 msgid "Are you sure you wish to delete: %(object)s?"
 msgstr "¿Está seguro que desea eliminar: %(object)s?"
 
-#: templates/generic_confirm.html:27
+#: templates/generic_confirm.html:33
 msgid "Yes"
 msgstr "Sí"
 
-#: templates/generic_confirm.html:30
+#: templates/generic_confirm.html:38
 msgid "No"
 msgstr "No"
 
@@ -72,44 +77,55 @@ msgstr "No"
 msgid "Details for %(title)s %(object)s"
 msgstr "Detalles para %(title)s %(object)s"
 
-#: templates/generic_detail.html:27 templates/generic_form.html:4
-#: templates/generic_form.html.py:12 templates/generic_navigation.html:6
-msgid "Create"
-msgstr "Create"
+#: templates/generic_form_instance.html:8
+msgid "required"
+msgstr "requerido"
 
-#: templates/generic_form.html:4
-msgid "Edit"
-msgstr "Editar"
-
-#: templates/generic_form.html:29
+#: templates/generic_form_subtemplate.html:39
 msgid "Save"
 msgstr "Guardar"
 
-#: templates/generic_form.html:33
+#: templates/generic_form_subtemplate.html:39
+msgid "Submit"
+msgstr "Enviar"
+
+#: templates/generic_form_subtemplate.html:43
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: templates/generic_list.html:5
+#: templates/generic_list.html:3
 #, python-format
 msgid "List of %(title)s"
 msgstr "Lista de %(title)s "
 
-#: templates/generic_list.html:17
-msgid "List of"
-msgstr "Lista de"
+#: templates/generic_list_subtemplate.html:9
+#, python-format
+msgid "List of %(title)s (%(start)s - %(end)s out of %(total)s)"
+msgstr "Lista de %(title)s  (%(start)s  - %(end)s de %(total)s)"
 
-#: templates/generic_list.html:27 templates/generic_list_subtemplate.html:13
-msgid "Create new"
-msgstr "Crear nuevo"
+#: templates/generic_list_subtemplate.html:11
+#, python-format
+msgid "List of %(title)s (%(total)s)"
+msgstr "Lista de %(title)s  (%(total)s)"
 
-#: templates/generic_list.html:36 templates/generic_list_subtemplate.html:22
+#: templates/generic_list_subtemplate.html:20
 msgid "Identifier"
 msgstr "Identificador"
 
-#: templates/generic_list.html:55 templates/generic_list_subtemplate.html:45
+#: templates/generic_list_subtemplate.html:48
 #, python-format
 msgid "There are no %(title)s"
 msgstr "No hay %(title)s "
+
+#: templatetags/generic_views_tags.py:13
+msgid "Filter"
+msgstr "Filtro"
+
+#~ msgid "List of"
+#~ msgstr "Lista de"
+
+#~ msgid "Create new"
+#~ msgstr "Crear nuevo"
 
 #~ msgid "Assign %(title)s"
 #~ msgstr "Asignar %(title)s"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-19 01:10-0400\n"
-"PO-Revision-Date: 2011-01-19 01:14\n"
+"POT-Creation-Date: 2011-01-24 16:36-0400\n"
+"PO-Revision-Date: 2011-01-24 16:41\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,67 +19,79 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: __init__.py:3 models.py:18 urls.py:47 urls.py:50
-msgid "states"
-msgstr "estados"
+#: __init__.py:8
+msgid "assets states"
+msgstr "estados de activos"
 
-#: __init__.py:4 __init__.py:13 __init__.py:25 __init__.py:38
-msgid "edit"
-msgstr "editar"
+#: __init__.py:9
+msgid "create new asset state"
+msgstr "crear nuevo estado de activo"
 
-#: __init__.py:5 __init__.py:14 __init__.py:26 __init__.py:39
-msgid "delete"
-msgstr "eliminar"
+#: __init__.py:10
+msgid "edit asset state"
+msgstr "editar estado de activo"
 
 #: __init__.py:11
+msgid "delete asset state"
+msgstr "eliminar estado de activo"
+
+#: __init__.py:13
 msgid "view all people"
 msgstr "ver todas las personas"
 
-#: __init__.py:12
+#: __init__.py:14
 msgid "create new person"
 msgstr "crear nueva persona"
 
-#: __init__.py:15
+#: __init__.py:15 __init__.py:23 __init__.py:31
+msgid "edit"
+msgstr "editar"
+
+#: __init__.py:16 __init__.py:24 __init__.py:32
+msgid "delete"
+msgstr "eliminar"
+
+#: __init__.py:17
 msgid "edit photos"
 msgstr "editar fotos"
 
-#: __init__.py:16
-msgid "assign/remove asset"
-msgstr "asignar/remover activo"
+#: __init__.py:18
+msgid "assign assets"
+msgstr "asignar activos"
 
-#: __init__.py:22
+#: __init__.py:20
 msgid "view all assets"
 msgstr "ver todos los activos"
 
-#: __init__.py:23
+#: __init__.py:21
 msgid "create new asset"
 msgstr "crear nuevo activo"
 
-#: __init__.py:24
-msgid "orphans assets"
+#: __init__.py:22 urls.py:32
+msgid "orphan assets"
 msgstr "activos huérfanos"
 
-#: __init__.py:27
+#: __init__.py:25
 msgid "photos"
 msgstr "fotos"
 
-#: __init__.py:28
-msgid "assign/remove people"
-msgstr "asignar/remover personas"
+#: __init__.py:26
+msgid "assign people"
+msgstr "asignar personas"
 
-#: __init__.py:29
+#: __init__.py:27
 msgid "template"
 msgstr "plantilla"
 
-#: __init__.py:36
+#: __init__.py:29
 msgid "view all groups"
 msgstr "ver todos los grupos"
 
-#: __init__.py:37
+#: __init__.py:30
 msgid "create group"
 msgstr "crear grupo"
 
-#: models.py:13 models.py:106
+#: models.py:13 models.py:102
 msgid "name"
 msgstr "nombre"
 
@@ -91,11 +103,15 @@ msgstr "exclusivo"
 msgid "state"
 msgstr "estado"
 
+#: models.py:18 models.py:150 urls.py:45 urls.py:48
+msgid "states"
+msgstr "estados"
+
 #: models.py:21
 msgid "inclusive"
 msgstr "inclusivo"
 
-#: models.py:34 models.py:107
+#: models.py:34 models.py:103
 msgid "item"
 msgstr "activo"
 
@@ -132,7 +148,7 @@ msgstr "notas"
 msgid "serial number"
 msgstr "número de serie"
 
-#: models.py:57 models.py:127
+#: models.py:57 models.py:123
 msgid "location"
 msgstr "localización"
 
@@ -140,157 +156,160 @@ msgstr "localización"
 msgid "asset"
 msgstr "activo"
 
-#: models.py:63 urls.py:33 views.py:46 views.py:184
+#: models.py:63 models.py:151 urls.py:33 views.py:33 views.py:138
 msgid "assets"
 msgstr "activos"
 
-#: models.py:111 urls.py:45
+#: models.py:107 urls.py:43
 msgid "item group"
 msgstr "grupo de activos"
 
-#: models.py:112 urls.py:41
+#: models.py:108 urls.py:39
 msgid "item groups"
 msgstr "grupos de activos"
 
-#: models.py:123
+#: models.py:119
 msgid "last name"
 msgstr "apellido paterno"
 
-#: models.py:124
+#: models.py:120
 msgid "second last name"
 msgstr "apellido materno"
 
-#: models.py:125
+#: models.py:121
 msgid "first name"
 msgstr "nombre"
 
-#: models.py:126
+#: models.py:122
 msgid "second name or initial"
 msgstr "segundo nombre"
 
-#: models.py:128
+#: models.py:124
 msgid "assigned assets"
 msgstr "activos asignados"
 
-#: models.py:132 urls.py:25
+#: models.py:128 urls.py:25
 msgid "person"
 msgstr "persona"
 
-#: models.py:133 urls.py:22 views.py:64
+#: models.py:129 models.py:153 urls.py:22 views.py:51
 msgid "people"
 msgstr "personas"
 
-#: urls.py:32
-msgid "orphan assets"
-msgstr "activos huérfanos"
+#: models.py:152
+msgid "asset groups"
+msgstr "grupos de activos"
 
 #: urls.py:34
 msgid "Assigned to:"
 msgstr "Assignado a:"
 
-#: views.py:38
+#: views.py:25
 #, python-format
 msgid "Assign assets to the person: <a href=\"%(url)s\">%(obj)s</a>"
-msgstr ""
+msgstr "Asignar activos a la persona: <a href=\"%(url)s\">%(obj)s</a>"
 
-#: views.py:44 views.py:182
+#: views.py:31 views.py:136
 msgid "Unassigned assets"
 msgstr "Activos sin asignar"
 
-#: views.py:45 views.py:183
+#: views.py:32 views.py:137
 msgid "Assigned assets"
 msgstr "Activos asignados"
 
-#: views.py:56
+#: views.py:43
 #, python-format
 msgid "Assign people to the asset: <a href=\"%(url)s\">%(obj)s</a>"
-msgstr ""
+msgstr "Asignar personas a los activos: <a href=\"%(url)s\">%(obj)s</a>"
 
-#: views.py:62
+#: views.py:49
 msgid "People that don't have this asset"
 msgstr "Personas que no tienen este activo"
 
-#: views.py:63
+#: views.py:50
 msgid "People that have this asset"
 msgstr "Personas que tienen este activo"
 
-#: views.py:73
+#: views.py:60
 #, python-format
 msgid "This asset has already been marked as '%s'."
 msgstr "Este activo ya ha sido marcado como '%s'."
 
-#: views.py:80
+#: views.py:67
 #, python-format
 msgid "Are you sure you wish to mark this asset as '%s'?"
 msgstr "¿Esta seguro que desea marcar el activo como '%s'?"
 
-#: views.py:84
+#: views.py:71
 msgid "Any other states this asset may be marked as, will be cleared."
 msgstr ""
 
-#: views.py:94
+#: views.py:81
 #, python-format
 msgid "This asset has already been exclusively marked as '%s'.  Clear this state first."
-msgstr ""
+msgstr "Este activo ha sido exclusivamente marcado como '%s'. Anule este estado estado."
 
-#: views.py:101
+#: views.py:88
 #, python-format
 msgid "The asset has been marked as '%s'."
 msgstr "El activo ha sido marcado como '%s'."
 
-#: views.py:116
+#: views.py:103
 #, python-format
 msgid "This asset is not marked as '%s'"
 msgstr "El activo no esta marcado como '%s'"
 
-#: views.py:122
+#: views.py:109
 #, python-format
 msgid "Are you sure you wish to unmark this asset as '%s'?"
-msgstr ""
+msgstr "¿Está seguro de que desea anular la marca de este activo como de '%s'?"
 
-#: views.py:128
+#: views.py:115
 #, python-format
 msgid "The asset has been unmarked as '%s'."
-msgstr ""
+msgstr "Se ha anulado la marca de '%s'."
+
+#: views.py:117
+#, python-format
+msgid "Unable to unmark this asset as '%s'"
+msgstr "No se puede anular la marca de este activo como '%s'"
 
 #: views.py:130
 #, python-format
-msgid "Unable to unmark this asset as '%s'"
-msgstr ""
-
-#: views.py:143
-msgid "There are no asset states."
-msgstr ""
-
-#: views.py:164
-#, python-format
-msgid "assets marked as '%s'"
-msgstr "activos marcados como '%s'"
-
-#: views.py:176
-#, python-format
 msgid "Assign assets to the group: <a href=\"%(url)s\">%(obj)s</a>"
-msgstr ""
+msgstr "Asignar activos al grupo: <a href=\"%(url)s\">%(obj)s</a>"
 
-#: templates/state_subtemplate.html:6
+#: templates/state_subtemplate.html:4
 msgid "Item states"
 msgstr "Estados de activos"
 
-#: templates/state_subtemplate.html:12
-msgid "Identifier"
-msgstr "Identificador"
-
-#: templates/state_subtemplate.html:25
+#: templates/state_subtemplate.html:15
 msgid "Unmark"
-msgstr ""
+msgstr "Desmarcar"
 
-#: templates/state_subtemplate.html:27
+#: templates/state_subtemplate.html:17
 msgid "Mark"
-msgstr ""
+msgstr "Marcar"
 
-#: templates/state_subtemplate.html:33
+#: templates/state_subtemplate.html:23
 msgid "There are no states defined."
 msgstr "No hay estados definidos."
+
+#: templates/state_subtemplate.html:37
+msgid "Submit"
+msgstr "Enviar"
+
+#~ msgid "assign/remove asset"
+#~ msgstr "asignar/remover activo"
+
+#~ msgid "orphans assets"
+#~ msgstr "activos huérfanos"
+
+#~ msgid "assets marked as '%s'"
+#~ msgstr "activos marcados como '%s'"
+
+#~ msgid "Identifier"
+#~ msgstr "Identificador"
 
 #~ msgid "States"
 #~ msgstr "Estados"

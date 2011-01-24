@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 17:34-0400\n"
-"PO-Revision-Date: 2011-01-09 17:34\n"
+"POT-Creation-Date: 2011-01-24 16:45-0400\n"
+"PO-Revision-Date: 2011-01-24 16:45\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,38 @@ msgstr ""
 "Language: \n"
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:11
+msgid "home"
+msgstr "inicio"
+
+#: __init__.py:12
+msgid "templates"
+msgstr "plantillas"
+
+#: __init__.py:13
+msgid "assets"
+msgstr "activos"
+
+#: __init__.py:16
+msgid "inventories"
+msgstr "inventarios"
+
+#: __init__.py:17
+msgid "tools"
+msgstr "herramientas"
+
+#: __init__.py:19
+msgid "import"
+msgstr "importación"
+
+#: __init__.py:21
+msgid "search"
+msgstr "búsqueda"
+
+#: __init__.py:22
+msgid "about"
+msgstr "acerca"
 
 #: templates/about.html:4
 msgid "About this program"
@@ -31,37 +63,49 @@ msgstr "Un sistema de manejo de inventario y activos basado en Django"
 msgid "Copyright 2007 Roberto Rosario"
 msgstr "Copyright 2007 Roberto Rosario"
 
-#: templates/base-plain.html:28 templates/base.html:31
+#: templates/base.html:36
 msgid "Please wait..."
 msgstr "Por favor espere..."
 
-#: templates/base-plain.html:52
-msgid "ok"
-msgstr "ok"
-
-#: templates/base.html:54
+#: templates/base.html:66
 msgid "User"
 msgstr "Usuario"
 
-#: templates/base.html:56
+#: templates/base.html:68
 msgid "Anonymous"
 msgstr "Anónimo"
 
-#: templates/base.html:59
+#: templates/base.html:71
 msgid "New password"
 msgstr "Nueva contraseña"
 
-#: templates/base.html:69
+#: templates/base.html:81
 msgid "Go"
-msgstr ""
+msgstr "Ir"
 
-#: templates/base.html:72
+#: templates/base.html:84
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: templates/base.html:72
+#: templates/base.html:84
 msgid "Logout"
 msgstr "Desconectarse"
+
+#: templates/base.html:134
+msgid "Available actions"
+msgstr "Acciones disponibles"
+
+#: templates/base.html:146
+#, python-format
+msgid "Actions for: %(object)s"
+msgstr "Acciones para: %(object)s "
+
+#: templates/base.html:148
+msgid "Actions"
+msgstr "Acciones"
+
+#~ msgid "ok"
+#~ msgstr "ok"
 
 #~ msgid "Loading"
 #~ msgstr "Cargando"
@@ -71,9 +115,6 @@ msgstr "Desconectarse"
 
 #~ msgid "Spanish"
 #~ msgstr "Español"
-
-#~ msgid "Search"
-#~ msgstr "Buscar"
 
 #~ msgid "Home"
 #~ msgstr "Inicio"
@@ -87,14 +128,8 @@ msgstr "Desconectarse"
 #~ msgid "Create new"
 #~ msgstr "Crear nuevo"
 
-#~ msgid "Templates"
-#~ msgstr "Plantillas"
-
 #~ msgid "Orphan"
 #~ msgstr "Huérfanos"
-
-#~ msgid "Assets"
-#~ msgstr "Activos"
 
 #~ msgid "Retired"
 #~ msgstr "Decomisados"
@@ -105,20 +140,8 @@ msgstr "Desconectarse"
 #~ msgid "Groups"
 #~ msgstr "Grupos"
 
-#~ msgid "Inventory"
-#~ msgstr "Inventario"
-
 #~ msgid "Transactions"
 #~ msgstr "Transacciones"
 
-#~ msgid "Tools"
-#~ msgstr "Herramientas"
-
-#~ msgid "Locations"
-#~ msgstr "Localizaciones"
-
 #~ msgid "Settings"
 #~ msgstr "Configuración"
-
-#~ msgid "About"
-#~ msgstr "Acerca"

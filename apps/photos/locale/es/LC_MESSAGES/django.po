@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-05 14:38-0400\n"
-"PO-Revision-Date: 2011-01-05 14:41\n"
+"POT-Creation-Date: 2011-01-24 16:46-0400\n"
+"PO-Revision-Date: 2011-01-24 16:46\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,56 +19,61 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:15
+#: models.py:20
 msgid "Title"
 msgstr "Título"
 
-#: models.py:16
-msgid "Photo"
-msgstr "Foto"
-
-#: models.py:19
+#: models.py:21
 msgid "Main photo?"
 msgstr "¿Foto principal?"
 
-#: models.py:70
+#: models.py:26
 msgid "photo"
 msgstr "foto"
 
-#: views.py:27
+#: models.py:27
+msgid "photos"
+msgstr "fotos"
+
+#: views.py:33
 msgid "The main photo has been changed."
 msgstr "La fotografía principal ha sido cambiado."
 
-#: views.py:36
+#: views.py:42
 msgid "The photo was deleted successfully.  The remaining photo has been selected as the main photo."
-msgstr ""
+msgstr "La foto se ha eliminado con éxito. La foto restante ha sido seleccionada como la foto principal."
 
-#: views.py:38
+#: views.py:44
 msgid "The photo was deleted successfully.  You have deleted the main photo, make sure you mark another one as the main photo."
-msgstr ""
+msgstr "La foto se ha eliminado con éxito. Ha eliminado la foto principal, asegúrese de marcar otro como la foto principal."
 
-#: views.py:40
+#: views.py:46
 msgid "The photo was deleted successfully."
 msgstr "La foto se ha eliminado éxitosamente."
 
-#: views.py:54
+#: views.py:58
 msgid "The photo is too big."
 msgstr "La foto es demasiado grande."
 
-#: views.py:70
+#: views.py:75
 msgid "The photo was added."
 msgstr "La foto se añadió."
 
-#: templates/generic_photos_subtemplate.html:11 templates/photos.html:33
+#: views.py:87
+msgid "Upload new photo"
+msgstr "Subir nueva foto"
+
+#: templates/generic_photos_subtemplate.html:14
+#: templates/generic_photos_subtemplate.html:28
 msgid "Photos"
 msgstr "Fotos"
 
-#: templates/generic_photos_subtemplate.html:44
+#: templates/generic_photos_subtemplate.html:62
 #, python-format
 msgid "There are no %(title)s "
-msgstr ""
+msgstr "No hay %(title)s "
 
-#: templates/generic_photos_subtemplate.html:46
+#: templates/generic_photos_subtemplate.html:64
 msgid "There are no photos"
 msgstr "No hay fotos"
 
@@ -76,38 +81,36 @@ msgstr "No hay fotos"
 msgid "Please wait..."
 msgstr "Por favor espere..."
 
-#: templates/photos.html:20 templates/photos.html.py:21
+#: templates/photos.html:20
 msgid "Edit photos"
 msgstr "Editar fotos"
 
-#: templates/photos.html:25
+#: templates/photos.html:27
 msgid "Photos for"
 msgstr "Fotos para"
 
-#: templates/photos.html:25
+#: templates/photos.html:27
 msgid "Maximum of"
 msgstr "Máximo de"
 
-#: templates/photos.html:52
+#: templates/photos.html:53
 msgid "Main photo"
 msgstr "Foto principal"
 
-#: templates/photos.html:53
+#: templates/photos.html:54
 msgid "Delete photo"
 msgstr "Eliminar foto"
 
-#: templates/photos.html:70
+#: templates/photos.html:68
 msgid "There are no photos."
 msgstr "No hay fotos."
 
-#: templates/photos.html:84
+#: templates/photos.html:74
 msgid "Uploading photo..."
 msgstr "Subiendo foto..."
 
-#: templates/photos.html:94
-msgid "Upload photos"
-msgstr "Subir fotos"
+#~ msgid "Photo"
+#~ msgstr "Foto"
 
-#: templates/photos.html:101
-msgid "Submit"
-msgstr "Enviar"
+#~ msgid "Submit"
+#~ msgstr "Enviar"
