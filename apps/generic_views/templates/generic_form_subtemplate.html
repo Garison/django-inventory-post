@@ -1,16 +1,20 @@
 {% load i18n %}
+
 {% if side_bar %}
+    <div class="block">
     <h3>
         {% include 'calculate_form_title.html' %}
     </h3>
-       <div class="content">
+    <div class="content">
+        <p>
 {% else %}
+    <div class="content">    
     <h2 class="title">
         {% include 'calculate_form_title.html' %}
     </h2>
+    <div class="inner">
 {% endif %}
-
-<div class="inner">
+    
     {% if form.is_multipart %}
         <form enctype="multipart/form-data" method="{{ submit_method|default:'post' }}" action="" class="form">
     {% else %}
@@ -46,9 +50,10 @@
         </div>
         {% endif %}
     </form>
-</div>
+    {% if sidebar %}
+        </p></div></div>
+    {% else %}
+        </div></div>
+    {% endif %}
 
-{% if side_bar %}
-    </div>
-{% endif %}
     

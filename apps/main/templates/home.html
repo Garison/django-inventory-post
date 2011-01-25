@@ -2,8 +2,14 @@
 {% load project_tags %}
 {% load i18n %}
 {% block content %}
-    <div class="block">
+
         <div class='tc'><h1>{% project_name %}</h1></div>
         <div class='tc'><img src='{{ MEDIA_URL }}images/1269206_36297494-resized.jpg' /></div>
+{% endblock %}
+{% block footer %}
+    <div id="footer">
+        <div class="block">
+            <p>Copyright &copy; 2007 Roberto Rosario.</p>
+        </div>
     </div>
 {% endblock %}
