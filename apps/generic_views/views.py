@@ -3,7 +3,8 @@ import urllib
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.contrib import messages
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
@@ -126,9 +127,12 @@ def generic_assign_remove(request, title, obj, left_list_qryset, left_list_title
 def generic_detail(request, object_id, form_class, queryset, title=None, extra_context={}, extra_fields=[]):
     #if isinstance(form_class, DetailForm):
     try:
-        form = form_class(instance=queryset.filter(id=object_id)[0], extra_fields=extra_fields)
-    except:
-        form = form_class(instance=queryset.filter(id=object_id)[0])
+        if extra_fields:
+            form = form_class(instance=queryset.get(id=object_id), extra_fields=extra_fields)
+        else:
+            form = form_class(instance=queryset.get(id=object_id))
+    except ObjectDoesNotExist:
+        raise Http404
     
     extra_context['form'] = form
     extra_context['title'] = title
