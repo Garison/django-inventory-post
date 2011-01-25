@@ -21,16 +21,6 @@ Features
 * Group assets, inventories or user per locations.
 
 
-Installation
----
-
-* Clone latest version
-* Change to to directory, execute:
-    ./manage.py syncdb 
-    ./manage.py runserver
-* Point your browser to http://127.0.0.1:8000 and login as the admin user
-
-
 Author
 ------
 

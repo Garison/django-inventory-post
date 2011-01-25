@@ -1,1 +1,19 @@
-
+- Make sure you have apache installed and running.
+- change into root
+- apt-get install libjpeg-dev libpng-dev -y
+- virtualenv --no-site-packages /usr/share/django-inventory
+- cd /usr/share/django-inventory
+- git clone https://github.com/rosarior/django-inventory.git
+- source /usr/share/django-inventory/bin/activate
+- pip install -r django-inventory/requirements/production.txt
+- cd /usr/share/django-inventory/django-inventory/
+- edit settings.py and configure it to your liking:
+    ADMINS, TIMEZONE
+- ./manage.py syncdb and create an superuser
+- edit /etc/hosts file and create a new host called django-inventory and
+  set it to your IP address
+  ie: django-inventory  127.0.0.1
+- cd /etc/apache2/sites-enabled/
+- ln -s /usr/share/django-inventory/django-inventory/apache/project.site 999-django-inventory
+- restart apache  (/etc/init.d/apache restart)
+- open the url http://django-inventory in a browser
