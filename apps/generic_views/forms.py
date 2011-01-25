@@ -71,13 +71,13 @@ class DetailForm(forms.ModelForm):
                     attrs=field.widget.attrs,
                     queryset=getattr(field, 'queryset', None),
                 )
-            if isinstance(field.widget, forms.widgets.Select):
+                self.fields[field_name].help_text=''
+            elif isinstance(field.widget, forms.widgets.Select):
                 self.fields[field_name].widget = DetailSelectMultiple(
                     choices=field.widget.choices,
                     attrs=field.widget.attrs,
                     queryset=getattr(field, 'queryset', None),
                 )
-                
                 self.fields[field_name].help_text=''
 
 

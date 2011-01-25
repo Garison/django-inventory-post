@@ -36,3 +36,7 @@ class ItemGroupForm(forms.ModelForm):
     class Meta:
         model = ItemGroup
         exclude = ('items',)
+
+class ItemGroupForm_view(DetailForm):
+    class Meta:
+        model = ItemGroup

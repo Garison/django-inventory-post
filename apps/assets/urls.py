@@ -12,7 +12,7 @@ from inventory import location_filter
 
 from assets import state_filter
 from models import Item, ItemGroup, Person, State
-from forms import ItemForm, ItemForm_view, ItemGroupForm, PersonForm, PersonForm_view
+from forms import ItemForm, ItemForm_view, ItemGroupForm, ItemGroupForm_view, PersonForm, PersonForm_view
 from conf import settings as asset_settings                             
 
                                 
@@ -38,7 +38,7 @@ urlpatterns = patterns('assets.views',
 
     url(r'^group/list/$', generic_list, dict({'queryset':ItemGroup.objects.all()}, extra_context=dict(title=_(u'item groups'))), 'group_list'),
     url(r'^group/create/$', create_object, {'form_class':ItemGroupForm, 'template_name':'generic_form.html'}, 'group_create'),
-    url(r'^group/(?P<object_id>\d+)/$', generic_detail, dict(form_class=ItemGroupForm, queryset=ItemGroup.objects.all()), 'group_view'),
+    url(r'^group/(?P<object_id>\d+)/$', generic_detail, dict(form_class=ItemGroupForm_view, queryset=ItemGroup.objects.all()), 'group_view'),
     url(r'^group/(?P<object_id>\d+)/update/$', 'group_assign_remove_item', (), name='group_update'),
     url(r'^group/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':ItemGroup}, post_delete_redirect="group_list", extra_context=dict(title=_(u'item group'))), 'group_delete'),
 
