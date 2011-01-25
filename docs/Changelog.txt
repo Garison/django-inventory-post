@@ -1,0 +1,20 @@
+* Updated the project to work with the latest Django version (1.2.4).
+* Eliminated the CustomUser model.
+* New Location object and elimination of regional, section, dept fields.
+* Eliminated supplies model and Item templates can be defined as supplies
+  for other item templates instead.
+* Django-Photologue app is now used to handle photo's thumbnailing and
+  such, can be configure from the admin interface.
+* The Django messages system is now used instead of a custom one.
+* Eliminated the hardcoded inrepair/retired asset states and instead
+  implement user defined item states
+* New themable user interface.
+* Massive HTML cleanup.
+* FamFamFam css icon sprites are now used instead of individual icons.
+* A new Suppliers model tied to Item Templates to list supplier for 
+  differente types of items.
+* The project is now modular splitted into different apps.
+* Each apps has it's own settings.py file to handle settings dependency
+  in a more congruent manner.
+* System wide smart search capability.
+* CSV data import support.
