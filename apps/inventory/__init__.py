@@ -12,6 +12,7 @@ inventory_create = {'text':_('create new inventory'), 'view':'inventory_create',
 inventory_balances = {'text':_(u'current balances'), 'view':'inventory_current', 'args':'object.id', 'famfam':'book_addresses'}
 inventory_update = {'text':_(u'edit'), 'view':'inventory_update', 'args':'object.id', 'famfam':'package_green'}
 inventory_delete = {'text':_(u'delete'), 'view':'inventory_delete', 'args':'object.id', 'famfam':'package_delete'}
+inventory_transactions = {'text':_(u'inventory transactions'), 'view':'inventory_transactions', 'args':'object.id', 'famfam':'book_go'}
 
 inventory_transaction_list = {'text':_('view all transactions'), 'view':'inventory_transaction_list', 'famfam':'book_go'}
 inventory_transaction_create = {'text':_('create new transaction'), 'view':'inventory_transaction_create', 'famfam':'book_add'}
@@ -54,7 +55,8 @@ register_links(['supplier_list', 'supplier_create', 'supplier_update', 'supplier
 register_links(Supplier, [supplier_update, supplier_delete, supplier_assign_itemtemplate])
 
 register_links(['inventory_list', 'inventory_create', 'inventory_current', 'inventory_update', 'inventory_delete'], [inventory_create], menu_name='sidebar')
-register_links(Inventory, [inventory_balances, inventory_update, inventory_delete])
+register_links(Inventory, [inventory_balances, inventory_update, inventory_delete, inventory_transactions])
+register_links('inventory_transactions', [inventory_transaction_create], menu_name='sidebar')
 
 register_links(['inventory_transaction_list', 'inventory_transaction_create', 'inventory_transaction_update', 'inventory_transaction_delete'], [inventory_transaction_create], menu_name='sidebar')
 register_links(InventoryTransaction, [inventory_transaction_update, inventory_transaction_delete])

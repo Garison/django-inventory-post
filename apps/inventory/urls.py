@@ -38,6 +38,7 @@ urlpatterns = patterns('inventory.views',
     url(r'^inventory/(?P<object_id>\d+)/update/$', update_object, {'form_class':InventoryForm, 'template_name':'generic_form.html'}, 'inventory_update'),
     url(r'^inventory/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Inventory}, post_delete_redirect="inventory_list", extra_context=dict(title=_(u'inventory'))), 'inventory_delete'),
     url(r'^inventory/(?P<object_id>\d+)/current/$', 'inventory_current', (), 'inventory_current'),
+    url(r'^inventory/(?P<object_id>\d+)/transactions/$', 'inventory_transactions', (), 'inventory_transactions'),
 
     url(r'^transaction/list/$', generic_list, dict({'queryset':InventoryTransaction.objects.all()}, extra_context=dict(title=_(u'transactions'))), 'inventory_transaction_list'),
     url(r'^transaction/create/$', create_object, {'model':InventoryTransaction, 'template_name':'generic_form.html'}, 'inventory_transaction_create'),
