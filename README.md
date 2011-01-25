@@ -21,6 +21,12 @@ Features
 * Group assets, inventories or user per locations.
 
 
+Installation
+---
+
+Check the INSTALL file in the docs folder
+
+
 Author
 ------
 

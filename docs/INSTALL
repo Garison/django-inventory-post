@@ -1,3 +1,5 @@
+Instructions for deploying with apache, Ubuntu Linux
+
 - Make sure you have apache installed and running.
 - change into root
 - apt-get install libjpeg-dev libpng-dev -y
@@ -15,5 +17,7 @@
   ie: django-inventory  127.0.0.1
 - cd /etc/apache2/sites-enabled/
 - ln -s /usr/share/django-inventory/django-inventory/apache/project.site 999-django-inventory
+- chown www-data:www-data /usr/share/django-inventory -R
+- chmod 700 /usr/share/django-inventory -R
 - restart apache  (/etc/init.d/apache restart)
 - open the url http://django-inventory in a browser
