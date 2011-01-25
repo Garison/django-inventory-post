@@ -1,0 +1,87 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="{{ LANGUAGE_CODE }}" />
+
+        <title>{% block html_title %}{% endblock %}</title>
+
+        {% block keywords %}{% endblock %}		
+
+        <link rel="stylesheet" href="{{ MEDIA_URL }}web_theme_media/stylesheets/base.css" type="text/css" media="screen" />
+        <link rel="stylesheet" id="current-theme" href="{{ MEDIA_URL }}web_theme_media/stylesheets/themes/warehouse/style.css" type="text/css" media="screen" />
+        {% block stylesheets %}{% endblock %}
+
+        <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}web_theme_media/javascripts/jquery-1.3.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}web_theme_media/javascripts/jquery.scrollTo.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}web_theme_media/javascripts/jquery.localscroll.js"></script>
+        {% block javascript %}{% endblock %}
+	</head>
+	<body>
+        <div id="container">
+            {% if user.is_anonymous %}
+                <div id="box">
+                    {% block content_plain %}{% endblock %}
+                </div>
+            {% endif %}
+            {% if not user.is_anonymous %}
+                <div id="header">
+                    <h1><a href="{% url home %}">{% block project_name %}{% endblock %}</a></h1>
+                        <div id="user-navigation">
+                            <ul class="wat-cf">
+                                <li><strong>{% trans 'User' %}:</strong>
+                                    {% if user.is_anonymous %}
+                                        {% trans 'Anonymous' %}
+                                    {% else %}
+                                        {{ user }}
+                                        <a href="{% url password_change_view %}">({% trans 'New password' %})</a>
+                                    {% endif %}
+                                </li>
+                                <li>
+                                    <form action="/i18n/setlang/" method="post">{% csrf_token %}
+                                        <select name="language">
+                                            {% for lang in LANGUAGES %}
+                                                <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <input type="submit" value="{% trans 'Go' %}" />
+                                    </form>                                
+                                </li>
+                                <li><a class="logout" href="{% if user.is_anonymous %}{% url login_view %}?next=/{% else %}{% url logout_view %}{% endif %}">{% if user.is_anonymous %}{% trans 'Login' %}{% else %}{% trans 'Logout' %}{% endif %}</a></li>
+                            </ul>
+                        </div>
+                    <div id="main-navigation">
+                        <ul class="wat-cf">
+                            {% block main_navigation %}{% endblock %}
+                        </ul>
+                    </div>
+                </div>
+                <div id="wrapper" class="wat-cf">
+                    <div id="main">
+                        <div class="block" id="block-text">
+                            {% block secondary_navigation %}{% endblock %}
+                            {% if messages %}
+                                <div class="inner">
+                                    <div class="flash">
+                                        {% for message in messages %}
+                                            <div class="message{% if message.tags %}{% if 'success' in message.tags %} notice{% endif %} {{ message.tags }}{% else %} notice{% endif %}">
+                                                <p onclick="$(this).parent().parent().fadeOut(); return false;">{{ message }}</p>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% block content %}{% endblock %}
+                        </div>  
+                        {% block footer %}{% endblock %}
+                    </div> 
+                    <div id="sidebar">
+                        {% block sidebar %}{% endblock %}
+                    </div>                    
+                </div>
+            {% endif %}
+        </div>
+    </body>
+</html>

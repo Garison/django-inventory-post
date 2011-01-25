@@ -1,3 +1,4 @@
+{% extends "web_theme_base.html" %}
 {% load i18n %}
 {% load project_tags %}
 {% load assets_tags %}
@@ -5,6 +6,39 @@
 {% load generic_views_tags %}
 {% load generic_views_helpers %}
 
+{% block html_title %}{% block title %}{% endblock %}{% endblock %}
+
+{% block project_name %}{% project_name %}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/override.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/famfamfam-silk-sprite.css" type="text/css" media="screen" />
+{% endblock %}
+
+{% block main_navigation %}
+    {% main_navigation %}                    
+    {% for link in navigation_main_links %}
+        <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text|capfirst }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}</a></li>
+    {% endfor %}
+{% endblock %}
+
+
+{% block secondary_navigation %}
+        {% main_navigation %}  
+{% if navigation_secondary_links %}
+        <div class="secondary-navigation">
+            <ul class="wat-cf">
+                {% for link in navigation_secondary_links %}
+                    <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text|capfirst }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}</a></li>
+                {% endfor %}     
+            </ul>
+        </div>     
+{% endif %}
+{% endblock %}
+
+
+
+{% comment %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -27,8 +61,7 @@
         <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}skins/pilu-web-app/javascripts/jquery.localscroll.js"></script>
         {% block stylesheets %}{% endblock %}
         
-		{% comment %}<link rel="shortcut icon" type="image/png" href="{{ MEDIA_URL }}images/" />{% endcomment %}
-		<script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}packages/jquery-1.4.2.min.js"></script>
 
 		<script type="text/javascript">
             $(document).ready(function() {
@@ -165,3 +198,4 @@
         </div>
     </body>
 </html>
+{% endcomment %}

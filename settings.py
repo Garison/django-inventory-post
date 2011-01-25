@@ -120,6 +120,7 @@ INSTALLED_APPS = [
     'importer',
     'movements',
     'main',
+    'web_theme',
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = [
