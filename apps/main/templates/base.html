@@ -17,7 +17,7 @@
         {% block keywords %}{% endblock %}		
 
         <link rel="stylesheet" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/base.css" type="text/css" media="screen" />
-        <link rel="stylesheet" id="current-theme" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/themes/warehouse/style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" id="current-theme" href="{{ MEDIA_URL }}skins/pilu-web-app/stylesheets/themes/drastic-dark/style.css" type="text/css" media="screen" />
 
         <link rel="stylesheet" href="{{ MEDIA_URL }}css/override.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ MEDIA_URL }}css/famfamfam-silk-sprite.css" type="text/css" media="screen" />
@@ -50,14 +50,12 @@
 		{% block javascript %}{% endblock %}
 	</head>
 	<body>
-    
         <div id="container">
             {% if user.is_anonymous %}
                 <div id="box">
                     {% block content_plain %}{% endblock %}
                 </div>
             {% endif %}
-        
             {% if not user.is_anonymous %}
                 <div id="header">
                     <h1><a href="{% url home %}">{% project_name %}</a></h1>
@@ -85,7 +83,7 @@
                             </ul>
                         </div>
 
-                        {% main_navigation %}                    
+                    {% main_navigation %}                    
                     <div id="main-navigation">
                         <ul class="wat-cf">
                             {% for link in navigation_main_links %}
@@ -94,80 +92,76 @@
                         </ul>
                     </div>
                 </div>
-                <div class="block" id="block-text">
-                    <div id="wrapper" class="wat-cf">
-                        <div id="main">
-                            <div class="block" id="block-text">                    
-                                {% if navigation_secondary_links %}                            
-                                    <div class="secondary-navigation">
-                                        <ul class="wat-cf">
-                                            {% for link in navigation_secondary_links %}
-                                                <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text|capfirst }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}</a></li>
-                                            {% endfor %}     
-                                            {% block secondary_links %}{% endblock %}                       
-                                        </ul>
-                                    </div>     
-                                {% endif %}
-                                {% block content-nonblock %}{% endblock %}            
-                                {% if messages %}
-                                    <div class="inner">
-                                        <div class="flash">
-                                            {% for message in messages %}
-                                                <div class="message{% if message.tags %}{% if 'success' in message.tags %} notice{% endif %} {{ message.tags }}{% else %} notice{% endif %}">
-                                                    <p onclick="$(this).parent().parent().fadeOut(); return false;">{{ message }}</p>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
+                <div id="wrapper" class="wat-cf">
+                    <div id="main">
+                        <div class="block" id="block-text">                    
+                            {% if navigation_secondary_links %}                            
+                                <div class="secondary-navigation">
+                                    <ul class="wat-cf">
+                                        {% for link in navigation_secondary_links %}
+                                            <li class="{% if link.first %}first {% endif %}{% if link.active %}active{% endif %}"><a href="{{ link.url }}">{{ link.text|capfirst }}{% if link.famfam %}<span class="famfam active famfam-{{ link.famfam|default:'link' }}"></span>{% endif %}</a></li>
+                                        {% endfor %}     
+                                        {% block secondary_links %}{% endblock %}                       
+                                    </ul>
+                                </div>     
+                            {% endif %}
+                            {% if messages %}
+                                <div class="inner">
+                                    <div class="flash">
+                                        {% for message in messages %}
+                                            <div class="message{% if message.tags %}{% if 'success' in message.tags %} notice{% endif %} {{ message.tags }}{% else %} notice{% endif %}">
+                                                <p onclick="$(this).parent().parent().fadeOut(); return false;">{{ message }}</p>
+                                            </div>
+                                        {% endfor %}
                                     </div>
-                                {% endif %}
-                                <div class="content">
-                                    {% block content %}{% endblock %}
-                                </div>
-                            </div>  
-                            {% block footer %}{% endblock %}
-                        </div> 
-                        <div id="sidebar">
-                            {% get_object_navigation_links "sidebar" %}
-
-                            {% if object_navigation_links %}
-                                <div class="block">
-                                <h3>{% trans 'Available actions' %}</h3>
-                                <ul class="navigation">
-                                    {% with 'true' as as_li %}
-                                        {% include 'generic_navigation.html' %}
-                                    {% endwith %}
-                                </ul>
                                 </div>
                             {% endif %}
-                        
-                        
-                            {% get_object_navigation_links %}
-                            {% if object_navigation_links %}
-                                <div class="block">
-                                {% if object %}
-                                    <h3>{% blocktrans %}Actions for: {{ object }}{% endblocktrans %}</h3>
-                                {% else %}
-                                    <h3>}{% trans 'Actions' %}</h3>
-                                {% endif %}
-                                <ul class="navigation">
-                                    {% with 'true' as as_li %}
-                                        {% include 'generic_navigation.html' %}
-                                    {% endwith %}
-                                </ul>
-                                </div>
-                            {% endif %}
+                            {% block content %}{% endblock %}
+                        </div>  
+                        {% block footer %}{% endblock %}
+                    </div> 
+                    <div id="sidebar">
+                        {% get_object_navigation_links "sidebar" %}
 
-
-                            {% if filter_form %}
-                                {% with 'true' as side_bar %}
-                                    {% filter_form %}
+                        {% if object_navigation_links %}
+                            <div class="block">
+                            <h3>{% trans 'Available actions' %}</h3>
+                            <ul class="navigation">
+                                {% with 'true' as as_li %}
+                                    {% include 'generic_navigation.html' %}
                                 {% endwith %}
+                            </ul>
+                            </div>
+                        {% endif %}
+                    
+                    
+                        {% get_object_navigation_links %}
+                        {% if object_navigation_links %}
+                            <div class="block">
+                            {% if object %}
+                                <h3>{% blocktrans %}Actions for: {{ object }}{% endblocktrans %}</h3>
+                            {% else %}
+                                <h3>}{% trans 'Actions' %}</h3>
                             {% endif %}
-                            
-                            {% block sidebar %}{% endblock %}
-                        </div>                    
+                            <ul class="navigation">
+                                {% with 'true' as as_li %}
+                                    {% include 'generic_navigation.html' %}
+                                {% endwith %}
+                            </ul>
+                            </div>
+                        {% endif %}
+
+
+                        {% if filter_form %}
+                            {% with 'true' as side_bar %}
+                                {% filter_form %}
+                            {% endwith %}
+                        {% endif %}
+                        
+                        {% block sidebar %}{% endblock %}
+                    </div>                    
                 </div>
             {% endif %}
         </div>
-	</body>
+    </body>
 </html>

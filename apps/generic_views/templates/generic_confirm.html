@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block title %} :: {% trans 'Confirm' %} {{ title }}{% endblock %}
+
 {% block sidebar %}
     {% for subtemplate in subtemplates %}
         {% include subtemplate %}
     {% endfor %}
-
 {% endblock %}
-{% block content-nonblock %}
+
+{% block content %}
     <div id="box">
       <div class="block" id="block-login">
         {% if delete_view %}      
