@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # -----------------------------------------------------
 # Instructions for deploying with apache, Ubuntu Linux
 # Make sure you have apache installed and running.

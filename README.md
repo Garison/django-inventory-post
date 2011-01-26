@@ -26,7 +26,7 @@ Installation
 
 Check the INSTALL file in the docs folder
 or if you are brave, copy the file [install.sh](https://github.com/rosarior/django-inventory/blob/master/misc/install.sh) file to your computer and execute it.
-This script has only been tested under Ubuntu/Maverick/amd64 w/ Apache2, revise it before running it.
+This script has only been tested under Ubuntu/Maverick/amd64 w/ Apache2 & bash, revise it before running it.
 
 
 Author
