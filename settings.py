@@ -165,6 +165,8 @@ LOGIN_EXEMPT_URLS = (
 #ASSETS_MAX_PERSON_PHOTOS = 5
 #--------- Pagination ------------------
 PAGINATION_DEFAULT_PAGINATION = 10
+#--------- Web theme app ---------------
+WEB_THEME = 'warehouse'
 #======== End of configuration options =======
 try:
     from settings_local import *
@@ -193,7 +195,7 @@ if DEVELOPMENT:
 
     try:
         import debug_toolbar
-#        INSTALLED_APPS.append('debug_toolbar')
+        #INSTALLED_APPS.append('debug_toolbar')
     except ImportError:
         print "debug_toolbar is not installed"
 
