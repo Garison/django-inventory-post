@@ -46,7 +46,7 @@ inventory_menu_links = [
     inventory_list, inventory_create, inventory_transaction_list, inventory_transaction_create
 ]
 
-location_filter = {'name':'location', 'queryset':Location.objects.all(), 'destination':'location'}
+location_filter = {'name':'location', 'title':_(u'location'), 'queryset':Location.objects.all(), 'destination':'location'}
 
 register_links(['template_list', 'template_create', 'template_orphans_list', 'template_update', 'template_delete', 'template_photos', 'template_assign_supply', 'template_assign_suppliers'], [template_create], menu_name='sidebar')
 register_links(ItemTemplate, [template_update, template_delete, template_photos, template_assets, template_assign_supplies, template_assign_suppliers])

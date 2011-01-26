@@ -31,7 +31,7 @@ group_create = {'text':_(u'create group'), 'view':'group_create', 'famfam':'char
 group_update = {'text':_(u'edit'), 'view':'group_update', 'args':'object.id', 'famfam':'chart_pie_edit'}
 group_delete = {'text' : _(u'delete'), 'view':'group_delete', 'args':'object.id', 'famfam':'chart_pie_delete'}
 
-state_filter = {'name':'state', 'queryset':State.objects.all(), 'destination':'itemstate'}
+state_filter = {'name':'state', 'title':_(u'state'), 'queryset':State.objects.all(), 'destination':'itemstate'}
 
 
 register_links(['item_list', 'item_view', 'item_create', 'item_orphans_list', 'item_update', 'item_delete', 'item_photos', 'item_assign_person', 'template_items_list'], [asset_create], menu_name='sidebar')

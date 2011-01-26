@@ -102,4 +102,5 @@ class FilterForm(forms.Form):
     def __init__(self, list_filters, *args, **kwargs):
         super(FilterForm, self).__init__(*args, **kwargs)
         for list_filter in list_filters:
-            self.fields[list_filter['name']] = forms.ModelChoiceField(queryset=list_filter['queryset'], required=False)
+            label = list_filter.get('title', list_filter['name'])
+            self.fields[list_filter['name']] = forms.ModelChoiceField(queryset=list_filter['queryset'], label=label[0].upper() + label[1:], required=False)
