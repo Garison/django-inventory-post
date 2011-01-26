@@ -76,9 +76,10 @@ SECRET_KEY = '4#8p2r=zfa=t@3@@v5v*)i=kvnuyxae_yyvqkyv4!opcwad6@+'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-#   'django.template.loaders.eggs.load_template_source',
+    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )),
 )
 
 MIDDLEWARE_CLASSES = [
@@ -162,6 +163,8 @@ LOGIN_EXEMPT_URLS = (
 #INVENTORY_MAX_TEMPLATE_PHOTOS = 5
 #ASSETS_MAX_ASSET_PHOTOS = 5
 #ASSETS_MAX_PERSON_PHOTOS = 5
+#--------- Pagination ------------------
+PAGINATION_DEFAULT_PAGINATION = 10
 #======== End of configuration options =======
 try:
     from settings_local import *
@@ -171,6 +174,11 @@ except ImportError:
 
 if DEVELOPMENT:
     INTERNAL_IPS = ('127.0.0.1',)
+
+    TEMPLATE_LOADERS = (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )    
     try:
         import rosetta
         INSTALLED_APPS.append('rosetta')
