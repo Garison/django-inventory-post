@@ -25,6 +25,7 @@ Installation
 ---
 
 Check the INSTALL file in the docs folder
+or if you are brave copy the file [install.sh](https://github.com/rosarior/django-inventory/blob/master/misc/install.sh) file to your computer and execute it.
 
 
 Author
