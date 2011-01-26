@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     #(r'^orig_admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
 
-    (r'^i18n/', include('django.conf.urls.i18n')),
+    #(r'^i18n/', include('django.conf.urls.i18n')),
     
     #----Project
     (r'^', include('common.urls')),

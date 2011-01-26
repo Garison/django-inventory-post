@@ -15,6 +15,28 @@
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/famfamfam-silk-sprite.css" type="text/css" media="screen" />
 {% endblock %}
 
+{% block user_navigation %}
+    <li><strong>{% trans 'User' %}:</strong>
+        {% if user.is_anonymous %}
+            {% trans 'Anonymous' %}
+        {% else %}
+            {{ user }}
+            <a href="{% url password_change_view %}">({% trans 'New password' %})</a>
+        {% endif %}
+    </li>
+    <li>
+        <form action="{% url set_language %}" method="post">{% csrf_token %}
+            <select name="language">
+                {% for lang in LANGUAGES %}
+                    <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="{% trans 'Go' %}" />
+        </form>                                
+    </li>
+    <li><a class="logout" href="{% if user.is_anonymous %}{% url login_view %}?next=/{% else %}{% url logout_view %}{% endif %}">{% if user.is_anonymous %}{% trans 'Login' %}{% else %}{% trans 'Logout' %}{% endif %}</a></li>
+{% endblock %}
+
 {% block main_navigation %}
     {% main_navigation %}                    
     {% for link in navigation_main_links %}
