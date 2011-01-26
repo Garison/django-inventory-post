@@ -4,12 +4,12 @@
 # Make sure you have apache installed and running.
 # Execute as root
 
-INSTALL_DIR=/tmp/django-inventory
+INSTALL_DIR=/usr/share/django-inventory
 APACHE_CONF=/etc/apache2/conf.d/django-inventory
 
 echo "Installation directory: $INSTALL_DIR"
-echo -n "* Installing virtualenv, pip, libjpeg and libpng..."
-apt-get update >/dev/null && apt-get install python-virtualenv python-pip libjpeg-dev libpng-dev -y >/dev/null
+echo -n "* Installing setuptools, virtualenv, pip, libjpeg and libpng..."
+apt-get update >/dev/null && apt-get install python-setuptools python-virtualenv python-pip libjpeg-dev libpng-dev -y >/dev/null
 echo "Done."
 
 echo -n "* Creating virtual environment..."
