@@ -3,11 +3,19 @@
 {% load project_tags %}
 {% block title %} :: {% trans 'About this program' %}{% endblock %}
 {% block content %}
-<h3 style="text-align: center;">
 
-{% project_name %}<br /><br />
-{% trans 'A Django based inventory and asset management system' %}<br /><br />
-<a href="http://www.github.com/rosarior/django-inventory/">http://www.github.com/rosarior/django-inventory/</a><br /><br />
-{% trans 'Copyright 2007 Roberto Rosario' %}<br /><br />
-</h3>
+<div class="content">
+    <h3 class="tc">
+    {% project_name %}<br /><br />
+    {% trans 'A Django based inventory and asset management system' %}<br /><br />
+    <a href="http://www.github.com/rosarior/django-inventory/">http://www.github.com/rosarior/django-inventory/</a><br /><br />
+    </h3>
+</div>
+{% endblock %}
+{% block footer %}
+    <div id="footer">
+        <div class="block">
+            <p>Copyright &copy; 2007 Roberto Rosario.</p>
+        </div>
+    </div>
 {% endblock %}
