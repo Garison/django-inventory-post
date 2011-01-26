@@ -23,7 +23,7 @@ urlpatterns = patterns('',
 
 if settings.DEVELOPMENT:
     urlpatterns += patterns('',
-        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'site_media', 'show_indexes': True}),
+        (r'^django-inventory-site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'site_media', 'show_indexes': True}),
     )
 
     if 'rosetta' in settings.INSTALLED_APPS:

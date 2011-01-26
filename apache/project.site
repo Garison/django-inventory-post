@@ -3,17 +3,17 @@
 
 #    WSGIDaemonProcess django-inventory user=www-data group=www-data threads=10 python-path=/usr/share/django-inventory/lib/python2.6/site-packages
 #    WSGIProcessGroup django-inventory
-    WSGIScriptAlias / /usr/share/django-inventory/django-inventory/wsgi/dispatch.wsgi
+    WSGIScriptAlias /django-inventory /usr/share/django-inventory/django-inventory/wsgi/dispatch.wsgi
     
-#    <Directory /usr/share/django-inventory/django-inventory>
-#        Order deny,allow
-#        Allow from all
-#    </Directory>
+    <Directory /usr/share/django-inventory/django-inventory>
+        Order deny,allow
+        Allow from all
+    </Directory>
     ErrorLog /var/log/apache2/error.log
     LogLevel warn
     CustomLog /var/log/apache2/access.log combined
 
-    Alias /site_media "/usr/share/django-inventory/django-inventory/site_media/"
+    Alias /django-inventory-site_media "/usr/share/django-inventory/django-inventory/site_media/"
     <Location "/site_media">
         SetHandler None
     </Location>

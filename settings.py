@@ -64,7 +64,7 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'site_media/')
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/site_media/'
+MEDIA_URL = '/django-inventory-site_media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -144,7 +144,7 @@ LOGIN_EXEMPT_URLS = (
     r'^favicon\.ico$',
     r'^about\.html$',
     r'^legal/', # allow the entire /legal/* subsection
-    r'^site_media/',
+    r'^django-inventory-site_media/',
 
     r'^accounts/register/$',
     r'^accounts/register/complete/$',
