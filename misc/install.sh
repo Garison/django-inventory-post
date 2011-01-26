@@ -28,7 +28,7 @@ echo "Done."
 
 echo -n "* Create database..."
 cd django-inventory
-$INSTALL_DIR/django-inventory/manage.py syncdb > /dev/null
+$INSTALL_DIR/django-inventory/manage.py syncdb
 echo "Done."
 
 echo -n "* Changin folder permissions and ownership..."
