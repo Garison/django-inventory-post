@@ -1,3 +1,0 @@
-[submodule "apps/web_theme/media"]
-	path = apps/web_theme/media
-	url = https://github.com/pilu/web-app-theme.git
