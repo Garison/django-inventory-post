@@ -26,7 +26,7 @@ source $INSTALL_DIR/bin/activate
 pip install -r django-inventory/requirements/production.txt >/dev/null
 echo "Done."
 
-echo -n "* Create database..."
+echo "* Create database..."
 cd django-inventory
 $INSTALL_DIR/django-inventory/manage.py syncdb
 echo "Done."
@@ -49,6 +49,11 @@ echo "</Location>" >> $APACHE_CONF
 echo "ErrorLog /var/log/apache2/error.log" >> $APACHE_CONF
 echo "LogLevel warn" >> $APACHE_CONF
 echo "CustomLog /var/log/apache2/access.log combined" >> $APACHE_CONF
+echo "Done."
+
+echo -n "* Creating custom settings_local.py file..." 
+echo "LOGIN_URL = 'login'" > $INSTALL_DIR/django-inventory/settings_local.py
+echo "LOGIN_REDIRECT_URL = '/django-inventory'" >> $INSTALL_DIR/django-inventory/settings_local.py                        
 echo "Done."
 
 echo -n "* Restaring apache..."
