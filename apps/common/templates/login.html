@@ -1,52 +1,6 @@
-{% extends "base.html" %}
+{% extends "web_theme_login.html" %}
 {% load i18n %}
 {% load project_tags %}
-{% load styling %}
-{% block title %} :: {% trans 'Login' %}{% endblock %}
-{% block content_plain %}
 
-{% add_classes_to_form form %}
-
-<div id="box">
-      <h1>{% project_name %}</h1>
-      <div class="block" id="block-login">
-        <h2>{% trans 'Login' %}</h2>
-        <div class="content login">
-        
-          {% if form.errors %}
-                    <div class="flash">
-            <div class="message error">
-              <p>{% trans 'The username or password is incorrect.' %}</p>
-            </div>
-          </div>
-            {% endif %}
-
-          <form action="." method="post" class="form login">{% csrf_token %}
-            <div class="group wat-cf">
-              <div class="left">
-                <label class="label right">{% trans 'Username' %}</label>
-              </div>
-              <div class="right">
-				{{ form.username }}                
-              </div>
-            </div>
-            <div class="group wat-cf">
-              <div class="left">
-                <label class="label right">{% trans 'Password' %}</label>
-              </div>
-              <div class="right">
-				{{ form.password }}                
-              </div>
-            </div>
-            <input type="hidden" name="next" value="{{ next|escape }}" />
-            <div class="group navform wat-cf">
-                <button class="button" type="submit">
-                  <img src="{{ MEDIA_URL }}skins/pilu-web-app/images/icons/key.png" alt="Save" /> Login
-                </button>
-            </div>
-          </form>
-        </div>
-      </div>
-</div>
-
-{% endblock %}
+{% block html_title %}{% project_name %} :: {% trans "Login" %}{% endblock %}
+{% block project_name %}{% project_name %}{% endblock %}
