@@ -2,6 +2,17 @@
 {% load styling %}
 {{ form.media|safe }}  
 {% add_classes_to_form form %}
+
+{% if form.non_field_errors %}
+    <div class="flash">
+        {% for value in form.non_field_errors %}
+            <div class="message error">
+                <p>{{ value }}</p>
+            </div>
+      {% endfor %}                    
+  </div>
+{% endif %}
+
 {% for field in form %}
     <div class="group">
         {% if field.errors %}<div class="fieldWithErrors">{% endif %}
