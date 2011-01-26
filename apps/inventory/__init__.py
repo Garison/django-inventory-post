@@ -20,7 +20,7 @@ inventory_transaction_update = {'text':_(u'edit'), 'view':'inventory_transaction
 inventory_transaction_delete = {'text':_(u'delete'), 'view':'inventory_transaction_delete', 'args':'object.id', 'famfam':'book_delete'}
 
 location_list = {'text':_('locations'), 'view':'location_list', 'famfam':'map'}
-location_create = {'text':_(u'edit'), 'view':'location_create', 'famfam':'map_add'}
+location_create = {'text':_(u'create new location'), 'view':'location_create', 'famfam':'map_add'}
 location_update = {'text':_(u'edit'), 'view':'location_update', 'args':'object.id', 'famfam':'map_edit'}
 location_delete = {'text':_(u'delete'), 'view':'location_delete', 'args':'object.id', 'famfam':'map_delete'}
 
