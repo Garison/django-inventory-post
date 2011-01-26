@@ -1,8 +1,8 @@
 /* icon set header - required*/
-.famfam { vertical-align: middle; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; display: inline-block; width: 20px; height: 20px;}
-.famfam.active { background-image: url('/site_media/images/famfamfam-silk-sprites/famfam-active.png'); cursor:pointer;}
-/* .famfam.hover{background-image: url('/site_media/images/famfamfam-silk-sprites/famfam-hover.png'); cursor:pointer;} */
-.famfam.inactive{background-image: url('/site_media/images/famfamfam-silk-sprites/famfam-inactive.png'); cursor:default;}
+.famfam {vertical-align: middle; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; display: inline-block; width: 20px; height: 20px;}
+.famfam.active {background-image: url('../images/famfamfam-silk-sprites/famfam-active.png'); cursor:pointer;}
+/* .famfam.hover{background-image: url('../images/famfamfam-silk-sprites/famfam-hover.png'); cursor:pointer;} */
+.famfam.inactive{background-image: url('../images/famfamfam-silk-sprites/famfam-inactive.png'); cursor:default;}
 
 /* icon set items - include only the rules for the icons you wish to use in your page*/
 .famfam-accept {background-position: -0px -0px;}
