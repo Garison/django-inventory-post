@@ -22,7 +22,7 @@ git clone https://github.com/rosarior/django-inventory.git >/dev/null
 echo "Done."
 
 echo -n "* Installing dependencies..." 
-sh $INSTALL_DIR/bin/activate
+source $INSTALL_DIR/bin/activate
 pip install -r django-inventory/requirements/production.txt >/dev/null
 echo "Done."
 
