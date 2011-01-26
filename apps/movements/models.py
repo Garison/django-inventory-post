@@ -24,7 +24,7 @@ class PurchaseRequest(models.Model):
     required_date = models.DateField(null=True, blank=True, verbose_name=_(u'date required'))
     budget = models.PositiveIntegerField(null=True, blank=True, verbose_name=_(u'budget')) 
     active = models.BooleanField(default=True, verbose_name=_(u'active'))
-    status = models.ForeignKey(PurchaseRequestStatus, verbose_name=_(u'status'))
+    status = models.ForeignKey(PurchaseRequestStatus, null=True, blank=True, verbose_name=_(u'status'))
     #originator
     #account number
     
@@ -32,19 +32,36 @@ class PurchaseRequest(models.Model):
         verbose_name = _(u"purchase request")
         verbose_name_plural = _(u"purchase requests")
         
-    def __unicode__(self):
-        return "%s - %s" % (self.content_object, self.title)
+    #def __unicode__(self):
+    #    return self.
         
 #    @models.permalink
 #    def get_absolute_url(self):
 #        return ('state_list', [])
 
 
-"""
+
 class PurchaseRequestItem(models.Model):
     purchase_request = models.ForeignKey(PurchaseRequest, verbose_name=_(u'purchase request'))
     item_template = models.ForeignKey(ItemTemplate, verbose_name=_(u'item template'))
+    qry = models.PositiveIntegerField(verbose_name=_(u'quantity'))
+    
+    class Meta:
+        verbose_name = _(u"purchase request item")
+        verbose_name_plural = _(u"purchase request items")
+        
+    def __unicode__(self):
+        return unicode(self.item_template)
 
+    #@models.permalink
+    #def get_absolute_url(self):
+    #    return ('purchase_request_state_list', [])
+
+"""
+ChangeOrder
+"""
+
+"""
 
 class PurchaseOrder(models.Model):
     supplier = models.ForeignKey(Supplier, verbose_name=_(u'supplier'))
