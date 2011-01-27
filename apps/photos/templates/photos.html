@@ -24,6 +24,7 @@ $(function() {
     {% endfor %}
 {% endblock %}
 {% block content %}
+<div class="content">
     <h3>{% trans 'Photos for' %}: <a href="{{ object.get_absolute_url }}">{{ object }}</a> ({% trans 'Maximum of' %} {{ max_photos }}):</h3>
 
     {% if photos %}
@@ -78,4 +79,5 @@ $(function() {
             {% include 'generic_form_subtemplate.html' %}
         </div>
     {% endif %}
+</div>
 {% endblock %}
