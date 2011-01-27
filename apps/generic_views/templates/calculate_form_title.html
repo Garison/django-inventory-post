@@ -6,9 +6,9 @@
         {% blocktrans %}Details for: {{ object }}{% endblocktrans %}
     {% else %}
         {% if object %}
-            {% trans 'Edit' %}: <a href="{{ object.get_absolute_url }}">{{ object|capfirst }}</a>
+            {% trans "Edit" %}: <a href="{{ object.get_absolute_url }}">{{ object|capfirst }}</a>
         {% else %}
-            {% trans 'Create' %}
+            {% trans "Create" %}
         {% endif %}                
     {% endif %}
 {% endif %}
