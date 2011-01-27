@@ -8,8 +8,8 @@ class PurchaseRequestStatus(models.Model):
     name = models.CharField(verbose_name=_(u'name'), max_length=32)
     
     class Meta:
-        verbose_name = _(u"purchase request status")
-        verbose_name_plural = _(u"purchase request status")
+        verbose_name = _(u'purchase request status')
+        verbose_name_plural = _(u'purchase request status')
         
     def __unicode__(self):
         return self.name
@@ -29,11 +29,11 @@ class PurchaseRequest(models.Model):
     #account number
     
     class Meta:
-        verbose_name = _(u"purchase request")
-        verbose_name_plural = _(u"purchase requests")
+        verbose_name = _(u'purchase request')
+        verbose_name_plural = _(u'purchase requests')
         
-    #def __unicode__(self):
-    #    return self.
+    def __unicode__(self):
+        return '%s - %s' % (self.id, self.issue_date) 
         
 #    @models.permalink
 #    def get_absolute_url(self):
@@ -42,16 +42,18 @@ class PurchaseRequest(models.Model):
 
 
 class PurchaseRequestItem(models.Model):
+    #Prefered suppliers m2m
     purchase_request = models.ForeignKey(PurchaseRequest, verbose_name=_(u'purchase request'))
     item_template = models.ForeignKey(ItemTemplate, verbose_name=_(u'item template'))
-    qry = models.PositiveIntegerField(verbose_name=_(u'quantity'))
+    qty = models.PositiveIntegerField(verbose_name=_(u'quantity'))
+    notes = models.TextField(null=True, blank=True, verbose_name=_(u'notes'))
     
     class Meta:
-        verbose_name = _(u"purchase request item")
-        verbose_name_plural = _(u"purchase request items")
+        verbose_name = _(u'purchase request item')
+        verbose_name_plural = _(u'purchase request items')
         
     def __unicode__(self):
-        return unicode(self.item_template)
+        return '%s - %s' % (unicode(self.item_template), self.qty)
 
     #@models.permalink
     #def get_absolute_url(self):
