@@ -24,6 +24,11 @@
             <a href="{% url password_change_view %}">({% trans 'New password' %})</a>
         {% endif %}
     </li>
+    {% if user.is_staff %}
+        <li><a href="/admin">{% trans "Admin site" %}</a></li>
+    {% endif %}
+    
+    
     <li>
         <form action="{% url set_language %}" method="post">{% csrf_token %}
             <select name="language">
