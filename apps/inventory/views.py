@@ -5,9 +5,7 @@ from django.utils.translation import ugettext as _
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic.list_detail import object_detail, object_list
-
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
 
 from generic_views.views import generic_assign_remove, generic_list
 
