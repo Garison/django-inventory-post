@@ -3,6 +3,7 @@
 {% load styling %}
 {% load generic_views_helpers %}
 {% block title %} :: {% blocktrans %}Details for {{ title }} {{ object }}{% endblocktrans %}{% endblock %}
+
 {% block javascript %}
 <script type="text/javascript">
 $(function() {
@@ -12,14 +13,13 @@ $(function() {
 });
 </script>
 {% endblock %}
-{% block local_sidebar %}
+{% block sidebar %}
     {% for subtemplate in subtemplates %}
         {% include subtemplate %}
     {% endfor %}
 {% endblock %}
 
-
-{% block content %}
+{% block stylesheets %}
     <style type="text/css">
         #subform form  textarea, 
         #subform form  select option,
@@ -27,8 +27,9 @@ $(function() {
         #subform form  select, 
         #subform form  input { background: none; color: black; border: none; }
     </style>
+{% endblock %}
 
-
+{% block content %}
     <div id="subform">
         {% with 'true' as read_only %}
             {% include "generic_form_subtemplate.html" %}

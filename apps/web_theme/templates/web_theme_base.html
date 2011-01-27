@@ -14,12 +14,12 @@
 
         <link rel="stylesheet" href="{{ MEDIA_URL }}web_theme_media/stylesheets/base.css" type="text/css" media="screen" />
         <link rel="stylesheet" id="current-theme" href="{{ MEDIA_URL }}web_theme_media/stylesheets/themes/{{ web_theme }}/style.css" type="text/css" media="screen" />
-        {% block stylesheets %}{% endblock %}
+        {% block web_theme_stylesheets %}{% endblock %}
 
         <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}web_theme_media/javascripts/jquery-1.3.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}web_theme_media/javascripts/jquery.scrollTo.js"></script>
         <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}web_theme_media/javascripts/jquery.localscroll.js"></script>
-        {% block javascript %}{% endblock %}
+        {% block web_theme_javascript %}{% endblock %}
 	</head>
 	<body>
         <div id="container">
@@ -30,22 +30,22 @@
             {% endif %}
             {% if not user.is_anonymous %}
                 <div id="header">
-                    <h1><a href="{% url home %}">{% block project_name %}{% endblock %}</a></h1>
+                    <h1><a href="{% url home %}">{% block web_theme_project_name %}{% endblock %}</a></h1>
                         <div id="user-navigation">
                             <ul class="wat-cf">
-                                {% block user_navigation %}{% endblock %}
+                                {% block web_theme_user_navigation %}{% endblock %}
                             </ul>
                         </div>
                     <div id="main-navigation">
                         <ul class="wat-cf">
-                            {% block main_navigation %}{% endblock %}
+                            {% block web_theme_main_navigation %}{% endblock %}
                         </ul>
                     </div>
                 </div>
                 <div id="wrapper" class="wat-cf">
                     <div id="main">
                         <div class="block" id="block-text">
-                            {% block secondary_navigation %}{% endblock %}
+                            {% block web_theme_secondary_navigation %}{% endblock %}
                             {% if messages %}
                                 <div class="inner">
                                     <div class="flash">
@@ -57,12 +57,12 @@
                                     </div>
                                 </div>
                             {% endif %}
-                            {% block content %}{% endblock %}
+                            {% block web_theme_content %}{% endblock %}
                         </div>  
-                        {% block footer %}{% endblock %}
+                        {% block web_theme_footer %}{% endblock %}
                     </div> 
                     <div id="sidebar">
-                        {% block sidebar %}{% endblock %}
+                        {% block web_theme_sidebar %}{% endblock %}
                     </div>                    
                 </div>
             {% endif %}
