@@ -17,8 +17,15 @@
     CREDITS file                                                        - DONE
 # Smarter search                                                        - DONE
 # Allow import of CSV data                                              - DONE
-# Selectable sidebar searchbox
+# Implement South for database migration
 # Insert license header to every .py file
+# Add reporting/hard copies
+# Export data to CSV
+
+Post release
+============================
+
+# Selectable sidebar searchbox
 # Allow templates and items to have attachments (not just photos)
 # Implement uploadify
 # Implement django-compress
@@ -33,14 +40,11 @@
 # Add clear button to filter by form in generic_list or substitue
     '----' to 'Any' in filter drop down
 # Use django reversion for changelogs
-# Add reporting/hard copies
 # Supply reorder thresholds
-# Implement South for database migration
 # Add google maps api to locations model
 # Add inventory transactions from RMAs & customer invoices
 # Implement django-permissions
 # Connect w/ descartes for BI charts
-# Export data to CSV
 
 # Deferred, deprecated
 ==========================
