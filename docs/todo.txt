@@ -17,6 +17,7 @@
     CREDITS file                                                        - DONE
 # Smarter search                                                        - DONE
 # Allow import of CSV data                                              - DONE
+# Selectable sidebar searchbox
 # Insert license header to every .py file
 # Allow templates and items to have attachments (not just photos)
 # Implement uploadify
@@ -24,6 +25,9 @@
 # Rename all instances of the word 'item' to 'asset'
 # User setting (theme, language, timezone, changepassword)
 # Add sorting by column to generic_list
+# Split tools menu into setup/tools
+# Add manufacturing submenu (BOM, part list per item template)
+# Use separate model for supplies and add other fields(qty, req/optional) 
 # Transfer items from one inventory to another
 # Transfer asset from/to users
 # Add clear button to filter by form in generic_list or substitue
