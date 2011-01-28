@@ -59,6 +59,54 @@ def purchase_request_item_create(request, object_id):
     #    template_name='generic_form.html',
     #    extra_context={'object':purchase_request},
     #) 
+    
+def purchase_request_close(request, object_id):
+    purchase_request = get_object_or_404(PurchaseRequest, pk=object_id)    
+
+    data = {
+        'object':purchase_request,
+        'title':_(u"Are you sure you wish to close the purchase request: %s?") % purchase_request,
+    }
+        
+    if purchase_request.active == False:
+        msg = _(u'This purchase request has already been closed.')
+        messages.error(request, msg, fail_silently=True)            
+        return redirect(request.META['HTTP_REFERER'] if 'HTTP_REFERER' in request.META else purchase_request.get_absolute_url())
+        
+    if request.method == 'POST':
+        purchase_request.active = False
+        purchase_request.save()
+        msg = _(u'The purchase request has been closed successfully.')
+        messages.success(request, msg, fail_silently=True)            
+        return redirect(purchase_request.get_absolute_url())
+
+    return render_to_response('generic_confirm.html', data,
+    context_instance=RequestContext(request))  
+    
+    
+def purchase_request_open(request, object_id):
+    purchase_request = get_object_or_404(PurchaseRequest, pk=object_id)    
+
+    data = {
+        'object':purchase_request,
+        'title':_(u"Are you sure you wish to open the purchase request: %s?") % purchase_request,
+    }
+        
+    if purchase_request.active == True:
+        msg = _(u'This purchase request is already open.')
+        messages.error(request, msg, fail_silently=True)            
+        return redirect(request.META['HTTP_REFERER'] if 'HTTP_REFERER' in request.META else purchase_request.get_absolute_url())
+        
+    if request.method == 'POST':
+        purchase_request.active = True
+        purchase_request.save()
+        msg = _(u'The purchase request has been opened successfully.')
+        messages.success(request, msg, fail_silently=True)            
+        return redirect(purchase_request.get_absolute_url())
+
+    return render_to_response('generic_confirm.html', data,
+    context_instance=RequestContext(request))  
+
 
 def purchase_order_view(request, object_id):
     purchase_order = get_object_or_404(PurchaseOrder, pk=object_id)
@@ -91,7 +139,7 @@ def purchase_order_close(request, object_id):
 
     data = {
         'object':purchase_order,
-        'title':_(u"Are you sure you wish close the purchase order: %s?") % purchase_order,
+        'title':_(u"Are you sure you wish to close the purchase order: %s?") % purchase_order,
     }
     if items.filter(active=True):
         data['message'] = _(u'There are still open items.')
@@ -115,6 +163,30 @@ def purchase_order_close(request, object_id):
     context_instance=RequestContext(request))  
 
 
+def purchase_order_open(request, object_id):
+    purchase_order = get_object_or_404(PurchaseOrder, pk=object_id)    
+
+    data = {
+        'object':purchase_order,
+        'title':_(u"Are you sure you wish to open the purchase order: %s?") % purchase_order,
+    }
+        
+    if purchase_order.active == True:
+        msg = _(u'This purchase order is already open.')
+        messages.error(request, msg, fail_silently=True)      
+        return redirect(request.META['HTTP_REFERER'] if 'HTTP_REFERER' in request.META else purchase_order.get_absolute_url())
+        
+    if request.method == 'POST':
+        purchase_order.active = True
+        purchase_order.save()
+        msg = _(u'The purchase order has been opened successfully.')
+        messages.success(request, msg, fail_silently=True)            
+        return redirect(purchase_order.get_absolute_url())
+
+    return render_to_response('generic_confirm.html', data,
+    context_instance=RequestContext(request))  
+
+
 def purchase_order_item_close(request, object_id):
     purchase_order_item = get_object_or_404(PurchaseOrderItem, pk=object_id)    
     data = {
@@ -125,7 +197,7 @@ def purchase_order_item_close(request, object_id):
     if purchase_order_item.active == False:
         msg = _(u'This purchase order item has already been closed.')
         messages.error(request, msg, fail_silently=True)            
-        return redirect(purchase_order_item.get_absolute_url())
+        return redirect(request.META['HTTP_REFERER'] if 'HTTP_REFERER' in request.META else purchase_order.get_absolute_url())
         
     
     if request.method == 'POST':
