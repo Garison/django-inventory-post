@@ -46,9 +46,11 @@
     {% for subtemplate in subtemplates_dict %}
     {% with subtemplate.title as title %}
     {% with subtemplate.object_list as object_list %}
+    {% with subtemplate.extra_columns as extra_columns %}
         <div class="content">
         {% include subtemplate.name %}
         </div>
+    {% endwith %}
     {% endwith %}
     {% endwith %}
     {% endfor %}
