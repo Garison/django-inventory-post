@@ -32,5 +32,5 @@ This script has only been tested under Ubuntu/Maverick/amd64 w/ Apache2 & bash, 
 Author
 ------
 
-Roberto Rosario - [Twitter](http://twitter.com/#siloraptor)
+Roberto Rosario - [Twitter](http://twitter.com/#siloraptor) [E-mail](roberto.rosario.gonzalez at gmail)
 
