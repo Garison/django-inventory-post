@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-24 16:36-0400\n"
-"PO-Revision-Date: 2011-01-24 16:41\n"
+"POT-Creation-Date: 2011-01-28 09:24-0400\n"
+"PO-Revision-Date: 2011-01-28 09:27\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -91,6 +91,15 @@ msgstr "ver todos los grupos"
 msgid "create group"
 msgstr "crear grupo"
 
+#: __init__.py:34 models.py:17 models.py:35
+msgid "state"
+msgstr "estado"
+
+#: __init__.py:51 models.py:63 models.py:151 urls.py:33 views.py:33
+#: views.py:138
+msgid "assets"
+msgstr "activos"
+
 #: models.py:13 models.py:102
 msgid "name"
 msgstr "nombre"
@@ -98,10 +107,6 @@ msgstr "nombre"
 #: models.py:14 models.py:21
 msgid "exclusive"
 msgstr "exclusivo"
-
-#: models.py:17 models.py:35
-msgid "state"
-msgstr "estado"
 
 #: models.py:18 models.py:150 urls.py:45 urls.py:48
 msgid "states"
@@ -152,13 +157,9 @@ msgstr "número de serie"
 msgid "location"
 msgstr "localización"
 
-#: models.py:62 urls.py:30
+#: models.py:62 urls.py:29 urls.py:30 urls.py:34
 msgid "asset"
 msgstr "activo"
-
-#: models.py:63 models.py:151 urls.py:33 views.py:33 views.py:138
-msgid "assets"
-msgstr "activos"
 
 #: models.py:107 urls.py:43
 msgid "item group"
@@ -242,7 +243,7 @@ msgstr "¿Esta seguro que desea marcar el activo como '%s'?"
 
 #: views.py:71
 msgid "Any other states this asset may be marked as, will be cleared."
-msgstr ""
+msgstr "Serrán borrados cualquier otro estado que esté marcados."
 
 #: views.py:81
 #, python-format
@@ -257,7 +258,7 @@ msgstr "El activo ha sido marcado como '%s'."
 #: views.py:103
 #, python-format
 msgid "This asset is not marked as '%s'"
-msgstr "El activo no esta marcado como '%s'"
+msgstr "El activo no está marcado como '%s'"
 
 #: views.py:109
 #, python-format
@@ -267,7 +268,7 @@ msgstr "¿Está seguro de que desea anular la marca de este activo como de '%s'?
 #: views.py:115
 #, python-format
 msgid "The asset has been unmarked as '%s'."
-msgstr "Se ha anulado la marca de '%s'."
+msgstr "El activo de ha desmarcado como '%s'."
 
 #: views.py:117
 #, python-format
@@ -279,25 +280,32 @@ msgstr "No se puede anular la marca de este activo como '%s'"
 msgid "Assign assets to the group: <a href=\"%(url)s\">%(obj)s</a>"
 msgstr "Asignar activos al grupo: <a href=\"%(url)s\">%(obj)s</a>"
 
-#: templates/state_subtemplate.html:4
+#: templates/state_subtemplate.html:7
 msgid "Item states"
 msgstr "Estados de activos"
 
-#: templates/state_subtemplate.html:15
-msgid "Unmark"
-msgstr "Desmarcar"
+#: templates/state_subtemplate.html:12
+#, python-format
+msgid "Unmark as %(state)s"
+msgstr "Desmarcar como %(state)s "
 
-#: templates/state_subtemplate.html:17
-msgid "Mark"
-msgstr "Marcar"
+#: templates/state_subtemplate.html:14
+#, python-format
+msgid "Mark as %(state)s"
+msgstr "Marcar como %(state)s"
 
-#: templates/state_subtemplate.html:23
+#: templates/state_subtemplate.html:18
 msgid "There are no states defined."
 msgstr "No hay estados definidos."
 
-#: templates/state_subtemplate.html:37
-msgid "Submit"
-msgstr "Enviar"
+#~ msgid "Unmark"
+#~ msgstr "Desmarcar"
+
+#~ msgid "Mark"
+#~ msgstr "Marcar"
+
+#~ msgid "Submit"
+#~ msgstr "Enviar"
 
 #~ msgid "assign/remove asset"
 #~ msgstr "asignar/remover activo"

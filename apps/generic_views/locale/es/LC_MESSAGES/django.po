@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-24 16:46-0400\n"
-"PO-Revision-Date: 2011-01-24 16:48\n"
+"POT-Creation-Date: 2011-01-28 09:33-0400\n"
+"PO-Revision-Date: 2011-01-28 09:34\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,26 +23,41 @@ msgstr ""
 msgid "None"
 msgstr "Ninguno"
 
-#: views.py:105
+#: views.py:106
 #, python-format
 msgid "The selected %s were added."
 msgstr "Los %s seleccionados fueron agregados."
 
-#: views.py:111
+#: views.py:112
 #, python-format
 msgid "The selected %s were removed."
 msgstr "Los %s seleccionados fueron removidos."
 
-#: templates/calculate_form_title.html:6
+#: templates/calculate_form_title.html:7
+#, python-format
+msgid "Details for %(object_name)s: %(object)s"
+msgstr "Detalles para %(object_name)s: %(object)s "
+
+#: templates/calculate_form_title.html:9
 #, python-format
 msgid "Details for: %(object)s"
 msgstr "Detalles para: %(object)s "
 
-#: templates/calculate_form_title.html:9
+#: templates/calculate_form_title.html:14
+#, python-format
+msgid "Edit %(object_name)s:"
+msgstr "Editar %(object_name)s :"
+
+#: templates/calculate_form_title.html:16
 msgid "Edit"
 msgstr "Editar"
 
-#: templates/calculate_form_title.html:11
+#: templates/calculate_form_title.html:20
+#, python-format
+msgid "Create new %(object_name)s"
+msgstr "Crear nuevo %(object_name)s "
+
+#: templates/calculate_form_title.html:22
 msgid "Create"
 msgstr "Create"
 
@@ -51,24 +66,29 @@ msgstr "Create"
 msgid "Assign %(title)s %(object)s"
 msgstr "Asignar %(title)s %(object)s"
 
-#: templates/generic_confirm.html:3 templates/generic_confirm.html.py:16
+#: templates/generic_confirm.html:3 templates/generic_confirm.html.py:17
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: templates/generic_confirm.html:14
+#: templates/generic_confirm.html:15
 msgid "Confirm delete"
 msgstr "Confirmar eliminación"
 
-#: templates/generic_confirm.html:25
+#: templates/generic_confirm.html:27
+#, python-format
+msgid "Are you sure you wish to delete %(object_name)s: %(object)s?"
+msgstr "¿Está seguro que desea eliminar %(object_name)s: %(object)s ?"
+
+#: templates/generic_confirm.html:29
 #, python-format
 msgid "Are you sure you wish to delete: %(object)s?"
 msgstr "¿Está seguro que desea eliminar: %(object)s?"
 
-#: templates/generic_confirm.html:33
+#: templates/generic_confirm.html:38
 msgid "Yes"
 msgstr "Sí"
 
-#: templates/generic_confirm.html:38
+#: templates/generic_confirm.html:43
 msgid "No"
 msgstr "No"
 
@@ -77,19 +97,19 @@ msgstr "No"
 msgid "Details for %(title)s %(object)s"
 msgstr "Detalles para %(title)s %(object)s"
 
-#: templates/generic_form_instance.html:8
+#: templates/generic_form_instance.html:19
 msgid "required"
 msgstr "requerido"
 
-#: templates/generic_form_subtemplate.html:39
+#: templates/generic_form_subtemplate.html:47
 msgid "Save"
 msgstr "Guardar"
 
-#: templates/generic_form_subtemplate.html:39
+#: templates/generic_form_subtemplate.html:47
 msgid "Submit"
 msgstr "Enviar"
 
-#: templates/generic_form_subtemplate.html:43
+#: templates/generic_form_subtemplate.html:51
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -98,21 +118,21 @@ msgstr "Cancelar"
 msgid "List of %(title)s"
 msgstr "Lista de %(title)s "
 
-#: templates/generic_list_subtemplate.html:9
+#: templates/generic_list_subtemplate.html:18
 #, python-format
 msgid "List of %(title)s (%(start)s - %(end)s out of %(total)s)"
 msgstr "Lista de %(title)s  (%(start)s  - %(end)s de %(total)s)"
 
-#: templates/generic_list_subtemplate.html:11
+#: templates/generic_list_subtemplate.html:20
 #, python-format
 msgid "List of %(title)s (%(total)s)"
 msgstr "Lista de %(title)s  (%(total)s)"
 
-#: templates/generic_list_subtemplate.html:20
+#: templates/generic_list_subtemplate.html:32
 msgid "Identifier"
 msgstr "Identificador"
 
-#: templates/generic_list_subtemplate.html:48
+#: templates/generic_list_subtemplate.html:60
 #, python-format
 msgid "There are no %(title)s"
 msgstr "No hay %(title)s "

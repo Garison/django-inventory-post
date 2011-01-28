@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-24 16:45-0400\n"
-"PO-Revision-Date: 2011-01-24 16:45\n"
+"POT-Creation-Date: 2011-01-28 09:32-0400\n"
+"PO-Revision-Date: 2011-01-28 09:32\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,35 +19,19 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.5.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: __init__.py:11
+#: __init__.py:13
 msgid "home"
 msgstr "inicio"
 
-#: __init__.py:12
-msgid "templates"
-msgstr "plantillas"
-
-#: __init__.py:13
-msgid "assets"
-msgstr "activos"
-
-#: __init__.py:16
-msgid "inventories"
-msgstr "inventarios"
-
-#: __init__.py:17
+#: __init__.py:15
 msgid "tools"
 msgstr "herramientas"
 
-#: __init__.py:19
+#: __init__.py:21
 msgid "import"
 msgstr "importación"
 
-#: __init__.py:21
-msgid "search"
-msgstr "búsqueda"
-
-#: __init__.py:22
+#: __init__.py:24
 msgid "about"
 msgstr "acerca"
 
@@ -55,54 +39,69 @@ msgstr "acerca"
 msgid "About this program"
 msgstr "Acerca de este programa"
 
-#: templates/about.html:9
+#: templates/about.html:10
 msgid "A Django based inventory and asset management system"
 msgstr "Un sistema de manejo de inventario y activos basado en Django"
 
-#: templates/about.html:11
-msgid "Copyright 2007 Roberto Rosario"
-msgstr "Copyright 2007 Roberto Rosario"
-
-#: templates/base.html:36
-msgid "Please wait..."
-msgstr "Por favor espere..."
-
-#: templates/base.html:66
+#: templates/base.html:20
 msgid "User"
 msgstr "Usuario"
 
-#: templates/base.html:68
+#: templates/base.html:22
 msgid "Anonymous"
 msgstr "Anónimo"
 
-#: templates/base.html:71
+#: templates/base.html:25
 msgid "New password"
 msgstr "Nueva contraseña"
 
-#: templates/base.html:81
+#: templates/base.html:29
+msgid "Admin site"
+msgstr "Sitio administrativo"
+
+#: templates/base.html:40
 msgid "Go"
 msgstr "Ir"
 
-#: templates/base.html:84
+#: templates/base.html:43
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: templates/base.html:84
+#: templates/base.html:43
 msgid "Logout"
 msgstr "Desconectarse"
 
-#: templates/base.html:134
+#: templates/base.html:70
 msgid "Available actions"
 msgstr "Acciones disponibles"
 
-#: templates/base.html:146
+#: templates/base.html:84
 #, python-format
 msgid "Actions for: %(object)s"
 msgstr "Acciones para: %(object)s "
 
-#: templates/base.html:148
+#: templates/base.html:86
 msgid "Actions"
 msgstr "Acciones"
+
+#: templates/base.html:122
+msgid "Please wait..."
+msgstr "Por favor espere..."
+
+#~ msgid "templates"
+#~ msgstr "plantillas"
+
+#~ msgid "assets"
+#~ msgstr "activos"
+
+#~ msgid "inventories"
+#~ msgstr "inventarios"
+
+#~ msgid "search"
+#~ msgstr "búsqueda"
+
+#~ msgid "Copyright 2007 Roberto Rosario"
+#~ msgstr "Copyright 2007 Roberto Rosario"
 
 #~ msgid "ok"
 #~ msgstr "ok"

@@ -1,0 +1,297 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-28 09:36-0400\n"
+"PO-Revision-Date: 2011-01-28 09:42\n"
+"Last-Translator: <admin@admin.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Translated-Using: django-rosetta 0.5.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:10 urls.py:19
+msgid "purchase request states"
+msgstr "estados solicitud de compra"
+
+#: __init__.py:11 urls.py:20
+msgid "create new purchase request state"
+msgstr "crear nuevo estado de solicitud de compra"
+
+#: __init__.py:12 __init__.py:26 __init__.py:31
+msgid "edit state"
+msgstr "editar estado"
+
+#: __init__.py:13 __init__.py:27 __init__.py:32
+msgid "delete state"
+msgstr "eliminar el estado"
+
+#: __init__.py:15 models.py:43 urls.py:24
+msgid "purchase requests"
+msgstr "solicitudes de compra"
+
+#: __init__.py:16
+msgid "create new request"
+msgstr "crear nueva solicitud"
+
+#: __init__.py:17
+msgid "edit request"
+msgstr "editar solicitud"
+
+#: __init__.py:18
+msgid "delete request"
+msgstr "eliminar solicitud"
+
+#: __init__.py:20 __init__.py:40
+msgid "add new item"
+msgstr ""
+
+#: __init__.py:21 __init__.py:41
+msgid "edit item"
+msgstr ""
+
+#: __init__.py:22 __init__.py:42
+msgid "delete item"
+msgstr ""
+
+#: __init__.py:24 urls.py:34
+msgid "purchase order states"
+msgstr "estados de órdenes de compra"
+
+#: __init__.py:25 urls.py:35
+msgid "create new purchase order state"
+msgstr "crear nuevo estado de orden de compra"
+
+#: __init__.py:29 urls.py:46
+msgid "purchase order item states"
+msgstr ""
+
+#: __init__.py:30
+msgid "create new item state"
+msgstr ""
+
+#: __init__.py:34 models.py:99 urls.py:39
+msgid "purchase orders"
+msgstr "órdenes de compra"
+
+#: __init__.py:35
+msgid "create new order"
+msgstr "crear nueva orden"
+
+#: __init__.py:36
+msgid "edit order"
+msgstr "editar orden"
+
+#: __init__.py:37
+msgid "delete order"
+msgstr "eliminar orden"
+
+#: __init__.py:38
+msgid "close order"
+msgstr "cerrar orden"
+
+#: __init__.py:43
+msgid "close item"
+msgstr ""
+
+#: __init__.py:45
+msgid "template"
+msgstr "plantilla"
+
+#: __init__.py:48 __init__.py:49 models.py:35 models.py:95 models.py:127
+#: models.py:130 views.py:79
+msgid "status"
+msgstr "estado"
+
+#: __init__.py:75
+msgid "purchases"
+msgstr "compras"
+
+#: models.py:15 models.py:73 models.py:110
+msgid "name"
+msgstr "nombre"
+
+#: models.py:18 models.py:19 models.py:146
+msgid "purchase request status"
+msgstr "estados de compra de solicitud"
+
+#: models.py:30 models.py:88
+msgid "user defined id"
+msgstr "Identificador definido por el usuario"
+
+#: models.py:31 models.py:91
+msgid "issue date"
+msgstr "fecha de emisión"
+
+#: models.py:32 models.py:92
+msgid "date required"
+msgstr "fecha requerido"
+
+#: models.py:33
+msgid "budget"
+msgstr "presupuesto"
+
+#: models.py:34 models.py:93 models.py:129 views.py:80
+msgid "active"
+msgstr "activo"
+
+#: models.py:36
+msgid "originator"
+msgstr "originador"
+
+#: models.py:37 models.py:58 models.py:94
+msgid "notes"
+msgstr "notas"
+
+#: models.py:42 models.py:55 models.py:89 models.py:147 urls.py:28
+msgid "purchase request"
+msgstr "solicitud de compra"
+
+#: models.py:56 models.py:126
+msgid "item template"
+msgstr ""
+
+#: models.py:57 models.py:131
+msgid "quantity"
+msgstr "cantidad"
+
+#: models.py:61 models.py:148 urls.py:32
+msgid "purchase request item"
+msgstr ""
+
+#: models.py:62 views.py:27
+msgid "purchase request items"
+msgstr ""
+
+#: models.py:76 models.py:77 models.py:149 urls.py:37
+msgid "purchase order status"
+msgstr ""
+
+#: models.py:90
+msgid "supplier"
+msgstr "proveedor"
+
+#: models.py:98 models.py:125 models.py:151 urls.py:43
+msgid "purchase order"
+msgstr ""
+
+#: models.py:113 models.py:114 models.py:150 urls.py:49
+msgid "purchase order item status"
+msgstr ""
+
+#: models.py:128 views.py:78
+msgid "agreed price"
+msgstr "precio acordado"
+
+#: models.py:132
+msgid "received"
+msgstr "recibido"
+
+#: models.py:135 models.py:152 urls.py:53
+msgid "purchase order item"
+msgstr ""
+
+#: models.py:136 views.py:73
+msgid "purchase order items"
+msgstr ""
+
+#: urls.py:22
+msgid "purchase request state"
+msgstr ""
+
+#: urls.py:26
+msgid "create new purchase request"
+msgstr ""
+
+#: urls.py:39
+msgid "Active"
+msgstr "Activo"
+
+#: urls.py:39 views.py:80
+msgid "Open"
+msgstr "Abierto"
+
+#: urls.py:39 views.py:80
+msgid "Closed"
+msgstr "Cerrado"
+
+#: urls.py:41
+msgid "create new purchase order"
+msgstr "crear nueva orden de compra"
+
+#: urls.py:47
+msgid "create new purchase order item state"
+msgstr ""
+
+#: views.py:22
+#, python-format
+msgid "details for purchase request: %s"
+msgstr ""
+
+#: views.py:29 views.py:76
+msgid "qty"
+msgstr "Cantidad"
+
+#: views.py:42
+msgid "The purchase request item was created successfully."
+msgstr ""
+
+#: views.py:50
+msgid "add new purchase request item"
+msgstr ""
+
+#: views.py:68
+#, python-format
+msgid "details for purchase order: %s"
+msgstr "detalles para orden de compra: %s"
+
+#: views.py:77
+msgid "amount received"
+msgstr "cantidad recibida"
+
+#: views.py:94
+#, python-format
+msgid "Are you sure you wish close the purchase order: %s?"
+msgstr "¿Está seguro que desea cerrar la orden de compra:%s?"
+
+#: views.py:97
+msgid "There are still open items."
+msgstr ""
+
+#: views.py:101
+msgid "This purchase order has already been closed."
+msgstr "Esta orden de compra ya ha sido cerrada."
+
+#: views.py:110
+msgid "The purchase order has been closed successfully."
+msgstr "La orden de compra se ha cerrado con éxito."
+
+#: views.py:122
+#, python-format
+msgid "Are you sure you wish close the purchase item order: %s?"
+msgstr ""
+
+#: views.py:126
+msgid "This purchase order item has already been closed."
+msgstr ""
+
+#: views.py:134
+msgid "The purchase order item has been closed successfully."
+msgstr ""
+
+#: views.py:149
+msgid "The purchase order item was created successfully."
+msgstr ""
+
+#: views.py:157
+msgid "add new purchase order item"
+msgstr ""

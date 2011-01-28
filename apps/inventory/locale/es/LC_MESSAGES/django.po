@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-24 16:41-0400\n"
-"PO-Revision-Date: 2011-01-24 16:44\n"
+"POT-Creation-Date: 2011-01-28 09:35-0400\n"
+"PO-Revision-Date: 2011-01-28 09:36\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,66 +31,89 @@ msgstr "crear nuevo inventario"
 msgid "current balances"
 msgstr "balances corrientes"
 
-#: __init__.py:13 __init__.py:18 __init__.py:22 __init__.py:23 __init__.py:28
-#: __init__.py:35
+#: __init__.py:13 __init__.py:19 __init__.py:24 __init__.py:29 __init__.py:37
 msgid "edit"
 msgstr "editar"
 
-#: __init__.py:14 __init__.py:19 __init__.py:24 __init__.py:29 __init__.py:36
+#: __init__.py:14 __init__.py:20 __init__.py:25 __init__.py:30 __init__.py:38
 msgid "delete"
 msgstr "eliminar"
 
-#: __init__.py:16
+#: __init__.py:15 models.py:115
+msgid "inventory transactions"
+msgstr "transacciones de inventarios"
+
+#: __init__.py:17
 msgid "view all transactions"
 msgstr "ver todas las transacciones"
 
-#: __init__.py:17
+#: __init__.py:18
 msgid "create new transaction"
 msgstr "crear nueva transacción"
 
-#: __init__.py:21 models.py:27 models.py:149 urls.py:48 urls.py:51
+#: __init__.py:22 models.py:27 models.py:149 urls.py:49 urls.py:52
 msgid "locations"
 msgstr "localizaciones"
 
-#: __init__.py:26
+#: __init__.py:23
+msgid "create new location"
+msgstr "crear nueva localización"
+
+#: __init__.py:27
 msgid "create new supplier"
 msgstr "crear nuevo suplidor"
 
-#: __init__.py:27 models.py:139 urls.py:55 views.py:69
+#: __init__.py:28 models.py:139 urls.py:56 views.py:67
 msgid "suppliers"
 msgstr "suplidores"
 
-#: __init__.py:30
+#: __init__.py:31
 msgid "assign templates"
 msgstr "plantillas sin asignar"
 
 #: __init__.py:32
+msgid "related purchase orders"
+msgstr "ordenes de compras relacionadas"
+
+#: __init__.py:34
 msgid "view all"
 msgstr "ver todos"
 
-#: __init__.py:33
+#: __init__.py:35
 msgid "create new"
 msgstr "crear nuevo"
 
-#: __init__.py:34
+#: __init__.py:36
 msgid "orphans"
 msgstr "huérfanos"
 
-#: __init__.py:37
+#: __init__.py:39
 msgid "photos"
 msgstr "fotos"
 
-#: __init__.py:38
+#: __init__.py:40
 msgid "related assets"
 msgstr "activos relacionados"
 
-#: __init__.py:39
+#: __init__.py:41
 msgid "assign supplies"
 msgstr "asignar suministros"
 
-#: __init__.py:40
+#: __init__.py:42
 msgid "assign suppliers"
 msgstr "asignar suplidores"
+
+#: __init__.py:50 models.py:26 models.py:80
+msgid "location"
+msgstr "localización"
+
+#: __init__.py:69 models.py:148 views.py:35
+msgid "templates"
+msgstr "plantillas"
+
+#: __init__.py:70 models.py:84 urls.py:35
+msgid "inventories"
+msgstr "inventarios"
 
 #: models.py:16 models.py:79 models.py:127
 msgid "name"
@@ -104,10 +127,6 @@ msgstr "dirección"
 #: models.py:21 models.py:22 models.py:132 models.py:133
 msgid "phone number"
 msgstr "número de teléfono"
-
-#: models.py:26 models.py:80
-msgid "location"
-msgstr "localización"
 
 #: models.py:38 models.py:62
 msgid "description"
@@ -129,11 +148,11 @@ msgstr "número de pieza"
 msgid "notes"
 msgstr "notas"
 
-#: models.py:43 views.py:53
+#: models.py:43 views.py:51
 msgid "supplies"
 msgstr "suministros"
 
-#: models.py:48 urls.py:24 urls.py:27
+#: models.py:48 urls.py:24 urls.py:25 urls.py:26 urls.py:27 urls.py:30
 msgid "item template"
 msgstr "plantilla"
 
@@ -149,29 +168,17 @@ msgstr "tiempo y hora"
 msgid "inventory"
 msgstr "inventario"
 
-#: models.py:84 urls.py:35
-msgid "inventories"
-msgstr "inventarios"
-
 #: models.py:110
 msgid "date"
 msgstr "fecha"
 
-#: models.py:114
+#: models.py:114 urls.py:47
 msgid "inventory transaction"
 msgstr "transacción de inventario"
 
-#: models.py:115
-msgid "inventory transactions"
-msgstr "transacciones de inventarios"
-
-#: models.py:138 urls.py:58
+#: models.py:138 models.py:151 urls.py:59
 msgid "supplier"
 msgstr "suplidor"
-
-#: models.py:148 views.py:37
-msgid "templates"
-msgstr "plantillas"
 
 #: urls.py:27
 msgid "Will be deleted from any user that may have it assigned and from any item group."
@@ -181,65 +188,74 @@ msgstr "Se eliminara de cualquier usuario que lo tenga asignado y de cualquier g
 msgid "orphan templates"
 msgstr "plantillas huérfanas"
 
-#: urls.py:42
+#: urls.py:43
 msgid "transactions"
 msgstr "transacciones"
 
-#: urls.py:44
+#: urls.py:45
 msgid "Transaction details"
 msgstr "detalles de transacción"
 
-#: views.py:29
+#: views.py:27
 #, python-format
 msgid "Assign templates to the supplier: <a href=\"%(url)s\">%(obj)s</a>"
 msgstr ""
 
-#: views.py:35
+#: views.py:33
 msgid "Unassigned templates"
 msgstr "Plantillas sin asignar"
 
-#: views.py:36
+#: views.py:34
 msgid "Assigned templates"
 msgstr "Plantillas asignados"
 
-#: views.py:45
+#: views.py:43
 #, python-format
 msgid "Assign supplies to the template: <a href=\"%(url)s\">%(obj)s</a>"
 msgstr ""
 
-#: views.py:51
+#: views.py:49
 msgid "Unassigned supplies"
 msgstr "Suministros sin asignar"
 
-#: views.py:52
+#: views.py:50
 msgid "Assigned supplies"
 msgstr "Suministros asignados"
 
-#: views.py:61
+#: views.py:59
 #, python-format
 msgid "Assign suppliers to the template: <a href=\"%(url)s\">%(obj)s</a>"
 msgstr ""
 
-#: views.py:67
+#: views.py:65
 msgid "Unassigned suppliers"
 msgstr "Ssuministros sin asignar"
 
-#: views.py:68
+#: views.py:66
 msgid "Assigned suppliers"
 msgstr "Suministros asignados"
 
-#: views.py:79
+#: views.py:77
 msgid "assets that use the template"
 msgstr "activos que utilizan la plantilla"
 
-#: views.py:98
+#: views.py:95
 msgid "quantity"
 msgstr "cantidad"
 
-#: views.py:101
+#: views.py:98
 #, python-format
 msgid "current balances for inventory: %s"
 msgstr "balances actuales para inventario: %s"
+
+#: views.py:112
+#, python-format
+msgid "transactions for inventory: %s"
+msgstr "transacciones para el inventario: %s"
+
+#: views.py:124
+msgid "purchase orders from supplier"
+msgstr "órdenes de compra del proveedor"
 
 #: templates/report-items_per_person.html:14
 msgid "User assets report"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-20 23:57-0400\n"
-"PO-Revision-Date: 2011-01-20 23:58\n"
+"POT-Creation-Date: 2011-01-28 09:28-0400\n"
+"PO-Revision-Date: 2011-01-28 09:31\n"
 "Last-Translator: <admin@admin.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: api.py:21
 #, python-format
 msgid "Could not open specified csv file, %s, or it does not exist"
-msgstr ""
+msgstr "No se pudo abrir el archivo csv especificado, %s, o no existe"
 
 #: api.py:55
 #, python-format
@@ -67,11 +67,11 @@ msgstr "Modelo que recibira los datos."
 
 #: forms.py:69
 msgid "import preview"
-msgstr ""
+msgstr "vista previa de importación"
 
 #: forms.py:72
 msgid "Preview"
-msgstr ""
+msgstr "Prevista"
 
 #: forms.py:73
 msgid "Start row"
@@ -83,23 +83,23 @@ msgstr "Delimitador"
 
 #: forms.py:74
 msgid "A one-character string used to separate fields. It defaults to \",\"."
-msgstr ""
+msgstr "Una cadena de un carácter utilizado para separar los campos. Por defecto es \",\"."
 
 #: forms.py:75
 msgid "Quote character"
-msgstr ""
+msgstr "Carácter de cita"
 
 #: forms.py:75
 msgid "A one-character string used to quote fields containing special characters, such as the delimiter or quote character, or which contain new-line characters. It defaults to \"."
-msgstr ""
+msgstr "Una cadena de un carácter utilizado para citar a los campos que contienen caracteres especiales, tales como el carácter delimitador o de cita, o que contengan caracteres de nueva línea. Por defecto es \"."
 
 #: forms.py:76
 msgid "Doublequote"
-msgstr ""
+msgstr "Doble comilla"
 
 #: forms.py:76
 msgid "Controls how instances of the quote character appearing inside a field should be themselves be quoted. When True, the character is doubled. When False, the escape character is used as a prefix to the quote character. It defaults to True."
-msgstr ""
+msgstr "Controla cómo las instancias del carácter de comillas que aparecen dentro de un campo debe ser ellos mismos citados. Cuando esta encendida esta opción, el carácter se duplica. De lo contrario, el carácter de escape se usa como prefijo el carácter de comillas. Por defecto es encendido."
 
 #: forms.py:77
 msgid "Escape character"
@@ -107,15 +107,15 @@ msgstr "Carácter de escape"
 
 #: forms.py:77
 msgid "The escape character removes any special meaning from the following character. It defaults to None, which disables escaping."
-msgstr ""
+msgstr "El carácter de escape quita cualquier significado especial del carácter siguiente. Su valor predeterminado es vacio, que desactiva el escape."
 
 #: forms.py:78
 msgid "Skip initial space"
-msgstr ""
+msgstr "Saltar espacio inicial"
 
 #: forms.py:78
 msgid "When True, whitespace immediately following the delimiter is ignored. The default is False."
-msgstr ""
+msgstr "Cuando se enciende, los espacios en blanco inmediatamente después del delimitador se ignoran. El valor predeterminado es apagado."
 
 #: forms.py:85
 msgid "Model field"
@@ -159,17 +159,17 @@ msgstr "Suba un documento a ser importado"
 
 #: views.py:75
 msgid "There are no settings available to download."
-msgstr ""
+msgstr "No hay ajustes disponibles para descargar."
 
-#: templates/import_wizard.html:10
+#: templates/import_wizard.html:11
 #, python-format
 msgid "Step %(step)s of %(step_count)s"
 msgstr "Paso %(step)s de %(step_count)s"
 
-#: templates/import_wizard.html:34
+#: templates/import_wizard.html:35
 msgid "Next"
 msgstr "Próximo"
 
-#: templates/import_wizard.html:34
+#: templates/import_wizard.html:35
 msgid "Finalize"
 msgstr "Finalizar"
