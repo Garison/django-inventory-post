@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} :: {% include "calculate_form_title.html" %}{% endblock %}
+{% block title %} :: {% with "true" as striptags %}{% include "calculate_form_title.html" %}{% endwith %}{% endblock %}
 
 {% block content %}
     {% include "generic_form_subtemplate.html" %}

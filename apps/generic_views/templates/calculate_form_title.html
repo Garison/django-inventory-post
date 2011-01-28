@@ -11,9 +11,9 @@
     {% else %}
         {% if object %}
             {% if object_name %}
-                {% blocktrans %}Edit {{ object_name }}:{% endblocktrans %} <a href="{{ object.get_absolute_url }}">{{ object|capfirst }}</a>
+                {% blocktrans %}Edit {{ object_name }}:{% endblocktrans %} {% if not striptags %}<a href="{{ object.get_absolute_url }}">{% endif %}{{ object|capfirst }}{% if not striptags %}</a>{% endif %}
             {% else %}
-                {% trans "Edit" %}: <a href="{{ object.get_absolute_url }}">{{ object|capfirst }}</a>
+                {% trans "Edit" %}: {% if not striptags %}<a href="{{ object.get_absolute_url }}">{% endif %}{{ object|capfirst }}{% if not striptags %}</a>{% endif %}
             {% endif %}
         {% else %}
             {% if object_name %}
