@@ -17,9 +17,10 @@ def register_links(src, links, menu_name=None):
             else:
                 object_navigation[menu_name][src] = {'links':links}
     else:
+        object_navigation[menu_name] = {}        
         if hasattr(src, '__iter__'):
             for one_src in src:
-                object_navigation[menu_name] = {one_src:{'links':links}}
+                object_navigation[menu_name][one_src] = {'links':links}
         else:
             object_navigation[menu_name] = {src:{'links':links}}
         
