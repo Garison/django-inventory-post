@@ -3,12 +3,24 @@
     {{ title|capfirst }}
 {% else %}
     {% if read_only %}
-        {% blocktrans %}Details for: {{ object }}{% endblocktrans %}
+        {% if object_name %}
+            {% blocktrans %}Details for {{ object_name }}: {{ object }}{% endblocktrans %}
+        {% else %}
+            {% blocktrans %}Details for: {{ object }}{% endblocktrans %}
+        {% endif %}
     {% else %}
         {% if object %}
-            {% trans "Edit" %}: <a href="{{ object.get_absolute_url }}">{{ object|capfirst }}</a>
+            {% if object_name %}
+                {% blocktrans %}Edit {{ object_name }}:{% endblocktrans %} <a href="{{ object.get_absolute_url }}">{{ object|capfirst }}</a>
+            {% else %}
+                {% trans "Edit" %}: <a href="{{ object.get_absolute_url }}">{{ object|capfirst }}</a>
+            {% endif %}
         {% else %}
-            {% trans "Create" %}
+            {% if object_name %}
+                {% blocktrans %}Create new {{ object_name }}{% endblocktrans %}
+            {% else %}
+                {% trans "Create" %}
+            {% endif %}
         {% endif %}                
     {% endif %}
 {% endif %}
