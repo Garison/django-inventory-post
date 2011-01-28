@@ -2,7 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from models import Location, ItemTemplate, Inventory, InventoryTransaction, Supplier
 
-from common.api import register_links
+from common.api import register_links, register_menu
 
 import assets
 
@@ -64,5 +64,9 @@ register_links(InventoryTransaction, [inventory_transaction_update, inventory_tr
 register_links(['location_list', 'location_create', 'location_update', 'location_delete'], [location_create], menu_name='sidebar')
 register_links(Location, [location_update, location_delete])
 
+register_menu([
+    {'text':_('templates'), 'view':'template_list', 'links':template_menu_links, 'famfam':'page', 'position':1},
+    {'text':_('inventories'), 'view':'inventory_list', 'links':inventory_menu_links,'famfam':'package_go', 'position':4},
+])
 
 

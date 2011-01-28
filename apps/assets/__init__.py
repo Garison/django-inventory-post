@@ -1,6 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 
-from common.api import register_links
+from common.api import register_links, register_menu
 
 from models import State, Person, Item, ItemGroup
 
@@ -45,3 +45,10 @@ register_links(ItemGroup, [group_update, group_delete])
 
 register_links(['state_list', 'state_create', 'state_update', 'state_delete'], [state_create], menu_name='sidebar')
 register_links(State, [state_edit, state_delete])
+
+
+register_menu([
+    {'text':_('assets'), 'view':'item_list', 'links':[
+        asset_list, asset_create, asset_orphan_list, group_list, group_create, person_list, person_create 
+    ], 'famfam':'computer', 'position':2},
+])

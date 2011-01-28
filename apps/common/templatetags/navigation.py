@@ -7,9 +7,7 @@ from django.template import TemplateSyntaxError, Library, \
                             VariableDoesNotExist, Node, Variable
 from django.utils.text import unescape_string_literal
 
-from common.api import object_navigation
-#TODO: move this to common app
-from main import menu_navigation
+from common.api import object_navigation, menu_links as menu_navigation
 
 register = Library()
 
@@ -161,9 +159,7 @@ def resolve_links(context, links, current_view, current_path):
 
     return context_links
 
-
 def _get_object_navigation_links(context, menu_name=None):
-    #TODO: don't update original link dict, but copy instead
     current_path = Variable('request').resolve(context).META['PATH_INFO']
     current_view = resolve_to_name(current_path)#.get_full_path())
     context_links = []    
@@ -178,16 +174,20 @@ def _get_object_navigation_links(context, menu_name=None):
     except VariableDoesNotExist:
         obj = None
         
-    for src, data in object_navigation.items():
-        if data['menu_name'] == menu_name:
-            links = data['links']
-            if src == current_view:
-                for link in resolve_links(context, links, current_view, current_path):
-                    context_links.append(link)
-            elif src == type(obj):
-                for link in resolve_links(context, links, current_view, current_path):
-                    context_links.append(link)        
-               
+    try:
+        links = object_navigation[menu_name][current_view]['links']
+        for link in resolve_links(context, links, current_view, current_path):
+            context_links.append(link)            
+    except KeyError:
+        pass
+
+    try:
+        links = object_navigation[menu_name][type(obj)]['links']
+        for link in resolve_links(context, links, current_view, current_path):
+            context_links.append(link)            
+    except KeyError:
+        pass
+
     return context_links
 
 

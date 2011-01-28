@@ -4,20 +4,18 @@ import assets
 import inventory
 import movements
 
+from common.api import register_menu
+
 from assets.models import Item, Person, ItemGroup, State
 from inventory.models import ItemTemplate, Inventory, InventoryTransaction, Supplier, Location
     
-menu_navigation = [
-    {'text':_('home'), 'view':'home', 'famfam':'house'},
-    {'text':_('templates'), 'view':'template_list', 'links':inventory.template_menu_links, 'famfam':'page'},
-    {'text':_('assets'), 'view':'item_list', 'links':[
-        assets.asset_list, assets.asset_create, assets.asset_orphan_list, assets.group_list, assets.group_create, assets.person_list, assets.person_create 
-    ], 'famfam':'computer'},
-    {'text':_('inventories'), 'view':'inventory_list', 'links':inventory.inventory_menu_links,'famfam':'package_go'},
+register_menu([
+    {'text':_('home'), 'view':'home', 'famfam':'house', 'position':0},
+
     {'text':_('tools'), 'view':'location_list', 'links': [
         inventory.location_list, assets.state_list, inventory.supplier_list, movements.purchase_request_state_list,
-        {'text':_('import'), 'view':'import_wizard', 'famfam':'lightning_add'}
-    ],'famfam':'wrench'},
-    {'text':_('search'), 'view':'search', 'famfam':'zoom'},
-    {'text':_('about'), 'view':'about'},
-]
+        {'text':_('import'), 'view':'import_wizard', 'famfam':'lightning_add'},
+    ],'famfam':'wrench', 'name':'tools','position':5},
+    
+    {'text':_('about'), 'view':'about', 'position':7},
+])
