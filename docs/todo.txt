@@ -28,6 +28,7 @@
 Post release
 ============================
 
+# Add prefered suppliers m2m to Purchase Request Item
 # Allow True, False for filters
 # Widget override support for filters
 # Selectable sidebar searchbox

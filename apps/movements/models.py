@@ -51,7 +51,6 @@ class PurchaseRequest(models.Model):
 
 
 class PurchaseRequestItem(models.Model):
-    #Prefered suppliers m2m
     purchase_request = models.ForeignKey(PurchaseRequest, verbose_name=_(u'purchase request'))
     item_template = models.ForeignKey(ItemTemplate, verbose_name=_(u'item template'))
     qty = models.PositiveIntegerField(verbose_name=_(u'quantity'))
