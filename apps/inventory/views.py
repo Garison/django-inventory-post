@@ -75,7 +75,6 @@ def template_items(request, object_id):
         template_name = "generic_list.html", 
         extra_context=dict(
             title = '%s: %s' % (_(u"assets that use the template"), template),
-            create_view = 'item_create',
         ),
     )
 
@@ -114,6 +113,18 @@ def inventory_transactions(request, object_id):
     },
     context_instance=RequestContext(request))
     
+
+def supplier_purchase_orders(request, object_id):
+    supplier = get_object_or_404(Supplier, pk=object_id)
+    return object_list(
+        request,
+        queryset = supplier.purchaseorder_set.all(),
+        template_name = "generic_list.html", 
+        extra_context=dict(
+            title = '%s: %s' % (_(u"purchase orders from supplier"), supplier),
+        ),
+    )
+
 
 '''
 def item_log_list(request, object_id):

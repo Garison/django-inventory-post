@@ -58,7 +58,8 @@ urlpatterns = patterns('inventory.views',
     url(r'^supplier/(?P<object_id>\d+)/update/$', update_object, {'form_class':SupplierForm, 'template_name':'generic_form.html'}, 'supplier_update'),
     url(r'^supplier/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Supplier}, post_delete_redirect="supplier_list", extra_context=dict(object_name=_(u'supplier'))), 'supplier_delete'),
     url(r'^supplier/(?P<object_id>\d+)/assign/itemtemplates/$', 'supplier_assign_remove_itemtemplates', (), 'supplier_assign_itemtemplates'),
-
+    url(r'^supplier/(?P<object_id>\d+)/purchase/orders/$', 'supplier_purchase_orders', (), 'supplier_purchase_orders'),
+    
 #    url(r'^reports/items_per_person/(?P<object_id>\d+)/$', 'report_items_per_person', (), 'report_items_per_person'),
 )
     

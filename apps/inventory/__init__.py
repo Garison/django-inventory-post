@@ -29,6 +29,7 @@ supplier_list = {'text':_('suppliers'), 'view':'supplier_list', 'famfam':'lorry'
 supplier_update = {'text':_('edit'), 'view':'supplier_update', 'args':'object.id', 'famfam':'lorry'}
 supplier_delete = {'text':_('delete'), 'view':'supplier_delete', 'args':'object.id', 'famfam':'lorry_delete'}
 supplier_assign_itemtemplate = {'text':_(u'assign templates'), 'view':'supplier_assign_itemtemplates', 'args':'object.id', 'famfam':'page_go'}
+supplier_purchase_orders = {'text':_(u'related purchase orders'), 'view':'supplier_purchase_orders', 'args':'object.id', 'famfam':'cart_go'}
 
 template_list = {'text':_('view all'), 'view':'template_list', 'famfam':'page_go'}
 template_create = {'text':_('create new'), 'view':'template_create', 'famfam':'page_add'}
@@ -52,7 +53,7 @@ register_links(['template_list', 'template_create', 'template_view', 'template_o
 register_links(ItemTemplate, [template_update, template_delete, template_photos, template_assets, template_assign_supplies, template_assign_suppliers])
 
 register_links(['supplier_list', 'supplier_create', 'supplier_update', 'supplier_view', 'supplier_delete', 'supplier_assign_itemtemplates'], [supplier_create], menu_name='sidebar')
-register_links(Supplier, [supplier_update, supplier_delete, supplier_assign_itemtemplate])
+register_links(Supplier, [supplier_update, supplier_delete, supplier_assign_itemtemplate, supplier_purchase_orders])
 
 register_links(['inventory_list', 'inventory_create', 'inventory_current', 'inventory_update', 'inventory_delete'], [inventory_create], menu_name='sidebar')
 register_links(Inventory, [inventory_balances, inventory_update, inventory_delete, inventory_transactions])
