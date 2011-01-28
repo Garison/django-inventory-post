@@ -21,10 +21,15 @@
 # Insert license header to every .py file
 # Add reporting/hard copies
 # Export data to CSV
+# Generate POs from PRs
+# Transfer items from POs to inventory
+# Closed PO items can't be edited
 
 Post release
 ============================
 
+# Allow True, False for filters
+# Widget override support for filters
 # Selectable sidebar searchbox
 # Allow templates and items to have attachments (not just photos)
 # Implement uploadify
