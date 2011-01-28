@@ -18,7 +18,7 @@ from conf import settings as asset_settings
                                 
 urlpatterns = patterns('assets.views',
     url(r'^person/(?P<object_id>\d+)/photos/$', generic_photos, {'model':Person, 'max_photos':asset_settings.MAX_PERSON_PHOTOS}, 'person_photos'), 
-    url(r'^person/(?P<object_id>\d+)/$', generic_detail, {'form_class':PersonForm_view, 'queryset':Person.objects.all(), 'extra_context':{'subtemplates':['generic_photos_subtemplate.html']}}, 'person_view'),
+    url(r'^person/(?P<object_id>\d+)/$', generic_detail, {'form_class':PersonForm_view, 'queryset':Person.objects.all(), 'extra_context':{'sidebar_subtemplates':['generic_photos_subtemplate.html']}}, 'person_view'),
     url(r'^person/list/$', generic_list, {'queryset':Person.objects.all(), 'list_filters':[location_filter], 'extra_context':{'title':_(u'people')}}, 'person_list'),
     url(r'^person/create/$', create_object, {'form_class':PersonForm, 'template_name':'generic_form.html'}, 'person_create'),
     url(r'^person/(?P<object_id>\d+)/update/$', update_object, {'form_class':PersonForm, 'template_name':'generic_form.html'}, 'person_update'),
