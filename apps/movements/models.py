@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from inventory.models import Supplier, ItemTemplate
 
+from dynamic_search.api import register
 
 class PurchaseRequestStatus(models.Model):
     name = models.CharField(verbose_name=_(u'name'), max_length=32)
@@ -17,7 +18,7 @@ class PurchaseRequestStatus(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('purchase_request_state_list', [])
-        
+
 
 class PurchaseRequest(models.Model):
     user_id = models.CharField(max_length=32, null=True, blank=True, verbose_name=_(u'user defined id'))
@@ -41,7 +42,6 @@ class PurchaseRequest(models.Model):
         return ('purchase_request_view', [str(self.id)])
 
 
-
 class PurchaseRequestItem(models.Model):
     #Prefered suppliers m2m
     purchase_request = models.ForeignKey(PurchaseRequest, verbose_name=_(u'purchase request'))
@@ -59,6 +59,12 @@ class PurchaseRequestItem(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('purchase_request_view', [str(self.purchase_request.id)])
+
+
+register(PurchaseRequestStatus, _(u'purchase request status'), ['name'])
+register(PurchaseRequest, _(u'purchase request'), ['user_id', 'id', 'budget', 'status__name'])
+register(PurchaseRequestItem, _(u'purchase request item'), ['item_template__description', 'qty', 'notes'])
+
 
 """
 ChangeOrder
