@@ -4,6 +4,7 @@ from django.views.generic.simple import direct_to_template
 
 urlpatterns = patterns('common.views',
     url(r'^about/$', direct_to_template, { 'template' : 'about.html'}, 'about'),
+    url(r'^password/change/done/$', 'password_change_done', (), name='password_change_done'),
 )
 
 urlpatterns += patterns('',
@@ -11,7 +12,7 @@ urlpatterns += patterns('',
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page' : '/'}, name='logout_view' ),
 
     url(r'^password/change/$', 'django.contrib.auth.views.password_change', {'template_name': 'password_change_form.html', 'post_change_redirect': '/password/change/done/'}, name='password_change_view'),
-    url(r'^password/change/done/$', 'django.contrib.auth.views.password_change_done', {'template_name': 'password_change_done.html'}),
+    #url(r'^password/change/done/$', 'django.contrib.auth.views.password_change_done', {'template_name': 'password_change_done.html'}),
 
     url(r'^password/reset/$', 'django.contrib.auth.views.password_reset', {'email_template_name' : 'password_reset_email.html', 'template_name': 'password_reset_form.html', 'post_reset_redirect' : '/password/reset/done'}, name='password_reset_view'),
     url(r'^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', { 'template_name' : 'password_reset_confirm.html', 'post_reset_redirect' : '/password/reset/complete/'}, name='password_reset_confirm_view'),
