@@ -12,12 +12,14 @@ inventory_create = {'text':_('create new inventory'), 'view':'inventory_create',
 inventory_balances = {'text':_(u'current balances'), 'view':'inventory_current', 'args':'object.id', 'famfam':'book_addresses'}
 inventory_update = {'text':_(u'edit'), 'view':'inventory_update', 'args':'object.id', 'famfam':'package_green'}
 inventory_delete = {'text':_(u'delete'), 'view':'inventory_delete', 'args':'object.id', 'famfam':'package_delete'}
-inventory_transactions = {'text':_(u'inventory transactions'), 'view':'inventory_transactions', 'args':'object.id', 'famfam':'book_go'}
+inventory_create_transaction = {'text':_('add transaction'), 'view':'inventory_create_transaction', 'args':'object.id', 'famfam':'book_add'}
+inventory_view = {'text':_(u'details'), 'view':'inventory_view', 'args':'object.id', 'famfam':'package_go'}
 
 inventory_transaction_list = {'text':_('view all transactions'), 'view':'inventory_transaction_list', 'famfam':'book_go'}
 inventory_transaction_create = {'text':_('create new transaction'), 'view':'inventory_transaction_create', 'famfam':'book_add'}
 inventory_transaction_update = {'text':_(u'edit'), 'view':'inventory_transaction_update', 'args':'object.id', 'famfam':'book_add'}
 inventory_transaction_delete = {'text':_(u'delete'), 'view':'inventory_transaction_delete', 'args':'object.id', 'famfam':'book_delete'}
+inventory_transaction_view = {'text':_(u'details'), 'view':'inventory_transaction_view', 'args':'object.id', 'famfam':'book_go'}
 
 location_list = {'text':_('locations'), 'view':'location_list', 'famfam':'map'}
 location_create = {'text':_(u'create new location'), 'view':'location_create', 'famfam':'map_add'}
@@ -41,10 +43,12 @@ template_assets = {'text':_(u'related assets'), 'view':'template_items_list', 'a
 template_assign_supplies = {'text':_(u'assign supplies'), 'view':'template_assign_supply', 'args':'object.id', 'famfam':'monitor'}
 template_assign_suppliers = {'text':_(u'assign suppliers'), 'view':'template_assign_suppliers', 'args':'object.id', 'famfam':'lorry_go'}
 
+jump_to_template = {'text':_(u'template'), 'view':'template_view', 'args':'object.supply.id', 'famfam':'page_go'}
+jump_to_inventory = {'text':_(u'return to inventory'), 'view':'inventory_view', 'args':'object.inventory.id', 'famfam':'package_go'}
 
 template_menu_links = [template_list, template_create, template_orphan_list]
 inventory_menu_links = [
-    inventory_list, inventory_create, inventory_transaction_list, inventory_transaction_create
+    inventory_list, inventory_create#, inventory_transaction_list, inventory_transaction_create
 ]
 
 location_filter = {'name':'location', 'title':_(u'location'), 'queryset':Location.objects.all(), 'destination':'location'}
@@ -55,12 +59,13 @@ register_links(ItemTemplate, [template_update, template_delete, template_photos,
 register_links(['supplier_list', 'supplier_create', 'supplier_update', 'supplier_view', 'supplier_delete', 'supplier_assign_itemtemplates'], [supplier_create], menu_name='sidebar')
 register_links(Supplier, [supplier_update, supplier_delete, supplier_assign_itemtemplate, supplier_purchase_orders])
 
-register_links(['inventory_list', 'inventory_create', 'inventory_current', 'inventory_update', 'inventory_delete'], [inventory_create], menu_name='sidebar')
-register_links(Inventory, [inventory_balances, inventory_update, inventory_delete, inventory_transactions])
-register_links('inventory_transactions', [inventory_transaction_create], menu_name='sidebar')
+register_links(['inventory_view', 'inventory_list', 'inventory_create', 'inventory_current', 'inventory_update', 'inventory_delete'], [inventory_create], menu_name='sidebar')
+register_links(Inventory, [inventory_balances, inventory_update, inventory_delete, inventory_create_transaction])
+register_links(Inventory, [inventory_view], menu_name='sidebar')
 
-register_links(['inventory_transaction_list', 'inventory_transaction_create', 'inventory_transaction_update', 'inventory_transaction_delete'], [inventory_transaction_create], menu_name='sidebar')
-register_links(InventoryTransaction, [inventory_transaction_update, inventory_transaction_delete])
+register_links(['inventory_transaction_list', 'inventory_transaction_create', 'inventory_transaction_update', 'inventory_transaction_delete', 'inventory_transaction_view'], [inventory_create_transaction], menu_name='sidebar')
+register_links(InventoryTransaction, [inventory_transaction_view, inventory_transaction_update, inventory_transaction_delete, jump_to_template])
+register_links(InventoryTransaction, [jump_to_inventory], menu_name='sidebar')
 
 register_links(['location_list', 'location_create', 'location_update', 'location_delete'], [location_create], menu_name='sidebar')
 register_links(Location, [location_update, location_delete])

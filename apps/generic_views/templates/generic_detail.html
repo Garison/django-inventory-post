@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load styling %}
 {% load generic_views_helpers %}
-{% block title %} :: {% blocktrans %}Details for {{ title }} {{ object }}{% endblocktrans %}{% endblock %}
+{% block title %} :: {% with "true" as read_only %}{% with "true" as striptags %}{% include "calculate_form_title.html" %}{% endwith %}{% endwith %}{% endblock %}
 
 {% block javascript %}
     <script type="text/javascript">
@@ -32,7 +32,7 @@
 
 {% block content %}
     <div id="subform">
-        {% with 'true' as read_only %}
+        {% with "true" as read_only %}
             {% include "generic_form_subtemplate.html" %}
         {% endwith %}
     </div>
@@ -47,9 +47,11 @@
     {% with subtemplate.title as title %}
     {% with subtemplate.object_list as object_list %}
     {% with subtemplate.extra_columns as extra_columns %}
+    {% with subtemplate.hide_object as hide_object %}
         <div class="content">
         {% include subtemplate.name %}
         </div>
+    {% endwith %}
     {% endwith %}
     {% endwith %}
     {% endwith %}

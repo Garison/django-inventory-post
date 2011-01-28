@@ -8,8 +8,6 @@ from generic_views.views import generic_assign_remove, \
 
 from photos.views import generic_photos
 
-from inventory import location_filter
-
 from models import ItemTemplate, InventoryTransaction, \
                    Inventory, Log, Location, Supplier
                    
@@ -32,18 +30,18 @@ urlpatterns = patterns('inventory.views',
     url(r'^template/(?P<object_id>\d+)/assign/supplies$', 'template_assign_remove_supply', (), name='template_assign_supply'),
     url(r'^template/(?P<object_id>\d+)/assign/suppliers/$', 'template_assign_remove_suppliers', (), name='template_assign_suppliers'),
 
-    url(r'^inventory/list/$', generic_list, dict({'queryset':Inventory.objects.all()}, extra_context=dict(title=_(u'inventories'))), 'inventory_list'),
-    url(r'^inventory/create/$', create_object, {'model':Inventory, 'template_name':'generic_form.html'}, 'inventory_create'),
-    url(r'^inventory/(?P<object_id>\d+)/$', generic_detail, dict(form_class=InventoryForm, queryset=Inventory.objects.all()), 'inventory_view'),
-    url(r'^inventory/(?P<object_id>\d+)/update/$', update_object, {'form_class':InventoryForm, 'template_name':'generic_form.html'}, 'inventory_update'),
+    url(r'^inventory/list/$', generic_list, dict({'queryset':Inventory.objects.all()}, extra_context=dict(title=_(u'inventories'), extra_columns=[{'name':_(u'location'), 'attribute':'location'}])), 'inventory_list'),
+    url(r'^inventory/create/$', create_object, {'model':Inventory, 'template_name':'generic_form.html', 'extra_context':{'object_name':_(u'inventory')}}, 'inventory_create'),
+    url(r'^inventory/(?P<object_id>\d+)/$', 'inventory_view', (),'inventory_view'),
+    url(r'^inventory/(?P<object_id>\d+)/update/$', update_object, {'form_class':InventoryForm, 'template_name':'generic_form.html', 'extra_context':{'object_name':_(u'inventory')}}, 'inventory_update'),
     url(r'^inventory/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Inventory}, post_delete_redirect="inventory_list", extra_context=dict(object_name=_(u'inventory'))), 'inventory_delete'),
     url(r'^inventory/(?P<object_id>\d+)/current/$', 'inventory_current', (), 'inventory_current'),
-    url(r'^inventory/(?P<object_id>\d+)/transactions/$', 'inventory_transactions', (), 'inventory_transactions'),
+    url(r'^inventory/(?P<object_id>\d+)/transaction/create/$', 'inventory_create_transaction', (), 'inventory_create_transaction'),
 
     url(r'^transaction/list/$', generic_list, dict({'queryset':InventoryTransaction.objects.all()}, extra_context=dict(title=_(u'transactions'))), 'inventory_transaction_list'),
-    url(r'^transaction/create/$', create_object, {'model':InventoryTransaction, 'template_name':'generic_form.html'}, 'inventory_transaction_create'),
-    url(r'^transaction/(?P<object_id>\d+)/$', generic_detail, dict(form_class=InventoryTransactionForm, queryset=InventoryTransaction.objects.all(), title=_(u'Transaction details')), 'inventory_transaction_view'),
-    url(r'^transaction/(?P<object_id>\d+)/update/$', update_object, {'model':InventoryTransaction, 'template_name':'generic_form.html'}, 'inventory_transaction_update'),
+    url(r'^transaction/create/$', create_object, {'model':InventoryTransaction, 'template_name':'generic_form.html', 'extra_context':{'object_name':_(u'transaction')}}, 'inventory_transaction_create'),
+    url(r'^transaction/(?P<object_id>\d+)/$', generic_detail, dict(form_class=InventoryTransactionForm, queryset=InventoryTransaction.objects.all(), extra_context={'object_name':_(u'transaction')}), 'inventory_transaction_view'),
+    url(r'^transaction/(?P<object_id>\d+)/update/$', update_object, {'model':InventoryTransaction, 'template_name':'generic_form.html', 'extra_context':{'object_name':_(u'transaction')}}, 'inventory_transaction_update'),
     url(r'^transaction/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':InventoryTransaction}, post_delete_redirect="inventory_transaction_list", extra_context=dict(object_name=_(u'inventory transaction'))), 'inventory_transaction_delete'),
 
     url(r'^location/list/$', generic_list, dict({'queryset':Location.objects.all()}, extra_context=dict(title =_(u'locations'))), 'location_list'),

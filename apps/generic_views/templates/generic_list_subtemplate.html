@@ -29,7 +29,9 @@
     <tbody>
       {% if not hide_header %}
           <tr>
-            <th>{% trans 'Identifier' %}</th>
+            {% if not hide_object %}
+                <th>{% trans 'Identifier' %}</th>
+            {% endif %}
             {% for column in extra_columns %}
                 <th>{{ column.name|capfirst }}</th>
             {% endfor %}        
@@ -40,6 +42,7 @@
       {% endif %}
         {% for object in object_list %}
             <tr class="{% cycle 'odd' 'even2' %}">
+            {% if not hide_object %}
                 {% if main_object %}
                     {% with object|object_property:main_object as object %}
                         <td>{% if not hide_link %}<a href="{{ object.get_absolute_url }}">{{ object }}</a>{% else %}{{ object }}{% endif %}</td>
@@ -47,8 +50,9 @@
                 {% else %}
                     <td>{% if not hide_link %}<a href="{{ object.get_absolute_url }}">{{ object }}</a>{% else %}{{ object }}{% endif %}</td>
                 {% endif %}
+            {% endif %}
                 {% for column in extra_columns %}
-                    <td>{{ object|object_property:column.attribute }}</td>
+                    <td>{{ object|object_property:column.attribute|safe }}</td>
                 {% endfor %}
                 {% if not hide_links %}
                     <td class='last'>

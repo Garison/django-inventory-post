@@ -35,6 +35,10 @@ class InventoryForm(forms.ModelForm):
         model = Inventory
 
 
+class InventoryForm_view(DetailForm):
+    class Meta:
+        model = Inventory
+
 class InventoryTransactionForm(forms.ModelForm):
     class Meta:
         model = InventoryTransaction

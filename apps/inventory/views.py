@@ -18,6 +18,8 @@ from models import ItemTemplate, Inventory, \
 
 from inventory import location_filter
 
+from forms import InventoryForm_view, InventoryTransactionForm
+
 
 def supplier_assign_remove_itemtemplates(request, object_id):
     obj = get_object_or_404(Supplier, pk=object_id)
@@ -78,6 +80,51 @@ def template_items(request, object_id):
         ),
     )
 
+def inventory_view(request, object_id):
+    inventory = get_object_or_404(Inventory, pk=object_id)
+    form = InventoryForm_view(instance=inventory)
+    
+    return render_to_response('generic_detail.html', {
+        #'title':_(u'details for inventory: %s') % inventory,
+        'object_name':_(u'inventory'),
+        'object':inventory,
+        'form':form,
+        'subtemplates_dict':[{
+            'name':'generic_list_subtemplate.html',
+            'title':_(u'inventory transactions'),
+            'object_list':inventory.inventorytransaction_set.all(),
+            'hide_object':True,
+
+            'extra_columns':[
+                #{'name':_(u'transaction'), 'attribute':lambda x: '<a href="%s">%s</a>' % (x.get_absolute_url(), x.supply)},
+                {'name':_(u'item'), 'attribute':'supply'},
+                {'name':_(u'qty'), 'attribute':'quantity'},
+                {'name':_(u'date'), 'attribute':'date'},
+            ],
+        }]
+    },
+    context_instance=RequestContext(request))
+
+
+def inventory_create_transaction(request, object_id):
+    inventory = get_object_or_404(Inventory, pk=object_id)
+    
+    if request.method == 'POST':
+        form = InventoryTransactionForm(request.POST)#, initial={'purchase_order':purchase_order})
+        if form.is_valid():
+            form.save()
+            msg = _(u'The inventory transaction was created successfully.')
+            messages.success(request, msg, fail_silently=True)            
+            return redirect(inventory.get_absolute_url())
+    else:
+        form = InventoryTransactionForm(initial={'inventory':inventory})
+
+    return render_to_response('generic_form.html', {
+        'form':form,
+        'object':inventory,
+        'title':_(u'add new transaction') ,
+    },
+    context_instance=RequestContext(request))
 
 def inventory_current(request, object_id):
     inventory = get_object_or_404(Inventory, pk=object_id)
@@ -99,20 +146,6 @@ def inventory_current(request, object_id):
     },
     context_instance=RequestContext(request))
 
-
-def inventory_transactions(request, object_id):
-    inventory = get_object_or_404(Inventory, pk=object_id)
-    transactions = InventoryTransaction.objects.filter(inventory=inventory)
-
-    return render_to_response('generic_list.html', {
-        'object_list':transactions,
-        #'extra_columns':[{'name':_(u'quantity'),'attribute':'qty'}],
-        #'main_object':'inventory_transaction',
-        #'object':inventory,
-        'title':_(u'transactions for inventory: %s') % inventory,
-    },
-    context_instance=RequestContext(request))
-    
 
 def supplier_purchase_orders(request, object_id):
     supplier = get_object_or_404(Supplier, pk=object_id)

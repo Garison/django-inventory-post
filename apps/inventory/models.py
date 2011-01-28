@@ -88,7 +88,7 @@ class Inventory(models.Model):
         return ('inventory_view', [str(self.id)])
 
     def __unicode__(self):
-        return "%s @ %s" % (self.name, self.location)
+        return self.name
 
 
 class InventoryCheckPoint(models.Model):
