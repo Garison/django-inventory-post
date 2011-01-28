@@ -5,16 +5,17 @@
 {% block title %} :: {% blocktrans %}Details for {{ title }} {{ object }}{% endblocktrans %}{% endblock %}
 
 {% block javascript %}
-<script type="text/javascript">
-$(function() {
-	$("#subform form :input").each(function() {
-		this.disabled = true;
-	});
-});
-</script>
+    <script type="text/javascript">
+    $(function() {
+        $("#subform form :input").each(function() {
+            this.disabled = true;
+        });
+    });
+    </script>
 {% endblock %}
+
 {% block sidebar %}
-    {% for subtemplate in subtemplates %}
+    {% for subtemplate in sidebar_subtemplates %}
         {% include subtemplate %}
     {% endfor %}
 {% endblock %}
@@ -36,4 +37,22 @@ $(function() {
         {% endwith %}
     </div>
 
+    {% for subtemplate in subtemplates %}
+        <div class="content">
+        {% include subtemplate %}
+        </div>
+    {% endfor %}
+
+    {% for subtemplate in subtemplates_dict %}
+    {% with subtemplate.title as title %}
+    {% with subtemplate.object_list as object_list %}
+        <div class="content">
+        {% include subtemplate.name %}
+        </div>
+    {% endwith %}
+    {% endwith %}
+    {% endfor %}
+
+    
 {% endblock %}
+

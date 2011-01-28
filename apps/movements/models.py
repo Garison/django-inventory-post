@@ -20,7 +20,8 @@ class PurchaseRequestStatus(models.Model):
         
 
 class PurchaseRequest(models.Model):
-    issue_date = models.DateField(verbose_name=_(u'issue date'))
+    user_id = models.CharField(max_length=32, null=True, blank=True, verbose_name=_(u'user defined id'))
+    issue_date = models.DateField(auto_now_add=True, verbose_name=_(u'issue date'))
     required_date = models.DateField(null=True, blank=True, verbose_name=_(u'date required'))
     budget = models.PositiveIntegerField(null=True, blank=True, verbose_name=_(u'budget')) 
     active = models.BooleanField(default=True, verbose_name=_(u'active'))
@@ -33,11 +34,11 @@ class PurchaseRequest(models.Model):
         verbose_name_plural = _(u'purchase requests')
         
     def __unicode__(self):
-        return '%s - %s' % (self.id, self.issue_date) 
+        return '#%s (%s)' % (self.user_id if self.user_id else self.id, self.issue_date) 
         
-#    @models.permalink
-#    def get_absolute_url(self):
-#        return ('state_list', [])
+    @models.permalink
+    def get_absolute_url(self):
+        return ('purchase_request_view', [str(self.id)])
 
 
 
@@ -55,9 +56,9 @@ class PurchaseRequestItem(models.Model):
     def __unicode__(self):
         return '%s - %s' % (unicode(self.item_template), self.qty)
 
-    #@models.permalink
-    #def get_absolute_url(self):
-    #    return ('purchase_request_state_list', [])
+    @models.permalink
+    def get_absolute_url(self):
+        return ('purchase_request_view', [str(self.purchase_request.id)])
 
 """
 ChangeOrder
