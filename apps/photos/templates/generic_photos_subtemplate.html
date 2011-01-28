@@ -14,24 +14,9 @@
 <div class="block">
   <h3>{% trans 'Photos' %}</h3>
    <div class="content">
-    <form action="" method="get" class="form">
-
     {% if object|get_photos_for_object %}
     <div>
         <table style='margin: auto;'>
-            {% comment %}
-            <thead>
-                <tr>
-                    <td colspan='10' style='font-weight: bold; text-align: center;'>
-                        {% if title %}
-                            {{ title|capfirst }}
-                        {% else %}
-                            {% trans 'Photos' %}
-                        {% endif %}
-                    </td>
-                </tr>
-            </thead>
-            {% endcomment %}
             <tbody>
                 <tr style="vertical-align: top;">
                 {% for photo in object|get_photos_for_object %}
@@ -67,8 +52,6 @@
     </p>
 
     {% endif %}
-
-    </form>
     </div>
 </div>
 
