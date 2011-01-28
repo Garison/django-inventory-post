@@ -165,7 +165,7 @@ def _get_object_navigation_links(context, menu_name=None):
     context_links = []    
 
     try:
-        object_name = Variable('object_name').resolve(context)
+        object_name = Variable('navigation_object_name').resolve(context)
     except VariableDoesNotExist:
         object_name = 'object'
         

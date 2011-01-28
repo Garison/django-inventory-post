@@ -18,8 +18,10 @@ purchase_request_item_create = {'text':_('add new item'), 'view':'purchase_reque
 purchase_request_item_update = {'text':_('edit item'), 'view':'purchase_request_item_update', 'args':'object.id', 'famfam':'basket_go'}
 purchase_request_item_delete = {'text':_('delete item'), 'view':'purchase_request_item_delete', 'args':'object.id', 'famfam':'basket_remove'}
 
+purchase_request_state_filter = {'name':'purchase_request_status', 'title':_(u'status'), 'queryset':PurchaseRequestStatus.objects.all(), 'destination':'status'}
 
 register_links(PurchaseRequestStatus, [purchase_request_state_update, purchase_request_state_delete])
+register_links(['purchase_request_state_create', 'purchase_request_state_list', 'purchase_request_state_update', 'purchase_request_state_delete'], [purchase_request_state_create], menu_name='sidebar')
 
 register_links(PurchaseRequest, [purchase_request_update, purchase_request_delete, purchase_request_item_create])
 register_links(['purchase_request_list', 'purchase_request_create', 'purchase_request_update', 'purchase_request_delete', 'purchase_request_view'], [purchase_request_create], menu_name='sidebar')
