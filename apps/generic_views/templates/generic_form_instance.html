@@ -13,12 +13,29 @@
   </div>
 {% endif %}
 
-{% for field in form %}
-    <div class="group">
-        {% if field.errors %}<div class="fieldWithErrors">{% endif %}
-        <label class="label">{{ field.label_tag }}{% if field.field.required and not read_only %} ({% trans 'required' %}){% endif %}</label>
-        {% if field.errors %}<span class="error">{% for error in field.errors %}{{ error }}{% if not forloop.last %} | {% endif %}{% endfor %}</span></div>{% endif %} 
-        {{ field }}
-        {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
+{% if 1 %}
+    {% for field in form %}
+    {% for error in field.errors %}{{ error }}{% endfor %}
+    {% endfor %}
+    <div id="wrapper" class="wat-cf" style="border: 1px solid red;">
+    {% for field in form %}
+        <div class="group" style="float: left;">
+            {% if field.errors %}<div class="fieldWithErrors">{% endif %}
+            {#<label class="label">{{ field.label_tag }}{% if field.field.required and not read_only %} ({% trans 'required' %}){% endif %}</label>#}
+            {% if field.errors %}<span class="error">{% for error in field.errors %}{{ error }}{% if not forloop.last %} | {% endif %}{% endfor %}</span></div>{% endif %} 
+            <div style="padding: 10px;">{{ field }}</div>
+            {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
+        </div>
+    {% endfor %} 
     </div>
-{% endfor %} 
+{% else %}
+    {% for field in form %}
+        <div class="group">
+            {% if field.errors %}<div class="fieldWithErrors">{% endif %}
+            <label class="label">{{ field.label_tag }}{% if field.field.required and not read_only %} ({% trans 'required' %}){% endif %}</label>
+            {% if field.errors %}<span class="error">{% for error in field.errors %}{{ error }}{% if not forloop.last %} | {% endif %}{% endfor %}</span></div>{% endif %} 
+            {{ field }}
+            {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
+        </div>
+    {% endfor %} 
+{% endif %}

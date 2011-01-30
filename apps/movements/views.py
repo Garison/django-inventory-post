@@ -108,6 +108,51 @@ def purchase_request_open(request, object_id):
     context_instance=RequestContext(request))  
 
 
+from forms import PRIMakePOIForm
+from django.forms.formsets import formset_factory
+
+def purchase_request_make_purchase_order(request, object_id):
+    purchase_request = get_object_or_404(PurchaseRequest, pk=object_id)
+    #ExpressionFormSet = formset_factory(ExpressionForm, extra=0)
+    #ExpressionFormSet.title = _(u'expressions')
+    ItemsFormSet = formset_factory(PRIMakePOIForm, extra=0)
+
+    
+    if request.method == 'POST':
+        formset = ItemsFormSet(request.POST)
+    
+    else:
+    
+        initial = []
+        for item in purchase_request.purchaserequestitem_set.all():
+            initial.append({
+                'item_template':item.item_template,
+                #'template_id':item.item_template.id,
+                #'name':item.item_template,
+                #'suppliers':item.item_template.suppliers.all()
+                
+            })
+            print item.item_template.suppliers.all()    
+        #form = PRIMakePOIForm(initial={'name':'s'})
+        formset = ItemsFormSet(initial=initial)
+    #item_template = purchase_request.purchaserequestitem_set.all()[0])
+    #messages.success(request, "This purchase request has already been closed.")
+    return render_to_response('generic_form.html', {
+        'formset':formset,
+    }, context_instance=RequestContext(request))  
+
+
+
+#                initial=[]
+#            for num, field in enumerate(self.settings['model']._meta.fields):
+#                if field.name != 'id':
+#                    initial.append({
+#                        'model_field':field.name,
+#                        'expression':'"%%s" %% csv_column[%s]' % str(num-1),
+#                        'enabled':field.name != 'id' and True
+#                        })
+
+
 def purchase_order_view(request, object_id):
     purchase_order = get_object_or_404(PurchaseOrder, pk=object_id)
     form = PurchaseOrderForm_view(instance=purchase_order)
