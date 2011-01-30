@@ -1,0 +1,348 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-30 16:50+0300\n"
+"PO-Revision-Date: 2011-01-30 12:24\n"
+"Last-Translator:   <garison2004@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Translated-Using: django-rosetta 0.5.5\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: __init__.py:10 urls.py:19
+msgid "purchase request states"
+msgstr "статусы закупок товаров"
+
+#: __init__.py:11 urls.py:20
+msgid "create new purchase request state"
+msgstr "создать новую заявку закупки товара"
+
+#: __init__.py:12 __init__.py:28 __init__.py:33
+msgid "edit state"
+msgstr "редактировать заявку"
+
+#: __init__.py:13 __init__.py:29 __init__.py:34
+msgid "delete state"
+msgstr "удалить заявку"
+
+#: __init__.py:15 models.py:43 urls.py:24
+msgid "purchase requests"
+msgstr "заявки на закупки"
+
+#: __init__.py:16
+msgid "create new request"
+msgstr "создать новую заявку"
+
+#: __init__.py:17
+msgid "edit request"
+msgstr "редактировать заявку"
+
+#: __init__.py:18
+msgid "delete request"
+msgstr "удалить заявку"
+
+#: __init__.py:19
+msgid "close request"
+msgstr "закрыть заявку"
+
+#: __init__.py:20
+msgid "open request"
+msgstr "открыть заявку"
+
+#: __init__.py:22 __init__.py:43
+msgid "add new item"
+msgstr "добавить новое наименование"
+
+#: __init__.py:23 __init__.py:44
+msgid "edit item"
+msgstr "редактировать наименование"
+
+#: __init__.py:24 __init__.py:45
+msgid "delete item"
+msgstr "удалить наименование"
+
+#: __init__.py:26 urls.py:36
+msgid "purchase order states"
+msgstr "состояние заказов на поставку"
+
+#: __init__.py:27 urls.py:37
+msgid "create new purchase order state"
+msgstr "создать новый заказ на поставку"
+
+#: __init__.py:31 urls.py:49
+msgid "purchase order item states"
+msgstr "состояние заказа на поставку"
+
+#: __init__.py:32
+msgid "create new item state"
+msgstr "создать новое наименование заказа"
+
+#: __init__.py:36 models.py:98 urls.py:41
+msgid "purchase orders"
+msgstr "заказы на поставку"
+
+#: __init__.py:37
+msgid "create new order"
+msgstr "создать новый заказ"
+
+#: __init__.py:38
+msgid "edit order"
+msgstr "редактировать заказ"
+
+#: __init__.py:39
+msgid "delete order"
+msgstr "удалить поставку"
+
+#: __init__.py:40
+msgid "close order"
+msgstr "закрыть поставку"
+
+#: __init__.py:41
+msgid "open order"
+msgstr "открыть поставку"
+
+#: __init__.py:46
+msgid "close item"
+msgstr "закрыть наименование"
+
+#: __init__.py:48
+msgid "template"
+msgstr "шаблон"
+
+#: __init__.py:51 __init__.py:52 models.py:35 models.py:94 models.py:126
+#: models.py:129 views.py:127
+msgid "status"
+msgstr "статус"
+
+#: __init__.py:78
+msgid "purchases"
+msgstr "закупки"
+
+#: models.py:15 models.py:72 models.py:109
+msgid "name"
+msgstr "имя"
+
+#: models.py:18 models.py:19 models.py:145
+msgid "purchase request status"
+msgstr "статусы заявок закупок"
+
+#: models.py:30 models.py:87
+msgid "user defined id"
+msgstr "id пользователя"
+
+#: models.py:31 models.py:90
+msgid "issue date"
+msgstr "дата выпуска"
+
+#: models.py:32 models.py:91
+msgid "date required"
+msgstr "дата требования"
+
+#: models.py:33
+msgid "budget"
+msgstr "бюджет"
+
+#: models.py:34 models.py:92 models.py:128 views.py:128
+msgid "active"
+msgstr "актив"
+
+#: models.py:36
+msgid "originator"
+msgstr "создатель"
+
+#: models.py:37 models.py:57 models.py:93
+msgid "notes"
+msgstr "комментарии"
+
+#: models.py:42 models.py:54 models.py:88 models.py:146 urls.py:28
+msgid "purchase request"
+msgstr "заявка на закупку"
+
+#: models.py:55 models.py:125
+msgid "item template"
+msgstr "шаблон наименования"
+
+#: models.py:56 models.py:130
+msgid "quantity"
+msgstr "количество"
+
+#: models.py:60 models.py:147 urls.py:34
+msgid "purchase request item"
+msgstr "наименование заявки на закупку"
+
+#: models.py:61 views.py:27
+msgid "purchase request items"
+msgstr "наименование заявок на закупки"
+
+#: models.py:75 models.py:76 models.py:148 urls.py:39
+msgid "purchase order status"
+msgstr "статус заказа на закупку"
+
+#: models.py:89
+msgid "supplier"
+msgstr "поставщик"
+
+#: models.py:97 models.py:124 models.py:150 urls.py:45
+msgid "purchase order"
+msgstr "заказ на закупку"
+
+#: models.py:112 models.py:113 models.py:149 urls.py:52
+msgid "purchase order item status"
+msgstr "статус позиции заказа на закупку"
+
+#: models.py:127 views.py:126
+msgid "agreed price"
+msgstr "согласованная цена"
+
+#: models.py:131
+msgid "received"
+msgstr "полученные"
+
+#: models.py:134 models.py:151 urls.py:56
+msgid "purchase order item"
+msgstr "позиция заказа на закупку"
+
+#: models.py:135 views.py:121
+msgid "purchase order items"
+msgstr "позиции заказа на закупку"
+
+#: urls.py:22
+msgid "purchase request state"
+msgstr "статус заявки на закупку"
+
+#: urls.py:24 urls.py:41
+msgid "Active"
+msgstr "Актив"
+
+#: urls.py:24 urls.py:41 views.py:128
+msgid "Open"
+msgstr "Открыть"
+
+#: urls.py:24 urls.py:41 views.py:128
+msgid "Closed"
+msgstr "Закрыть"
+
+#: urls.py:26
+msgid "create new purchase request"
+msgstr "создать новую заявку на закупку"
+
+#: urls.py:43
+msgid "create new purchase order"
+msgstr "создать новый заказ на закупку"
+
+#: urls.py:50
+msgid "create new purchase order item state"
+msgstr "создать новое статус наименования заказа на закупку"
+
+#: views.py:22
+#, python-format
+msgid "details for purchase request: %s"
+msgstr ""
+
+#: views.py:29 views.py:124
+msgid "qty"
+msgstr ""
+
+#: views.py:42
+msgid "The purchase request item was created successfully."
+msgstr "Позиция заявки на закупку была создана успешно"
+
+#: views.py:50
+msgid "add new purchase request item"
+msgstr "добавьте новую позицию заявки на закупку"
+
+#: views.py:68
+#, python-format
+msgid "Are you sure you wish to close the purchase request: %s?"
+msgstr ""
+
+#: views.py:72
+msgid "This purchase request has already been closed."
+msgstr ""
+
+#: views.py:79
+msgid "The purchase request has been closed successfully."
+msgstr ""
+
+#: views.py:92
+#, python-format
+msgid "Are you sure you wish to open the purchase request: %s?"
+msgstr ""
+
+#: views.py:96
+msgid "This purchase request is already open."
+msgstr ""
+
+#: views.py:103
+msgid "The purchase request has been opened successfully."
+msgstr ""
+
+#: views.py:116
+#, python-format
+msgid "details for purchase order: %s"
+msgstr ""
+
+#: views.py:125
+msgid "amount received"
+msgstr ""
+
+#: views.py:142
+#, python-format
+msgid "Are you sure you wish to close the purchase order: %s?"
+msgstr ""
+
+#: views.py:145
+msgid "There are still open items."
+msgstr ""
+
+#: views.py:149
+msgid "This purchase order has already been closed."
+msgstr "Этот заказ на закупку уже закрыт"
+
+#: views.py:158
+msgid "The purchase order has been closed successfully."
+msgstr "Этот заказ на закупку уже закрыт полностью"
+
+#: views.py:171
+#, python-format
+msgid "Are you sure you wish to open the purchase order: %s?"
+msgstr ""
+
+#: views.py:175
+msgid "This purchase order is already open."
+msgstr "Этот заказ на закупку был уже закрыт"
+
+#: views.py:182
+msgid "The purchase order has been opened successfully."
+msgstr "Этот заказ на закупку уже открыт"
+
+#: views.py:194
+#, python-format
+msgid "Are you sure you wish close the purchase item order: %s?"
+msgstr ""
+
+#: views.py:198
+msgid "This purchase order item has already been closed."
+msgstr "Этот заказ на закупку уже закрыт"
+
+#: views.py:206
+msgid "The purchase order item has been closed successfully."
+msgstr "Этот заказ на закупку уже закрыт полностью"
+
+#: views.py:221
+msgid "The purchase order item was created successfully."
+msgstr "Позиция заявки на закупку была создана успешно"
+
+#: views.py:229
+msgid "add new purchase order item"
+msgstr "добавьте новую позицию заявки на закупку"

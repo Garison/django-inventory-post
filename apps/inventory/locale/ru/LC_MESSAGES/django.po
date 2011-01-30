@@ -1,0 +1,311 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-30 16:50+0300\n"
+"PO-Revision-Date: 2011-01-30 16:16\n"
+"Last-Translator:   <garison2004@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Translated-Using: django-rosetta 0.5.5\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: __init__.py:10
+msgid "view all inventories"
+msgstr "Все инв.карточки"
+
+#: __init__.py:11
+msgid "create new inventory"
+msgstr "Создать новую  инв.карточку"
+
+#: __init__.py:12
+msgid "current balances"
+msgstr "Правильность баланса"
+
+#: __init__.py:13 __init__.py:20 __init__.py:26 __init__.py:31 __init__.py:39
+msgid "edit"
+msgstr "редактировать"
+
+#: __init__.py:14 __init__.py:21 __init__.py:27 __init__.py:32 __init__.py:40
+msgid "delete"
+msgstr "удалить"
+
+#: __init__.py:15
+msgid "add transaction"
+msgstr "добавить транзакцию"
+
+#: __init__.py:16 __init__.py:22
+msgid "details"
+msgstr "детально"
+
+#: __init__.py:18
+msgid "view all transactions"
+msgstr "смотреть все транзакции"
+
+#: __init__.py:19
+msgid "create new transaction"
+msgstr "создать новую транзакцию"
+
+#: __init__.py:24 models.py:27 models.py:149 urls.py:47 urls.py:50
+msgid "locations"
+msgstr "расположение"
+
+#: __init__.py:25
+msgid "create new location"
+msgstr "создать новое место"
+
+#: __init__.py:29
+msgid "create new supplier"
+msgstr "создать нового поставщика"
+
+#: __init__.py:30 models.py:139 urls.py:54 views.py:69
+msgid "suppliers"
+msgstr "поставщики"
+
+#: __init__.py:33
+msgid "assign templates"
+msgstr "назначить шаблоны"
+
+#: __init__.py:34
+msgid "related purchase orders"
+msgstr "связанные заказы на закупку"
+
+#: __init__.py:36
+msgid "view all"
+msgstr "Смотреть все"
+
+#: __init__.py:37
+msgid "create new"
+msgstr "Создать"
+
+#: __init__.py:38
+msgid "orphans"
+msgstr "Одиночные"
+
+#: __init__.py:41
+msgid "photos"
+msgstr "Фотографии"
+
+#: __init__.py:42
+msgid "related assets"
+msgstr "связанные активы"
+
+#: __init__.py:43
+msgid "assign supplies"
+msgstr "назначить поставки"
+
+#: __init__.py:44
+msgid "assign suppliers"
+msgstr "назначить поставщиков"
+
+#: __init__.py:46
+msgid "template"
+msgstr "шаблон"
+
+#: __init__.py:47
+msgid "return to inventory"
+msgstr "вернутся в инвентаризацию"
+
+#: __init__.py:54 models.py:26 models.py:80 urls.py:33
+msgid "location"
+msgstr "размещение"
+
+#: __init__.py:74 models.py:148 views.py:37
+msgid "templates"
+msgstr "шаблоны"
+
+#: __init__.py:75 models.py:84 urls.py:33
+msgid "inventories"
+msgstr "инвентарный учет"
+
+#: models.py:16 models.py:79 models.py:127
+msgid "name"
+msgstr "имя"
+
+#: models.py:17 models.py:18 models.py:19 models.py:20 models.py:128
+#: models.py:129 models.py:130 models.py:131
+msgid "address"
+msgstr "адрес"
+
+#: models.py:21 models.py:22 models.py:132 models.py:133
+msgid "phone number"
+msgstr "телефонный номер"
+
+#: models.py:38 models.py:62
+msgid "description"
+msgstr "описание"
+
+#: models.py:39
+msgid "brand"
+msgstr "брэнд"
+
+#: models.py:40
+msgid "model"
+msgstr "модель"
+
+#: models.py:41
+msgid "part number"
+msgstr "отдельный номер"
+
+#: models.py:42
+msgid "notes"
+msgstr "комментарий"
+
+#: models.py:43 views.py:53
+msgid "supplies"
+msgstr "поставки"
+
+#: models.py:48 urls.py:22 urls.py:23 urls.py:24 urls.py:25 urls.py:28
+msgid "item template"
+msgstr "тип шаблона"
+
+#: models.py:49
+msgid "item templates"
+msgstr "типы шаблонов"
+
+#: models.py:60
+msgid "timedate"
+msgstr "время"
+
+#: models.py:83 models.py:150 urls.py:34 urls.py:36 urls.py:37 views.py:89
+msgid "inventory"
+msgstr "инвентарный учет"
+
+#: models.py:110 views.py:102
+msgid "date"
+msgstr "дата"
+
+#: models.py:114 urls.py:45
+msgid "inventory transaction"
+msgstr "движение  устройства"
+
+#: models.py:115 views.py:94
+msgid "inventory transactions"
+msgstr "движение устройств"
+
+#: models.py:138 models.py:151 urls.py:57
+msgid "supplier"
+msgstr "поставщик"
+
+#: urls.py:25
+msgid ""
+"Will be deleted from any user that may have it assigned and from any item "
+"group."
+msgstr "Будет удален любым пользователем, которому было назначено это и от любой группы позиции."
+
+#: urls.py:26
+msgid "orphan templates"
+msgstr "одиночное устройство"
+
+#: urls.py:41
+msgid "transactions"
+msgstr "перемещения"
+
+#: urls.py:42 urls.py:43 urls.py:44
+msgid "transaction"
+msgstr "перемещение"
+
+#: views.py:29
+#, python-format
+msgid "Assign templates to the supplier: <a href=\"%(url)s\">%(obj)s</a>"
+msgstr ""
+
+#: views.py:35
+msgid "Unassigned templates"
+msgstr "Не назначенные шаблоны"
+
+#: views.py:36
+msgid "Assigned templates"
+msgstr "Назначенные устройства"
+
+#: views.py:45
+#, python-format
+msgid "Assign supplies to the template: <a href=\"%(url)s\">%(obj)s</a>"
+msgstr ""
+
+#: views.py:51
+msgid "Unassigned supplies"
+msgstr "Не назначенные поставки"
+
+#: views.py:52
+msgid "Assigned supplies"
+msgstr "Назначенные поставки"
+
+#: views.py:61
+#, python-format
+msgid "Assign suppliers to the template: <a href=\"%(url)s\">%(obj)s</a>"
+msgstr ""
+
+#: views.py:67
+msgid "Unassigned suppliers"
+msgstr "Не назначенные поставщики"
+
+#: views.py:68
+msgid "Assigned suppliers"
+msgstr "Назначенные поставщики"
+
+#: views.py:79
+msgid "assets that use the template"
+msgstr "активы которые используют устройство"
+
+#: views.py:100
+msgid "item"
+msgstr "изделие"
+
+#: views.py:101
+msgid "qty"
+msgstr "количество"
+
+#: views.py:116
+msgid "The inventory transaction was created successfully."
+msgstr ""
+
+#: views.py:125
+msgid "add new transaction"
+msgstr ""
+
+#: views.py:142
+msgid "quantity"
+msgstr ""
+
+#: views.py:145
+#, python-format
+msgid "current balances for inventory: %s"
+msgstr ""
+
+#: views.py:157
+msgid "purchase orders from supplier"
+msgstr ""
+
+#: templates/report-items_per_person.html:14
+msgid "User assets report"
+msgstr ""
+
+#: templates/report-items_per_person.html:21
+msgid "ASSET NUMBER"
+msgstr ""
+
+#: templates/report-items_per_person.html:22
+msgid "DESCRIPTION"
+msgstr ""
+
+#: templates/report-items_per_person.html:23
+msgid "LOCATION"
+msgstr ""
+
+#: templates/report-items_per_person.html:24
+msgid "ASSIGNED TO"
+msgstr ""
+
+#: templates/report-items_per_person.html:25
+msgid "NOTES"
+msgstr "Комментарий"

@@ -1,0 +1,113 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-01-30 16:50+0300\n"
+"PO-Revision-Date: 2011-01-30 12:44\n"
+"Last-Translator:   <garison2004@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Translated-Using: django-rosetta 0.5.5\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: models.py:20
+msgid "Title"
+msgstr "Заголовок"
+
+#: models.py:21
+msgid "Main photo?"
+msgstr "Главная фотография?"
+
+#: models.py:26
+msgid "photo"
+msgstr "фотография"
+
+#: models.py:27
+msgid "photos"
+msgstr "фотографии"
+
+#: views.py:33
+msgid "The main photo has been changed."
+msgstr "Главная фотография была изменена."
+
+#: views.py:42
+msgid ""
+"The photo was deleted successfully.  The remaining photo has been selected "
+"as the main photo."
+msgstr "Фотография была удалена успешно. Остающаяся фотография была выбрана как главная фотография."
+
+#: views.py:44
+msgid ""
+"The photo was deleted successfully.  You have deleted the main photo, make "
+"sure you mark another one as the main photo."
+msgstr "Фотография была удалена успешно. Вы удалили главную фотографию, удостоверьтесь, что вы отмечаете другую фотографию как главную."
+
+#: views.py:46
+msgid "The photo was deleted successfully."
+msgstr "Фотография была удалена успешно. "
+
+#: views.py:58
+msgid "The photo is too big."
+msgstr "Фотография слишком большая"
+
+#: views.py:75
+msgid "The photo was added."
+msgstr "Фотография была добавлена"
+
+#: views.py:87
+msgid "Upload new photo"
+msgstr "Загрузите новую фотографию"
+
+#: templates/generic_photos_subtemplate.html:15
+msgid "Photos"
+msgstr "Фотографии"
+
+#: templates/generic_photos_subtemplate.html:48
+#, python-format
+msgid "There are no %(title)s "
+msgstr ""
+
+#: templates/generic_photos_subtemplate.html:50
+msgid "There are no photos"
+msgstr "Нет фотографии"
+
+#: templates/photos.html:13
+msgid "Please wait..."
+msgstr "Подождите пожалуйста..."
+
+#: templates/photos.html:20
+msgid "Edit photos"
+msgstr "Редактированние фотографии"
+
+#: templates/photos.html:29
+msgid "Photos for"
+msgstr "Фотографии для"
+
+#: templates/photos.html:29
+msgid "Maximum of"
+msgstr "Максимальный размер"
+
+#: templates/photos.html:55
+msgid "Main photo"
+msgstr "Главная фотография"
+
+#: templates/photos.html:56
+msgid "Delete photo"
+msgstr "Удалить фотографию"
+
+#: templates/photos.html:70
+msgid "There are no photos."
+msgstr "Здесь нет фотографии"
+
+#: templates/photos.html:76
+msgid "Uploading photo..."
+msgstr "Загрузка фотографии..."
