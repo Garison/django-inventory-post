@@ -17,11 +17,12 @@
     CREDITS file                                                        - DONE
 # Smarter search                                                        - DONE
 # Allow import of CSV data                                              - DONE
+# Generate POs from PRs                                                 - DONE
+# Warn users about item templates with no associated suppliers
 # Implement South for database migration
 # Insert license header to every .py file
 # Add reporting/hard copies
 # Export data to CSV
-# Generate POs from PRs
 # Transfer items from POs to inventory
 # Closed PO items can't be edited
 
@@ -49,10 +50,11 @@ Post release
 # Supply reorder thresholds
 # Add google maps api to locations model
 # Add inventory transactions from RMAs & customer invoices
-# Implement django-permissions
+# Implement django-permissions for roles and permissions
 # Connect w/ descartes for BI charts
 # Eliminate custom generic view and move functionality
     into context processors
+# Convert User, Customer, Supplier to a new generic Entity model
 
 # Deferred, deprecated
 ==========================

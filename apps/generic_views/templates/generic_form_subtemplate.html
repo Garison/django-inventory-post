@@ -32,24 +32,32 @@
                 <input name='{{ name }}' type='hidden' value='{{ value }}' />
             {% endfor %}
         {% endif %} 
-        
-        {% if formset %}
+                   
+        {% if form.management_form %}
+            {% with form as formset %}
+                {{ formset.management_form }}
 
-<div id="wrapper" class="wat-cf">
-{% for field in formset.forms.0 %}
-    <div class="group" style="float: left;">
-        {#{% if field.errors %}<div class="fieldWithErrors">{% endif %}#}
-        <label class="label">{{ field.label_tag }}{% if field.field.required and not read_only %} ({% trans 'required' %}){% endif %}</label>
-        {#{% if field.errors %}<span class="error">{% for error in field.errors %}{{ error }}{% if not forloop.last %} | {% endif %}{% endfor %}</span></div>{% endif %} #}
-        {#<div>{{ field }}</div>#}
-        {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
-    </div>
-{% endfor %} 
-</div>        
-            {% for form in formset.forms %}
-                {% include "generic_form_instance.html" %}
-            {% endfor %}
-            {{ formset.management_form }}
+                {% if form_display_mode_table %}
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            {% for field in formset.forms.0.visible_fields %}
+                                <th>
+                                    {{ field.label_tag }}{% if field.field.required and not read_only %} ({% trans 'required' %}){% endif %}
+                                </th>
+                            {#{% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}#}
+                            {% endfor %} 
+                        </tr>
+                {% endif %}
+                
+                {% for form in formset.forms %}
+                    {% include "generic_form_instance.html" %}
+                {% endfor %}
+                {% if form_display_mode_table %}
+                    </tbody>
+                    </table>
+                {% endif %}
+            {% endwith %}
         {% else %}
             {% include "generic_form_instance.html" %}
         {% endif %}

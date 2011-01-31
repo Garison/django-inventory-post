@@ -7,27 +7,44 @@ from django.contrib.contenttypes.models import ContentType
 from django.views.generic.list_detail import object_detail, object_list
 from django.core.urlresolvers import reverse
 from django.views.generic.create_update import create_object
+from django.forms.formsets import formset_factory
 
+from inventory.models import Supplier, ItemTemplate
 
 from models import PurchaseRequest, PurchaseRequestItem, PurchaseOrder
 from forms import PurchaseRequestForm_view, PurchaseRequestItemForm, \
                   PurchaseOrderForm_view, PurchaseOrderItemForm, \
-                  PurchaseOrderItem
+                  PurchaseOrderItem, PurchaseOrderWizardItemForm
+
                   
 def purchase_request_view(request, object_id):
     purchase_request = get_object_or_404(PurchaseRequest, pk=object_id)
-    form = PurchaseRequestForm_view(instance=purchase_request)
+    form = PurchaseRequestForm_view(
+        instance=purchase_request,
+        extra_fields=[
+            {'field':'purchaseorder_set.all', 'label':_(u'Related purchase orders')}
+        ]
+    )
     
     return render_to_response('generic_detail.html', {
         'title':_(u'details for purchase request: %s') % purchase_request,
         'object':purchase_request,
         'form':form,
-        'subtemplates_dict':[{
+        'subtemplates_dict':[
+            {
             'name':'generic_list_subtemplate.html',
             'title':_(u'purchase request items'),
             'object_list':purchase_request.purchaserequestitem_set.all(),
             'extra_columns':[{'name':_(u'qty'), 'attribute':'qty'}],
-        }]
+            },
+            #TODO: Used this instead when pagination namespace is supported
+            #{
+            #    'name':'generic_list_subtemplate.html',
+            #    'title':_(u'related purchase orders'),
+            #    'object_list':purchase_request.purchaseorder_set.all(),
+            #    'extra_columns':[{'name':_(u'issue data'), 'attribute':'issue_date'}],
+            #}
+        ]
     },
     context_instance=RequestContext(request))
 
@@ -51,14 +68,6 @@ def purchase_request_item_create(request, object_id):
     },
     context_instance=RequestContext(request))
     
-    #form = PurchaseRequestItemForm#(purchase_request=purchase_request)
-    
-    #return create_object(request, 
-    #    #model=PurchaseRequestItem#,(purchase_request=purchase_request),
-    #    form_class=form,
-    #    template_name='generic_form.html',
-    #    extra_context={'object':purchase_request},
-    #) 
     
 def purchase_request_close(request, object_id):
     purchase_request = get_object_or_404(PurchaseRequest, pk=object_id)    
@@ -108,49 +117,88 @@ def purchase_request_open(request, object_id):
     context_instance=RequestContext(request))  
 
 
-from forms import PRIMakePOIForm
-from django.forms.formsets import formset_factory
 
-def purchase_request_make_purchase_order(request, object_id):
+def purchase_order_wizard(request, object_id):
+    """
+    Creates new purchase orders based on the item suppliers selected
+    from a purchase request
+    """
+        
     purchase_request = get_object_or_404(PurchaseRequest, pk=object_id)
-    #ExpressionFormSet = formset_factory(ExpressionForm, extra=0)
-    #ExpressionFormSet.title = _(u'expressions')
-    ItemsFormSet = formset_factory(PRIMakePOIForm, extra=0)
 
+    #A closed purchase orders may also mean a PO has been generated
+    # previously from it by this wizard
+    if purchase_request.active == False:
+        msg = _(u'This purchase request is closed.')
+        messages.error(request, msg, fail_silently=True)            
+        return redirect(request.META['HTTP_REFERER'] if 'HTTP_REFERER' in request.META else purchase_request.get_absolute_url())
+
+    if not purchase_request.purchaserequestitem_set.all():
+        msg = _(u'This purchase request is empty, add items before using the wizard.')
+        messages.error(request, msg, fail_silently=True)            
+        return redirect(request.META['HTTP_REFERER'] if 'HTTP_REFERER' in request.META else purchase_request.get_absolute_url())
+
+
+    #Create a formset for all the items in the purchase request
+    #and let the user select from the available suppliers from each
+    #item
+    ItemsFormSet = formset_factory(PurchaseOrderWizardItemForm, extra=0)
+
+    initial = []
+    for item in purchase_request.purchaserequestitem_set.all():
+        initial.append({
+            'item':item
+        })
     
     if request.method == 'POST':
-        formset = ItemsFormSet(request.POST)
-    
-    else:
-    
-        initial = []
-        for item in purchase_request.purchaserequestitem_set.all():
-            initial.append({
-                'item_template':item.item_template,
-                #'template_id':item.item_template.id,
-                #'name':item.item_template,
-                #'suppliers':item.item_template.suppliers.all()
+        formset = ItemsFormSet(request.POST, initial=initial)
+        if formset.is_valid():
+            #Create a dictionary of supplier and corresponding items
+            #to be ordered from them
+            #TODO: Can this be done with a reduce function?
+            suppliers = {}
+            for form in formset.forms:
+                supplier = get_object_or_404(Supplier, pk=form.cleaned_data['supplier'])
+                item_template = get_object_or_404(ItemTemplate, pk=form.cleaned_data['template_id'])
+                if supplier in suppliers:
+                    suppliers[supplier].append({'item_template':item_template, 'qty': form.cleaned_data['qty']})
+                else:
+                    suppliers[supplier] = [{'item_template':item_template, 'qty': form.cleaned_data['qty']}]
+            
+            #Create a new purchase order for each supplier in the
+            #suppliers directory
+            new_pos = []
+            for supplier, po_items_data in suppliers.items():
+                purchase_order = PurchaseOrder(
+                    purchase_request=purchase_request,
+                    supplier=supplier
+                )
+                new_pos.append(purchase_order)
+                purchase_order.save()
                 
-            })
-            print item.item_template.suppliers.all()    
-        #form = PRIMakePOIForm(initial={'name':'s'})
+                #Create the purchase order items 
+                for po_item_data in po_items_data:
+                    po_item = PurchaseOrderItem(
+                        purchase_order=purchase_order,
+                        item_template=po_item_data['item_template'],
+                        qty=po_item_data['qty']
+                    )
+                    po_item.save()
+                 
+            purchase_request.active = False
+            purchase_request.save()
+            msg = _(u'The following new purchase order have been created: %s.') % (', '.join(['%s' % po for po in new_pos]))
+            messages.success(request, msg, fail_silently=True)            
+      
+            return redirect('purchase_order_list')
+    else:
         formset = ItemsFormSet(initial=initial)
-    #item_template = purchase_request.purchaserequestitem_set.all()[0])
-    #messages.success(request, "This purchase request has already been closed.")
     return render_to_response('generic_form.html', {
-        'formset':formset,
+        'form':formset,
+        'form_display_mode_table':True,
+        'title':_(u'purchase order wizard, using purchase request source: <a href="%(url)s">%(name)s</a>') % {'url':purchase_request.get_absolute_url(), 'name':purchase_request},
+        'object':purchase_request,
     }, context_instance=RequestContext(request))  
-
-
-
-#                initial=[]
-#            for num, field in enumerate(self.settings['model']._meta.fields):
-#                if field.name != 'id':
-#                    initial.append({
-#                        'model_field':field.name,
-#                        'expression':'"%%s" %% csv_column[%s]' % str(num-1),
-#                        'enabled':field.name != 'id' and True
-#                        })
 
 
 def purchase_order_view(request, object_id):

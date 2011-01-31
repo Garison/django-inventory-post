@@ -18,6 +18,7 @@ purchase_request_update = {'text':_('edit request'), 'view':'purchase_request_up
 purchase_request_delete = {'text':_('delete request'), 'view':'purchase_request_delete', 'args':'object.id', 'famfam':'basket_delete'}
 purchase_request_close = {'text':_('close request'), 'view':'purchase_request_close', 'args':'object.id', 'famfam':'cross'}
 purchase_request_open = {'text':_('open request'), 'view':'purchase_request_open', 'args':'object.id', 'famfam':'accept'}
+purchase_request_po_wizard = {'text':_('purchase order wizard'), 'view':'purchase_order_wizard', 'args':'object.id', 'famfam':'wand'}
 
 purchase_request_item_create = {'text':_('add new item'), 'view':'purchase_request_item_create', 'args':'object.id', 'famfam':'basket_put'}
 purchase_request_item_update = {'text':_('edit item'), 'view':'purchase_request_item_update', 'args':'object.id', 'famfam':'basket_go'}
@@ -55,8 +56,8 @@ purchase_order_state_filter = {'name':'purchase_order_status', 'title':_(u'statu
 register_links(PurchaseRequestStatus, [purchase_request_state_update, purchase_request_state_delete])
 register_links(['purchase_request_state_create', 'purchase_request_state_list', 'purchase_request_state_update', 'purchase_request_state_delete'], [purchase_request_state_create], menu_name='sidebar')
 
-register_links(PurchaseRequest, [purchase_request_update, purchase_request_delete, purchase_request_item_create, purchase_request_close, purchase_request_open])
-register_links(['purchase_request_list', 'purchase_request_create', 'purchase_request_update', 'purchase_request_delete', 'purchase_request_view'], [purchase_request_create], menu_name='sidebar')
+register_links(PurchaseRequest, [purchase_request_update, purchase_request_delete, purchase_request_item_create, purchase_request_close, purchase_request_open, purchase_request_po_wizard])
+register_links(['purchase_request_list', 'purchase_request_create', 'purchase_request_update', 'purchase_request_delete', 'purchase_request_view', 'purchase_order_wizard'], [purchase_request_create], menu_name='sidebar')
 
 register_links(PurchaseRequestItem, [purchase_request_item_update, purchase_request_item_delete, jump_to_template])
 register_links(['purchase_request_item_create'], [purchase_request_create], menu_name='sidebar')

@@ -20,3 +20,4 @@
 * CSV data import support.
 * Added WSGI and apache sample deployment files as well as instructions
 * Added Purchase request and purchase orders
+* New wizard to generate purchase orders from purchase requests
