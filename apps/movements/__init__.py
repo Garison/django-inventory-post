@@ -45,6 +45,7 @@ purchase_order_item_create = {'text':_('add new item'), 'view':'purchase_order_i
 purchase_order_item_update = {'text':_('edit item'), 'view':'purchase_order_item_update', 'args':'object.id', 'famfam':'cart_go'}
 purchase_order_item_delete = {'text':_('delete item'), 'view':'purchase_order_item_delete', 'args':'object.id', 'famfam':'cart_remove'}
 purchase_order_item_close = {'text':_('close item'), 'view':'purchase_order_item_close', 'args':'object.id', 'famfam':'cross'}
+purchase_order_item_transfer = {'text':_('transfer item'), 'view':'purchase_order_item_transfer', 'args':'object.id', 'famfam':'package_link'}
 
 jump_to_template = {'text':_(u'template'), 'view':'template_view', 'args':'object.item_template.id', 'famfam':'page_go'}
 
@@ -71,7 +72,7 @@ register_links(['purchase_order_item_state_create', 'purchase_order_item_state_l
 register_links(PurchaseOrder, [purchase_order_update, purchase_order_delete, purchase_order_item_create, purchase_order_close, purchase_order_open])
 register_links(['purchase_order_list', 'purchase_order_create', 'purchase_order_update', 'purchase_order_delete', 'purchase_order_view', 'supplier_purchase_orders'], [purchase_order_create], menu_name='sidebar')
 
-register_links(PurchaseOrderItem, [purchase_order_item_update, purchase_order_item_delete, jump_to_template, purchase_order_item_close])
+register_links(PurchaseOrderItem, [purchase_order_item_update, purchase_order_item_delete, jump_to_template, purchase_order_item_close, purchase_order_item_transfer])
 register_links(['purchase_order_item_create'], [purchase_order_create], menu_name='sidebar')
 
 

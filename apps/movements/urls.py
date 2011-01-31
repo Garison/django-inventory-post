@@ -56,6 +56,7 @@ urlpatterns = patterns('movements.views',
     url(r'^purchase/order/item/(?P<object_id>\d+)/update/$', update_object, {'model':PurchaseOrderItem, 'template_name':'generic_form.html'}, 'purchase_order_item_update'),
     url(r'^purchase/order/item/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':PurchaseOrderItem}, post_delete_redirect="purchase_order_list", extra_context=dict(object_name=_(u'purchase order item'))), 'purchase_order_item_delete'),
     url(r'^purchase/order/item/(?P<object_id>\d+)/close/$', 'purchase_order_item_close', (), 'purchase_order_item_close'),
+    url(r'^purchase/order/item/(?P<object_id>\d+)/transfer/$', 'purchase_order_item_transfer', (), 'purchase_order_item_transfer'),
 
 )
     
