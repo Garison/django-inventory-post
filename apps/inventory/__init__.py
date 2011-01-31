@@ -35,7 +35,7 @@ supplier_purchase_orders = {'text':_(u'related purchase orders'), 'view':'suppli
 
 template_list = {'text':_('view all'), 'view':'template_list', 'famfam':'page_go'}
 template_create = {'text':_('create new'), 'view':'template_create', 'famfam':'page_add'}
-template_orphan_list = {'text':_('orphans'), 'view':'template_orphans_list'}
+template_orphan_list = {'text':_('orphans templates'), 'view':'template_orphans_list'}
 template_update = {'text':_(u'edit'), 'view':'template_update', 'args':'object.id', 'famfam':'page_edit'}
 template_delete = {'text':_(u'delete'), 'view':'template_delete', 'args':'object.id', 'famfam':'page_delete'}
 template_photos = {'text':_(u'photos'), 'view':'template_photos', 'args':'object.id', 'famfam':'picture_go'}
@@ -46,9 +46,9 @@ template_assign_suppliers = {'text':_(u'assign suppliers'), 'view':'template_ass
 jump_to_template = {'text':_(u'template'), 'view':'template_view', 'args':'object.supply.id', 'famfam':'page_go'}
 jump_to_inventory = {'text':_(u'return to inventory'), 'view':'inventory_view', 'args':'object.inventory.id', 'famfam':'package_go'}
 
-template_menu_links = [template_list, template_create, template_orphan_list]
+template_menu_links = [template_list, template_orphan_list, supplier_list]
 inventory_menu_links = [
-    inventory_list, inventory_create#, inventory_transaction_list, inventory_transaction_create
+    inventory_list,#, inventory_transaction_list, inventory_transaction_create
 ]
 
 location_filter = {'name':'location', 'title':_(u'location'), 'queryset':Location.objects.all(), 'destination':'location'}

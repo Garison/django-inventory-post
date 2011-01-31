@@ -18,17 +18,22 @@
 # Smarter search                                                        - DONE
 # Allow import of CSV data                                              - DONE
 # Generate POs from PRs                                                 - DONE
+# Transfer items from POs to inventory                                  - DONE
+# Split tools menu into setup/tools                                     - DONE
 # Warn users about item templates with no associated suppliers
 # Implement South for database migration
 # Insert license header to every .py file
 # Add reporting/hard copies
 # Export data to CSV
-# Transfer items from POs to inventory
 # Closed PO items can't be edited
 
 Post release
 ============================
 
+# Add budgeting tools to purchase requests
+# Renamed movements app to purchases
+# Offer to close a PO if all items are closed
+# Ability to traverse items from the edit or detail view
 # Expose api via webservices
 # Add prefered suppliers m2m to Purchase Request Item
 # Allow True, False for filters
@@ -40,7 +45,6 @@ Post release
 # Rename all instances of the word 'item' to 'asset'
 # User setting (theme, language, timezone, changepassword)
 # Add sorting by column to generic_list
-# Split tools menu into setup/tools
 # Add manufacturing submenu (BOM, part list per item template)
 # Use separate model for supplies and add other fields(qty, req/optional) 
 # Transfer items from one inventory to another
