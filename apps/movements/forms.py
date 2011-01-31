@@ -8,9 +8,7 @@ from inventory.models import Inventory
 from models import PurchaseRequest, PurchaseRequestItem, PurchaseOrder, \
                    PurchaseOrderItem
                    
-                   
-#TODO: Remove auto_add_now from models and implement custom save method to include date              
-
+#TODO: Remove auto_add_now from models and implement custom save method to include date     
 
 class PurchaseRequestForm_view(DetailForm):
     def __init__(self, *args, **kwargs):
@@ -45,7 +43,7 @@ class PurchaseOrderWizardItemForm(forms.Form):
             self.fields['qty'].initial = self.initial['item'].qty
 
     template_id = forms.CharField(widget=forms.HiddenInput)
-    name = forms.CharField(label=_(u'Name'))
+    name = forms.CharField(label=_(u'Name'), required=False, widget=forms.TextInput(attrs={'readonly':'readonly'}))
     supplier = forms.ChoiceField(label=_(u'Suppliers'))
     qty = forms.CharField(label=_(u'Qty'))
 
