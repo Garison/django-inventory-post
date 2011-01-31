@@ -85,7 +85,6 @@ def inventory_view(request, object_id):
     form = InventoryForm_view(instance=inventory)
     
     return render_to_response('generic_detail.html', {
-        #'title':_(u'details for inventory: %s') % inventory,
         'object_name':_(u'inventory'),
         'object':inventory,
         'form':form,
@@ -97,9 +96,9 @@ def inventory_view(request, object_id):
 
             'extra_columns':[
                 #{'name':_(u'transaction'), 'attribute':lambda x: '<a href="%s">%s</a>' % (x.get_absolute_url(), x.supply)},
+                {'name':_(u'date'), 'attribute':'date'},
                 {'name':_(u'item'), 'attribute':'supply'},
                 {'name':_(u'qty'), 'attribute':'quantity'},
-                {'name':_(u'date'), 'attribute':'date'},
             ],
         }]
     },
