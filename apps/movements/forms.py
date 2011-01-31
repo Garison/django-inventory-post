@@ -10,27 +10,39 @@ from models import PurchaseRequest, PurchaseRequestItem, PurchaseOrder, \
                    
 #TODO: Remove auto_add_now from models and implement custom save method to include date     
 
-class PurchaseRequestForm_view(DetailForm):
-    def __init__(self, *args, **kwargs):
-        super(PurchaseRequestForm_view, self).__init__(*args, **kwargs)    
-        
+class PurchaseRequestForm(forms.ModelForm):
     class Meta:
         model = PurchaseRequest
-    
+        exclude = ('active',)
+
+
+class PurchaseRequestForm_view(DetailForm):
+    class Meta:
+        model = PurchaseRequest
+        exclude = ('active',)
+            
 
 class PurchaseRequestItemForm(forms.ModelForm):
     class Meta:
         model = PurchaseRequestItem
 
+
+class PurchaseOrderForm(forms.ModelForm):
+    class Meta:
+        model = PurchaseOrder
+        exclude = ('active',)
+    
     
 class PurchaseOrderForm_view(DetailForm):
     class Meta:
         model = PurchaseOrder
-
+        exclude = ('active',)
+        
     
 class PurchaseOrderItemForm(forms.ModelForm):
     class Meta:
         model = PurchaseOrderItem
+        exclude = ('active',)
      
 
 class PurchaseOrderWizardItemForm(forms.Form):
