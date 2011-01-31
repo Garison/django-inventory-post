@@ -65,10 +65,6 @@ class DocumentForm(forms.Form):
 
 
 class PreviewForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        self.title = _(u'import preview')
-        super(PreviewForm, self).__init__(*args, **kwargs)
-            
     preview_area = forms.CharField(label=_(u'Preview'), required=False, widget=forms.widgets.Textarea(attrs={'cols':80, 'rows':10}))
     start_row = forms.IntegerField(label=_(u'Start row'), initial=1)
     dialect_delimiter = forms.CharField(label=_('Delimiter'), max_length=1, help_text=_(u'A one-character string used to separate fields. It defaults to ",".'))
@@ -79,9 +75,6 @@ class PreviewForm(forms.Form):
 
 
 class ExpressionForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        super(ExpressionForm, self).__init__(*args, **kwargs)
-
     model_field = forms.CharField(label=_(u'Model field'))
     expression = forms.CharField(label=_(u'Expression'))
     arguments = forms.CharField(label=_(u'Arguments'), required=False)
@@ -119,8 +112,17 @@ class ImportWizard(BoundFormWizard):
             }}
         csvfile.close()
 
+    def render_template(self, request, form, previous_fields, step, context=None):
+        context = {'step_title':self.extra_context['step_titles'][step]}
+        return super(ImportWizard, self).render_template(request, form, previous_fields, step, context)
        
     def parse_params(self, request, *args, **kwargs):
+        self.extra_context={'step_titles':[
+            _(u'step 1 of 4: Import preview'),
+            _(u'step 2 of 4: expressions'),
+            _(u'step 3 of 4: Import test run results'),
+            _(u'step 4 of 4: Final import results'),
+            ]}
         self.settings = {}
         self.settings['filename'] = request.GET.get('temp_file', None)
         self.settings['model_name'] = request.GET.get('model_name', None)

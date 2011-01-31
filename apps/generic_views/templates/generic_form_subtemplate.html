@@ -1,5 +1,5 @@
 {% load i18n %}
-       
+                
 {% if side_bar %}
     <div class="block">
     <h3>
@@ -24,14 +24,17 @@
     {% else %}
         <form method="{{ submit_method|default:'post' }}" action="" class="form">
     {% endif %}
+        {% if step_field %}
+            <input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+        {% endif %}
+        
         {% if submit_method != 'GET' and submit_method != 'get' %}
             {% csrf_token %}
         {% endif %}
-        {% if hidden_fields %}
-            {% for name, value in hidden_fields.items %}
-                <input name='{{ name }}' type='hidden' value='{{ value }}' />
-            {% endfor %}
-        {% endif %} 
+
+        {% for hidden_field in hidden_fields %}
+           {{ hidden_field.as_hidden }}
+        {% endfor %}
                    
         {% if form.management_form %}
             {% with form as formset %}
