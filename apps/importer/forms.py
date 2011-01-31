@@ -48,15 +48,21 @@ class DocumentForm(forms.Form):
             choices = models
         else:
             qs=ContentType.objects.all()
-            choices = sorted(["%s.%s" % (model.app_label, model.name) for model in qs])
+            choices = sorted(["%s.%s" % (model.app_label, model.model) for model in qs])
 
         exclude = kwargs.pop('exclude', [])
         for exclusion in exclude:
             choices.remove(exclusion)
 
         super(DocumentForm, self).__init__(*args, **kwargs)
-            
-        self.fields['model_name'].choices=zip(choices, choices)
+        
+        capfirst = lambda x: x[0].upper() + x[1:]
+        
+        get_verbose_name = lambda x: getattr(x._meta, 'verbose_name', x) if hasattr(x, '_meta') else x
+        
+        names = [capfirst(get_verbose_name(ContentType.objects.get(app_label=model.split('.')[0], model=model.split('.')[1]).model_class())) for model in choices]
+                
+        self.fields['model_name'].choices=sorted(zip(choices, names), lambda x,y: 1 if x[1]>y[1] else -1)
         
     local_document = DocumentField(label=_(u'Local document'))
     model_name = forms.ChoiceField(label=_(u'Model'), help_text=_(u'Model that will receive the data.'))
@@ -142,8 +148,10 @@ class ImportWizard(BoundFormWizard):
         if step == 0:
             self.settings['dialect_settings'] = dict([(key, form.cleaned_data[key]) for key in form.cleaned_data if 'dialect' in key])
             self.settings['start_row'] = form.cleaned_data['start_row']
-            app_label, name = self.settings['model_name'].split('.')
-            ct = ContentType.objects.get(app_label=app_label, name=name)
+            #app_label, name = self.settings['model_name'].split('.')
+            app_label, model = self.settings['model_name'].split('.')
+            #ct = ContentType.objects.get(app_label=app_label, name=name)
+            ct = ContentType.objects.get(app_label=app_label, model=model)
             self.settings['model'] = ct.model_class()
             initial=[]
             for num, field in enumerate(self.settings['model']._meta.fields):
