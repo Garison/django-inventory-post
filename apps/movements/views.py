@@ -16,7 +16,8 @@ from inventory.models import Supplier, ItemTemplate, InventoryTransaction
 from models import PurchaseRequest, PurchaseRequestItem, PurchaseOrder
 from forms import PurchaseRequestForm_view, PurchaseRequestItemForm, \
                   PurchaseOrderForm_view, PurchaseOrderItemForm, \
-                  PurchaseOrderItem, PurchaseOrderWizardItemForm
+                  PurchaseOrderItem, PurchaseOrderWizardItemForm, \
+                  PurchaseOrderItemTransferForm
 
                   
 def purchase_request_view(request, object_id):
@@ -217,7 +218,7 @@ def purchase_order_view(request, object_id):
             'object_list':purchase_order.purchaseorderitem_set.all(),
             'extra_columns':[
                 {'name':_(u'qty'), 'attribute':'qty'},
-                {'name':_(u'amount received'), 'attribute':'received_qty'},
+                {'name':_(u'qty received'), 'attribute':'received_qty'},
                 {'name':_(u'agreed price'), 'attribute':lambda x: '$%s' % x.agreed_price if x.agreed_price else '-'},
                 {'name':_(u'status'), 'attribute':'status'},
                 {'name':_(u'active'), 'attribute':lambda x: _(u'Open') if x.active == True else _(u'Closed')}
@@ -282,13 +283,121 @@ def purchase_order_open(request, object_id):
     context_instance=RequestContext(request))  
 
 
-from forms import PurchaseOrderItemTransferForm
+def purchase_order_transfer(request, object_id):
+    """
+    Take a purchase order and call transfer_to_inventory to transfer and
+    close all of its item and close the purchase order too
+    """
+    purchase_order = get_object_or_404(PurchaseOrder, pk=object_id)    
+    
+    if purchase_order.active == False:
+        msg = _(u'This purchase order has already been closed.')
+        messages.error(request, msg, fail_silently=True)            
+        return redirect(request.META['HTTP_REFERER'] if 'HTTP_REFERER' in request.META else purchase_order.get_absolute_url())
+    
+    return transfer_to_inventory(request, purchase_order)
+
+
+def transfer_to_inventory(request, object_to_transfer):
+    """
+    Take an item from a purchase order, or an entire purchase order and
+    create inventory transaction entries to add the items to an inventory
+    and close the item and/or the purchase order
+    """    
+    FormSet = formset_factory(PurchaseOrderItemTransferForm, extra=0)    
+    context = {}
+
+    if isinstance(object_to_transfer, PurchaseOrderItem):
+        #A single purchase order item
+        context = {
+            'object_name':_(u'purchase order item'),
+            'title':_(u'Transfer and close the received purchase orders item: %s') % object_to_transfer, 
+        }   
+        #Seed a formset of a single form
+        initial = [{
+            'qty':object_to_transfer.received_qty,
+            'purchase_order_item':object_to_transfer,
+            'purchase_order_item_id':object_to_transfer.id
+        }]
+    elif isinstance(object_to_transfer, PurchaseOrder):
+        #An entire purchase order
+        context = {
+            'object_name':_(u'purchase order'),
+        }   
+        #Seed the formset for each PO item
+        initial = []
+        items = object_to_transfer.purchaseorderitem_set.filter(active=True)
+        if not items:
+            #There are no PO items active
+            context['title'] = _(u'All the items from this purchase order are either closed or transfered, continue to close the purchase order.')
+        else:
+            context['title'] = _(u'Transfer and close all the received items from the purchase order: %s') % object_to_transfer
+            
+        for item in items:
+            initial.append({
+                'qty':item.received_qty,
+                'purchase_order_item':item,
+                'purchase_order_item_id':item.id
+            })
+    #TODO: Raise error if object_to_transfer is neither a PO nor a PO item?
+    #else:
+    #    raise 'Unknown object type'
+
+    if request.method == 'POST':
+        formset = FormSet(request.POST)
+        if formset.is_valid():
+            if len(formset.forms):
+                #In case of empty PO or PO w/ no active items
+                for form in formset.forms:
+                    #Create inventory transaction for each PO item
+                    purchase_order_item = get_object_or_404(PurchaseOrderItem, pk=form.cleaned_data['purchase_order_item_id'])
+                    transaction = InventoryTransaction(
+                        inventory=form.cleaned_data['inventory'],
+                        supply=purchase_order_item.item_template,
+                        quantity=form.cleaned_data['qty'],
+                        date=datetime.date.today(),
+                        notes=_(u'Automatically transfered from purchase order:%s') % purchase_order_item.purchase_order
+                    )    
+                    transaction.save()
+                    purchase_order_item.active = False
+                    purchase_order_item.save()
+            
+                if isinstance(object_to_transfer, PurchaseOrderItem):
+                    msg = _(u'The purchase order item has been transfered and closed successfully.')
+                    messages.success(request, msg, fail_silently=True)            
+                    return redirect(purchase_order_item.get_absolute_url())
+                elif isinstance(object_to_transfer, PurchaseOrder):
+                    object_to_transfer.active = False
+                    object_to_transfer.save()
+                    msg = _(u'All the purchase order items have been transfered and closed successfully, the purchase order has been closed as well.')
+                    messages.success(request, msg, fail_silently=True)            
+                    return redirect(object_to_transfer.get_absolute_url())
+            else:
+                #Empty PO or PO w/ no active items
+                object_to_transfer.active = False
+                object_to_transfer.save()
+                msg = _(u'All the purchase order items were closed or already transfered, closing the purchase order.')
+                messages.success(request, msg, fail_silently=True)
+                return redirect(object_to_transfer.get_absolute_url())
+                    
+    else:
+        formset = FormSet(initial=initial)
+    
+    context.update({
+        'object':object_to_transfer,
+        'form':formset,
+        'form_display_mode_table':True
+    })
+        
+    return render_to_response('generic_form.html', context,
+        context_instance=RequestContext(request))    
+    
 
 def purchase_order_item_transfer(request, object_id):
     """
-    Take an item from a purchase order, create inventory transaction
-    entries to add it to an inventory and close the item
-    """
+    Take a purchase order item and call transfer_to_inventory to
+    transfer and close the item
+    """      
     purchase_order_item = get_object_or_404(PurchaseOrderItem, pk=object_id)    
     
     if purchase_order_item.active == False:
@@ -296,33 +405,8 @@ def purchase_order_item_transfer(request, object_id):
         messages.error(request, msg, fail_silently=True)            
         return redirect(request.META['HTTP_REFERER'] if 'HTTP_REFERER' in request.META else purchase_order_item.get_absolute_url())
     
-    #Use the inventory selected by the user and record a transaction for it    
-    if request.method == 'POST':
-        form = PurchaseOrderItemTransferForm(request.POST)
-        if form.is_valid():
-            transaction = InventoryTransaction(
-                inventory=form.cleaned_data['inventory'],
-                supply=purchase_order_item.item_template,
-                quantity=purchase_order_item.received_qty,
-                date=datetime.date.today(),
-                notes=_(u'Automatically transfered from purchase order:%s') % purchase_order_item.purchase_order
-            )
-            transaction.save()
-            purchase_order_item.active = False
-            purchase_order_item.save()
-            msg = _(u'The purchase order item has been transfered and closed successfully.')
-            messages.success(request, msg, fail_silently=True)            
-            return redirect(purchase_order_item.get_absolute_url())
-    else:
-        form = PurchaseOrderItemTransferForm()
-        
-    return render_to_response('generic_form.html', {
-        'form':form,
-        'title':_(u'Transfer and close the received purchase orders item: %s') % purchase_order_item,
-        'object':purchase_order_item,
-        'object_name':_(u'purchase order item'),
-    }, context_instance=RequestContext(request))
-    
+    return transfer_to_inventory(request, purchase_order_item)
+
 
 def purchase_order_item_close(request, object_id):
     purchase_order_item = get_object_or_404(PurchaseOrderItem, pk=object_id)    

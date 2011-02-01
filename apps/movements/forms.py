@@ -61,4 +61,7 @@ class PurchaseOrderWizardItemForm(forms.Form):
 
 
 class PurchaseOrderItemTransferForm(forms.Form):
+    purchase_order_item_id = forms.CharField(widget=forms.HiddenInput)
+    purchase_order_item = forms.CharField(label=_(u'Purchase order item'), widget=forms.TextInput(attrs={'readonly':'readonly'}))
     inventory = forms.ModelChoiceField(queryset = Inventory.objects.all(), help_text = _(u'Inventory that will receive the item.'))
+    qty = forms.CharField(label=_(u'Qty received'))
