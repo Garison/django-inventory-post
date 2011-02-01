@@ -113,7 +113,7 @@ class InventoryTransaction(models.Model):
     class Meta:
         verbose_name = _(u'inventory transaction')
         verbose_name_plural = _(u'inventory transactions')
-        ordering = ['-date']
+        ordering = ['-date', '-id']
 
     @models.permalink
     def get_absolute_url(self):
