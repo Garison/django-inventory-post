@@ -32,6 +32,11 @@
 Post release
 ============================
 
+# Quote requests as client and as seller
+# Quotations as client and as seller
+# Relate Quotations as client w/ suppliers and item template
+# Relate Quotations w/ purchase request, orders
+# Simple ticketing system for assets
 # Add budgeting tools to purchase requests
 # Renamed movements app to purchases
 # Ability to traverse items from the edit or detail view
