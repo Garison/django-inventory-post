@@ -13,8 +13,8 @@ sys.path.append(os.path.join(PROJECT_ROOT, '3rd_party_apps'))
 PROJECT_TITLE = 'Django Inventory'
 PROJECT_NAME = 'django_inventory'
 
-DEBUG = False
-DEVELOPMENT = False
+DEBUG = True #False
+DEVELOPMENT = True #False
 TEMPLATE_DEBUG = DEBUG
 ADMINS = (
         # ('Your Name', 'your_email@domain.com'),
@@ -24,10 +24,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(PROJECT_ROOT, "%s.sqlite" % PROJECT_NAME),     # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'inventory', #os.path.join(PROJECT_ROOT, "%s.sqlite" % PROJECT_NAME),     # Or path to database file if using sqlite3.
+        'USER': 'inventory',                      # Not used with sqlite3.
+        'PASSWORD': 'inventory',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -49,6 +49,7 @@ ugettext = lambda s: s
 LANGUAGES = (
     ('es', ugettext('Spanish')),
     ('en', ugettext('English')),
+    ('ru', ugettext('Russian')),
 )
     
 SITE_ID = 1
