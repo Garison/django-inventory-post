@@ -82,7 +82,7 @@ register_links(SubLocation, [sublocation_update, sublocation_delete])
 
 register_menu([
     {'text':_('templates'), 'view':'template_list', 'links':template_menu_links, 'famfam':'page', 'position':1},
-    {'text':_('inventories'), 'view':'inventory_list', 'links':inventory_menu_links,'famfam':'package_go', 'position':4},
+    {'text':_('inventories'), 'view':'inventory_list', 'links':inventory_menu_links,'famfam':'package', 'position':4},
 ])
 
 
