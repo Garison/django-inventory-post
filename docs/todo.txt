@@ -26,13 +26,14 @@
 # Add reporting/hard copies
 # Export data to CSV
 # Closed PO items can't be edited
+# Switch inventory balances and transactions, current balances at hand
+    are more useful
 
 Post release
 ============================
 
 # Add budgeting tools to purchase requests
 # Renamed movements app to purchases
-# Offer to close a PO if all items are closed
 # Ability to traverse items from the edit or detail view
 # Expose api via webservices
 # Add prefered suppliers m2m to Purchase Request Item
