@@ -45,7 +45,10 @@ class DetailSelectMultiple(forms.widgets.SelectMultiple):
         if options:
             for index, string in options:
                 if self.queryset:
-                    output += u'<li><a href="%s">%s</a></li>' % (self.queryset.get(pk=index).get_absolute_url(), string)
+                    try:
+                        output += u'<li><a href="%s">%s</a></li>' % (self.queryset.get(pk=index).get_absolute_url(), string)
+                    except AttributeError:
+                        output += u'<li>%s</li>' % (string)
                 else:
                  output += u'<li>%s</li>' % string
         else:
