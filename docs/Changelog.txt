@@ -24,3 +24,4 @@
 * Added view to transfer received items from a PO to an inventory
 * Reorganized secondary menu, removed reduntant entries
 * Single or bulk PO to inventory transfer
+* Initial Russian translation thanks to Garison (Aleksey) https://github.com/Garison
