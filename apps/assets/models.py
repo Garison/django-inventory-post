@@ -148,6 +148,6 @@ class Person(models.Model):
     
      
 register(ItemState, _(u'states'), ['state__name'])
-register(Item, _(u'assets'), ['property_number', 'notes', 'serial_number'])
+register(Item, _(u'assets'), ['property_number', 'notes', 'serial_number', 'person__first_name', 'person__last_name', 'person__second_last_name', 'person__second_name'])
 register(ItemGroup, _(u'asset groups'), ['name'])
 register(Person, _(u'people'), ['last_name', 'second_last_name', 'first_name', 'second_name', 'location__name'])
