@@ -48,9 +48,11 @@
     {% with subtemplate.object_list as object_list %}
     {% with subtemplate.extra_columns as extra_columns %}
     {% with subtemplate.hide_object as hide_object %}
+    {% with subtemplate.main_object as main_object %}
         <div class="content">
         {% include subtemplate.name %}
         </div>
+    {% endwith %}
     {% endwith %}
     {% endwith %}
     {% endwith %}

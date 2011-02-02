@@ -25,3 +25,5 @@
 * Reorganized secondary menu, removed reduntant entries
 * Single or bulk PO to inventory transfer
 * Initial Russian translation thanks to Garison (Aleksey) https://github.com/Garison
+* Switched inventory balances and transactions view, current balances are
+  now shown by default first
