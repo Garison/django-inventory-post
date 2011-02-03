@@ -41,12 +41,10 @@
               <button class="button" type="submit">
                 <img src="{{ MEDIA_URL }}web_theme_media/images/icons/tick.png" alt="{% trans 'Yes' %}" /> {% trans 'Yes' %}
               </button>
-              {# TODO: Fix back button #}
-              {% comment %}
-              <a href="#header" onclick='{% if previous %}window.location.replace("{{ previous }}");{% else %}history.go(-1);{% endif %}' class="button">
+              <a href="#" onclick='{% if previous %}window.location.replace("{{ previous }}");{% else %}history.go(-2);{% endif %}' class="button">
                 <img src="{{ MEDIA_URL }}web_theme_media/images/icons/cross.png"  alt="{% trans 'No' %}"/> {% trans 'No' %}
               </a>
-              {% endcomment %}
+              
             </div>
           </form>
         </div>
