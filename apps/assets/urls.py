@@ -17,7 +17,7 @@ from conf import settings as asset_settings
 
                                 
 urlpatterns = patterns('assets.views',
-    url(r'^person/(?P<object_id>\d+)/photos/$', generic_photos, {'model':Person, 'max_photos':asset_settings.MAX_PERSON_PHOTOS}, 'person_photos'), 
+    url(r'^person/(?P<object_id>\d+)/photos/$', generic_photos, {'model':Person, 'max_photos':asset_settings.MAX_PERSON_PHOTOS, 'extra_context':{'object_name':_(u'person')}}, 'person_photos'), 
     url(r'^person/(?P<object_id>\d+)/$', generic_detail, {'form_class':PersonForm_view, 'queryset':Person.objects.all(), 'extra_context':{'sidebar_subtemplates':['generic_photos_subtemplate.html']}}, 'person_view'),
     url(r'^person/list/$', generic_list, {'queryset':Person.objects.all(), 'list_filters':[location_filter], 'extra_context':{'title':_(u'people')}}, 'person_list'),
     url(r'^person/create/$', create_object, {'form_class':PersonForm, 'template_name':'generic_form.html'}, 'person_create'),
@@ -32,7 +32,7 @@ urlpatterns = patterns('assets.views',
     url(r'^asset/orphans/$', generic_list, dict({'queryset':Item.objects.filter(person=None)}, list_filters=[location_filter], extra_context=dict(title=_(u'orphan assets'))), 'item_orphans_list'),
     url(r'^asset/list/$', generic_list, dict({'queryset':Item.objects.all()}, list_filters=[location_filter, state_filter], extra_context=dict(title=_(u'assets'))), 'item_list'),
     url(r'^asset/(?P<object_id>\d+)/$', generic_detail, dict(form_class=ItemForm_view, queryset=Item.objects.all(), extra_context={'object_name':_(u'asset'), 'sidebar_subtemplates':['generic_photos_subtemplate.html', 'state_subtemplate.html']}, extra_fields=[{'field':'get_owners', 'label':_(u'Assigned to:')}]), 'item_view'),
-    url(r'^asset/(?P<object_id>\d+)/photos/$', generic_photos, dict(model=Item, max_photos=asset_settings.MAX_ASSET_PHOTOS), 'item_photos'), 
+    url(r'^asset/(?P<object_id>\d+)/photos/$', generic_photos, {'model':Item, 'max_photos':asset_settings.MAX_ASSET_PHOTOS, 'extra_context':{'object_name':_(u'asset')}}, 'item_photos'), 
     url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/set/$', 'item_setstate', (), 'item_setstate'),
     url(r'^asset/(?P<object_id>\d+)/state/(?P<state_id>\d+)/unset$', 'item_remove_state', (), 'item_remove_state'),
 

@@ -16,6 +16,10 @@
     {% block stylesheets %}{% endblock %}
 {% endblock %}
 
+{% block web_theme_javascript %}
+    {% block javascript %}{% endblock %}
+{% endblock %}
+
 {% block web_theme_user_navigation %}
     <li><strong>{% trans 'User' %}:</strong>
         {% if user.is_anonymous %}

@@ -65,7 +65,18 @@
         {% endfor %}
         </tbody>
     </table>
-    {% paginate %}          
   </form>
+    {% paginate %}
 </div>
 </div>
+
+    {% for subform in subforms_dict %}
+    {% with subform.title as title %}
+    {% with subform.extra_columns as extra_columns %}
+    {% with subform.form as form %}
+        {% include subform.name %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% endfor %}
+

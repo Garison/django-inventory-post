@@ -40,11 +40,11 @@ supplier_assign_itemtemplate = {'text':_(u'assign templates'), 'view':'supplier_
 supplier_purchase_orders = {'text':_(u'related purchase orders'), 'view':'supplier_purchase_orders', 'args':'object.id', 'famfam':'cart_go'}
 
 template_list = {'text':_('view all'), 'view':'template_list', 'famfam':'page_go'}
-template_create = {'text':_('create new'), 'view':'template_create', 'famfam':'page_add'}
+template_create = {'text':_('create new template'), 'view':'template_create', 'famfam':'page_add'}
 template_orphan_list = {'text':_('orphans templates'), 'view':'template_orphans_list'}
 template_update = {'text':_(u'edit'), 'view':'template_update', 'args':'object.id', 'famfam':'page_edit'}
 template_delete = {'text':_(u'delete'), 'view':'template_delete', 'args':'object.id', 'famfam':'page_delete'}
-template_photos = {'text':_(u'photos'), 'view':'template_photos', 'args':'object.id', 'famfam':'picture_go'}
+template_photos = {'text':_(u'add / remove photos'), 'view':'template_photos', 'args':'object.id', 'famfam':'picture_go'}
 template_assets = {'text':_(u'related assets'), 'view':'template_items_list', 'args':'object.id', 'famfam':'computer_go'}
 template_assign_supplies = {'text':_(u'assign supplies'), 'view':'template_assign_supply', 'args':'object.id', 'famfam':'monitor'}
 template_assign_suppliers = {'text':_(u'assign suppliers'), 'view':'template_assign_suppliers', 'args':'object.id', 'famfam':'lorry_go'}

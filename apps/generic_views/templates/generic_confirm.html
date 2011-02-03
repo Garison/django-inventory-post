@@ -32,7 +32,7 @@
                         <h3>{% blocktrans %}Are you sure you wish to delete: {{ object }}?{% endblocktrans %}</h3>
                     {% endif %}
                 {% else %}
-                    {% trans 'Are you sure you wish to proceed?' %}
+                    <h4>{% trans 'Are you sure you wish to proceed?' %}</h4>
                 {% endif %}                
             {% endif %}
             {% if message %}<h4>{{ message }}</h4>{% endif %}
