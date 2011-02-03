@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %} :: {% trans 'Confirm' %} {{ title }}{% endblock %}
+{% block title %} :: {% if delete_view %}{% trans 'Confirm delete' %}{% else %}{% trans 'Confirm' %}{% endif %}{% endblock %}
 
 {% block sidebar %}
     {% for subtemplate in subtemplates %}
@@ -21,17 +21,21 @@
             {% if next %}
                 <input name='next' type='hidden' value='{{ next }}' />
             {% endif %}          
-
-            {% if delete_view %}
-                {% if object_name %}
-                    <h3>{% blocktrans %}Are you sure you wish to delete {{ object_name }}: {{ object }}?{% endblocktrans %}</h3>
-                {% else %}
-                    <h3>{% blocktrans %}Are you sure you wish to delete: {{ object }}?{% endblocktrans %}</h3>
-                {% endif %}
-            {% else %}
+            
+            {% if title %}
                 <h3>{{ title }}</h3>
+            {% else %}
+                {% if delete_view %}
+                    {% if object_name %}
+                        <h3>{% blocktrans %}Are you sure you wish to delete {{ object_name }}: {{ object }}?{% endblocktrans %}</h3>
+                    {% else %}
+                        <h3>{% blocktrans %}Are you sure you wish to delete: {{ object }}?{% endblocktrans %}</h3>
+                    {% endif %}
+                {% else %}
+                    {% trans 'Are you sure you wish to proceed?' %}
+                {% endif %}                
             {% endif %}
-            <h4>{{ message }}</h4>
+            {% if message %}<h4>{{ message }}</h4>{% endif %}
 
             <div class="group navform wat-cf">        
               <button class="button" type="submit">
