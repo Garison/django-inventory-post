@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from generic_views.views import generic_assign_remove, generic_list
 
 from photos.views import generic_photos
+from photos.models import GenericPhoto
 
 from assets.models import Person, Item, ItemGroup
 
@@ -36,6 +37,36 @@ def supplier_assign_remove_itemtemplates(request, object_id):
         right_list_title=_(u'Assigned templates'), 
         item_name=_(u"templates"), 
     )
+
+
+def get_main_photo_html(item):
+    main_photo = GenericPhoto.objects.get_main_photo_for_object(item)
+    if main_photo:
+        return '<div class="gallery"><a href="%s"><img src="%s" /></a></div>' % (main_photo.get_display_url(), main_photo.get_thumbnail_url())
+    else:
+        return None
+
+def template_list(request):
+    
+  
+    
+#    generic_list, dict({'queryset':ItemTemplate.objects.all()}, extra_context=dict(title=_(u'item template'))), 'template_list'),
+#    photos = GenericPhoto.objects.photos_for_object(model_instance)
+#            {'name':_(u'photo'),'attribute':lambda x: '<div class="gallery"><a href="%s"><img src="%s" /></a></div>' % (x.get_display_url(), x.get_thumbnail_url())},
+    
+
+    return object_list(
+        request,
+        queryset = ItemTemplate.objects.all(),
+        template_name = "generic_list.html", 
+        extra_context={
+            'title':'item templates',
+            'extra_columns':[
+                {'name':_(u'photo'),'attribute':lambda x: get_main_photo_html(x)},
+            ]
+        },
+    )
+
     
 def template_assign_remove_supply(request, object_id):
     obj = get_object_or_404(ItemTemplate, pk=object_id)

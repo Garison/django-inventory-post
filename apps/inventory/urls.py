@@ -19,7 +19,8 @@ from conf import settings as inventory_settings
                                 
 
 urlpatterns = patterns('inventory.views',
-    url(r'^template/list/$', generic_list, dict({'queryset':ItemTemplate.objects.all()}, extra_context=dict(title=_(u'item template'))), 'template_list'),
+    #url(r'^template/list/$', generic_list, dict({'queryset':ItemTemplate.objects.all()}, extra_context=dict(title=_(u'item template'))), 'template_list'),
+    url(r'^template/list/$', 'template_list', (), 'template_list'),
     url(r'^template/create/$', create_object, {'form_class':ItemTemplateForm, 'template_name':'generic_form.html', 'extra_context':{'object_name':_(u'item template')}}, 'template_create'),
     url(r'^template/(?P<object_id>\d+)/update/$', update_object, {'form_class':ItemTemplateForm, 'template_name':'generic_form.html', 'extra_context':{'object_name':_(u'item template')}}, 'template_update' ),
     url(r'^template/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':ItemTemplate}, post_delete_redirect="template_list", extra_context=dict(object_name=_(u'item template'), _message=_(u"Will be deleted from any user that may have it assigned and from any item group."))), 'template_delete' ),

@@ -10,7 +10,14 @@ class GenericPhotoManager(models.Manager):
     def photos_for_object(self, obj):
         object_type = ContentType.objects.get_for_model(obj)
         return self.filter(content_type__pk=object_type.id, object_id=obj.id)        
-        
+
+    def get_main_photo_for_object(self, obj):
+        object_type = ContentType.objects.get_for_model(obj)
+        photos = self.filter(content_type__pk=object_type.id, object_id=obj.id, main=True)
+        if photos.count() > 0:
+            return photos[0]
+        else:
+            return None
         
 class GenericPhoto(ImageModel):
     content_type = models.ForeignKey(ContentType)
