@@ -7,13 +7,13 @@ import movements
 from common.api import register_menu
 
 from assets.models import Item, Person, ItemGroup, State
-from inventory.models import ItemTemplate, Inventory, InventoryTransaction, Supplier, Location
+from inventory.models import ItemTemplate, Inventory, InventoryTransaction, Supplier, Location, SubLocation
     
 register_menu([
     {'text':_(u'home'), 'view':'home', 'famfam':'house', 'position':0},
 
     {'text':_(u'tools'), 'view':'location_list', 'links': [
-        inventory.location_list, assets.state_list, 
+        inventory.location_list, inventory.sublocation_list, assets.state_list, 
         inventory.supplier_list,
         movements.purchase_request_state_list, 
         movements.purchase_order_state_list,

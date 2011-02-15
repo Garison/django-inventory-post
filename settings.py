@@ -176,7 +176,7 @@ except ImportError:
 
 
 if DEVELOPMENT:
-    INTERNAL_IPS = ('127.0.0.1',)
+    INTERNAL_IPS = ('127.0.0.1', '192.168.0.186',)
 
     TEMPLATE_LOADERS = (
         'django.template.loaders.filesystem.Loader',

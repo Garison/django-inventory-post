@@ -9,11 +9,11 @@ from generic_views.views import generic_assign_remove, \
 from photos.views import generic_photos
 
 from models import ItemTemplate, InventoryTransaction, \
-                   Inventory, Log, Location, Supplier
+                   Inventory, Log, Location, SubLocation, Supplier
                    
 from forms import InventoryTransactionForm, InventoryForm, \
                   ItemTemplateForm, ItemTemplateForm_view, LogForm, \
-                  SupplierForm, LocationForm_view
+                  SupplierForm, LocationForm_view, SubLocationForm_view
 
 from conf import settings as inventory_settings
                                 
@@ -49,6 +49,14 @@ urlpatterns = patterns('inventory.views',
     url(r'^location/(?P<object_id>\d+)/update/$', update_object, {'model':Location, 'template_name':'generic_form.html'}, 'location_update'),
     url(r'^location/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':Location}, post_delete_redirect="location_list", extra_context=dict(object_name=_(u'locations'))), 'location_delete'),
     url(r'^location/(?P<object_id>\d+)/$', generic_detail, dict(form_class=LocationForm_view, queryset=Location.objects.all()), 'location_view'),
+   
+  url(r'^sublocation/list/$', generic_list, dict({'queryset':SubLocation.objects.all()}, extra_context=dict(title =_(u'sublocations'))), 'sublocation_list'),
+    url(r'^sublocation/create/$', create_object, {'model':SubLocation, 'template_name':'generic_form.html'}, 'sublocation_create'),
+    url(r'^sublocation/(?P<object_id>\d+)/update/$', update_object, {'model':SubLocation, 'template_name':'generic_form.html'}, 'sublocation_update'),
+url(r'^sublocation/(?P<object_id>\d+)/delete/$', generic_delete, dict({'model':SubLocation}, post_delete_redirect="Sublocation_list", extra_context=dict(object_name=_(u'sublocations'))), 'sublocation_delete'),
+   
+    url(r'^sublocation/(?P<object_id>\d+)/$', generic_detail, dict(form_class=SubLocationForm_view, queryset=SubLocation.objects.all()), 'sublocation_view'),
+
 
     url(r'^supplier/(?P<object_id>\d+)/$', generic_detail, dict(form_class=SupplierForm, queryset=Supplier.objects.all()), 'supplier_view'),
     url(r'^supplier/list/$', generic_list, dict({'queryset':Supplier.objects.all()}, extra_context=dict(title=_(u'suppliers'))), 'supplier_list'),

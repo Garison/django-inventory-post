@@ -32,7 +32,30 @@ class Location(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('location_view', [str(self.id)])
+
+class SubLocation(models.Model):
+    location = models.CharField(max_length=32, verbose_name=_(u"location"))
+    parentID =  models.IntegerField(null=False)
+    completename = models.CharField(max_length=200, verbose_name=_(u"fullname"), null=False, blank=True)
+    comments = models.TextField(verbose_name=_(u"comments"), null=True, blank=True)    
+    level = models.IntegerField(null=False)
+     
+    class Meta:
+        ordering = ['location']
+        verbose_name = _(u"sublocation")
+        verbose_name_plural = _(u"sublocations")
+        
+    def __unicode__(self):
     
+        return u'%s - - %s'  % (self.location, self.completename)
+        #return self.location
+
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('submissionlocation_view', [str(self.id)])
+
+   
                 
 class ItemTemplate(models.Model):
     description = models.CharField(verbose_name=_(u"description"), max_length=64)
@@ -147,5 +170,6 @@ class Supplier(models.Model):
 
 register(ItemTemplate, _(u'templates'), ['description', 'brand', 'model', 'part_number', 'notes'])
 register(Location, _(u'locations'), ['name', 'address_line1', 'address_line2', 'address_line3', 'address_line4', 'phone_number1', 'phone_number2'])
+register(SubLocation, _(u'sublocation'), [ 'location','parentID', 'completename', 'comments', 'level'])
 register(Inventory, _(u'inventory'), ['name', 'location__name'])
 register(Supplier, _(u'supplier'), ['name', 'address_line1', 'address_line2', 'address_line3', 'address_line4', 'phone_number1', 'phone_number2', 'notes'])

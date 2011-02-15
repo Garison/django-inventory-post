@@ -1,6 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 
-from models import Location, ItemTemplate, Inventory, InventoryTransaction, Supplier
+from models import Location, SubLocation, ItemTemplate, Inventory, InventoryTransaction, Supplier
 
 from common.api import register_links, register_menu
 
@@ -25,6 +25,11 @@ location_list = {'text':_('locations'), 'view':'location_list', 'famfam':'map'}
 location_create = {'text':_(u'create new location'), 'view':'location_create', 'famfam':'map_add'}
 location_update = {'text':_(u'edit'), 'view':'location_update', 'args':'object.id', 'famfam':'map_edit'}
 location_delete = {'text':_(u'delete'), 'view':'location_delete', 'args':'object.id', 'famfam':'map_delete'}
+
+sublocation_list = {'text':_('sublocations'), 'view':'sublocation_list', 'famfam':'map'}
+sublocation_create = {'text':_(u'create new sublocation'), 'view':'sublocation_create', 'famfam':'map_add'}
+sublocation_update = {'text':_(u'edit'), 'view':'sublocation_update', 'args':'object.id', 'famfam':'map_edit'}
+sublocation_delete = {'text':_(u'delete'), 'view':'sublocation_delete', 'args':'object.id', 'famfam':'map_delete'}
 
 supplier_create = {'text':_('create new supplier'), 'view':'supplier_create', 'famfam':'lorry_add'}
 supplier_list = {'text':_('suppliers'), 'view':'supplier_list', 'famfam':'lorry'}
@@ -69,6 +74,11 @@ register_links(InventoryTransaction, [jump_to_inventory], menu_name='sidebar')
 
 register_links(['location_list', 'location_create', 'location_update', 'location_delete'], [location_create], menu_name='sidebar')
 register_links(Location, [location_update, location_delete])
+
+register_links(['sublocation_list', 'sublocation_create', 'sublocation_update', 'sublocation_delete'], [location_create], menu_name='sidebar')
+register_links(SubLocation, [sublocation_update, sublocation_delete])
+
+
 
 register_menu([
     {'text':_('templates'), 'view':'template_list', 'links':template_menu_links, 'famfam':'page', 'position':1},
