@@ -1,5 +1,5 @@
 {% load i18n %}
-       
+                
 {% if side_bar %}
     <div class="block">
     <h3>
@@ -24,19 +24,43 @@
     {% else %}
         <form method="{{ submit_method|default:'post' }}" action="" class="form">
     {% endif %}
+        {% if step_field %}
+            <input type="hidden" name="{{ step_field }}" value="{{ step0 }}" />
+        {% endif %}
+        
         {% if submit_method != 'GET' and submit_method != 'get' %}
             {% csrf_token %}
         {% endif %}
-        {% if hidden_fields %}
-            {% for name, value in hidden_fields.items %}
-                <input name='{{ name }}' type='hidden' value='{{ value }}' />
-            {% endfor %}
-        {% endif %} 
-        
-        {% if formset %}
-            {% for form in formset.forms %}
-                {% include "generic_form_instance.html" %}
-            {% endfor %}
+
+        {% for hidden_field in hidden_fields %}
+           {{ hidden_field.as_hidden }}
+        {% endfor %}
+                   
+        {% if form.management_form %}
+            {% with form as formset %}
+                {{ formset.management_form }}
+
+                {% if form_display_mode_table %}
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            {% for field in formset.forms.0.visible_fields %}
+                                <th>
+                                    {{ field.label_tag }}{% if field.field.required and not read_only %} ({% trans 'required' %}){% endif %}
+                                </th>
+                            {#{% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}#}
+                            {% endfor %} 
+                        </tr>
+                {% endif %}
+                
+                {% for form in formset.forms %}
+                    {% include "generic_form_instance.html" %}
+                {% endfor %}
+                {% if form_display_mode_table %}
+                    </tbody>
+                    </table>
+                {% endif %}
+            {% endwith %}
         {% else %}
             {% include "generic_form_instance.html" %}
         {% endif %}

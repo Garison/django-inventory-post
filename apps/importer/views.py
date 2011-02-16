@@ -35,10 +35,18 @@ def import_wizard(request):
     
    
 def import_file(request):
-    models = ['assets.asset', 'assets.item group', 'assets.item state', 
-            'assets.person', 'assets.state', 'inventory.inventory', 
-            'inventory.inventory transaction', 'inventory.item template', 
-            'inventory.location', 'inventory.supplier'] 
+    models = [
+        'inventory.inventory',
+        'inventory.inventorytransaction',
+        'assets.itemgroup',
+        'assets.itemstate',
+        'inventory.itemtemplate', 
+        'inventory.location',
+        'assets.person',
+        'assets.state',
+        'inventory.supplier',
+        'assets.item',
+    ]
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES, models=models)
         if form.is_valid():

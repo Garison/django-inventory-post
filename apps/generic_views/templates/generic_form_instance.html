@@ -13,12 +13,27 @@
   </div>
 {% endif %}
 
-{% for field in form %}
-    <div class="group">
-        {% if field.errors %}<div class="fieldWithErrors">{% endif %}
-        <label class="label">{{ field.label_tag }}{% if field.field.required and not read_only %} ({% trans 'required' %}){% endif %}</label>
-        {% if field.errors %}<span class="error">{% for error in field.errors %}{{ error }}{% if not forloop.last %} | {% endif %}{% endfor %}</span></div>{% endif %} 
+{% if form_display_mode_table %}
+    {% for field in form.hidden_fields %}
         {{ field }}
-        {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
-    </div>
-{% endfor %} 
+    {% endfor %}
+    <tr class="{% cycle 'odd' 'even2' %}">
+    {% for field in form.visible_fields %}
+            <td title="{% if field.errors %}{% for error in field.errors %}{{ error }}{% if not forloop.last %} | {% endif %}{% endfor %}{% else %}{{ field.help_text }}{% endif %}">
+            {% if field.errors %}<div class="flash"><div class="error">{% endif %}
+              {{ field }}
+            {% if field.errors %}</div></div>{% endif %}
+            </td>
+    {% endfor %} 
+    </tr>
+{% else %}
+    {% for field in form %}
+        <div class="group">
+            {% if field.errors %}<div class="fieldWithErrors">{% endif %}
+            <label class="label">{{ field.label_tag }}{% if field.field.required and not read_only %} ({% trans 'required' %}){% endif %}</label>
+            {% if field.errors %}<span class="error">{% for error in field.errors %}{{ error }}{% if not forloop.last %} | {% endif %}{% endfor %}</span></div>{% endif %} 
+            {{ field }}
+            {% if field.help_text %}<span class="description">{{ field.help_text }}</span>{% endif %}
+        </div>
+    {% endfor %} 
+{% endif %}

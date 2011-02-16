@@ -49,6 +49,6 @@ register_links(State, [state_edit, state_delete])
 
 register_menu([
     {'text':_('assets'), 'view':'item_list', 'links':[
-        asset_list, asset_create, asset_orphan_list, group_list, group_create, person_list, person_create 
+        asset_list, asset_orphan_list, group_list, person_list
     ], 'famfam':'computer', 'position':2},
 ])

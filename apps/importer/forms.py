@@ -48,15 +48,21 @@ class DocumentForm(forms.Form):
             choices = models
         else:
             qs=ContentType.objects.all()
-            choices = sorted(["%s.%s" % (model.app_label, model.name) for model in qs])
+            choices = sorted(["%s.%s" % (model.app_label, model.model) for model in qs])
 
         exclude = kwargs.pop('exclude', [])
         for exclusion in exclude:
             choices.remove(exclusion)
 
         super(DocumentForm, self).__init__(*args, **kwargs)
-            
-        self.fields['model_name'].choices=zip(choices, choices)
+        
+        capfirst = lambda x: x[0].upper() + x[1:]
+        
+        get_verbose_name = lambda x: getattr(x._meta, 'verbose_name', x) if hasattr(x, '_meta') else x
+        
+        names = [capfirst(get_verbose_name(ContentType.objects.get(app_label=model.split('.')[0], model=model.split('.')[1]).model_class())) for model in choices]
+                
+        self.fields['model_name'].choices=sorted(zip(choices, names), lambda x,y: 1 if x[1]>y[1] else -1)
         
     local_document = DocumentField(label=_(u'Local document'))
     model_name = forms.ChoiceField(label=_(u'Model'), help_text=_(u'Model that will receive the data.'))
@@ -65,10 +71,6 @@ class DocumentForm(forms.Form):
 
 
 class PreviewForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        self.title = _(u'import preview')
-        super(PreviewForm, self).__init__(*args, **kwargs)
-            
     preview_area = forms.CharField(label=_(u'Preview'), required=False, widget=forms.widgets.Textarea(attrs={'cols':80, 'rows':10}))
     start_row = forms.IntegerField(label=_(u'Start row'), initial=1)
     dialect_delimiter = forms.CharField(label=_('Delimiter'), max_length=1, help_text=_(u'A one-character string used to separate fields. It defaults to ",".'))
@@ -79,9 +81,6 @@ class PreviewForm(forms.Form):
 
 
 class ExpressionForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        super(ExpressionForm, self).__init__(*args, **kwargs)
-
     model_field = forms.CharField(label=_(u'Model field'))
     expression = forms.CharField(label=_(u'Expression'))
     arguments = forms.CharField(label=_(u'Arguments'), required=False)
@@ -119,8 +118,17 @@ class ImportWizard(BoundFormWizard):
             }}
         csvfile.close()
 
+    def render_template(self, request, form, previous_fields, step, context=None):
+        context = {'step_title':self.extra_context['step_titles'][step]}
+        return super(ImportWizard, self).render_template(request, form, previous_fields, step, context)
        
     def parse_params(self, request, *args, **kwargs):
+        self.extra_context={'step_titles':[
+            _(u'step 1 of 4: Import preview'),
+            _(u'step 2 of 4: expressions'),
+            _(u'step 3 of 4: Import test run results'),
+            _(u'step 4 of 4: Final import results'),
+            ]}
         self.settings = {}
         self.settings['filename'] = request.GET.get('temp_file', None)
         self.settings['model_name'] = request.GET.get('model_name', None)
@@ -140,8 +148,10 @@ class ImportWizard(BoundFormWizard):
         if step == 0:
             self.settings['dialect_settings'] = dict([(key, form.cleaned_data[key]) for key in form.cleaned_data if 'dialect' in key])
             self.settings['start_row'] = form.cleaned_data['start_row']
-            app_label, name = self.settings['model_name'].split('.')
-            ct = ContentType.objects.get(app_label=app_label, name=name)
+            #app_label, name = self.settings['model_name'].split('.')
+            app_label, model = self.settings['model_name'].split('.')
+            #ct = ContentType.objects.get(app_label=app_label, name=name)
+            ct = ContentType.objects.get(app_label=app_label, model=model)
             self.settings['model'] = ct.model_class()
             initial=[]
             for num, field in enumerate(self.settings['model']._meta.fields):

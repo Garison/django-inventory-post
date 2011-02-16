@@ -1,6 +1,10 @@
 {% load i18n %}
 {% if title %}
-    {{ title|capfirst }}
+    {% if striptags %}
+        {{ title|capfirst|striptags }}
+    {% else %}
+        {{ title|capfirst|safe }}
+    {% endif %}
 {% else %}
     {% if read_only %}
         {% if object_name %}

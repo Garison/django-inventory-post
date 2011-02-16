@@ -17,17 +17,25 @@
     CREDITS file                                                        - DONE
 # Smarter search                                                        - DONE
 # Allow import of CSV data                                              - DONE
+# Generate POs from PRs                                                 - DONE
+# Transfer items from POs to inventory                                  - DONE
+# Split tools menu into setup/tools                                     - DONE
+# Warn users about item templates with no associated suppliers
 # Implement South for database migration
 # Insert license header to every .py file
 # Add reporting/hard copies
 # Export data to CSV
-# Generate POs from PRs
-# Transfer items from POs to inventory
 # Closed PO items can't be edited
+# Switch inventory balances and transactions, current balances at hand
+    are more useful
 
 Post release
 ============================
 
+# Add budgeting tools to purchase requests
+# Renamed movements app to purchases
+# Ability to traverse items from the edit or detail view
+# Expose api via webservices
 # Add prefered suppliers m2m to Purchase Request Item
 # Allow True, False for filters
 # Widget override support for filters
@@ -38,7 +46,6 @@ Post release
 # Rename all instances of the word 'item' to 'asset'
 # User setting (theme, language, timezone, changepassword)
 # Add sorting by column to generic_list
-# Split tools menu into setup/tools
 # Add manufacturing submenu (BOM, part list per item template)
 # Use separate model for supplies and add other fields(qty, req/optional) 
 # Transfer items from one inventory to another
@@ -49,10 +56,11 @@ Post release
 # Supply reorder thresholds
 # Add google maps api to locations model
 # Add inventory transactions from RMAs & customer invoices
-# Implement django-permissions
+# Implement django-permissions for roles and permissions
 # Connect w/ descartes for BI charts
 # Eliminate custom generic view and move functionality
     into context processors
+# Convert User, Customer, Supplier to a new generic Entity model
 
 # Deferred, deprecated
 ==========================

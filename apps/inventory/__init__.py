@@ -26,7 +26,7 @@ location_create = {'text':_(u'create new location'), 'view':'location_create', '
 location_update = {'text':_(u'edit'), 'view':'location_update', 'args':'object.id', 'famfam':'map_edit'}
 location_delete = {'text':_(u'delete'), 'view':'location_delete', 'args':'object.id', 'famfam':'map_delete'}
 
-sublocation_list = {'text':_('sublocations'), 'view':'sublocation_list', 'famfam':'map'}
+sublocation_list = {'text':_('sublocation'), 'view':'sublocation_list', 'famfam':'map'}
 sublocation_create = {'text':_(u'create new sublocation'), 'view':'sublocation_create', 'famfam':'map_add'}
 sublocation_update = {'text':_(u'edit'), 'view':'sublocation_update', 'args':'object.id', 'famfam':'map_edit'}
 sublocation_delete = {'text':_(u'delete'), 'view':'sublocation_delete', 'args':'object.id', 'famfam':'map_delete'}
@@ -40,7 +40,7 @@ supplier_purchase_orders = {'text':_(u'related purchase orders'), 'view':'suppli
 
 template_list = {'text':_('view all'), 'view':'template_list', 'famfam':'page_go'}
 template_create = {'text':_('create new'), 'view':'template_create', 'famfam':'page_add'}
-template_orphan_list = {'text':_('orphans'), 'view':'template_orphans_list'}
+template_orphan_list = {'text':_('orphans templates'), 'view':'template_orphans_list'}
 template_update = {'text':_(u'edit'), 'view':'template_update', 'args':'object.id', 'famfam':'page_edit'}
 template_delete = {'text':_(u'delete'), 'view':'template_delete', 'args':'object.id', 'famfam':'page_delete'}
 template_photos = {'text':_(u'photos'), 'view':'template_photos', 'args':'object.id', 'famfam':'picture_go'}
@@ -51,9 +51,9 @@ template_assign_suppliers = {'text':_(u'assign suppliers'), 'view':'template_ass
 jump_to_template = {'text':_(u'template'), 'view':'template_view', 'args':'object.supply.id', 'famfam':'page_go'}
 jump_to_inventory = {'text':_(u'return to inventory'), 'view':'inventory_view', 'args':'object.inventory.id', 'famfam':'package_go'}
 
-template_menu_links = [template_list, template_create, template_orphan_list]
+template_menu_links = [template_list, template_orphan_list, supplier_list]
 inventory_menu_links = [
-    inventory_list, inventory_create#, inventory_transaction_list, inventory_transaction_create
+    inventory_list,#, inventory_transaction_list, inventory_transaction_create
 ]
 
 location_filter = {'name':'location', 'title':_(u'location'), 'queryset':Location.objects.all(), 'destination':'location'}
@@ -75,7 +75,7 @@ register_links(InventoryTransaction, [jump_to_inventory], menu_name='sidebar')
 register_links(['location_list', 'location_create', 'location_update', 'location_delete'], [location_create], menu_name='sidebar')
 register_links(Location, [location_update, location_delete])
 
-register_links(['sublocation_list', 'sublocation_create', 'sublocation_update', 'sublocation_delete'], [location_create], menu_name='sidebar')
+register_links(['sublocation_list', 'sublocation_create', 'sublocation_update', 'sublocation_delete'], [sublocation_create], menu_name='sidebar')
 register_links(SubLocation, [sublocation_update, sublocation_delete])
 
 

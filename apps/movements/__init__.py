@@ -18,6 +18,7 @@ purchase_request_update = {'text':_('edit request'), 'view':'purchase_request_up
 purchase_request_delete = {'text':_('delete request'), 'view':'purchase_request_delete', 'args':'object.id', 'famfam':'basket_delete'}
 purchase_request_close = {'text':_('close request'), 'view':'purchase_request_close', 'args':'object.id', 'famfam':'cross'}
 purchase_request_open = {'text':_('open request'), 'view':'purchase_request_open', 'args':'object.id', 'famfam':'accept'}
+purchase_request_po_wizard = {'text':_('purchase order wizard'), 'view':'purchase_order_wizard', 'args':'object.id', 'famfam':'wand'}
 
 purchase_request_item_create = {'text':_('add new item'), 'view':'purchase_request_item_create', 'args':'object.id', 'famfam':'basket_put'}
 purchase_request_item_update = {'text':_('edit item'), 'view':'purchase_request_item_update', 'args':'object.id', 'famfam':'basket_go'}
@@ -39,11 +40,13 @@ purchase_order_update = {'text':_('edit order'), 'view':'purchase_order_update',
 purchase_order_delete = {'text':_('delete order'), 'view':'purchase_order_delete', 'args':'object.id', 'famfam':'cart_delete'}
 purchase_order_close = {'text':_('close order'), 'view':'purchase_order_close', 'args':'object.id', 'famfam':'cross'}
 purchase_order_open = {'text':_('open order'), 'view':'purchase_order_open', 'args':'object.id', 'famfam':'accept'}
+purchase_order_transfer = {'text':_('transfer entire order'), 'view':'purchase_order_transfer', 'args':'object.id', 'famfam':'package_link'}
 
 purchase_order_item_create = {'text':_('add new item'), 'view':'purchase_order_item_create', 'args':'object.id', 'famfam':'cart_put'}
 purchase_order_item_update = {'text':_('edit item'), 'view':'purchase_order_item_update', 'args':'object.id', 'famfam':'cart_go'}
 purchase_order_item_delete = {'text':_('delete item'), 'view':'purchase_order_item_delete', 'args':'object.id', 'famfam':'cart_remove'}
 purchase_order_item_close = {'text':_('close item'), 'view':'purchase_order_item_close', 'args':'object.id', 'famfam':'cross'}
+purchase_order_item_transfer = {'text':_('transfer item'), 'view':'purchase_order_item_transfer', 'args':'object.id', 'famfam':'package_link'}
 
 jump_to_template = {'text':_(u'template'), 'view':'template_view', 'args':'object.item_template.id', 'famfam':'page_go'}
 
@@ -55,8 +58,8 @@ purchase_order_state_filter = {'name':'purchase_order_status', 'title':_(u'statu
 register_links(PurchaseRequestStatus, [purchase_request_state_update, purchase_request_state_delete])
 register_links(['purchase_request_state_create', 'purchase_request_state_list', 'purchase_request_state_update', 'purchase_request_state_delete'], [purchase_request_state_create], menu_name='sidebar')
 
-register_links(PurchaseRequest, [purchase_request_update, purchase_request_delete, purchase_request_item_create, purchase_request_close, purchase_request_open])
-register_links(['purchase_request_list', 'purchase_request_create', 'purchase_request_update', 'purchase_request_delete', 'purchase_request_view'], [purchase_request_create], menu_name='sidebar')
+register_links(PurchaseRequest, [purchase_request_update, purchase_request_delete, purchase_request_item_create, purchase_request_close, purchase_request_open, purchase_request_po_wizard])
+register_links(['purchase_request_list', 'purchase_request_create', 'purchase_request_update', 'purchase_request_delete', 'purchase_request_view', 'purchase_order_wizard'], [purchase_request_create], menu_name='sidebar')
 
 register_links(PurchaseRequestItem, [purchase_request_item_update, purchase_request_item_delete, jump_to_template])
 register_links(['purchase_request_item_create'], [purchase_request_create], menu_name='sidebar')
@@ -67,16 +70,15 @@ register_links(['purchase_order_state_create', 'purchase_order_state_list', 'pur
 register_links(PurchaseOrderItemStatus, [purchase_order_item_state_update, purchase_order_item_state_delete])
 register_links(['purchase_order_item_state_create', 'purchase_order_item_state_list', 'purchase_order_item_state_update', 'purchase_order_item_state_delete'], [purchase_order_item_state_create], menu_name='sidebar')
 
-register_links(PurchaseOrder, [purchase_order_update, purchase_order_delete, purchase_order_item_create, purchase_order_close, purchase_order_open])
+register_links(PurchaseOrder, [purchase_order_update, purchase_order_delete, purchase_order_item_create, purchase_order_close, purchase_order_open, purchase_order_transfer])
 register_links(['purchase_order_list', 'purchase_order_create', 'purchase_order_update', 'purchase_order_delete', 'purchase_order_view', 'supplier_purchase_orders'], [purchase_order_create], menu_name='sidebar')
 
-register_links(PurchaseOrderItem, [purchase_order_item_update, purchase_order_item_delete, jump_to_template, purchase_order_item_close])
+register_links(PurchaseOrderItem, [purchase_order_item_update, purchase_order_item_delete, jump_to_template, purchase_order_item_close, purchase_order_item_transfer])
 register_links(['purchase_order_item_create'], [purchase_order_create], menu_name='sidebar')
 
 
 register_menu([
     {'text':_('purchases'), 'view':'purchase_request_list', 'links':[
-        purchase_request_list, purchase_request_create, purchase_order_list,
-        purchase_order_create 
+        purchase_request_list, purchase_order_list,
     ],'famfam':'basket','position':4}])
 
